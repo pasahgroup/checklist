@@ -109,7 +109,7 @@ $role_name = role::where('name','Manager')->first();
           'user_id'=>0
              ]);
 //Insert to user
-  $userReg = user::UpdateOrCreate([
+  $userReg = user::Create([
         'name'=>request('first_name').' '.request('last_name'),
         'department_id'=>$department->id,
         'property_id'=>$insetqnsy->id,
@@ -119,7 +119,7 @@ $role_name = role::where('name','Manager')->first();
           'user_id'=>0
         ]);
 
-        $userSiteReg = userProperty::UpdateOrCreate([
+        $userSiteReg = userProperty::Create([
         'sys_user_id'=>$userReg->id,
         'property_id'=>$insetqnsy->id,
         'status'=>'Active',
@@ -134,6 +134,7 @@ $appliedto =userRole::Create([
         ]);
 //Insert data to
 $dbconnect =dbconnect::Create([
+     'user_id'=>$userReg->id, 
         'company_id'=>$insetqnsy->id,       
         'status'=>'Active'     
         ]);
@@ -186,7 +187,7 @@ else
         ]);               
 
         //Insert to user
-  $userReg = user::UpdateOrCreate([
+  $userReg = user::Create([
         'name'=>request('first_name').' '.request('last_name'),
         'department_id'=>$department->id,
         'property_id'=>$insetqnsy->id,
@@ -196,7 +197,7 @@ else
           'user_id'=>0
         ]);
 
-        $userSiteReg = userProperty::UpdateOrCreate([
+        $userSiteReg = userProperty::Create([
         'sys_user_id'=>$userReg->id,
         'property_id'=>$insetqnsy->id,
         'status'=>'Active',
@@ -212,6 +213,7 @@ $appliedto =userRole::Create([
   //Insert data to
 
 $dbconnect =dbconnect::Create([
+         'user_id'=>$userReg->id,
         'company_id'=>$insetqnsy->id,       
         'status'=>'Active'     
         ]);
