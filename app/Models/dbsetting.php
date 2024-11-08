@@ -24,7 +24,7 @@ class dbsetting extends Model
       //$value = DB::select('select * from my_companies');
         $n=52;
           $value = DB::select('select * from dbconnects where user_id="'.$n.'"');
-       dd($value);
+       //dd($value);
     
 $db="checkmasterdb2";
   $setconfig= Config::set('database.connections.clientdb', [   
