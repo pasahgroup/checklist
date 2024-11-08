@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="detailDailyReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="1d127a37-26e0-4b8b-8997-2c9c46151eed">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table" fill="Solid">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="a4d392e0-3994-4271-84ba-55531d88cd56"/>
+	<subDataset name="Table Dataset 2" uuid="f01ad11c-c1ab-418b-9c21-5e9ace3872c1"/>
+	<parameter name="answer_id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select a.id,a.property_id,p.property_name,a.metaname_id,m.metaname_name,a.answer,a.indicator_id,s.qns,a.asset_id,t.asset_name,u.name, a.opt_answer_id,o.answer_classification,a.description,a.photo,a.datex from answers a,properties p,set_indicators s,users u,assets t,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.user_id=u.id and a.asset_id=t.id and a.indicator_id=s.id and a.opt_answer_id=o.id and p.id=a.property_id and a.id=$P{answer_id}]]>
+	</queryString>
+	<field name="id" class="java.math.BigInteger">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="property_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="property_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="metaname_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="metaname_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="answer" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="indicator_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="qns" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="asset_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="asset_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="opt_answer_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="answer_classification" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="photo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="datex" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="21" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="65" y="8" width="130" height="20" uuid="69e8de78-c6d1-4333-823e-a42b1dbe9249"/>
+				<textElement markup="styled">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{property_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="8" width="65" height="20" uuid="4c1e3675-5bb0-4004-acc7-4f9e25b74056"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Property:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="273" y="8" width="83" height="20" uuid="f1cafc76-857d-44f4-bf05-5ffd9de70a40"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Asset Name:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="356" y="8" width="135" height="20" uuid="00c65262-1e42-487f-b0b8-172e3ec3faf2"/>
+				<textElement markup="styled">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{asset_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="123" y="0" width="417" height="23" uuid="581d6c05-1ea7-483f-8c68-87bce6c56899"/>
+				<text><![CDATA[qns]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="193" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement style="table_TD" positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="52" height="23" uuid="414e8d6a-8370-4d54-a891-a052539f089b"/>
+				<textElement markup="styled"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" evaluationTime="Report">
+				<reportElement style="table_TD" positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="708" y="0" width="94" height="23" uuid="4d126e5a-97b3-4864-ad00-9fc688cd8b76"/>
+				<textElement markup="styled"/>
+				<textFieldExpression><![CDATA[$F{answer_classification}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" evaluationTime="Report">
+				<reportElement style="table_TD" positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="123" y="0" width="417" height="23" uuid="20f41806-44a9-48a8-97d3-fcb6e263c1ca"/>
+				<textElement markup="styled"/>
+				<textFieldExpression><![CDATA[$F{qns}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" evaluationTime="Report">
+				<reportElement style="table_TD" positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="540" y="0" width="168" height="23" uuid="db0af733-4aca-4e51-95bd-395cfed4d04f"/>
+				<textElement markup="styled"/>
+				<textFieldExpression><![CDATA[$F{answer}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" evaluationTime="Report">
+				<reportElement style="table_TD" positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="52" y="0" width="71" height="23" uuid="4dfe2ca3-2c72-4650-941f-932b8b1f4c53"/>
+				<textElement markup="styled"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="96" y="36" width="706" height="43" uuid="3c72fba4-3f7b-4bd3-8efb-e08f3a75c1f7"/>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="36" width="94" height="21" uuid="efc2ac25-c66c-43f4-a9bd-b26fc0f7ed27"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Description:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="2" y="79" width="800" height="2" forecolor="#FFCCCC" uuid="3aaee408-b3a5-43df-a906-8371f48877d3"/>
+			</line>
+			<image>
+				<reportElement x="96" y="81" width="270" height="107" uuid="eb0d6965-bdfe-405f-8526-c5b355fe821b"/>
+				<imageExpression><![CDATA[]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="2" y="81" width="94" height="21" uuid="3e283d73-fdda-4b2d-90a5-f50fb3275071"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Photo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="444" y="81" width="96" height="22" uuid="2592d871-8fbc-4261-9099-d80df549367b"/>
+				<textFieldExpression><![CDATA[$F{photo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="55" splitType="Stretch">
+			<staticText>
+				<reportElement x="416" y="4" width="75" height="27" uuid="1aa6429a-cfaa-48e1-bb71-12239f913479"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Posted Date:]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="dd-MMM-yyyy h:mm a">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="491" y="4" width="143" height="27" uuid="0a21c317-6a7e-49b5-a521-e98515fcbf7f"/>
+				<textElement markup="styled"/>
+				<textFieldExpression><![CDATA[$F{datex}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" evaluationTime="Report">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="96" y="4" width="270" height="23" uuid="eb32d30f-2bf2-4c49-926b-197a17f343a5"/>
+				<textElement markup="styled"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="4" width="94" height="23" uuid="56389dbc-49ea-4185-8a62-7bfdd5fd1af4"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Posted by:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="27" width="94" height="27" uuid="5fc0764f-83a2-43fb-abe6-dc6361a8f75c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Printed by:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" evaluationTime="Report">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="96" y="27" width="270" height="27" uuid="acec0141-9ed1-4d55-83e0-1588c0bd188f"/>
+				<textElement markup="styled"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="416" y="31" width="75" height="23" uuid="b17601d1-22fe-4069-9097-eee14c0bde81"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Printed Date:]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yyyy h:mm">
+				<reportElement x="491" y="31" width="143" height="23" isPrintInFirstWholeBand="true" uuid="1a729f2c-8d46-4d28-8fac-5fbbd8c0a9ca"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

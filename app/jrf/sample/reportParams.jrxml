@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportParams" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="10724fc7-e983-484d-940e-a098de654555">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="empID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from PYR_PAYROLL_VIEWF2 where employee_id =$P{empID}]]>
+	</queryString>
+	<field name="EMPLOYEE_ID" class="java.math.BigDecimal"/>
+	<field name="EMPLOYEE_NAME" class="java.lang.String"/>
+	<field name="NO_OF_DAYS" class="java.math.BigDecimal"/>
+	<field name="YEAR" class="java.math.BigDecimal"/>
+	<field name="NO_OF_MONTHS" class="java.math.BigDecimal"/>
+	<field name="BASIC_SALARY" class="java.math.BigDecimal"/>
+	<field name="GRATUITY" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="31" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="34" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="017cdbce-84f8-4048-a015-0c68370d5a9b" x="0" y="0" width="79" height="20"/>
+				<textElement/>
+				<text><![CDATA[EMPLOYEE_ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0acceb9e-8017-47df-bf4c-a6097c969d1e" x="79" y="0" width="79" height="20"/>
+				<textElement/>
+				<text><![CDATA[EMPLOYEE_NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cc8c0789-3b84-4e4f-b60a-3dcf35485ada" x="158" y="0" width="79" height="20"/>
+				<textElement/>
+				<text><![CDATA[NO_OF_DAYS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="19046503-6b50-4eb8-a526-e24bf9b14ff0" x="237" y="0" width="79" height="20"/>
+				<textElement/>
+				<text><![CDATA[YEAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f3bb4a71-3af7-4ec3-a71c-f598a37e1ad0" x="316" y="0" width="79" height="20"/>
+				<textElement/>
+				<text><![CDATA[NO_OF_MONTHS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6a78de94-e04b-4e49-bb71-70b0a3bb722f" x="395" y="0" width="79" height="20"/>
+				<textElement/>
+				<text><![CDATA[BASIC_SALARY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2d3810a5-5b09-4e7d-8422-efe6683a8696" x="474" y="0" width="79" height="20"/>
+				<textElement/>
+				<text><![CDATA[GRATUITY]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="44" splitType="Stretch">
+			<textField>
+				<reportElement uuid="827348e2-22a7-47db-b55b-3c3ee4b86116" x="0" y="0" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{EMPLOYEE_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="073381f5-45e8-4b40-9b4e-64c374d15862" x="79" y="0" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{EMPLOYEE_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0e857d81-bd13-4782-a6b0-f9a0e7b85785" x="158" y="0" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{NO_OF_DAYS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a4b4e7cf-f487-4e6e-b7f4-cf4455032073" x="237" y="0" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{YEAR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4d315533-01da-440d-8c9b-694c2c896c00" x="316" y="0" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{NO_OF_MONTHS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5c172382-979a-4511-89e8-3a9663db1cf6" x="395" y="0" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{BASIC_SALARY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="300221f7-2da3-4593-8117-ef50ea6a6e7c" x="474" y="0" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{GRATUITY}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

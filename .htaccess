@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^kacce\.or\.tz [NC]
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://kacce.or.tz/$1 [R,L]
+RewriteEngine On
+RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

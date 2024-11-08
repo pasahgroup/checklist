@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="department" pageWidth="595" pageHeight="421" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="578900e3-0c5e-4102-8e31-dc6c573ab805">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="horesyfdb"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="7dc39814-6dec-4f6e-9519-a3378eb2d06f"/>
+	<parameter name="id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+   *
+FROM
+     departments where id=$P{id} order by ID]]>
+	</queryString>
+	<field name="id" class="java.math.BigInteger">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="departments"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="department_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="department_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="department_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="departments"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="unit_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="unit_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="unit_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="departments"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="status"/>
+		<property name="com.jaspersoft.studio.field.label" value="status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="departments"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="users" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="users"/>
+		<property name="com.jaspersoft.studio.field.label" value="users"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="departments"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="user_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="user_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="user_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="departments"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="created_at" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="created_at"/>
+		<property name="com.jaspersoft.studio.field.label" value="created_at"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="departments"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="updated_at" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="updated_at"/>
+		<property name="com.jaspersoft.studio.field.label" value="updated_at"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="departments"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="total" class="java.lang.Integer" calculation="Sum"/>
+	<background>
+		<band height="381" splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="139" splitType="Stretch">
+			<staticText>
+				<reportElement x="110" y="10" width="414" height="41" uuid="a004d480-5e99-4dca-a7bd-424124e6fd68"/>
+				<textElement>
+					<font size="26" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[The sample report header-Wawa]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="434" y="67" width="80" height="20" uuid="914d893a-3d28-4e7e-9188-7a92439e732e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="514" y="67" width="41" height="20" uuid="bf87de04-8d4e-4aba-8769-908d465660d2"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement style="table_TH" x="1" y="0" width="109" height="23" uuid="ad5b0d92-7ff8-4402-9166-05da6e0a84fc"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="110" y="0" width="224" height="23" uuid="affe03f3-b668-4f1a-8d39-94718b7827a9"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Department]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="334" y="0" width="211" height="23" uuid="fc9db07d-6f26-45d8-819c-b548a740c9a2"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unit]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement style="table_TD" x="1" y="0" width="109" height="21" uuid="a700271c-0c86-4819-923f-1beacc43a408"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" stretchType="RelativeToBandHeight" x="110" y="1" width="224" height="20" uuid="609b2097-449d-460c-b140-a97a00e3424b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{department_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="334" y="1" width="211" height="20" uuid="ecefeccd-525f-4937-b15b-8a4d5ac50d3a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{unit_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="16" width="429" height="20" uuid="30bee12b-6c21-4697-bf1c-6c260a837581"/>
+				<text><![CDATA[This is sample report footer]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

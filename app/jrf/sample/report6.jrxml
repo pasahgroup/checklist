@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report6" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="361e6c69-93f9-4b76-b443-d7a962f8dd1c">
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     locations.`id` AS locations_id,
+     locations.`country` AS locations_country,
+     locations.`region` AS locations_region,
+     locations.`district` AS locations_district,
+     locations.`ward` AS locations_ward,
+     locations.`village` AS locations_village,
+     locations.`created_at` AS locations_created_at,
+     locations.`updated_at` AS locations_updated_at
+FROM
+     `locations` locations]]>
+	</queryString>
+	<field name="locations_id" class="java.math.BigInteger"/>
+	<field name="locations_country" class="java.lang.String"/>
+	<field name="locations_region" class="java.lang.String"/>
+	<field name="locations_district" class="java.lang.String"/>
+	<field name="locations_ward" class="java.lang.String"/>
+	<field name="locations_village" class="java.lang.String"/>
+	<field name="locations_created_at" class="java.sql.Timestamp"/>
+	<field name="locations_updated_at" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<image>
+				<reportElement uuid="a1b4fb4f-6f1f-43d9-b663-7d8d1a59dabd" x="0" y="0" width="164" height="126"/>
+				<imageExpression><![CDATA["coffee.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="aca65c19-e8d8-40d3-ae62-bdf70e988707" style="Title" x="170" y="0" width="263" height="62"/>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Coffee Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="96180275-9bf2-4ea0-9362-52e9f50cf4c1" style="SubTitle" x="219" y="62" width="196" height="22"/>
+				<textElement>
+					<font fontName="Times New Roman" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Coffee SubTitle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f25a9ad9-a111-47ab-a700-599019b286bb" x="172" y="94" width="383" height="42"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor purus gravida arcu aliquam mattis. Donec et nulla libero, ut varius massa. Nulla sed turpis elit. Etiam aliquet mauris a ligula hendrerit in auctor leo lobortis.]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="7a8612ef-ea98-4a73-9ecb-c8c92dec7ceb" x="433" y="-115" width="267" height="209"/>
+				<imageExpression><![CDATA["coffee_stain.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement uuid="ef780bd7-ea7f-4b3f-b159-e25b8a943a97" positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="992fd19c-1755-4379-b2ed-f7c8941afb2f" style="Column header" x="0" y="0" width="69" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[locations_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5b0d436d-a27a-4af8-93c1-8fcafc03d937" style="Column header" x="69" y="0" width="69" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[locations_country]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="808c8961-33eb-4010-81b6-621e68e94cb9" style="Column header" x="138" y="0" width="69" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[locations_region]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8358f52c-1686-49b7-9b39-509ea9783ef0" style="Column header" x="207" y="0" width="69" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[locations_district]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="45f2b36a-97a9-430f-b82f-f3cfe2758b6b" style="Column header" x="276" y="0" width="69" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[locations_ward]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="50265e98-83fd-44d6-8926-963a3873c1f0" style="Column header" x="345" y="0" width="69" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[locations_village]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d0605e49-e321-4c84-b90a-2dc3dd707e78" style="Column header" x="414" y="0" width="69" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[locations_created_at]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="582f036e-2214-4bc4-8c9b-3a8d50896b8b" style="Column header" x="483" y="0" width="69" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[locations_updated_at]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement uuid="2b316d0e-8e24-4755-ad13-8dc845b7af04" style="Row" mode="Opaque" x="0" y="0" width="555" height="15"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="6fb9f94e-47c8-4cc1-ada1-59c531c948c0" style="Detail" x="0" y="0" width="69" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{locations_id}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="350780a7-bc6c-4fd3-8d49-9bd4c7e47263" style="Detail" x="69" y="0" width="69" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{locations_country}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="5b241a9e-7cf8-4d37-b57c-65b1b0f7bd72" style="Detail" x="138" y="0" width="69" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{locations_region}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="1cba81dc-264e-499c-9992-21f41ff770a1" style="Detail" x="207" y="0" width="69" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{locations_district}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="c1369f80-ab64-41d4-9b63-96aa69d74c48" style="Detail" x="276" y="0" width="69" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{locations_ward}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="00264386-c94e-4eee-a2ba-73875478d9ab" style="Detail" x="345" y="0" width="69" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{locations_village}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="d575772a-f3dd-4436-a157-e3b79b25e8e3" style="Detail" x="414" y="0" width="69" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{locations_created_at}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="c98d1950-add6-4f96-acc4-57c31dae1aa1" style="Detail" x="483" y="0" width="69" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{locations_updated_at}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement uuid="0eda3062-3aad-4917-a7f2-963565822fea" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement uuid="c04c7d07-3c06-4829-86dc-ae059a6d077b" mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="715af70e-c172-4f7e-8b3a-3a4166dd438c" style="Column header" x="533" y="0" width="40" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="399eb029-3d81-4116-b9c8-d2b3e11ff4c8" style="Column header" x="453" y="0" width="80" height="20" forecolor="#736343"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="5de2455d-48b3-4661-82d3-cfb6f349d3be" style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

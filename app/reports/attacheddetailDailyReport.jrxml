@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="detailDailyReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="1d127a37-26e0-4b8b-8997-2c9c46151eed">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="91"/>
+	<style name="table" fill="Solid">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TH" mode="Opaque" backcolor="#D0D0BB">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_CH" mode="Opaque" backcolor="#FFFFE6">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="a4d392e0-3994-4271-84ba-55531d88cd56"/>
+	<subDataset name="Table Dataset 2" uuid="f01ad11c-c1ab-418b-9c21-5e9ace3872c1"/>
+	<subDataset name="Table Dataset 3" uuid="96fa158c-f010-41b4-8124-cad338d4a07e">
+		<queryString language="plsql">
+			<![CDATA[select * from answers]]>
+		</queryString>
+		<field name="id" class="java.math.BigInteger">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="property_id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="metaname_id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="indicator_id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="opt_answer_id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="answer" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="asset_id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="section" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="photo" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="description" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="status" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="action" class="java.lang.Boolean">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="user_id" class="java.lang.Long">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="datex" class="java.sql.Date">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="created_at" class="java.sql.Timestamp">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="updated_at" class="java.sql.Timestamp">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="New Dataset 1" uuid="6178bdf6-8d28-4007-8393-a4bd4e2234fc">
+		<queryString>
+			<![CDATA[select * from answers]]>
+		</queryString>
+		<field name="id" class="java.math.BigInteger">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="property_id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="metaname_id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="indicator_id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="opt_answer_id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="answer" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="asset_id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="section" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="photo" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="description" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="status" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="action" class="java.lang.Boolean">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="user_id" class="java.lang.Long">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="datex" class="java.sql.Date">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="created_at" class="java.sql.Timestamp">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="updated_at" class="java.sql.Timestamp">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\xampp\\htdocs\\horesyf\\app\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT COUNT(*) indicator_count,cast(indicator_id as Integer)indicator_id, (answer) Answer FROM answers group by answer]]>
+	</queryString>
+	<field name="id" class="java.math.BigInteger">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="property_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="property_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="metaname_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="metaname_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="answer" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="section" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="indicator_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="qns" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="asset_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="asset_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="opt_answer_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="answer_classification" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="photo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="datex" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="65" y="0" width="689" height="31" uuid="a9695583-ef3b-41b2-8a15-7cfeb3a8d150"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Daily Report Issues]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="70" splitType="Stretch">
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="65" y="8" width="130" height="20" uuid="69e8de78-c6d1-4333-823e-a42b1dbe9249"/>
+				<textElement markup="styled">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{property_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="8" width="65" height="20" uuid="4c1e3675-5bb0-4004-acc7-4f9e25b74056"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Property:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="273" y="8" width="83" height="20" uuid="f1cafc76-857d-44f4-bf05-5ffd9de70a40"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Asset Name:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="356" y="8" width="135" height="20" uuid="00c65262-1e42-487f-b0b8-172e3ec3faf2"/>
+				<textElement markup="styled">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{asset_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="39" width="608" height="31" uuid="3a0dd803-2a47-4f0c-9899-3a1a9b316fc3"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Maintenance: Issues]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="44" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="105">
+			<componentElement>
+				<reportElement key="table 3" style="table 3" x="0" y="0" width="394" height="96" uuid="08b08b14-5601-4410-814e-c256f8b18428"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="New Dataset 1" uuid="503b20d9-9b4e-4680-adcb-7ae24d89b56f">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="eadeb0e4-adcf-4cd2-b9df-71dcf6887892">
+						<jr:tableHeader style="table 3_TH" height="30"/>
+						<jr:tableFooter style="table 3_TH" height="30"/>
+						<jr:columnHeader style="table 3_CH" height="30"/>
+						<jr:columnFooter style="table 3_CH" height="30"/>
+						<jr:detailCell style="table 3_TD" height="20"/>
+					</jr:column>
+					<jr:column width="90" uuid="d1624e74-f2e5-4f73-a9b3-92685b0ee32a">
+						<jr:tableHeader style="table 3_TH" height="30"/>
+						<jr:tableFooter style="table 3_TH" height="30"/>
+						<jr:columnHeader style="table 3_CH" height="30"/>
+						<jr:columnFooter style="table 3_CH" height="30"/>
+						<jr:detailCell style="table 3_TD" height="20"/>
+					</jr:column>
+					<jr:column width="90" uuid="d06e73cd-3b86-421e-b4c5-dc832e824000">
+						<jr:tableHeader style="table 3_TH" height="30"/>
+						<jr:tableFooter style="table 3_TH" height="30"/>
+						<jr:columnHeader style="table 3_CH" height="30"/>
+						<jr:columnFooter style="table 3_CH" height="30"/>
+						<jr:detailCell style="table 3_TD" height="20"/>
+					</jr:column>
+					<jr:column width="90" uuid="a68a6b16-9a82-4562-a96d-80773321f9a5">
+						<jr:tableHeader style="table 3_TH" height="30"/>
+						<jr:tableFooter style="table 3_TH" height="30"/>
+						<jr:columnHeader style="table 3_CH" height="30"/>
+						<jr:columnFooter style="table 3_CH" height="30"/>
+						<jr:detailCell style="table 3_TD" height="20"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table 3" style="table 3" x="394" y="0" width="408" height="96" uuid="27a4b3ca-6baa-4af8-8eab-c07d8db6588f"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="New Dataset 1" uuid="97ca7d1a-a890-489d-aee2-792bb21f8c29">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="e27b3dc2-8b91-40e1-b0e9-1f0f55851c0c">
+						<jr:tableHeader style="table 3_TH" height="30"/>
+						<jr:tableFooter style="table 3_TH" height="30"/>
+						<jr:columnHeader style="table 3_CH" height="30"/>
+						<jr:columnFooter style="table 3_CH" height="30"/>
+						<jr:detailCell style="table 3_TD" height="20"/>
+					</jr:column>
+					<jr:column width="90" uuid="54b0fb6b-cb27-4abe-998c-dafc91f8d6ef">
+						<jr:tableHeader style="table 3_TH" height="30"/>
+						<jr:tableFooter style="table 3_TH" height="30"/>
+						<jr:columnHeader style="table 3_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="82bb23f9-ad17-4127-842d-2eb37b43c809"/>
+								<text><![CDATA[property_id]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 3_CH" height="30"/>
+						<jr:detailCell style="table 3_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="712c978a-58c6-411d-9c92-205ad84202ac"/>
+								<textFieldExpression><![CDATA[$F{property_id}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="5667f61d-6f4c-4fc6-a33d-d06f5abc348d">
+						<jr:tableHeader style="table 3_TH" height="30"/>
+						<jr:tableFooter style="table 3_TH" height="30"/>
+						<jr:columnHeader style="table 3_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="c073444d-9f32-4529-94a6-491908867bfd"/>
+								<text><![CDATA[metaname_id]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 3_CH" height="30"/>
+						<jr:detailCell style="table 3_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="b9bf4fbb-14cf-47cb-88e5-82461fabf816"/>
+								<textFieldExpression><![CDATA[$F{metaname_id}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="8fe8f4e7-f94f-484c-a281-62a64ce013fa">
+						<jr:tableHeader style="table 3_TH" height="30"/>
+						<jr:tableFooter style="table 3_TH" height="30"/>
+						<jr:columnHeader style="table 3_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="7b8b743f-6b33-47be-a253-efefae3d2653"/>
+								<text><![CDATA[indicator_id]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 3_CH" height="30"/>
+						<jr:detailCell style="table 3_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="6c2e74b0-ff42-4c1b-962e-44044856f716"/>
+								<textFieldExpression><![CDATA[$F{indicator_id}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="74" splitType="Stretch">
+			<staticText>
+				<reportElement x="416" y="4" width="75" height="27" uuid="1aa6429a-cfaa-48e1-bb71-12239f913479"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Posted Date:]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="dd-MMM-yyyy h:mm a">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="491" y="4" width="143" height="27" uuid="0a21c317-6a7e-49b5-a521-e98515fcbf7f"/>
+				<textElement markup="styled"/>
+				<textFieldExpression><![CDATA[$F{datex}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" evaluationTime="Report">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="96" y="4" width="270" height="23" uuid="eb32d30f-2bf2-4c49-926b-197a17f343a5"/>
+				<textElement markup="styled"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="4" width="94" height="23" uuid="56389dbc-49ea-4185-8a62-7bfdd5fd1af4"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Posted by:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="27" width="94" height="27" uuid="5fc0764f-83a2-43fb-abe6-dc6361a8f75c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Printed by:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="416" y="31" width="75" height="24" uuid="b17601d1-22fe-4069-9097-eee14c0bde81"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Printed Date:]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yyyy h:mm">
+				<reportElement x="491" y="31" width="143" height="23" isPrintInFirstWholeBand="true" uuid="1a729f2c-8d46-4d28-8fac-5fbbd8c0a9ca"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<summary>
+		<band height="186" splitType="Stretch"/>
+	</summary>
+	<noData>
+		<band height="50"/>
+	</noData>
+</jasperReport>

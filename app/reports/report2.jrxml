@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6218bf49-401a-41b0-bc5f-63e9e4969333">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="date_to" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="date_from" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM answers where datex>=$P{date_from} and datex<=$P{date_to}]]>
+	</queryString>
+	<field name="id" class="java.math.BigInteger">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="property_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="metaname_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="indicator_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="opt_answer_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="answer" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="asset_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="action" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="user_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="datex" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="created_at" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="updated_at" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="51" splitType="Stretch">
+			<textField pattern="dd-MM-yyyy">
+				<reportElement x="400" y="23" width="100" height="20" uuid="8139dd78-fe2c-4961-a2df-fab50da63d8d"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="42" height="20" uuid="dab656c4-e01e-409d-ad91-0f0463c383d9"/>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="42" y="0" width="42" height="20" uuid="4ed9983a-ebff-4118-8581-1d56e0a90c77"/>
+				<text><![CDATA[property_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="84" y="0" width="42" height="20" uuid="cc481004-dee5-43d1-9c36-a683fed19b80"/>
+				<text><![CDATA[metaname_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="126" y="0" width="42" height="20" uuid="7f20f0bb-bbba-4689-aa0c-357e439555e5"/>
+				<text><![CDATA[indicator_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="0" width="42" height="20" uuid="336198a0-992b-4b74-a489-694eaa05f989"/>
+				<text><![CDATA[opt_answer_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="356" y="2" width="144" height="20" uuid="28d635a0-2b67-4624-a2cf-0c77773a9de7"/>
+				<text><![CDATA[status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="252" y="2" width="94" height="20" uuid="ec2bb87d-7ced-40a6-aeff-d5eb01957170"/>
+				<text><![CDATA[datex]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="0" width="42" height="20" uuid="d9ce2504-d5e6-4e71-84a9-68678a59af03"/>
+				<text><![CDATA[answer]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="42" height="20" uuid="bed0b7c0-4d70-4d6e-a21a-0617e7e9b6da"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="356" y="2" width="144" height="20" uuid="0757f4a9-195a-4a4a-92d7-a7474bf159b6"/>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="252" y="1" width="94" height="20" uuid="094b2e35-2108-44f2-8a81-268363a244c7"/>
+				<textFieldExpression><![CDATA[$F{datex}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
