@@ -66,21 +66,12 @@ License: You must have a valid license purchased only from themeforest(the above
 </head>
 
 <body id="tc_body" class="header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-fixed">
-   <!-- Paste this code after body tag -->
-
-    <!-- <div class="se-pre-con">
-	<div class="pre-loader">
-	  <img class="img-fluid" src="./assets/images/loadergif.gif" alt="loading">
-	</div>
-  </div> -->
+   
 
 	<!--begin::Header Mobile-->
 	<div id="tc_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
 		<!--begin::Logo-->
 		<a href="/admin" class="brand-logo">
-
-		<!-- 	<span class="brand-text"><img style="height: 35px;" alt="Logo" src="../../assets/images/misc/logox.png" /></span> -->
-
 		</a>
 
 		<!--end::Logo-->
@@ -107,23 +98,23 @@ License: You must have a valid license purchased only from themeforest(the above
 		</div>
 		<!--end::Toolbar-->
 	</div>
-	<!--end::Header Mobile-->
-	<!--begin::Main-->
-	<div class="d-flex flex-column flex-root"   style="background-color:#fff !important">
-		<!--begin::Page-->
-		<div class="d-flex flex-row flex-column-fluid page"  style="background-color:#fff !important">
-
-			<!--end::Aside-->
-			<!--begin::Wrapper-->
-			<div class='d-flex flex-column flex-row-fluid <?php if(isset($wrapper)): ?><?php echo $wrapper ?><?php endif; ?>' id="tc_wrapper">
-				<!--begin::Header-->
-		
+	
+	
 				<!--end::Header-->
                 <?php if($message= Session::get('success')): ?>
 <div class="alert alert-success" role="alert">
 	<button aria-label="Close" class="close" data-dismiss="alert" type="button">
 	<span aria-hidden="true">&times;</span></button>
 	<strong>Well done!</strong> <?php echo e($message); ?>
+
+</div>
+<?php endif; ?>
+
+<?php if($message= Session::get('info')): ?>
+<div class="alert alert-info" role="alert">
+	<button aria-label="Close" class="close" data-dismiss="alert" type="button">
+	<span aria-hidden="true">&times;</span></button>
+	<strong>Sorry!</strong> <?php echo e($message); ?>
 
 </div>
 <?php endif; ?>
@@ -172,12 +163,6 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
           <?php endif; ?>
 
-			</div>
-			<!--end::Wrapper-->
-		</div>
-		<!--end::Page-->
-	</div>
-	<!--end::Main-->
 
   <script src="../../../assets/js/plugin.bundle.min.js"></script>
 	<script src="../../../assets/js/bootstrap.bundle.min.js"></script>

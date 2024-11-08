@@ -62,12 +62,16 @@ $department = department::where('department_name','Manager')->first();
 $role_name = role::where('name','Manager')->first();
 
 //Company view
-  $comp = myCompany::where('company_name',request('business_name'))
+  $compEmail = myCompany::where('email',request('email'))
   ->where('status','Active')->first();
-  if()
-
-
   
+  if(!is_null($compEmail))
+  {
+  
+   return redirect()->back()->with('info','Email alredy exist');
+  }
+
+
   if(request('attachment')){
             $attach = request('attachment');
             foreach($attach as $attached){
