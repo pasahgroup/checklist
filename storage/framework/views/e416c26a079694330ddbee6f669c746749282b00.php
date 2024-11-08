@@ -1,11 +1,5 @@
 <!DOCTYPE html>
-<!--
-Template Name: Kundol Admin - Bootstrap 4 HTML Admin Dashboard Theme
-Author: Themescoder
-Website: http://www.themescoder.net/
-Contact: support@themescoder.net
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
+
 <html lang="en">
 <!--begin::Head-->
  <?php echo \Livewire\Livewire::styles(); ?>
@@ -59,9 +53,7 @@ License: You must have a valid license purchased only from themeforest(the above
 }
     </script>
     <script src="../../js/jQuery311.min.js" type="text/javascript"></script>
-       <!-- <script src="../../js/activitydata.js" type="text/javascript"></script> -->
-
-
+  
 <link rel="shortcut icon" href="../../assets/images/misc/logo.svg" />
 </head>
 
