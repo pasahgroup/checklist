@@ -7,18 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
 
-class db extends Model
+class dbsetting extends Model
 {
-    use HasFactory;
+   //  use HasFactory;
 
-        protected $fillable = [
-        'company_id',
-        'db_name',
-        'db_username',
-        'pwd',
-        'host',
-        'status'
-   ];
+   //      protected $fillable = [
+   //      'company_id',
+   //      'db_name',
+   //      'db_username',
+   //      'pwd',
+   //      'host',
+   //      'status'
+   // ];
 
     public static function getConnect($n){   
       //$value = DB::select('select * from my_companies');

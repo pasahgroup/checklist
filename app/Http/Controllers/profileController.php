@@ -61,6 +61,13 @@ class profileController extends Controller
 $department = department::where('department_name','Manager')->first();
 $role_name = role::where('name','Manager')->first();
 
+//Company view
+  $comp = myCompany::where('company_name',request('business_name'))
+  ->where('status','Active')->first();
+  if()
+
+
+  
   if(request('attachment')){
             $attach = request('attachment');
             foreach($attach as $attached){
@@ -155,10 +162,10 @@ else
 
     //dd(request('business_name'));
          $comp = myCompany::where('company_name',request('business_name'))->first();
-                    // dd($comp);
+                     //dd($comp);
                     if($comp == null)
                       {
-    //dd('print1');
+    //dd('print1x');
  $insetqnsy = myCompany::Create([
           'company_name'=>request('business_name'),
            'logo'=>'',
@@ -199,10 +206,12 @@ $appliedto =userRole::Create([
         'user_id'=>0   
         ]);
   //Insert data to
+
 $dbconnect =dbconnect::Create([
         'company_id'=>$insetqnsy->id,       
         'status'=>'Active'     
         ]);
+
                 }
                       else
                       {

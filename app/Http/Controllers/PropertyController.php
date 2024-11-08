@@ -6,7 +6,7 @@ use App\Models\property;
 use App\Models\keyIndicator;
 use App\Models\answer;
 use App\Models\user;
-use App\Models\dbconnect;
+use App\Models\dbsetting;
 
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -63,7 +63,7 @@ class PropertyController extends Controller
 //Helper::some_function();
  // $aData['dataC'] = asset::getAsset(1);
  
-  $aData['dataC'] = dbconnect::getConnect(900);
+  $aData['dataC'] = dbsetting::getConnect(900);
 
  //dd($aData);
 //Helper::shout('courses');
