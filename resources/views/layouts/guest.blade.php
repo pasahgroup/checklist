@@ -7,10 +7,7 @@
 
         <title>{{ config('app.name', 'Pasah Login') }}</title>
 
-        <!-- Fonts -->
-        <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"> -->
-
-        <!-- Styles -->
+              <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link href="../../../assets/css/style.css?v=1.0" rel="stylesheet" type="text/css" />
 

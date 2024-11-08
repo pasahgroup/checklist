@@ -1,8 +1,5 @@
 
 <br>
-<!-- <div class="text-center text-primary">
-                    <strong style="color:#0a0215;"><?php echo e($company->company_name??'Set Company Profile'); ?></strong>
-              </div> -->
 
     <div id="accordion" style="background-color:#f4f4f4; !important">
         <div class="text-center text-primary"><hr>

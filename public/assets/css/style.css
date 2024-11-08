@@ -12694,7 +12694,7 @@ table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.
       .aside .aside-menu .nav-item .nav-link .nav-icon {
         flex: 0 0 35px; }
     .aside .aside-menu .nav-item .sub-nav-link {
-      padding: 13px 10px; }
+      padding: 8px 10px; }
     .aside .aside-menu .nav-item .mini-sub-nav-link {
       padding: 13px 35px; }
     .aside .aside-menu .nav-item .nav-link[aria-expanded="false"] .fa-rotate-90 {
