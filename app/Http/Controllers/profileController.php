@@ -247,8 +247,7 @@ $insetqnsy = myCompany::where('company_name',request('business_name'))
         return redirect()->route('login',compact('code'))->with('success','Registered successfully, Now Login');     
      }else{
         return redirect()->route('company-profile.index')->with('success','Updated successfully');
-     }
-
+      }
   
     }
 
