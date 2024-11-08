@@ -22,8 +22,8 @@ class dbsetting extends Model
 
     public static function getConnect($n){   
       //$value = DB::select('select * from my_companies');
-      //     $value = DB::select('select *from my_companies where tin="'.$n.'" order by tin');
-       //dd($n);
+          $value = DB::select('select * from dbconnects where company_id="'.$n.'"');
+       //dd($value);
     
 $db="checkmasterdb2";
   $setconfig= Config::set('database.connections.clientdb', [   

@@ -12,6 +12,7 @@ class dbconnect extends Model
     use HasFactory;
 
         protected $fillable = [
+        'user_id',
         'company_id',
         'db_name',
         'db_username',

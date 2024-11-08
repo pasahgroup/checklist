@@ -13,15 +13,16 @@ class CreateDbconnectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('dbconnects', function (Blueprint $table) {            
+        Schema::create('dbconnects', function (Blueprint $table) {           
           $table->bigIncrements('id');
-          $table->integer('company_id')->nullable();
+          $table->integer('user_id')->nullable();
+            $table->integer('company_id')->nullable();
           $table->string('db_name')->nullable();
           $table->string('db_username')->nullable();
           $table->string('pwd')->nullable();
           $table->string('host')->nullable();
            $table->string('status')->default('Active');
-            $table->timestamps();
+           $table->timestamps();
         });
     }
 

@@ -63,9 +63,9 @@ class PropertyController extends Controller
 //Helper::some_function();
  // $aData['dataC'] = asset::getAsset(1);
  
-  $aData['dataC'] = dbsetting::getConnect(900);
+  $aData['dataC'] = dbsetting::getConnect($auth->id);
 
- //dd($aData);
+ //dd($auth->id);
 //Helper::shout('courses');
       // dd($id);
 
