@@ -144,6 +144,7 @@ $appliedto =userRole::Create([
         'company_id'=>$insetqnsy->id,
           'level'=>'Main',
       ],[
+          'company_code'=>request('code'),
          'property_name'=>request('business_name'),
         'property_category'=>'Hotel',
          'property_rank'=>2,
@@ -174,40 +175,11 @@ $dbconnect =dbconnect::Create([
         ]);
 
                  }
-//                       else
-//                       {
-// $insetqnsy = myCompany::where('company_name',request('business_name'))
-//              ->update([
-//  'company_name'=>request('business_name'),
-//            'logo'=>$imageToStore,
-//           'tin'=>request('tin'),
-//           'vrn'=>request('vrn'),
-//           'phone_number'=>request('phone_number'),
-//           'email'=>request('email'),
-//           'address'=>request('address'),
 
-//           'district'=>request('district'),
-//           'region'=>request('region'),
-
-//           'first_name'=>request('first_name'),
-//           'last_name'=>request('last_name'),
-//            'code'=>request('code'),
-//           'status'=>'Active',
-//          'user_id'=>auth()->id()
-//             ]);
-  
-//             }
-
-         // }
 }
 else
 {
 
-//     //dd(request('business_name'));
-//          $comp = myCompany::where('company_name',request('business_name'))->first();
-//                      //dd($comp);
-//                     if($comp == null)
-//                       {
 // //Insert to user
        $userReg = user::Create([
         'name'=>request('first_name').' '.request('last_name'),
@@ -255,12 +227,11 @@ $appliedto =userRole::Create([
         ]);
 
 //Insert data into properties table
-//dd('('.request('district').' '.request('region').')');
-
  $insert_property = property::UpdateOrCreate([       
         'company_id'=>$insetqnsy->id,
          'level'=>'Main',
     ],[
+        'company_code'=>request('code'),
          'property_name'=>request('business_name'),
         'property_category'=>'Hotel',
          'property_rank'=>2,
@@ -289,31 +260,6 @@ $dbconnect =dbconnect::Create([
         'status'=>'Active'     
         ]);
 
-//                 }
-//                       else
-//                       {
-//                         //dd('print2');
-
-// $insetqnsy = myCompany::where('company_name',request('business_name'))
-//              ->update([
-//  'company_name'=>request('business_name'),
-//           // 'logo'=>'',
-//           'tin'=>request('tin'),
-//           'vrn'=>request('vrn'),
-//           'phone_number'=>request('phone_number'),
-//           'email'=>request('email'),
-//           'address'=>request('address'),
-          
-//           'district'=>request('district'),
-//           'region'=>request('region'),
-
-//           'first_name'=>request('first_name'),
-//           'last_name'=>request('last_name'),
-//            'code'=>request('code'),
-//           'status'=>'Active',
-//           'user_id'=>auth()->id()
-//         ]);
-//               }
      }
 
        $code=request('code');
