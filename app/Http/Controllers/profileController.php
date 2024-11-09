@@ -241,7 +241,7 @@ $appliedto =userRole::Create([
 
          'email'=>request('email'),
          'password'=>Hash::make(request('password')),
-          'property_description'=>'First company reg'
+          'property_description'=>'First company reg',
          'status'=>'Active',
           'user_id'=>$userReg->id
         ]);
