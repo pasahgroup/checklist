@@ -14,6 +14,8 @@ class myCompany extends Model
         'vrn',
         'logo',
         'address',
+        'region',
+        'district',
         'phone_number',
         'code',
         'first_name',

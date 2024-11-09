@@ -63,7 +63,19 @@
                   <label >Phone Number</label>
                 <input class="form-control" type="number" name="phone_number" placeholder="company mobile number" required>
                                 </div>
-			 
+
+			  <div class="clearfix" style="height: 10px;clear: both;"></div>
+
+         <div class="col-md-6">
+                  <label>Region</label>
+                <input class="form-control" type="text" name="region" placeholder="region">
+                                </div>
+             <div class="col-md-6">
+                  <label >District</label>
+              <input class="form-control" type="text" name="district" placeholder="district">
+                                </div>     
+                                </div>
+       
        <div class="clearfix" style="height: 10px;clear: both;"></div>
 
             <div class="form-group">

@@ -21,6 +21,9 @@ class CreateMyCompaniesTable extends Migration
             $table->string('logo')->nullable();
             $table->string('address')->nullable();
 
+            $table->string('district',64)->nullable();
+            $table->string('region',64)->nullable();
+
             $table->string('first_name',32)->nullable();
             $table->string('last_name',32)->nullable();
 

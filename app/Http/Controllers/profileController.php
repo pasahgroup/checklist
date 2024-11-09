@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\user;
 use App\Models\role;
 use App\Models\dbconnect;
+use App\Models\property;
 
 use Dotenv\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -93,7 +94,6 @@ $role_name = role::where('name','Manager')->first();
                     if($comp == null)
                       {
 //dd('prints');
-
  $insetqnsy = myCompany::Create([
           'company_name'=>request('business_name'),
            'logo'=>$imageToStore,
@@ -102,6 +102,10 @@ $role_name = role::where('name','Manager')->first();
           'phone_number'=>request('phone_number'),
           'email'=>request('email'),
           'address'=>request('address'),
+
+           'district'=>request('district'),
+            'region'=>request('region'),
+
           'first_name'=>request('first_name'),
           'last_name'=>request('last_name'),
           'code'=>request('code'),
@@ -151,6 +155,10 @@ $insetqnsy = myCompany::where('company_name',request('business_name'))
           'phone_number'=>request('phone_number'),
           'email'=>request('email'),
           'address'=>request('address'),
+
+          'district'=>request('district'),
+          'region'=>request('region'),
+
           'first_name'=>request('first_name'),
           'last_name'=>request('last_name'),
            'code'=>request('code'),
@@ -177,8 +185,12 @@ else
           'tin'=>request('tin'),
           'vrn'=>request('vrn'),
           'phone_number'=>request('phone_number'),
-          'email'=>request('email'),
+          'email'=>request('email'),          
           'address'=>request('address'),
+
+             'district'=>request('district'),
+             'region'=>request('region'),
+          
           'first_name'=>request('first_name'),
           'last_name'=>request('last_name'),
            'code'=>request('code'),
@@ -210,8 +222,22 @@ $appliedto =userRole::Create([
         'status'=>'Active',
         'user_id'=>0   
         ]);
-  //Insert data to
 
+//Insert data into properties table
+ $insert_property = property::Create([       
+        'company_id'=>$insetqnsy->id,
+         'property_name'=>request('business_name'),
+        'property_category'=>'Hotel',
+         'property_rank'=>2,
+         'property_rank'=>1,
+         'location_name'=>'('.request('district').' '.request('region').')',
+         'email'=>request('email'),
+         'password'=>Hash::make(request('password')),
+         'status'=>'Active',
+          'user_id'=>0
+        ]);
+
+  //Insert data to
 $dbconnect =dbconnect::Create([
          'user_id'=>$userReg->id,
         'company_id'=>$insetqnsy->id,       
@@ -232,6 +258,10 @@ $insetqnsy = myCompany::where('company_name',request('business_name'))
           'phone_number'=>request('phone_number'),
           'email'=>request('email'),
           'address'=>request('address'),
+          
+          'district'=>request('district'),
+          'region'=>request('region'),
+
           'first_name'=>request('first_name'),
           'last_name'=>request('last_name'),
            'code'=>request('code'),

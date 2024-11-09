@@ -106,18 +106,17 @@ class PropertyController extends Controller
 
    //dd(session("auth_user"));
 
-      $properties = property::where('status','Active')->get();
+      // $properties = property::where('status','Active')->get();
       //$propertyName = Property::where('id',1)->first();
     
-     //$usersx=property::on('clientdb')->where('status','Active')->get(); 
+     $properties=property::on('clientdb')->where('status','Active')->get(); 
 
      // $users = DB::connection('conn2')->select('Select * from users');
-       $users = DB::connection('clientdb')->select('Select * from users');
-    //dd($users);
+       //$users = DB::connection('clientdb')->select('Select * from users');
+    dd($properties);
 
     return view('admin.settings.properties.dash.dash-property',compact('properties'));
     }
-
 
 
  public function reportGeneral(Request $request,$id)
