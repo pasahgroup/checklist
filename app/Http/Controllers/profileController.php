@@ -95,14 +95,15 @@ $role_name = role::where('name','Manager')->first();
                       {
 
     //Insert to user
-  $userReg = user::Create([
+//Insert to user
+       $userReg = user::Create([
         'name'=>request('first_name').' '.request('last_name'),
         'department_id'=>$department->id,
-        'property_id'=>$insetqnsy->id,
+        // 'property_id'=>$insetqnsy->id,
          'email'=>request('email'),
          'password'=>Hash::make(request('password')),
          'status'=>'Active',
-          'user_id'=>auth()->id()
+          'user_id'=>0
         ]);
 
 //dd('prints');
@@ -138,7 +139,33 @@ $appliedto =userRole::Create([
         'status'=>'Active',
         'user_id'=>$userReg->id     
         ]);
-//Insert data to
+
+//Insert into property table
+ $insert_property = property::Create([       
+        'company_id'=>$insetqnsy->id,
+         'property_name'=>request('business_name'),
+        'property_category'=>'Hotel',
+         'property_rank'=>2,
+         'property_rank'=>1,
+         'location_name'=>request('district').'('.request('region').')',
+         'room_no'=>1,
+         'phone'=>request('phone_number'),
+
+         'email'=>request('email'),
+         'password'=>Hash::make(request('password')),
+          'property_description'=>'First company registration',
+           'logo'=>$imageToStore,
+         'status'=>'Active',
+          'user_id'=>$userReg->id
+        ]);
+
+//Update user property ID
+$updateUserPID = user::where('id',$userReg->id)
+             ->update([
+'property_id'=>$insert_property->id
+        ]);
+
+//Insert data to dbconnects table
 $dbconnect =dbconnect::Create([
      'user_id'=>$userReg->id, 
         'company_id'=>$insetqnsy->id,       
@@ -241,7 +268,7 @@ $appliedto =userRole::Create([
 
          'email'=>request('email'),
          'password'=>Hash::make(request('password')),
-          'property_description'=>'First company reg',
+          'property_description'=>'First company registration',
          'status'=>'Active',
           'user_id'=>$userReg->id
         ]);
