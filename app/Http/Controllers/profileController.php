@@ -259,7 +259,6 @@ $dbconnect =dbconnect::Create([
         'company_id'=>$insetqnsy->id,       
         'status'=>'Active'     
         ]);
-
      }
 
        $code=request('code');
