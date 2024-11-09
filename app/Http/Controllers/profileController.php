@@ -164,7 +164,9 @@ $appliedto =userRole::Create([
 //Update user property ID
 $updateUserPID = user::where('id',$userReg->id)
              ->update([
-'property_id'=>$insert_property->id
+'property_id'=>$insert_property->id,
+ 'company_id'=>$insetqnsy->id,
+  'company_code'=>request('code')
         ]);
 
 //Insert data to dbconnects table
@@ -250,7 +252,9 @@ $appliedto =userRole::Create([
 //Update user property ID
 $updateUserPID = user::where('id',$userReg->id)
              ->update([
-'property_id'=>$insert_property->id
+'property_id'=>$insert_property->id,
+ 'company_id'=>$insetqnsy->id,
+  'company_code'=>request('code')
         ]);
 
   //Insert data to
