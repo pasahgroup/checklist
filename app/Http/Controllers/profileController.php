@@ -104,7 +104,7 @@ $role_name = role::where('name','Manager')->first();
          'status'=>'Active',
           'user_id'=>auth()->id()
         ]);
-                            
+
 //dd('prints');
  $insetqnsy = myCompany::Create([
           'company_name'=>request('business_name'),
@@ -181,16 +181,16 @@ else
                     if($comp == null)
                       {
 
-                //Insert to user
-  $userReg = user::Create([
+       $userReg = user::Create([
         'name'=>request('first_name').' '.request('last_name'),
         'department_id'=>$department->id,
-        'property_id'=>$insetqnsy->id,
+        // 'property_id'=>$insetqnsy->id,
          'email'=>request('email'),
          'password'=>Hash::make(request('password')),
          'status'=>'Active',
           'user_id'=>0
         ]);
+
     //dd('print1x');
  $insetqnsy = myCompany::Create([
           'company_name'=>request('business_name'),
@@ -212,6 +212,11 @@ else
         ]);             
 
  
+                //Insert to user
+ 
+
+
+
         $userSiteReg = userProperty::Create([
         'sys_user_id'=>$userReg->id,
         'property_id'=>$insetqnsy->id,
