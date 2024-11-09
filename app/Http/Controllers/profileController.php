@@ -233,6 +233,7 @@ $appliedto =userRole::Create([
          'property_rank'=>2,
          'property_rank'=>1,
          'location_name'=>'('.request('district').' '.request('region').')',
+         'room_no'=>1,
          'phone'=>request('phone_number'),
 
          'email'=>request('email'),
