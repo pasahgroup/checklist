@@ -93,6 +93,18 @@ $role_name = role::where('name','Manager')->first();
                     
                     if($comp == null)
                       {
+
+    //Insert to user
+  $userReg = user::Create([
+        'name'=>request('first_name').' '.request('last_name'),
+        'department_id'=>$department->id,
+        'property_id'=>$insetqnsy->id,
+         'email'=>request('email'),
+         'password'=>Hash::make(request('password')),
+         'status'=>'Active',
+          'user_id'=>auth()->id()
+        ]);
+                            
 //dd('prints');
  $insetqnsy = myCompany::Create([
           'company_name'=>request('business_name'),
@@ -110,31 +122,21 @@ $role_name = role::where('name','Manager')->first();
           'last_name'=>request('last_name'),
           'code'=>request('code'),
           'status'=>'Active',
-          'user_id'=>0
+          'user_id'=>$userReg->id
              ]);
-//Insert to user
-  $userReg = user::Create([
-        'name'=>request('first_name').' '.request('last_name'),
-        'department_id'=>$department->id,
-        'property_id'=>$insetqnsy->id,
-         'email'=>request('email'),
-         'password'=>Hash::make(request('password')),
-         'status'=>'Active',
-          'user_id'=>0
-        ]);
 
         $userSiteReg = userProperty::Create([
         'sys_user_id'=>$userReg->id,
         'property_id'=>$insetqnsy->id,
         'status'=>'Active',
-        'user_id'=>0
+        'user_id'=>$userReg->id
         ]);
 
 $appliedto =userRole::Create([
         'sys_user_id'=>$userReg->id,
         'role_id'=>$role_name->id,        
         'status'=>'Active',
-        'user_id'=>0      
+        'user_id'=>$userReg->id     
         ]);
 //Insert data to
 $dbconnect =dbconnect::Create([
@@ -163,7 +165,7 @@ $insetqnsy = myCompany::where('company_name',request('business_name'))
           'last_name'=>request('last_name'),
            'code'=>request('code'),
           'status'=>'Active',
-          'user_id'=>0
+         'user_id'=>auth()->id()
             ]);
   
             }
@@ -178,6 +180,17 @@ else
                      //dd($comp);
                     if($comp == null)
                       {
+
+                //Insert to user
+  $userReg = user::Create([
+        'name'=>request('first_name').' '.request('last_name'),
+        'department_id'=>$department->id,
+        'property_id'=>$insetqnsy->id,
+         'email'=>request('email'),
+         'password'=>Hash::make(request('password')),
+         'status'=>'Active',
+          'user_id'=>0
+        ]);
     //dd('print1x');
  $insetqnsy = myCompany::Create([
           'company_name'=>request('business_name'),
@@ -195,32 +208,22 @@ else
           'last_name'=>request('last_name'),
            'code'=>request('code'),
           'status'=>'Active',
-          'user_id'=>0
-        ]);               
+          'user_id'=>$userReg->id
+        ]);             
 
-        //Insert to user
-  $userReg = user::Create([
-        'name'=>request('first_name').' '.request('last_name'),
-        'department_id'=>$department->id,
-        'property_id'=>$insetqnsy->id,
-         'email'=>request('email'),
-         'password'=>Hash::make(request('password')),
-         'status'=>'Active',
-          'user_id'=>0
-        ]);
-
+ 
         $userSiteReg = userProperty::Create([
         'sys_user_id'=>$userReg->id,
         'property_id'=>$insetqnsy->id,
         'status'=>'Active',
-        'user_id'=>0
+        'user_id'=>$userReg->id
         ]);        
 
 $appliedto =userRole::Create([
         'sys_user_id'=>$userReg->id,
          'role_id'=>$role_name->id,         
         'status'=>'Active',
-        'user_id'=>0   
+        'user_id'=>$userReg->id   
         ]);
 
 //Insert data into properties table
@@ -239,7 +242,7 @@ $appliedto =userRole::Create([
          'email'=>request('email'),
          'password'=>Hash::make(request('password')),
          'status'=>'Active',
-          'user_id'=>0
+          'user_id'=>$userReg->id
         ]);
 
   //Insert data to
@@ -271,7 +274,7 @@ $insetqnsy = myCompany::where('company_name',request('business_name'))
           'last_name'=>request('last_name'),
            'code'=>request('code'),
           'status'=>'Active',
-          'user_id'=>0
+          'user_id'=>auth()->id()
         ]);
               }
      }
