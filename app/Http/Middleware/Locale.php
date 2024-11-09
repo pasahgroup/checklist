@@ -20,10 +20,11 @@ class Locale
     {
           //$locale = request()->getLocale();
           // $auth_user=Auth::user();
-          // $auth_user=user::where('status','Active')->get();           
+          // $auth_user=user::where('status','Active')->get();
+           $response = $next($request);        
            $auth_user = Auth::user();
 
-         // dd($auth_user);
+          //dd($auth_user);
          // app()->setLocale($auth_user);
 //dd($request->session());
 
