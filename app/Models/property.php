@@ -18,6 +18,7 @@ class property extends Model
         'phone',
         'email',
         'property_description',
+        'level',
         'photo',
         'status',
         'user_id'

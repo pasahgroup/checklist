@@ -25,6 +25,7 @@ class CreatePropertiesTable extends Migration
             $table->string('email')->nullable();
             $table->string('property_description')->nullable();
             $table->string('photo')->nullable();
+            $table->string('level',32)->nullable();
             $table->string('status')->default('Active');
             $table->integer('user_id')->unsigned();
             $table->timestamps();

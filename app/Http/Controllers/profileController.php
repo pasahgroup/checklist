@@ -88,12 +88,11 @@ $role_name = role::where('name','Manager')->first();
                      //upload the image
                      $path =$attached->storeAs('public/logo/', $imageToStore);
 
-                    $comp = myCompany::where('company_name',request('business_name'))->first();
-                     // dd($comp);
+                    // $comp = myCompany::where('company_name',request('business_name'))->first();
+                    //  // dd($comp);
                     
-                    if($comp == null)
-                      {
-
+                    // if($comp == null)
+                    //   {
     //Insert to user
 //Insert to user
        $userReg = user::Create([
@@ -141,8 +140,10 @@ $appliedto =userRole::Create([
         ]);
 
 //Insert into property table
- $insert_property = property::Create([       
+ $insert_property = property::UpdateOrCreate([       
         'company_id'=>$insetqnsy->id,
+          'level'=>'Main',
+      ],[
          'property_name'=>request('business_name'),
         'property_category'=>'Hotel',
          'property_rank'=>2,
@@ -153,8 +154,8 @@ $appliedto =userRole::Create([
 
          'email'=>request('email'),
          'password'=>Hash::make(request('password')),
-          'property_description'=>'First company registration',
-           'logo'=>$imageToStore,
+          'property_description'=>'First company registration',        
+           'photo'=>$imageToStore,
          'status'=>'Active',
           'user_id'=>$userReg->id
         ]);
@@ -173,41 +174,41 @@ $dbconnect =dbconnect::Create([
         ]);
 
                  }
-                      else
-                      {
-$insetqnsy = myCompany::where('company_name',request('business_name'))
-             ->update([
- 'company_name'=>request('business_name'),
-           'logo'=>$imageToStore,
-          'tin'=>request('tin'),
-          'vrn'=>request('vrn'),
-          'phone_number'=>request('phone_number'),
-          'email'=>request('email'),
-          'address'=>request('address'),
+//                       else
+//                       {
+// $insetqnsy = myCompany::where('company_name',request('business_name'))
+//              ->update([
+//  'company_name'=>request('business_name'),
+//            'logo'=>$imageToStore,
+//           'tin'=>request('tin'),
+//           'vrn'=>request('vrn'),
+//           'phone_number'=>request('phone_number'),
+//           'email'=>request('email'),
+//           'address'=>request('address'),
 
-          'district'=>request('district'),
-          'region'=>request('region'),
+//           'district'=>request('district'),
+//           'region'=>request('region'),
 
-          'first_name'=>request('first_name'),
-          'last_name'=>request('last_name'),
-           'code'=>request('code'),
-          'status'=>'Active',
-         'user_id'=>auth()->id()
-            ]);
+//           'first_name'=>request('first_name'),
+//           'last_name'=>request('last_name'),
+//            'code'=>request('code'),
+//           'status'=>'Active',
+//          'user_id'=>auth()->id()
+//             ]);
   
-            }
+//             }
 
-         }
+         // }
 }
 else
 {
 
-    //dd(request('business_name'));
-         $comp = myCompany::where('company_name',request('business_name'))->first();
-                     //dd($comp);
-                    if($comp == null)
-                      {
-//Insert to user
+//     //dd(request('business_name'));
+//          $comp = myCompany::where('company_name',request('business_name'))->first();
+//                      //dd($comp);
+//                     if($comp == null)
+//                       {
+// //Insert to user
        $userReg = user::Create([
         'name'=>request('first_name').' '.request('last_name'),
         'department_id'=>$department->id,
@@ -256,8 +257,10 @@ $appliedto =userRole::Create([
 //Insert data into properties table
 //dd('('.request('district').' '.request('region').')');
 
- $insert_property = property::Create([       
+ $insert_property = property::UpdateOrCreate([       
         'company_id'=>$insetqnsy->id,
+         'level'=>'Main',
+    ],[
          'property_name'=>request('business_name'),
         'property_category'=>'Hotel',
          'property_rank'=>2,
@@ -268,12 +271,10 @@ $appliedto =userRole::Create([
 
          'email'=>request('email'),
          'password'=>Hash::make(request('password')),
-          'property_description'=>'First company registration',
+          'property_description'=>'First company registration',         
          'status'=>'Active',
           'user_id'=>$userReg->id
         ]);
-
-
 
 //Update user property ID
 $updateUserPID = user::where('id',$userReg->id)
@@ -288,31 +289,31 @@ $dbconnect =dbconnect::Create([
         'status'=>'Active'     
         ]);
 
-                }
-                      else
-                      {
-                        //dd('print2');
+//                 }
+//                       else
+//                       {
+//                         //dd('print2');
 
-$insetqnsy = myCompany::where('company_name',request('business_name'))
-             ->update([
- 'company_name'=>request('business_name'),
-          // 'logo'=>'',
-          'tin'=>request('tin'),
-          'vrn'=>request('vrn'),
-          'phone_number'=>request('phone_number'),
-          'email'=>request('email'),
-          'address'=>request('address'),
+// $insetqnsy = myCompany::where('company_name',request('business_name'))
+//              ->update([
+//  'company_name'=>request('business_name'),
+//           // 'logo'=>'',
+//           'tin'=>request('tin'),
+//           'vrn'=>request('vrn'),
+//           'phone_number'=>request('phone_number'),
+//           'email'=>request('email'),
+//           'address'=>request('address'),
           
-          'district'=>request('district'),
-          'region'=>request('region'),
+//           'district'=>request('district'),
+//           'region'=>request('region'),
 
-          'first_name'=>request('first_name'),
-          'last_name'=>request('last_name'),
-           'code'=>request('code'),
-          'status'=>'Active',
-          'user_id'=>auth()->id()
-        ]);
-              }
+//           'first_name'=>request('first_name'),
+//           'last_name'=>request('last_name'),
+//            'code'=>request('code'),
+//           'status'=>'Active',
+//           'user_id'=>auth()->id()
+//         ]);
+//               }
      }
 
        $code=request('code');
