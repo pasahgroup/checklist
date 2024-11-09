@@ -17,6 +17,9 @@ class CreateUsersTable extends Migration
              $table->bigIncrements('id');
             $table->string('name');
              $table->integer('property_id');
+              $table->integer('company_id')->nullable();
+               $table->integer('company_code')->nullable();
+               
               $table->integer('department_id');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
