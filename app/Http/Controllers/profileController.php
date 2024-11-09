@@ -224,6 +224,8 @@ $appliedto =userRole::Create([
         ]);
 
 //Insert data into properties table
+//dd('('.request('district').' '.request('region').')');
+
  $insert_property = property::Create([       
         'company_id'=>$insetqnsy->id,
          'property_name'=>request('business_name'),
@@ -231,6 +233,8 @@ $appliedto =userRole::Create([
          'property_rank'=>2,
          'property_rank'=>1,
          'location_name'=>'('.request('district').' '.request('region').')',
+         'phone'=>request('phone_number'),
+
          'email'=>request('email'),
          'password'=>Hash::make(request('password')),
          'status'=>'Active',
