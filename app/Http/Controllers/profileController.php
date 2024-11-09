@@ -180,7 +180,7 @@ else
                      //dd($comp);
                     if($comp == null)
                       {
-
+//Insert to user
        $userReg = user::Create([
         'name'=>request('first_name').' '.request('last_name'),
         'department_id'=>$department->id,
@@ -209,14 +209,9 @@ else
            'code'=>request('code'),
           'status'=>'Active',
           'user_id'=>$userReg->id
-        ]);             
+        ]);
 
- 
-                //Insert to user
- 
-
-
-
+      
         $userSiteReg = userProperty::Create([
         'sys_user_id'=>$userReg->id,
         'property_id'=>$insetqnsy->id,
@@ -240,14 +235,23 @@ $appliedto =userRole::Create([
         'property_category'=>'Hotel',
          'property_rank'=>2,
          'property_rank'=>1,
-         'location_name'=>'('.request('district').' '.request('region').')',
+         'location_name'=>request('district').'('.request('region').')',
          'room_no'=>1,
          'phone'=>request('phone_number'),
 
          'email'=>request('email'),
          'password'=>Hash::make(request('password')),
+          'property_description'=>'First company reg'
          'status'=>'Active',
           'user_id'=>$userReg->id
+        ]);
+
+
+
+//Update user property ID
+$updateUserPID = user::where('id',$userReg->id)
+             ->update([
+'property_id'=>$insert_property->id
         ]);
 
   //Insert data to
