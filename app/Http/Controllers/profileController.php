@@ -148,6 +148,8 @@ $role_name = role::where('name','Manager')->first();
         'user_id'=>$userReg->id
         ]);
 
+//Assign to Role
+$userReg->assignRole($role_name->id);
 $appliedto =userRole::Create([
         'sys_user_id'=>$userReg->id,
         'role_id'=>$role_name->id,        
@@ -235,7 +237,10 @@ else
         'property_id'=>$insetqnsy->id,
         'status'=>'Active',
         'user_id'=>$userReg->id
-        ]);        
+        ]);
+
+//User role
+ $userReg->assignRole($role_name->id);
 
 $appliedto =userRole::Create([
         'sys_user_id'=>$userReg->id,
@@ -280,6 +285,8 @@ $dbconnect =dbconnect::Create([
         'status'=>'Active'     
         ]);
      }
+
+       
 
        $code=request('code');
      if(request('profile_web'))
