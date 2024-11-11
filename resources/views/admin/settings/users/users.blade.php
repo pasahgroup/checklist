@@ -121,9 +121,7 @@
                                                             </div>
 <form method="POST" action="{{ route('roles.store') }}" method="POST">
                                                     @csrf
-                                                     <div class="modal-body">
-
-                                                                            {{-- form start here --}}
+                                                     <div class="modal-body">                                {{-- form start here --}}
 
 
                                         <div class="container">
@@ -138,8 +136,8 @@
                                          @endforeach
                                                         </select>
 
-                                         <input type="hidden" name="addrole" value="addrole">
-                                         <input type="hidden" name="user_id" value="{{ $value->id}}">
+            <input type="hidden" name="addrole" value="addrole">
+            <input type="hidden" name="user_id" value="{{ $value->id}}">
                                                          </div>
                                                                 </div>
                                                                 </div>
