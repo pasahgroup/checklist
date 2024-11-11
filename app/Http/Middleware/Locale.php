@@ -21,20 +21,29 @@ class Locale
           //$locale = request()->getLocale();
           // $auth_user=Auth::user();
           // $auth_user=user::where('status','Active')->get();
-           $response = $next($request);        
-           $auth_user = Auth::user();
+             //$response = $next($request);
+//             $auth_user=1; 
+//                //Auth::user();
+//             //dd($auth_user);   
+           
+//            if(!is_null($auth_user)){
+//            //$auth_user = Auth::user()
 
-          //dd($auth_user);
-         // app()->setLocale($auth_user);
-//dd($request->session());
+//             //dd($auth_user);
+//             return $next($request);
+//             }
 
-        session([
-            "auth_user" => $auth_user,
-            //"current-country" => geoip(request()->ip())->iso_code,
-        ]);
+//          //dd('print');
+//           //dd($auth_user);
+//          // app()->setLocale($auth_user);
+// //dd($request->session());
 
-        return $next($request);
-
-        //return $next($request);
+//         // session([
+//         //  "auth_user" => $auth_user,
+//         //     //"current-country" => geoip(request()->ip())->iso_code,
+//         // ]);
+       
+    return $next($request);
+       }
     }
-}
+

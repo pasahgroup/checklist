@@ -333,7 +333,7 @@ Route::put('riq-update/{id}',[MetadataController::class,'updateDatatype'])->name
   Route::get('recovery-metadata',[MetadataController::class,'recovery'])->name('recovery-metadata');
 
   // Route::resource('render', Department::class,'render')->middleware(['role:Admin|Store']);
-  Route::resource('department', DepartmentController::class)->middleware(['role:Admin|SuperAdmin']);
+  Route::resource('department', DepartmentController::class)->middleware(['role:Admin|SuperAdmin|GeneralAdmin']);
 
   Route::get('delete-department/{id}',[DepartmentController::class,'edit'])->name('delete-department');
   Route::get('update-department/{id}',[DepartmentController::class,'recoveryUpdate'])->name('update-department');
@@ -490,9 +490,7 @@ Route::post('createOrder', [rentalController::class,'createOrder'])->name('creat
 Route::get('shops',[warehouseController::class,'shops']);
 
  Route::resource('company-profile',profileController::class);//changed
-
 Route::resource('custom-users', customRegisterController::class);
-
 
 // test
 Route::get('tester',[testerController::class,'test']);

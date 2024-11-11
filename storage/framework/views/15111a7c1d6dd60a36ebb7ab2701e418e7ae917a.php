@@ -61,8 +61,11 @@ background-image:url(<?php echo e(URL::asset('../../assets/images/misc/bg-login.
             </div>
         <?php endif; ?>
 
-        <form method="post" action="<?php echo e(route('login')); ?>">
-            <?php echo csrf_field(); ?>
+
+                   <form  method="post"  action="<?php echo e(route('login')); ?>" enctype="multipart/form-data">
+                <?php echo csrf_field(); ?>
+              <input type="hidden" name="_method" value="post">
+    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
             
            
     <div class="mt-4">

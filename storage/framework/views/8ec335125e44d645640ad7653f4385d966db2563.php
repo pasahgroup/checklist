@@ -17,25 +17,25 @@
 											<div class="row">
 
                                                 <div class="col-md-12 col-sm-12">
-                                                    <div class="tab-content" id="v-pills-tabContent1">
-                                                        <div class="tab-pane fade show active" id="general" role="tabpanel" >
-                                                              <form  method="post"  action="<?php echo e(route('company-profile.store')); ?>" enctype="multipart/form-data">
+                                  <div class="tab-content" id="v-pills-tabContent1">
+                                
+         <div class="tab-pane fade show active" id="general" role="tabpanel" >
+         
+
+         	<form  method="POST"  action="<?php echo e(route('company-profile.update',$profile->id)); ?>" enctype="multipart/form-data">
                              <?php echo csrf_field(); ?>
-    <input type="hidden" name="_method" value="post">
+    <input type="hidden" name="_method" value="PUT">
     <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 
 
 
-															<div class="form-group row">
-																<div class="col-md-6">
-																	<label >Business Name</label>
-																	<fieldset class="form-group mb-3">
+									<div class="form-group row">
+											<div class="col-md-6">
+											<label >Business Name</label>
 	<input type="text" name="business_name" class="form-control border-dark"  placeholder="" value="<?php echo e($profile->company_name??''); ?>">
 																	
 </div>
-
-											</fieldset>
-																
+		
 									<div class="col-md-6">
 									<label >Phone Number</label>
 								<input class="form-control" type="number" name="phone_number" value="<?php echo e($profile->phone_number??''); ?>" required>
@@ -58,6 +58,17 @@
 							<input class="form-control" type="text" name="vrn" value="<?php echo e($profile->vrn??''); ?>">
 																</div>
 
+ 
+<div class="col-md-6">
+                  <label>Region</label>
+                <input class="form-control" type="text" name="region" value="<?php echo e($profile->region??''); ?>">
+                                </div>
+             <div class="col-md-6">
+                  <label >District</label>
+              <input class="form-control" type="text" name="district" value="<?php echo e($profile->district??''); ?>">
+                                </div> 
+
+
 								<div class="col-md-6">
 							<label >Upload Logo</label>
 						<fieldset class="form-group mb-3 border-dark rounded p-1">
@@ -69,6 +80,18 @@
 									<label >Code</label>
 							<input class="form-control" type="text" name="code" value="<?php echo e($profile->code?? $pin); ?>" readonly>
 																</div>
+
+<div class="col-md-6">
+                  <label>First name</label>
+                <input class="form-control" type="text" name="region" value="<?php echo e($profile->first_name??''); ?>">
+                                </div>
+             <div class="col-md-6">
+                  <label >Last name</label>
+              <input class="form-control" type="text" name="district" value="<?php echo e($profile->last_name??''); ?>">
+                                </div> 
+
+<div><br></div>
+	          												
 
 						<div class="col-md-12">
 																	<button type="submit" class="btn btn-primary float-right">Update</button>

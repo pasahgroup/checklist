@@ -54,12 +54,12 @@ class adminController extends Controller
 //dd(request()->getHost());
       //dd(request('code'));
        
-
+//dd(auth()->id());
 // DB::purge($dd);
 
        if(auth())
        {
-         //dd(auth()->id());
+
         $now = Carbon::now();
         $weekStartDate = $now->startOfWeek()->format('Y-m-d H:i');
         $weekEndDate = $now->endOfWeek()->format('Y-m-d H:i');
@@ -67,7 +67,7 @@ class adminController extends Controller
         $users= User::get();
         $user->hasRole('Admin');
        //$int = (int)$user->property_id;
-
+//dd($users);
         //dd($user->hasRole('Housekeeper'));
       $property_name = property::where('id',$user->property_id)->first();
      //dd($property_name);
@@ -207,8 +207,8 @@ if($user->hasRole('Manager')){
  //Report monthly dataDaily
   $reportMonthlyData=DB::select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.opt_answer_id=o.id and month(a.datex)=month(NOW())');
   $dataMonthly = collect($reportMonthlyData);
-
-    return redirect('managers-inspection');
+//dd('ddd');
+ return redirect('managers-inspection');
 }
 
 

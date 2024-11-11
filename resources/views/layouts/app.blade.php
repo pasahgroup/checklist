@@ -1,18 +1,12 @@
 <!DOCTYPE html>
-<!--
-Template Name: Kundol Admin - Bootstrap 4 HTML Admin Dashboard Theme
-Author: Themescoder
-Website: http://www.themescoder.net/
-Contact: support@themescoder.net
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
+
 <html lang="en">
 <!--begin::Head-->
  @livewireStyles
 <head>
 
 	<meta charset="utf-8" />
-	<title>Admin | Dashboard</title>
+	<title>Checklist System</title>
 	<meta name="description" content="Checklist Master, Sales and CRM system" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<!--begin::Fonts-->
@@ -348,7 +342,7 @@ License: You must have a valid license purchased only from themeforest(the above
 </div>
 @endif
 @if($message= Session::get('info'))
-<div class="alert alert-info" role="alert">
+<div class="alert alert-danger" role="alert">
 	<button aria-label="Close" class="close" data-dismiss="alert" type="button">
 	<span aria-hidden="true">&times;</span></button>
 	<strong>Sorry!</strong> {{ $message }}

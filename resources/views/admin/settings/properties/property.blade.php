@@ -122,11 +122,13 @@
           </button>
         </div>
         <div class="modal-body">
-           	<form id="myform" action="{{ route('properties.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
+           	<form id="myform" action="{{ route('properties.update',$property->id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+    <input type="hidden" name="_method" value="PUT">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="row">
 
-				<div class="col-12">
+				<div class="col-md-12">
 					<div class="form-group">
 						<label class="text-dark" >Property Name </label>
 						<input type="text" name="property_name" class="form-control" value="{{$property->property_name}}">
@@ -144,6 +146,8 @@
                         </select>
 					</div>
 
+		<div class="row">
+				<div class="col-md-5">
                  <div class="form-group">
 						<label class="text-dark" >Rank</label>
                         <select name="property_rank" id="" class="form-control">
@@ -157,30 +161,44 @@
                                       <option>5</option>
                         </select>
 					</div>
+</div>
+		
 
-
-
+				<div class="col-md-7">
                          <div class="form-group">
                         <label class="text-dark" >Number of Rooms</label>
                         <input type="number" name="room_no" class="form-control" name="room_no" min="0" required="" value="{{$property->room_no}}">
                         </div>
+                      </div>
+                 	</div>     
 
  	<div class="form-group">
 						<label class="text-dark" >Location Name </label>
 						<input type="text" name="location_name" class="form-control" value="{{$property->location_name}}">
 						<small  class="form-text text-muted">please enter location name</small>
 					</div>
+			
 
 
-                           <div class="form-group">
-                        <label class="text-dark" >Phone</label>
-                        <input type="number" name="phone" class="form-control" name="phone" min="0" value="{{$property->phone}}">
-                        </div>
 
-                       <div class="form-group">
+			<div class="row">
+				<div class="col-md-5">
+                 <div class="form-group">
+						<label class="text-dark">Phone</label>
+                             <input type="number" name="phone" class="form-control" name="phone" min="0" value="{{$property->phone}}">
+					</div>
+</div>
+		
+
+				<div class="col-md-7">
+                         <div class="form-group">
                         <label class="text-dark" >Email</label>
-                        <input type="email" name="email" class="form-control" name="email" value="{{$property->email}}">
+                           <input type="email" name="email" class="form-control" name="email" value="{{$property->email}}">
                         </div>
+                      </div>
+                 	</div>   
+
+
 
                 <div class="form-group">
                         <label class="text-dark" >Description</label>
@@ -189,12 +207,14 @@
 
 				</div>
 
+
 				     <div class="form-group">
                         <label class="text-dark" >Photo</label>
                         <input type="file" name="attachment[]" onChange="displayImage(this)" id="attachment" accept="image/*" class="" style="display:block;">
                         </div>
 
 {{ URL::asset('/storage/properties/'.$property->photo) }}
+
    <div class="form-group">
                       <span class="img-div">
               <div class="text-center img-placeholder"  onClick="triggerClick()">
@@ -281,7 +301,7 @@
 
 			<div class="row col-xl-12 col-md-12">
   <div class="card-body"  style="background-color:#b2ca5d !important">
-		<form id="myform" action="{{ route('properties.store') }}" method="POST" enctype="multipart/form-data">
+		<form action="{{ route('properties.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 			<div class="row">
 

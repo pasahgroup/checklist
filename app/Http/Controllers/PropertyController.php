@@ -7,6 +7,7 @@ use App\Models\keyIndicator;
 use App\Models\answer;
 use App\Models\user;
 use App\Models\dbsetting;
+use App\Models\myCompany;
 
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -51,23 +52,36 @@ class PropertyController extends Controller
      */
     public function index()
     {
-      $properties = property::where('status','Active')->get();
-      //dd($properties);
-    return view('admin.settings.properties.property',compact('properties'));
+  $auth=auth::user();
+  $aData['dataC'] = dbsetting::getConnect($auth->id);
+
+
+$level=property::where('id',$auth->property_id)->first();
+ //dd($level);
+
+if($level->level=="Main")
+{
+$properties = property::on('clientdb')->where('company_id',$auth->company_id)      
+      ->where('status','Active')->get();
+}else
+{
+$properties = property::on('clientdb')->where('company_id',$auth->company_id)
+      ->where('id',$auth->property_id)
+      ->where('status','Active')->get();
+}
+
+  
+     return view('admin.settings.properties.property',compact('properties'));
     }
 
  public function dashProperty($id)
     {       
   $auth=auth::user();
-
-//Helper::some_function();
- // $aData['dataC'] = asset::getAsset(1);
- 
   $aData['dataC'] = dbsetting::getConnect($auth->id);
 
- dd($auth);
+ //dd($auth);
 //Helper::shout('courses');
-      // dd($id);
+      // dd($auth_user);
 
  //$dd=Config::get(app_path().'/db/dbconn.php');
 //dd($dd);
@@ -92,7 +106,7 @@ class PropertyController extends Controller
 //    // all the other params from config
 // ]);
 
-         //dd($auth_user);
+        // dd(auth_user);
      // {{session("current-country")}} retrive data onblade
 
         //DB::purge('mynewconnection');
@@ -112,8 +126,8 @@ class PropertyController extends Controller
      $properties=property::on('clientdb')->where('status','Active')->get(); 
 
      // $users = DB::connection('conn2')->select('Select * from users');
-       //$users = DB::connection('clientdb')->select('Select * from users');
-    dd($properties);
+    // $users = DB::connection('clientdb')->select('Select * from users');
+    // dd($users);
 
     return view('admin.settings.properties.dash.dash-property',compact('properties'));
     }
@@ -1044,7 +1058,6 @@ $updateUser = user::where('id',auth()->id())
 
 
 $man="Managers";
-
     //Daily manager Report
    $reportManagerMonthlyData=DB::select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.property_id="'.$id.'" and a.opt_answer_id=o.id  and m.metaname_name="'.$man.'" and month(a.datex)=month(NOW()) order by m.metaname_name ASC');
 
@@ -1080,16 +1093,24 @@ $man="Managers";
      */
     public function store(Request $request)
     {
+      $auth=auth()->user();
+        //dd(request('id'));
           //See if the site is Exists
-         $site=property::where('property_name',request('property_name'))
-        ->where('id',request('id'))->first();
+//If value Exist
+$exists = \DB::table('properties')->where('property_name',request('property_name'))->where('company_id',$auth->company_id)->exists();
+//dd($exists);
+if($exists)
+{
+ return redirect()->back()->with('info','The Property already Exists');
+}
 
-       if($site ==null)
-       {
-        $sites = property::UpdateOrCreate(
-                        [   'property_name'=>request('property_name')],
-        [
-        // 'site_name'=>request('site_name'),
+     
+     $hotelUdate = property::UpdateOrCreate([    
+            //'photo'=>$imageToStore
+                'property_name'=>request('property_name'),
+         'company_id'=>$auth->company_id,
+              'company_code'=>$auth->company_code,
+         'property_name'=>request('property_name'),
         'property_category'=>request('property_category'),
         'property_rank'=>request('property_rank'),
         'room_no'=>request('room_no'),
@@ -1097,18 +1118,14 @@ $man="Managers";
          'phone'=>request('phone'),
           'email'=>request('email'),
           'property_description'=>request('property_description'),
-        'user_id'=>auth()->id()
-      ]);
-        $idf=$sites->id;
-       }
-      else
-       {
-        return redirect()->route('properties.index')->with('info','This Property Exists');
-       }
-//dd(request('attachment'));
+           'user_id'=>auth()->id()
+        ]);
 
-        if(request('attachment')){
+
+  if(request('attachment')){
             $attach = request('attachment');
+            //dd($attach);
+
             foreach($attach as $attached){
 
                  // Get filename with extension
@@ -1122,25 +1139,15 @@ $man="Managers";
                  //upload the image
                  $path = $attached->storeAs('public/properties/', $imageToStore);
 
-           $id = property::where('id', $idf)->first();
-
-             if($id !=null)
-             {
-             $hotelUdate = property::where('id',$idf)
+         
+$hotelUdatePhoto =property::where('id',$hotelUdate->id)
              ->update([
-            'photo'=>$imageToStore
+          'photo'=>$imageToStore
         ]);
-           }else
-           {
-         property::UpdateOrCreate(
-                [
-                'photo'=>$imageToStore
-                ]
-                );
-            }
             }
         }
-        return redirect()->route('properties.index')->with('success','Property created successful');
+
+return redirect()->route('properties.index')->with('success','Property created successful');
     }
 
     /**
@@ -1178,10 +1185,62 @@ $man="Managers";
      * @param  \App\Models\site  $site
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, site $site)
+    public function update(Request $request,$id)
     {
-        //Update the time_show odbc_columns
-        //dd('update');
+        $auth=auth()->user();      
+        
+        $propertyUpdate =property::where('id',$id)
+             ->update([
+        'property_name'=>request('property_name'),
+         'company_id'=>$auth->company_id,
+              'company_code'=>$auth->company_code,
+         'property_name'=>request('property_name'),
+        'property_category'=>request('property_category'),
+        'property_rank'=>request('property_rank'),
+        'room_no'=>request('room_no'),
+        'location_name'=>request('location_name'),
+         'phone'=>request('phone'),
+          'email'=>request('email'),
+          'property_description'=>request('property_description'),
+           'user_id'=>auth()->id()
+            ]);
+
+  
+  if(request('attachment')){
+            $attach = request('attachment');
+            //dd($attach);
+
+            foreach($attach as $attached){
+
+                 // Get filename with extension
+                 $fileNameWithExt = $attached->getClientOriginalName();
+                 // Just Filename
+                 $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+                 // Get just Extension
+                 $extension = $attached->getClientOriginalExtension();
+                 //Filename to store
+                 $imageToStore = $filename.'_'.time().'.'.$extension;
+                 //upload the image
+                 $path = $attached->storeAs('public/properties/', $imageToStore);
+
+         
+$hotelUdatePhoto =property::where('id',$id)
+             ->update([
+          'photo'=>$imageToStore
+        ]);
+
+             if($auth->level=="")
+             {
+            $mainCompanyPhoto =myCompany::where('id',$auth->company_id)
+             ->update([
+            'photo'=>$imageToStore
+              ]);
+           }
+            }
+        }
+
+
+      return redirect()->back()->with('success','Successfully updeted'); 
     }
 
     /**

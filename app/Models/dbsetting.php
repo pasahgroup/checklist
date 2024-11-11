@@ -22,7 +22,7 @@ class dbsetting extends Model
 
     public static function getConnect($n){   
       //$value = DB::select('select * from my_companies');
-        $n=52;
+      //dd($n);
           $value = DB::select('select * from dbconnects where user_id="'.$n.'"');
        //dd($value);
     

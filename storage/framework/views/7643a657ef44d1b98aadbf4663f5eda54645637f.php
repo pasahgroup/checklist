@@ -13,7 +13,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <head>
 
 	<meta charset="utf-8" />
-	<title>Admin | Dashboard</title>
+	<title>Checklist System</title>
 	<meta name="description" content="Checklist Master, Sales and CRM system" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<!--begin::Fonts-->

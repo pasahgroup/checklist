@@ -12,6 +12,9 @@ use App\Models\property;
 
 use Dotenv\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dbsetting;
+
 use DB;
 use App\Models\department;
 use App\Models\userProperty;
@@ -26,9 +29,18 @@ class profileController extends Controller
      */
     public function index()
     {
-        $profile = myCompany::first();
-         $pin=rand(111111, 999999);
-        return view('admin.profile.profile',compact('profile','pin'));
+     $auth=auth::user();
+     $aData['dataC'] = dbsetting::getConnect($auth->id);
+     
+     if(!is_null($auth->company_id))
+     {
+        $profile = myCompany::on('clientdb')->where('id',$auth->company_id)->first();         
+         }
+         else{
+             return redirect()->back()->with('info','Company ID is null');
+         }
+         //dd($profile);
+        return view('admin.profile.profile',compact('profile'));
     }
 
  public function companyWeb()
@@ -38,6 +50,7 @@ class profileController extends Controller
          $pin=rand(111111, 999999);
          //dd($pin);
         return view('admin.profile.profile_web',compact('pin'));
+    
     }
     /**
      * Show the form for creating a new resource.
@@ -283,7 +296,7 @@ $dbconnect =dbconnect::Create([
      */
     public function show($id)
     {
-        //
+        dd('updd');
     }
 
     /**
@@ -294,7 +307,7 @@ $dbconnect =dbconnect::Create([
      */
     public function edit($id)
     {
-        //
+        dd('upd');
     }
 
     /**
@@ -306,7 +319,7 @@ $dbconnect =dbconnect::Create([
      */
     public function update(Request $request, $id)
     {
-        //
+        dd('upd');
     }
 
     /**

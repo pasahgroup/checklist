@@ -182,7 +182,8 @@ class ManageController extends Controller
       //Get asset_show from assets table
       $asset_show=asset::where('property_id',$departments->property_id)->first();
       //dd($asset_show->time_show);
-      //dd($datet);
+      //dd($asset_show);
+      
       if($datet>="23:45")
       {
         
