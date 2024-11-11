@@ -29,6 +29,8 @@ class UserRegisterController extends Controller
      */
     public function index()
     {
+      $auth=auth()->user();
+
         $metadatas = metadata::where('status','Active')
           ->orWhere('status','Stop')
           ->get();
@@ -42,7 +44,10 @@ class UserRegisterController extends Controller
  //dd($roles);
 
 $departments=department::get();
-$properties=property::get();
+$properties=property::where('company_id',$auth->company_id)
+->where('status','Active')
+->get();
+
 //dd($metadatas);
  return view('auth.register',compact('departments','users','datatypes','properties','roles'));
     }

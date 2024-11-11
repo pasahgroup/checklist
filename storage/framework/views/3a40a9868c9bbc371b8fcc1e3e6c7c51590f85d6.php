@@ -98,6 +98,17 @@
               </div>
             </div>
 
+ <div class="clearfix" style="height: 10px;clear: both;"></div>
+            <div class="form-group">
+              <label class="col-lg-2 control-label" for="upass1">Category:</label>
+                <select  name="property_category" id="property_category" class="">
+                          <option value="">--- Select property category ---</option>
+                         <option>Camp site</option>
+                         <option>Lodge</option>
+                         <option>Hotel</option>
+                     </select>
+            </div>
+
             <div class="clearfix" style="height: 10px;clear: both;"></div>
 
             <div class="form-group">

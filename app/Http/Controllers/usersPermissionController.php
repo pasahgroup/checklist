@@ -44,6 +44,7 @@ class usersPermissionController extends Controller
         ->select('properties.id as id','users.id as model_id','properties.property_name as permission_name')
         ->get();
 
+     //dd($permissions);
         $permit = property::get();
         $roles = Role::get();
         //$limitation = myPayment::latest()->first();

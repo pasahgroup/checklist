@@ -8,7 +8,7 @@ use App\Models\myCompany;
 use App\Models\myPayment;
 use Illuminate\Http\Request;
 use App\Models\user;
-use App\Models\role;
+
 use App\Models\dbconnect;
 use App\Models\property;
 
@@ -164,7 +164,7 @@ $appliedto =userRole::Create([
       ],[
           'company_code'=>request('code'),
          'property_name'=>request('business_name'),
-        'property_category'=>'Hotel',
+        'property_category'=>request('property_category'),
          'property_rank'=>2,
          'property_rank'=>1,
          'location_name'=>request('district').'('.request('region').')',
@@ -256,7 +256,7 @@ $appliedto =userRole::Create([
     ],[
         'company_code'=>request('code'),
          'property_name'=>request('business_name'),
-        'property_category'=>'Hotel',
+        'property_category'=>request('property_category'),
          'property_rank'=>2,
          'property_rank'=>1,
          'location_name'=>request('district').'('.request('region').')',
