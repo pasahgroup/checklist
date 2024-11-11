@@ -37,23 +37,11 @@ class ManageController extends Controller
      */
     public function index()
     {
-    //  $qnID='idx'.$this->qnID;
-      //$qnID=$this->qnID;
-       //dd('bbb');
-      //dd($this->metavv);
+   
       $meta=request('meta');
 
-     //$metaAll=$this->metaValue;
-      // if($metaAll==null)
-      // {
-      //   $metaAll="All";
-      // }
 
           $current_date = date('Y-m-d');
-          //  $pos_id=$this->metaname_id;
-          //  $qnType=$this->qnType;
-          //  $times=$this->qnNo;
-          // $qn_no=$this->qn_no;
           $metaname_id=request('metaname_id');
            $assetID=request('assetID');
            $assetIDf=request('assetID');
@@ -89,10 +77,12 @@ class ManageController extends Controller
             // $metadatas = optionalAnswer::get();
       //Assign Activities to userActivities
       $departments=user::where('id',auth()->id())->first();
+      
+      //dd(auth()->id());
       //Get Department name
         $departGetName= department::where('status','Active')
         ->where('id',$departments->department_id)->first();
-      //dd($departGetName);
+      //dd($departments->department_id);
 
       //$assets = asset::where('assets.metaname_id',$metaname_id)
      $assets = asset::join('answers','answers.asset_id','assets.id')
@@ -177,7 +167,7 @@ class ManageController extends Controller
       //Extract date
       $datet=Carbon::now();
       $datet=$datet->format('H:i:s');
-      //dd($departments->property_id);
+     // dd($departments->property_id);
 
       //Get asset_show from assets table
       $asset_show=asset::where('property_id',$departments->property_id)->first();
@@ -240,7 +230,7 @@ class ManageController extends Controller
              ->select('metanames.id','metanames.metaname_name')
                ->orderBy('metanames.id')->get();
 
-//dd($metas);
+dd($metas);
 
           $qns = DB::select("select * from qnsview_answer where property_id in(".$departments->property_id.")");
           $qns=collect($qns);

@@ -16,6 +16,7 @@ use Dotenv\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\dbsetting;
+use App\Models\asset;
 
 use DB;
 use App\Models\department;
@@ -193,6 +194,16 @@ $dbconnect =dbconnect::Create([
         'company_id'=>$insetqnsy->id,       
         'status'=>'Active'     
         ]);
+
+//Insert one value in asset table             
+$assetData =asset::Create([
+     'property_id'=>$userReg->id, 
+        'company_id'=>$insetqnsy->id,       
+        'status'=>'Active'     
+        
+'user_id'=>$userReg->id, 
+        ]);
+
 
                  }
 
