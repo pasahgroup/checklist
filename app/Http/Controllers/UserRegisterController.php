@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\user;
 //use App\Actions\Fortify\PasswordValidationRules;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Dotenv\Validator;
 use App\Models\department;
 use App\Models\metadata;
@@ -11,12 +13,10 @@ use App\Models\datatype;
 use App\Models\property;
 use App\Models\userProperty;
 use App\Models\userRole;
-use App\Models\role;
+// use App\Models\role;
 
 use DB;
 use Illuminate\Support\Facades\Hash;
-// use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Http\Request;
 
@@ -114,15 +114,15 @@ else
         'user_id'=>auth()->id()
         ]);
 
+ // $user = User::where('id',$userReg->id);
+ $userReg->assignRole(request('role'));
+
          $appliedto =userRole::Create([
         'sys_user_id'=>$userReg->id,
         'role_id'=>request('role'),        
         'status'=>'Active',
         'user_id'=>auth()->id()        
         ]);
-
- $user = User::where('id',$userReg->id);
- $user->assignRole(request('role'));
 
  }
       return redirect()->back()->with('success','User Registered successfuly');
