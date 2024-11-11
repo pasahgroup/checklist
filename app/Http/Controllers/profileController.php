@@ -105,9 +105,7 @@ $role_name = role::where('name','Manager')->first();
                      //upload the image
                      $path =$attached->storeAs('public/logo/', $imageToStore);
 
-                    // $comp = myCompany::where('company_name',request('business_name'))->first();
-                    //  // dd($comp);
-                    
+                
                     // if($comp == null)
                     //   {
     //Insert to user
@@ -198,9 +196,14 @@ $dbconnect =dbconnect::Create([
 //Insert one value in asset table             
 $assetData =asset::Create([
      'property_id'=>$userReg->id, 
-        'company_id'=>$insetqnsy->id,       
-        'status'=>'Active'     
-        
+     'metaname_id'=>1, 
+     'asset_name'=>"Room 1",
+     'asset_type'=>"Room",
+     'time_show'=>1,
+     'asset_show'=>1,
+
+        'asset_description'=>"Room 1", 
+        'status'=>'Active',           
 'user_id'=>$userReg->id, 
         ]);
 
@@ -295,6 +298,21 @@ $dbconnect =dbconnect::Create([
         'company_id'=>$insetqnsy->id,       
         'status'=>'Active'     
         ]);
+     
+//Insert one value in asset table             
+$assetData =asset::Create([
+     'property_id'=>$userReg->id, 
+     'metaname_id'=>1, 
+     'asset_name'=>"Room 1",
+     'asset_type'=>"Room",
+     'time_show'=>1,
+     'asset_show'=>1,
+
+        'asset_description'=>"Room 1", 
+        'status'=>'Active',          
+'user_id'=>$userReg->id, 
+        ]);
+
      }
 
        

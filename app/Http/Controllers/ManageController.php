@@ -36,11 +36,8 @@ class ManageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-   
-      $meta=request('meta');
-
-
+    {   
+          $meta=request('meta');
           $current_date = date('Y-m-d');
           $metaname_id=request('metaname_id');
            $assetID=request('assetID');
@@ -65,7 +62,7 @@ class ManageController extends Controller
           // $indicators = setIndicator::get();
       // $metanames = metaname::get();
          
-         $metanames = answer::join('metanames','metanames.id','answers.metaname_id')
+      $metanames = answer::join('metanames','metanames.id','answers.metaname_id')
      //->where('assets.metaname_id',$metaname_id)
      ->where('answers.manager_checklist','!=',"Cleared")
     ->groupby('answers.metaname_id')
@@ -78,7 +75,7 @@ class ManageController extends Controller
       //Assign Activities to userActivities
       $departments=user::where('id',auth()->id())->first();
       
-      //dd(auth()->id());
+      dd($departments);
       //Get Department name
         $departGetName= department::where('status','Active')
         ->where('id',$departments->department_id)->first();
@@ -167,12 +164,12 @@ class ManageController extends Controller
       //Extract date
       $datet=Carbon::now();
       $datet=$datet->format('H:i:s');
-     // dd($departments->property_id);
+      dd($departments->property_id);
 
       //Get asset_show from assets table
       $asset_show=asset::where('property_id',$departments->property_id)->first();
       //dd($asset_show->time_show);
-      //dd($asset_show);
+      dd($asset_show);
       
       if($datet>="23:45")
       {
