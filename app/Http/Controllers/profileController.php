@@ -195,7 +195,7 @@ $dbconnect =dbconnect::Create([
 
 //Insert one value in asset table             
 $assetData =asset::Create([
-     'property_id'=>$userReg->id, 
+     'property_id'=>$insert_property->id, 
      'metaname_id'=>1, 
      'asset_name'=>"Room 1",
      'asset_type'=>"Room",
@@ -301,7 +301,7 @@ $dbconnect =dbconnect::Create([
      
 //Insert one value in asset table             
 $assetData =asset::Create([
-     'property_id'=>$userReg->id, 
+     'property_id'=>$insert_property->id,
      'metaname_id'=>1, 
      'asset_name'=>"Room 1",
      'asset_type'=>"Room",
