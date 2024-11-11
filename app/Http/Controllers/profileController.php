@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use App\Models\myCompany;
 use App\Models\myPayment;
 use Illuminate\Http\Request;
@@ -19,6 +21,7 @@ use DB;
 use App\Models\department;
 use App\Models\userProperty;
 use App\Models\userRole;
+use Spatie\Permission\Traits\HasRoles;
 
 class profileController extends Controller
 {
