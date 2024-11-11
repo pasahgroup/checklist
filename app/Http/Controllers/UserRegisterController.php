@@ -10,8 +10,14 @@ use App\Models\metadata;
 use App\Models\datatype;
 use App\Models\property;
 use App\Models\userProperty;
+use App\Models\userRole;
+use App\Models\role;
+
 use DB;
 use Illuminate\Support\Facades\Hash;
+// use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Http\Request;
 
 class UserRegisterController extends Controller
@@ -31,12 +37,14 @@ class UserRegisterController extends Controller
   $users = user::where('status','Active')
   ->where('name','!=',"")
   ->get();
- //dd($users);
+
+    $roles = role::where('status','Active')->get();
+ //dd($roles);
 
 $departments=department::get();
 $properties=property::get();
 //dd($metadatas);
- return view('auth.register',compact('departments','users','datatypes','properties'));
+ return view('auth.register',compact('departments','users','datatypes','properties','roles'));
     }
 
     /**
@@ -57,8 +65,10 @@ $properties=property::get();
      */
     public function store(Request $request)
     {
-
        $auth=auth()->user();
+       //dd(request('role'));
+
+
   validator([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -103,7 +113,18 @@ else
         'status'=>'Active',
         'user_id'=>auth()->id()
         ]);
-}
+
+         $appliedto =userRole::Create([
+        'sys_user_id'=>$userReg->id,
+        'role_id'=>request('role'),        
+        'status'=>'Active',
+        'user_id'=>auth()->id()        
+        ]);
+
+ $user = User::where('id',$userReg->id);
+ $user->assignRole(request('role'));
+
+ }
       return redirect()->back()->with('success','User Registered successfuly');
     }
 

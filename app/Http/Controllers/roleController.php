@@ -83,7 +83,7 @@ class roleController extends Controller
         }
         elseif(request('addrole')){
 
-//dd('ppp');
+
  $user = User::where('id',request('user_id'))->first();
  $user->assignRole(request('role_name'));
 
@@ -91,6 +91,7 @@ class roleController extends Controller
    ->where('role_id',request('role_name'))
     ->first();
         if($role){
+            //dd('Role');
            $role->update([
             'status'=>'Active',
             'user_id'=>auth()->id()
@@ -99,6 +100,7 @@ class roleController extends Controller
         }
         else{
 
+//dd('popol');
    $appliedto =userRole::Create([
         'sys_user_id'=>request('user_id'),
         'role_id'=>request('role_name'),        

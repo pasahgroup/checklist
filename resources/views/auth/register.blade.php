@@ -283,6 +283,18 @@
             </div>
 
 
+
+  <div>
+                <x-jet-label for="role" value="{{ __('Role') }}" />
+ <select name="role" id="role" class="block mt-1 w-full" required>
+                        <option value="">--- Select Roles ---</option>
+                            @foreach ($roles as $role)
+                        <option value="{{$role->id}}">{{$role->name}}</option>
+
+                            @endforeach
+                        </select>
+            </div>
+
             <div class="mt-4">
                 <x-jet-label for="email" value="{{ __('Email') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
