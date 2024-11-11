@@ -119,7 +119,7 @@
                                             <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                                                 <span aria-hidden="true">×</span></button>
                                                             </div>
-                                                <form method="POST" action="{{ route('roles.store') }}" method="POST">
+<form method="POST" action="{{ route('roles.store') }}" method="POST">
                                                     @csrf
                                                      <div class="modal-body">
 
@@ -144,7 +144,7 @@
                                                                 </div>
                                                                 </div>
 
-                                                     {{-- form Ends here --}}
+                                    {{-- form Ends here --}}
 
                                                                 </div>
                                             <div class="modal-footer">
