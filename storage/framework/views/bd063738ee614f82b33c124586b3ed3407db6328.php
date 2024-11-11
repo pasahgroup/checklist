@@ -120,11 +120,9 @@
                                             <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                                                 <span aria-hidden="true">×</span></button>
                                                             </div>
-                                                <form method="POST" action="<?php echo e(route('roles.store')); ?>" method="POST">
+<form method="POST" action="<?php echo e(route('roles.store')); ?>" method="POST">
                                                     <?php echo csrf_field(); ?>
-                                                     <div class="modal-body">
-
-                                                                            
+                                                     <div class="modal-body">                                
 
 
                                         <div class="container">
@@ -139,13 +137,13 @@
                                          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                         </select>
 
-                                         <input type="hidden" name="addrole" value="addrole">
-                                         <input type="hidden" name="user_id" value="<?php echo e($value->id); ?>">
+            <input type="hidden" name="addrole" value="addrole">
+            <input type="hidden" name="user_id" value="<?php echo e($value->id); ?>">
                                                          </div>
                                                                 </div>
                                                                 </div>
 
-                                                     
+                                    
 
                                                                 </div>
                                             <div class="modal-footer">

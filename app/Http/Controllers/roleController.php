@@ -83,6 +83,7 @@ class roleController extends Controller
         }
         elseif(request('addrole')){
 
+//dd('ppp');
  $user = User::where('id',request('user_id'))->first();
  $user->assignRole(request('role_name'));
 
