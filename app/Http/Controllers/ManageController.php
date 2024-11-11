@@ -75,7 +75,7 @@ class ManageController extends Controller
       //Assign Activities to userActivities
       $departments=user::where('id',auth()->id())->first();
       
-      dd($departments);
+      //dd($departments);
       //Get Department name
         $departGetName= department::where('status','Active')
         ->where('id',$departments->department_id)->first();
@@ -164,13 +164,11 @@ class ManageController extends Controller
       //Extract date
       $datet=Carbon::now();
       $datet=$datet->format('H:i:s');
-      dd($departments->property_id);
-
+      
       //Get asset_show from assets table
       $asset_show=asset::where('property_id',$departments->property_id)->first();
       //dd($asset_show->time_show);
-      dd($asset_show);
-      
+     
       if($datet>="23:45")
       {
         
@@ -227,7 +225,7 @@ class ManageController extends Controller
              ->select('metanames.id','metanames.metaname_name')
                ->orderBy('metanames.id')->get();
 
-dd($metas);
+
 
           $qns = DB::select("select * from qnsview_answer where property_id in(".$departments->property_id.")");
           $qns=collect($qns);
