@@ -57,7 +57,7 @@ class PropertyController extends Controller
 
 
 $level=property::where('id',$auth->property_id)->first();
- //dd($level);
+ //dd($auth);
 
 if($level->level=="Main")
 {
@@ -68,6 +68,7 @@ $properties = property::on('clientdb')->where('company_id',$auth->company_id)
 $properties = property::on('clientdb')->where('company_id',$auth->company_id)
       ->where('id',$auth->property_id)
       ->where('status','Active')->get();
+      //dd($properties); 
 }
 
   

@@ -58,6 +58,7 @@ $properties=property::get();
     public function store(Request $request)
     {
 
+       $auth=auth()->user();
   validator([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -87,6 +88,9 @@ else
         'name'=>request('name'),
         'department_id'=>request('department'),
         'property_id'=>request('property'),
+        'company_id'=>$auth->company_id,
+        'company_code'=>$auth->company_code,
+
          'email'=>request('email'),
          'password'=>Hash::make(request('password')),
          'status'=>'Active',
