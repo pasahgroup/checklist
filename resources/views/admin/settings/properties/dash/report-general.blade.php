@@ -2,18 +2,6 @@
 @extends('layouts.app')
 @section('content')
 
-     <script src=
- "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    </script>
-
-    <script src=
-"https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
-    </script>
-  <script src=
- "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
-    </script>
- 
-
 <style>
 table, th, td {
   border: 0px solid green;
@@ -63,7 +51,7 @@ table, th, td {
                      <div class="col-12 col-md-12">
                     <div class="card card-custom gutter-b bg-white border-0" >
                         <div class="card-body">
-                            <form method="GET" action="{{ route('report-general',$id) }}" @if ($prnt=="2") target="_blank" @endif>
+                            <form method="GET" action="{{ route('report-general',$id) }}" @if ($prnt==2) target="_blank" @endif>
                                 <div class="form-group row justify-content-center mb-0">
                                     <div class="col-md-3">
                                         <label class="text-dark">Date Range</label>
@@ -81,7 +69,7 @@ table, th, td {
 
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group mb-0" >
                                             <label class="text-dark" >Select property name</label>
                                                 <select class="arabic-select w-100 mb-3 h-30px" name="property_search" >
@@ -97,7 +85,7 @@ table, th, td {
                                           </div>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group mb-0" >
                                             <label class="text-dark" >Select Metaname</label>
                                                 <select class="arabic-select w-100 mb-3 h-30px" name="metaname_search" >
@@ -112,7 +100,7 @@ table, th, td {
                                           </div>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group mb-0" >
                                             <label class="text-dark" >Select Key Indicator</label>
                                                 <select class="arabic-select w-100 mb-3 h-30px" name="indicator_search" >
@@ -128,15 +116,15 @@ table, th, td {
                                           </div>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                       <!-- <x-jet-button class="ml-4">
                                           {{ __('Log in') }}
                                       </x-jet-button> -->
-                                        <div class="form-group mb-0" >
-                                          <x-jet-button class="ml-4 btn-success" name="search" value="search">
+                                        <div class="form-group mb-0" style="padding-top:22px;">
+                                          <x-jet-button class="btn-success" name="search" value="search">
                                               {{ __('Search') }}
                                           </x-jet-button>
-                                          <x-jet-button  class="ml-4 btn-primary" name="print" value="print" target="_blank">
+                                          <x-jet-button  class="btn-primary" name="print" value="print" target="_blank">
                                               {{ __('Print') }}
                                           </x-jet-button>
                                           </div>
@@ -235,7 +223,5 @@ table, th, td {
                </div>
                 </div>
             </div>
-
- 
 
 @endsection

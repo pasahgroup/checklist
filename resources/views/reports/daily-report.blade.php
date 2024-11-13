@@ -69,7 +69,7 @@ table, th, td {
                          <form method="GET" action="{{ route('daily-reportx',[$property_id,$status]) }}">
                              <div class="form-group row justify-content-center mb-0">
 
-                                 <div class="col-md-3">
+                                 <div class="col-md-2">
                                      <label class="text-dark">Date Range</label>
                                      @if(!empty($filter_date))
                                      <input type="text" name="date" id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
@@ -84,7 +84,7 @@ table, th, td {
                                      </div> --}}
 
                                  </div>
-                                 <div class="col-md-3">
+                                 <div class="col-md-2">
                                      <div class="form-group mb-0" >
                                          <label class="text-dark" >Select Metaname</label>
                                              <select class="arabic-select w-100 mb-3 h-30px" name="metaname_search" >
@@ -101,7 +101,7 @@ table, th, td {
                                        </div>
                                  </div>
 
-                                 <div class="col-md-3">
+                                 <div class="col-md-2">
                                      <div class="form-group mb-0" >
                                          <label class="text-dark" >Select Key Indicator</label>
                                              <select class="arabic-select w-100 mb-3 h-30px" name="indicator_search" >
@@ -120,11 +120,11 @@ table, th, td {
                                    <!-- <x-jet-button class="ml-4">
                                        {{ __('Log in') }}
                                    </x-jet-button> -->
-                                     <div class="form-group mb-0" >
-                                       <x-jet-button class="ml-4 btn-success" name="search" value="search">
+                                     <div class="form-group" style="padding:22px;">
+                                       <x-jet-button class="btn-success" name="search" value="search">
                                            {{ __('Search') }}
                                        </x-jet-button>
-                                       <x-jet-button class="button ml-4 btn-primary" name="print" value="print">
+                                       <x-jet-button class="button btn-primary" name="print" value="print">
                                            {{ __('Print') }}
                                        </x-jet-button>
                                   </div>

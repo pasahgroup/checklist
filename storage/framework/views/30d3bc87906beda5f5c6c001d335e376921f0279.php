@@ -114,12 +114,11 @@
 						<a href="/" class="brand-logo">
 
             <?php if(isset($company->logo)): ?>
-            	<img class="brand-image" style="height: 25px; background-color:;"  src="<?php echo e(asset('storage/logo/'.$company->logo)); ?>" alt="Logo"/>
-            <!-- <span class="brand-text"><img style="height: 35px;width: 140px;" alt="Logo" src="<?php echo e(asset('storage/logo/'.$company->logo)); ?>"/></span> -->
+            	<img class="brand-image" style="height: 25px; background-color:;"  src="<?php echo e(URL::asset('/storage/logo/'.$company->logo ?? '')); ?>" alt="Logo"/>
             <?php endif; ?>
 <!--In Maximizing logo -->
 <?php if(isset($company->logo)): ?>
-<!-- <span class="brand-text"><img style="height: 60px;width: 150px;" alt="Logo" src="<?php echo e(asset('storage/logo/'.$company->logo)); ?>"/></span> -->
+ <span class="brand-text"><img style="height: 15vh;width: 100%;" alt="Logo" src="<?php echo e(asset('storage/logo/'.$company->logo)); ?>"/></span>
 <?php endif; ?>
 	</a>
        </div>

@@ -106,7 +106,6 @@ background-image:url({{URL::asset('../../assets/images/misc/bg-login.jpg')}});
           </div>
       </div>
   </div>
-
 </main>
 
 @endsection

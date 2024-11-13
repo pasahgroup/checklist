@@ -190,7 +190,6 @@ background-image:url(<?php echo e(URL::asset('../../assets/images/misc/bg-login.
           </div>
       </div>
   </div>
-
 </main>
 
 <?php $__env->stopSection(); ?>

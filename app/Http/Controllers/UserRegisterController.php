@@ -13,7 +13,7 @@ use App\Models\datatype;
 use App\Models\property;
 use App\Models\userProperty;
 use App\Models\userRole;
-// use App\Models\role;
+use App\Models\asset;
 
 use DB;
 use Illuminate\Support\Facades\Hash;
@@ -127,6 +127,21 @@ else
         'role_id'=>request('role'),        
         'status'=>'Active',
         'user_id'=>auth()->id()        
+        ]);
+
+
+//Insert one value in asset table             
+$assetData =asset::Create([
+     'property_id'=>request('property'), 
+     'metaname_id'=>1, 
+     'asset_name'=>"Room 1",
+     'asset_type'=>"Room",
+     'time_show'=>1,
+     'asset_show'=>1,
+
+        'asset_description'=>"Room 1", 
+        'status'=>'Active',           
+'user_id'=>$userReg->id, 
         ]);
 
  }

@@ -49,12 +49,21 @@ class profileController extends Controller
 
  public function companyWeb()
     {
-        //dd('here');
+           $auth=auth()->user();
+
       //  $profile = myCompany::first();
          $pin=rand(111111, 999999);
          //dd($pin);
-        return view('admin.profile.profile_web',compact('pin'));
-    
+//          $properties=property::where('company_id',$auth->company_id)
+// ->where('status','Active')
+// ->get();
+            $properties=property::where('status','Active')
+            ->get();
+             $roles = role::where('status','Active')->get();
+            $departments=department::get();
+
+
+        return view('admin.profile.profile_web',compact('pin','properties','departments','roles'));    
     }
     /**
      * Show the form for creating a new resource.
@@ -75,6 +84,14 @@ class profileController extends Controller
      */
     public function store(Request $request)
     {
+
+  // validator([
+  //           'name' => ['required', 'string', 'max:255'],
+  //           'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+  //           'password' =>['required', 'string', 'max:64'],
+  //           //'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
+  //       ])->validate();
+
 
 $department = department::where('department_name','Manager')->first();
 $role_name = role::where('name','Manager')->first();
@@ -106,8 +123,6 @@ $role_name = role::where('name','Manager')->first();
                      $path =$attached->storeAs('public/logo/', $imageToStore);
 
                 
-                    // if($comp == null)
-                    //   {
     //Insert to user
 //Insert to user
        $userReg = user::Create([
@@ -171,6 +186,7 @@ $appliedto =userRole::Create([
          'phone'=>request('phone_number'),
 
          'email'=>request('email'),
+         //'password'=>Hash::make(request('password')),
          'password'=>Hash::make(request('password')),
           'property_description'=>'First company registration',        
            'photo'=>$imageToStore,
@@ -208,7 +224,7 @@ $assetData =asset::Create([
         ]);
 
 
-                 }
+    }
 
 }
 else

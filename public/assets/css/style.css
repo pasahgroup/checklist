@@ -3456,7 +3456,7 @@ border: 1px solid rgba(255,255,123, 0.3);
 .card-body {
   flex: 1 1 auto;
   min-height: 1px;
-  padding: 1.25rem; }
+  padding:0.9rem; }
 
 .card-title {
   margin-bottom: 0.75rem; }
@@ -5585,7 +5585,8 @@ button.bg-dark:focus {
   user-select: none !important; }
 
 .overflow-auto {
-  overflow: auto !important; }
+  overflow: none !important;
+   }
 
 .overflow-hidden {
   overflow: hidden !important; }
@@ -12422,7 +12423,7 @@ select.form-control:not([multiple=multiple]) {
   color: var(--artical-color-dark) !important; }
 
 table.dataTable tbody th, table.dataTable tbody td {
-  padding: 10px 18px !important; }
+  padding: 1px 10px !important; }
 
 .slick-slide {
   outline: none;
@@ -12646,7 +12647,7 @@ table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    padding: 1.5rem 1.45rem 1.5rem 2.3rem; }
+    padding: 1.5rem 1.45rem -2rem 2.3rem; }
     .aside .brand .brand-logo {
       display: flex;
       align-items: center;

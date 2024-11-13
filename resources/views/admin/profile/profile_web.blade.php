@@ -32,8 +32,7 @@
     </div>
     <div class="panel-body">
       <!-- <form name="basicform" id="basicform" method="post" action="#" enctype="multipart/form-data"> -->
-        
-
+<x-guest-layout>
    <form   id="basicform"  name="basicform" method="POST"  action="{{ route('company-profile-create.store') }}" enctype="multipart/form-data">
                              @csrf
     <input type="hidden" name="_method" value="post">
@@ -74,13 +73,13 @@
                   <label >District</label>
               <input class="form-control" type="text" name="district" placeholder="district">
                                 </div>     
-                                </div>
+                               
        
        <div class="clearfix" style="height: 10px;clear: both;"></div>
 
             <div class="form-group">
               <div class="col-lg-10 col-lg-offset-2">
-                <button class="btn btn-success open1 float-right" type="button">Next <span class="fa fa-arrow-right"></span></button> 
+                <button class="btn btn-success open1 float-right" type="button">Next<span class="fa fa-arrow-right"></span></button> 
               </div>
             </div>
 
@@ -168,10 +167,23 @@
             <div class="clearfix" style="height: 10px;clear: both;"></div>
 
            
+ {{--
+             <div class="mt-4">
+                <x-jet-label for="password" value="{{ __('Password') }}" />
+                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
+                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            </div>
+--}}
+        
+       
             <div class="form-group">
               <label class="col-lg-2 control-label" for="upass1">Password:</label>
               <div class="col-lg-6">
-                <input type="password" placeholder="Your Password" id="upass1" name="upass1" class="form-control" autocomplete="off">
+                <input type="password" placeholder="Your Password" id="password" name="password" class="form-control" autocomplete="off">
               </div>
             </div>
 
@@ -180,7 +192,7 @@
             <div class="form-group">
               <label class="col-lg-2 control-label" for="upass1">Confirm Password: </label>
               <div class="col-lg-6">
-                <input type="password" placeholder="Confirm Password" id="upass2" name="upass2" class="form-control" autocomplete="off">
+                <input type="password" placeholder="Confirm Password" id="password_confirmation" name="password_confirmation" class="form-control" autocomplete="off">
               </div>
             </div>
 
@@ -197,6 +209,7 @@
           </fieldset>
         </div>
       </form>
+      </x-guest-layout>
     </div>
   </div>
 

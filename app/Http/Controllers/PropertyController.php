@@ -29,6 +29,7 @@ use JasperPHP\JasperPHP as JasperPHP;
 use Illuminate\Http\Request;
 use PHPJasper\PHPJasper;
 use Illuminate\Support\Facades\Redirect;
+use Barryvdh\DomPDF\Facade\Pdf;
 
  require base_path().'/vendor/autoload.php';
  //require base_path().'/vendor/autoload.php';
@@ -56,7 +57,7 @@ class PropertyController extends Controller
   $aData['dataC'] = dbsetting::getConnect($auth->id);
 
 
-$level=property::where('id',$auth->property_id)->first();
+$level=property::on('clientdb')->where('id',$auth->property_id)->first();
  //dd($auth);
 
 if($level->level=="Main")
@@ -136,13 +137,16 @@ $properties = property::on('clientdb')->where('company_id',$auth->company_id)
 
  public function reportGeneral(Request $request,$id)
     {
+    $auth=auth::user();
+  $aData['dataC'] = dbsetting::getConnect($auth->id);
+
 $prnt="";
-$userID=user::where('id',auth()->id())->first();
-$property=property::where('id',$userID->property_id)->first();
+///$userID=user::where('id',auth()->id())->first();
+$property=property::on('clientdb')->where('id',$auth->property_id)->first();
   //$segment = $request->segment(1);
  // $currenturl = Request::url();
- // dd('uuu');
-// dd($property->id);
+//dd($userID);
+ //dd($property);
 
 
         $segments = request()->segments();
@@ -156,28 +160,26 @@ $url="http://localhost:8000/report-general/{$property->id}/dashboard";
 //END OF RESERVED CODE FOR URL
 
 //dd('mmm');
-$uri =request()->path();
-//dd($uri);
+$uri =request()->path();//dd($uri);
 
-      $keyIndicators = keyIndicator::get();
-      $metanames = metaname::get();
-      $propertiesNames = property::get();
+      $keyIndicators = keyIndicator::on('clientdb')->get();
+      $metanames = metaname::on('clientdb')->get();
+      $propertiesNames = property::on('clientdb')->get();
 //dd($metanames);
     $current_date = date('Y-m-d');
-    $properties = property::where('id',$property->id)
+    $properties = property::on('clientdb')->where('id',$property->id)
       ->where('status','Active')->first();
 //dd($properties);
 
-   
-      $reportDailyData=DB::select('select * from reportdailydata_view where property_id="'.$property->id.'" order by metaname_name ASC');
-    // dd($reportDailyData);
+         $reportDailyData=DB::connection('clientdb')->select('select * from reportdailydata_view where property_id="'.$property->id.'" order by metaname_name ASC');
+     //dd($reportDailyData);
 
     // $reportDailyReader=DB::select('select a.id,a.property_id,p.property_name,a.metaname_id,m.metaname_name,a.answer,a.indicator_id,s.qns,a.asset_id,t.asset_name,u.name, a.opt_answer_id,o.answer_classification,a.description,a.photo,a.datex from answers a,properties p,set_indicators s,users u,assets t,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.user_id=u.id and a.asset_id=t.id and a.indicator_id=s.id and a.opt_answer_id=o.id and p.id=a.property_id and a.datex="'.$current_date.'" and a.property_id="'.$id.'"');
 
 //Delaying on data loading
     // $reportDailyReader=DB::select('select * from reportdailyreader_view where property_id="'.$property->id.'"');
 
- $reportDailyReader=DB::select('select * from issue_report_view where property_id="'.$property->id.'"');
+ $reportDailyReader=DB::connection('clientdb')->select('select * from issue_report_view where property_id="'.$property->id.'"');
 //dd($reportDailyReader);
 
 $dataDaily = collect($reportDailyData);
@@ -190,7 +192,7 @@ $roomDaily = $dataDaily->where('metaname_name','Room')
 
 $xx=$dataDaily->count();
     //Weekly Report
-$reportWeeklyData=DB::select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.property_id="'.$property->id.'" and a.opt_answer_id=o.id and WEEK(a.datex)=WEEK(NOW()) order by m.metaname_name ASC');
+$reportWeeklyData=DB::connection('clientdb')->select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.property_id="'.$property->id.'" and a.opt_answer_id=o.id and WEEK(a.datex)=WEEK(NOW()) order by m.metaname_name ASC');
 
 $dataWeekly = collect($reportWeeklyData);
 $weeklyMetaCollects=$dataWeekly->groupBy('metaname_name');
@@ -200,7 +202,7 @@ $roomWeekly = $dataWeekly->where('metaname_name','Room')
    $criticalWeekly=$roomWeekly->where('answer_classification','Critical')->count();
 
     //Monthly Report
-$reportMonthlyData=DB::select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.property_id="'.$property->id.'" and a.opt_answer_id=o.id and month(a.datex)=month(NOW()) order by m.metaname_name ASC');
+$reportMonthlyData=DB::connection('clientdb')->select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.property_id="'.$property->id.'" and a.opt_answer_id=o.id and month(a.datex)=month(NOW()) order by m.metaname_name ASC');
 
  $dataMonthly = collect($reportMonthlyData);
 $monthlyMetaCollects=$dataMonthly->groupBy('metaname_name');
@@ -274,7 +276,7 @@ $roomMonthly = $dataMonthly->where('metaname_name','Room')
 //dd($keyArray);
 
 //End of Request
-	 $reportDailyReader = answer::join('properties','answers.property_id','properties.id')
+	 $reportDailyReader = answer::on('clientdb')->join('properties','answers.property_id','properties.id')
 	 ->join('set_indicators','answers.indicator_id','set_indicators.id')
 	  ->join('users','answers.user_id','users.id')
 	   ->join('assets','answers.asset_id','assets.id')
@@ -296,10 +298,48 @@ $roomMonthly = $dataMonthly->where('metaname_name','Room')
    else{
 	   //dd('Not role');
    }
-
-   
+//dd($reportDailyReader);
+    //dd(request('print'));
 	if(request('print')){
+        $prnt=2;
+
+$user=user::where('id',2)->first();
+             $answers=answer::get();
+             $count=answer::count();
+   $data = [
+            'title' => 'Laravel PDF Example',
+            'date' => date('m/d/Y'),
+            'answers' => $answers,
+            'user' => $user,
+             'count' => $count,
+              'property' => $property,
+        ];
+
+    // $employees=employee::get();
+     dd($prnt);
+
+        //return view('myPDF', $data);
+
+// $dompdf = new DOMP//DF();
+// $dompdf->set_paper('A3','landscape'); //Changed A4 to A3
+// $dompdf->load_html($html);
+// $dompdf->render();
+// use Carbon\Carbon;
+
+$timestamp = time();  
+$doc_name="GeneralReport_".$timestamp;
+//dd($doc_name);
+//return view('reportPrint.generalReport',compact($data));
+     //$dompdf->stream('reportPrint.generalReport', array($data));
+        
+         $pdf = PDF::loadView('reportPrint.generalReport', $data);
+   
+      return $pdf->stream($doc_name.'.pdf');
+     return $pdf->download($doc_name.'.pdf');
+
+
    // $id=$_GET['property_search'];
+        //dd('dddd');
 $prnt=1;
     $datex=$_GET['date'];
     $date_end = substr($datex, strpos($datex, "-") + 2);
@@ -394,16 +434,20 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$property_id,"metanames"=>$m
    //dd('Not role');
    //Metaname percent
 
-   $answerCount=DB::select('select a.*,m.metaname_name from answers a,metanames m where a.metaname_id=m.id and DAY(a.datex)=DAY(NOW()) and a.status="Active" group by a.property_id,a.metaname_id,a.indicator_id,a.asset_id order by a.metaname_id ASC');
+   // $answerCount=DB::connection('clientdb')->select('select a.*,m.metaname_name from answers a,metanames m where a.metaname_id=m.id and DAY(a.datex)=DAY(NOW()) and a.status="Active" group by a.property_id,a.metaname_id,a.indicator_id,a.asset_id order by a.metaname_id ASC');
+     
+     $answerCount=DB::connection('clientdb')->select('select a.*,m.metaname_name from answers a,metanames m where a.metaname_id=m.id and DAY(a.datex)=DAY(NOW()) and a.status="Active" order by a.metaname_id ASC');
    $answerCount = collect($answerCount);
+   $answerCount = $answerCount->groupBy('property_id','metaname_id','indicator_id','asset_id');
 
+//dd($answerCount);
    //$totalqns=DB::select('select a.metaname_id,metaname_name,count(a.metaname_id)totalqns from assets a, qns_appliedtos q,metanames m where a.metaname_id=q.metaname_id and a.metaname_id=m.id and a.status="Active" and q.status="Active" group by a.metaname_id');
-   $totalqns=DB::select('select a.metaname_id,metaname_name from assets a, qns_appliedtos q,metanames m where a.metaname_id=q.metaname_id and a.metaname_id=m.id and a.status="Active" and q.status="Active"');
+   $totalqns=DB::connection('clientdb')->select('select a.metaname_id,metaname_name from assets a, qns_appliedtos q,metanames m where a.metaname_id=q.metaname_id and a.metaname_id=m.id and a.status="Active" and q.status="Active"');
 
    $totalqns = collect($totalqns);
 
         return view('admin.settings.properties.dash.report-general',compact('properties','property','propertiesNames','metanames','keyIndicators','reportDailyReader','dailyMetaCollects','weeklyMetaCollects','monthlyMetaCollects','badDaily','badWeekly','badMonthly','criticalDaily','criticalWeekly','criticalMonthly','id','uri','answerCount','totalqns','prnt'));
-            //return view('admin.settings.properties.dash.report-general',compact('properties','property','propertiesNames','metanames','keyIndicators','dailyMetaCollects','weeklyMetaCollects','monthlyMetaCollects','badDaily','badWeekly','badMonthly','criticalDaily','criticalWeekly','criticalMonthly','id','uri','answerCount','totalqns','prnt'));
+         
     }
 
 
@@ -412,7 +456,7 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$property_id,"metanames"=>$m
        {
          $prnt="";
    $userID=user::where('id',auth()->id())->first();
-   $property=property::where('id',$userID->property_id)->first();
+   $property=property::on('clientdb')->where('id',$userID->property_id)->first();
 
            $segments = request()->segments();
            $last  = end($segments);
@@ -469,9 +513,6 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$property_id,"metanames"=>$m
       $criticalMonthly=$roomMonthly->where('answer_classification','Critical')->count();
 
        
-
-
-
 
         if(request('search') || request('print')){
           $id=$_GET['property_search'];
@@ -553,6 +594,9 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$property_id,"metanames"=>$m
 
       //dd($metaArray);
    	if(request('print')){
+      
+
+
        $id=$_GET['property_search'];
         $prnt=1;
        $datex=$_GET['date'];
@@ -671,6 +715,8 @@ $PHPJasperXML->load_xml_file(app_path().'/reports/detailDailyReport.jrxml');
 
           return redirect($uri->url)->with('info','Returned successfly');
           }
+
+
 
 
           public function reportViewPost(Request $request,$sn,$id)
@@ -1121,7 +1167,6 @@ if($exists)
           'property_description'=>request('property_description'),
            'user_id'=>auth()->id()
         ]);
-
 
   if(request('attachment')){
             $attach = request('attachment');

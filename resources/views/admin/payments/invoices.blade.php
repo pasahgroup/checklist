@@ -91,7 +91,7 @@
 																	Placed On <span>{{ $payment->created_at }}</span>
 																</h5>
 																<a href="index.html">
-																	<img src="../../../assets/images/misc/logo.svg" alt="logo">
+					<img src="../../../assets/images/misc/logo.svg" alt="logo">
 																</a>
 															</div>
 

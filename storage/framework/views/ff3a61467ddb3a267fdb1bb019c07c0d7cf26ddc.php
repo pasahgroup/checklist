@@ -1,17 +1,5 @@
 <?php $__env->startSection('content'); ?>
 
-     <script src=
- "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    </script>
-
-    <script src=
-"https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
-    </script>
-  <script src=
- "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
-    </script>
- 
-
 <style>
 table, th, td {
   border: 0px solid green;
@@ -61,7 +49,7 @@ table, th, td {
                      <div class="col-12 col-md-12">
                     <div class="card card-custom gutter-b bg-white border-0" >
                         <div class="card-body">
-                            <form method="GET" action="<?php echo e(route('report-general',$id)); ?>" <?php if($prnt=="2"): ?> target="_blank" <?php endif; ?>>
+                            <form method="GET" action="<?php echo e(route('report-general',$id)); ?>" <?php if($prnt==2): ?> target="_blank" <?php endif; ?>>
                                 <div class="form-group row justify-content-center mb-0">
                                     <div class="col-md-3">
                                         <label class="text-dark">Date Range</label>
@@ -76,7 +64,7 @@ table, th, td {
 
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group mb-0" >
                                             <label class="text-dark" >Select property name</label>
                                                 <select class="arabic-select w-100 mb-3 h-30px" name="property_search" >
@@ -92,7 +80,7 @@ table, th, td {
                                           </div>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group mb-0" >
                                             <label class="text-dark" >Select Metaname</label>
                                                 <select class="arabic-select w-100 mb-3 h-30px" name="metaname_search" >
@@ -107,7 +95,7 @@ table, th, td {
                                           </div>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group mb-0" >
                                             <label class="text-dark" >Select Key Indicator</label>
                                                 <select class="arabic-select w-100 mb-3 h-30px" name="indicator_search" >
@@ -123,7 +111,7 @@ table, th, td {
                                           </div>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                       <!-- <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['class' => 'ml-4']]); ?>
 <?php $component->withName('jet-button'); ?>
@@ -138,13 +126,13 @@ table, th, td {
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?> -->
-                                        <div class="form-group mb-0" >
+                                        <div class="form-group mb-0" style="padding-top:22px;">
                                           <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['class' => 'ml-4 btn-success','name' => 'search','value' => 'search']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['class' => 'btn-success','name' => 'search','value' => 'search']]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'ml-4 btn-success','name' => 'search','value' => 'search']); ?>
+<?php $component->withAttributes(['class' => 'btn-success','name' => 'search','value' => 'search']); ?>
                                               <?php echo e(__('Search')); ?>
 
                                            <?php echo $__env->renderComponent(); ?>
@@ -154,11 +142,11 @@ table, th, td {
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
                                           <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['class' => 'ml-4 btn-primary','name' => 'print','value' => 'print','target' => '_blank']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['class' => 'btn-primary','name' => 'print','value' => 'print','target' => '_blank']]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'ml-4 btn-primary','name' => 'print','value' => 'print','target' => '_blank']); ?>
+<?php $component->withAttributes(['class' => 'btn-primary','name' => 'print','value' => 'print','target' => '_blank']); ?>
                                               <?php echo e(__('Print')); ?>
 
                                            <?php echo $__env->renderComponent(); ?>
@@ -264,8 +252,6 @@ table, th, td {
                </div>
                 </div>
             </div>
-
- 
 
 <?php $__env->stopSection(); ?>
 
