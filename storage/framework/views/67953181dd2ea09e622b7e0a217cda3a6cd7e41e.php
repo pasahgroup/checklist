@@ -13,7 +13,11 @@
 
         .header { position: fixed; left: 0px; top: -40px; right: 0px;}
         .footer { position: fixed; left: 0px; bottom: 200px; right: 0px;}
+         .page {
+        size: A4 landscape;}
+    }
     </style>
+
 
 </head>
 <body>
@@ -23,7 +27,7 @@
         <div class="col-xs-9">
         <table cellspacing='0' cellpadding='5' style="border-width: 0 !important;padding:0px 0px 0px 60px;">
             <tr>
-                <td style="padding: 10px;"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('logo/logo.png')))); ?>" width="50px" height="50px"></td>
+                <td style="padding: 5px;"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(storage_path('app/public/logo/logo.jpg')))); ?>" width="80px" height="60px"></td>
                 <td>
                     <table style="text-align: center;style='width:45%'">
                         <tr><strong><?php echo e($property->property_name); ?></strong></tr>
@@ -172,31 +176,40 @@
 
             <thead>
                 <tr>
-                    <td style='width:7%;font-weight:bold;'>ITEM NO.</td>
-                    <td style='width:7%;font-weight:bold;'>QTY</td>
-                    <td style='width:7%;font-weight:bold;'>UNIT</td>
-                    <td style='width:49%;font-weight:bold;'>DESCRIPTION</td>
-                    <td style='width:15%;font-weight:bold;'>ESTIMATED UNIT OF</td>
-                    <td style='width:15%;font-weight:bold;'>ESTIMATED COST</td>
+                    <td style='width:7%;font-weight:bold;'>Index</td>
+                    <td style='width:7%;font-weight:bold;'>ID</td>
+                    <td style='width:7%;font-weight:bold;'>Metaname</td>
+                    <td style='width:20%;font-weight:bold;'> Asset name</td>
+                    <td style='width:40%;font-weight:bold;'>Qns</td>
+                    <td style='width:15%;font-weight:bold;'>Answer</td>
+                    <td style='width:15%;font-weight:bold;'>Notification</td>
+
+                    <td style='width:15%;font-weight:bold;'>Posted BY</td>
+                    <td style='width:15%;font-weight:bold;'>Date</td>
                 </tr>
             </thead>    
 
-            <tbody >
+            <tbody>
               
-                 <?php $__currentLoopData = $answers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $indexKey => $list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
+               <?php $__currentLoopData = $reportDailyReader; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $indexKey => $DailyReader): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            
                 <tr>
-                  <td><?php echo e($indexKey); ?></td>
-                  <td><?php echo e($list->pr_qty); ?></td>
-                  <td><?php echo e($list->pr_unit); ?></td>
-                  <td><?php echo e($list->pr_description); ?></td>
-                  <td  style='text-align: right;'><?php echo e($list->pr_cost_per_unit); ?></td>
-                  <td style='text-align: right;'><?php echo e($list->pr_estimated_cost); ?></td>
+                  <td><?php echo e($indexKey+1); ?></td>
+                    <td><?php echo e($DailyReader->id); ?></td>
+                  <td><?php echo e($DailyReader->metaname_name); ?></td>
+                  <td><?php echo e($DailyReader->asset_name); ?></td>
+                  <td><?php echo e($DailyReader->qns); ?></td>
+                  <td  style='text-align: center;'><?php echo e($DailyReader->answer); ?></td>
+                  <td  style='text-align: center;'><?php echo e($DailyReader->answer_label); ?></td>
+
+                  <td style='text-align: center;'><?php echo e($DailyReader->PostedBy); ?></td>
+                  <td style='text-align: center;'><?php echo e($DailyReader->Date); ?></td>
                 </tr>
 
-                <?php if($indexKey >= 9): ?>
+                <?php if($indexKey >= 10): ?>
                         <?php break; ?>
                 <?php endif; ?>
+           
 
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
@@ -208,19 +221,44 @@
 
             <tfoot>
                 <tr style="background-color: #b0b1b2;">
-                  <td colspan="5" style="text-align: right; font-weight: bold;">GRAND TOTAL</td>
-                  <td style="text-align: right; font-weight: bold;">
-                   790,000/=
+                    <td colspan="3" style="text-align: right; font-weight: bold;">
+                  <?php echo e($property->property_name); ?>
+
+                  </td>
+                  <td colspan="4" style="text-align: left; font-weight: bold;"></td>
+                  <td colspan="2" style="text-align: left; font-weight: bold;">
+                   Total Rows: 790,000/=
+                  </td>
+
+                </tr>
+                  <tr style="background-color: #b0b1b2;">
+                     <td colspan="3" style="text-align: right; font-weight: bold;">
+                 .
+                  </td>
+                  <td colspan="4" style="text-align: left; font-weight: bold;"></td>
+                  <td colspan="2" style="text-align: left; font-weight: bold;">
+                  .
+                  </td>
+                </tr>
+                  <tr style="background-color: #b0b1b2;">
+                     <td colspan="3" style="text-align: right; font-weight: bold;">
+                  </td>
+                  <td colspan="4" style="text-align: left; font-weight: bold;"></td>
+                  <td colspan="2" style="text-align: left; font-weight: bold;">
+                   Printed Date: 790,000/=
                   </td>
                 </tr>
             </tfoot>
+
         </table>
       </div>
   </div>
 
 
-
+ 
 </div>
 
+
 </body>
-</html><?php /**PATH C:\xampp\htdocs\checkmaster\resources\views/reportPrint/generalReport.blade.php ENDPATH**/ ?>
+</html>
+<?php /**PATH C:\xampp\htdocs\checkmaster\resources\views/reportPrint/generalReport.blade.php ENDPATH**/ ?>

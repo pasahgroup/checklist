@@ -49,7 +49,7 @@ table, th, td {
                      <div class="col-12 col-md-12">
                     <div class="card card-custom gutter-b bg-white border-0" >
                         <div class="card-body">
-                            <form method="GET" action="<?php echo e(route('report-general',$id)); ?>" <?php if($prnt==2): ?> target="_blank" <?php endif; ?>>
+                            <form method="GET" action="<?php echo e(route('report-general',$id)); ?>" <?php if($prnt=="print"): ?> target="_blankx" <?php endif; ?>>
                                 <div class="form-group row justify-content-center mb-0">
                                     <div class="col-md-3">
                                         <label class="text-dark">Date Range</label>
@@ -142,11 +142,11 @@ table, th, td {
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
                                           <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['class' => 'btn-primary','name' => 'print','value' => 'print','target' => '_blank']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'openInNewTab()','class' => 'btn-primary','name' => 'print','value' => 'print','target' => '_blank']]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'btn-primary','name' => 'print','value' => 'print','target' => '_blank']); ?>
+<?php $component->withAttributes(['onclick' => 'openInNewTab()','class' => 'btn-primary','name' => 'print','value' => 'print','target' => '_blank']); ?>
                                               <?php echo e(__('Print')); ?>
 
                                            <?php echo $__env->renderComponent(); ?>
@@ -215,9 +215,6 @@ table, th, td {
                                                 <input type="hidden" name="uri" value="<?php echo e($_SERVER['REQUEST_URI']); ?>">
                                                 <button class="btn btn-success btn-sm" type="submit">
                                                 <span class="fa fa-eye"><span></button>
-
-<!-- <button href="" role="button" type="Submit"><span class="btn-sm btn-primary"><i class="fa fa-eye"></i><span></button> -->
-                                                <!-- <a href="/report-view/<?php echo e($dailyDataR->id); ?>/<?php echo e($id); ?>"  <span class="fa fa-eye"><span></a> -->
                                             </form>
                                             </td>
 
@@ -253,6 +250,13 @@ table, th, td {
                 </div>
             </div>
 
+<!-- <script>  
+function openInNewTab() {  
+    $url=window.location.href;
+    //alert($url);
+    window.open($url, '_blank');  
+}  
+</script>  -->
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\checkmaster\resources\views/admin/settings/properties/dash/report-general.blade.php ENDPATH**/ ?>

@@ -111,19 +111,11 @@
 			<div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="tc_aside">
 				<!--begin::Brand-->
 				<div class="brand flex-column-auto" id="tc_brand">
-						<a href="/" class="brand-logo">
-
-            <?php if(isset($company->logo)): ?>
-            	<img class="brand-image" style="height: 25px; background-color:;"  src="<?php echo e(URL::asset('/storage/logo/'.$company->logo ?? '')); ?>" alt="Logo"/>
-            <?php endif; ?>
-<!--In Maximizing logo -->
-<?php if(isset($company->logo)): ?>
- <span class="brand-text"><img style="height: 15vh;width: 100%;" alt="Logo" src="<?php echo e(asset('storage/logo/'.$company->logo)); ?>"/></span>
+					<?php if(isset($company->logo)): ?>
+ <span class="brand-logo" style="padding:8px;padding-left:30px;"><img style="height: 15vh;width: 100%;" alt="Logo" src="<?php echo e(asset('storage/logo/'.$company->logo)); ?>"/></span>
 <?php endif; ?>
-	</a>
        </div>
 
-				<!--end::Brand-->
 				<!--begin::Aside Menu-->
 				<div class="aside-menu-wrapper flex-column-fluid overflow-auto h-100" id="tc_aside_menu_wrapper" style="background-color:#">
 					<!--begin::Menu Container-->

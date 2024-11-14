@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 @section('content')
 
@@ -51,7 +50,7 @@ table, th, td {
                      <div class="col-12 col-md-12">
                     <div class="card card-custom gutter-b bg-white border-0" >
                         <div class="card-body">
-                            <form method="GET" action="{{ route('report-general',$id) }}" @if ($prnt==2) target="_blank" @endif>
+                            <form method="GET" action="{{ route('report-general',$id) }}" @if ($prnt=="print") target="_blankx" @endif>
                                 <div class="form-group row justify-content-center mb-0">
                                     <div class="col-md-3">
                                         <label class="text-dark">Date Range</label>
@@ -124,7 +123,7 @@ table, th, td {
                                           <x-jet-button class="btn-success" name="search" value="search">
                                               {{ __('Search') }}
                                           </x-jet-button>
-                                          <x-jet-button  class="btn-primary" name="print" value="print" target="_blank">
+                                          <x-jet-button onclick="openInNewTab()"  class="btn-primary" name="print" value="print" target="_blank">
                                               {{ __('Print') }}
                                           </x-jet-button>
                                           </div>
@@ -186,9 +185,6 @@ table, th, td {
                                                 <input type="hidden" name="uri" value="{{$_SERVER['REQUEST_URI']}}">
                                                 <button class="btn btn-success btn-sm" type="submit">
                                                 <span class="fa fa-eye"><span></button>
-
-<!-- <button href="" role="button" type="Submit"><span class="btn-sm btn-primary"><i class="fa fa-eye"></i><span></button> -->
-                                                <!-- <a href="/report-view/{{$dailyDataR->id}}/{{$id}}"  <span class="fa fa-eye"><span></a> -->
                                             </form>
                                             </td>
 
@@ -224,4 +220,11 @@ table, th, td {
                 </div>
             </div>
 
+<!-- <script>  
+function openInNewTab() {  
+    $url=window.location.href;
+    //alert($url);
+    window.open($url, '_blank');  
+}  
+</script>  -->
 @endsection

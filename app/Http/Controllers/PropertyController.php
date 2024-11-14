@@ -30,6 +30,7 @@ use Illuminate\Http\Request;
 use PHPJasper\PHPJasper;
 use Illuminate\Support\Facades\Redirect;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Response;
 
  require base_path().'/vendor/autoload.php';
  //require base_path().'/vendor/autoload.php';
@@ -172,13 +173,7 @@ $uri =request()->path();//dd($uri);
 //dd($properties);
 
          $reportDailyData=DB::connection('clientdb')->select('select * from reportdailydata_view where property_id="'.$property->id.'" order by metaname_name ASC');
-     //dd($reportDailyData);
-
-    // $reportDailyReader=DB::select('select a.id,a.property_id,p.property_name,a.metaname_id,m.metaname_name,a.answer,a.indicator_id,s.qns,a.asset_id,t.asset_name,u.name, a.opt_answer_id,o.answer_classification,a.description,a.photo,a.datex from answers a,properties p,set_indicators s,users u,assets t,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.user_id=u.id and a.asset_id=t.id and a.indicator_id=s.id and a.opt_answer_id=o.id and p.id=a.property_id and a.datex="'.$current_date.'" and a.property_id="'.$id.'"');
-
-//Delaying on data loading
-    // $reportDailyReader=DB::select('select * from reportdailyreader_view where property_id="'.$property->id.'"');
-
+  
  $reportDailyReader=DB::connection('clientdb')->select('select * from issue_report_view where property_id="'.$property->id.'"');
 //dd($reportDailyReader);
 
@@ -309,14 +304,18 @@ $user=user::where('id',2)->first();
    $data = [
             'title' => 'Laravel PDF Example',
             'date' => date('m/d/Y'),
-            'answers' => $answers,
+            'reportDailyReader' => $reportDailyReader,
             'user' => $user,
              'count' => $count,
               'property' => $property,
         ];
 
     // $employees=employee::get();
-     dd($prnt);
+    //dd($reportDailyReader);
+     if($reportDailyReader ==null)
+     {
+        dd('reportDailyReader null');
+     }
 
         //return view('myPDF', $data);
 
@@ -332,10 +331,10 @@ $doc_name="GeneralReport_".$timestamp;
 //return view('reportPrint.generalReport',compact($data));
      //$dompdf->stream('reportPrint.generalReport', array($data));
         
-         $pdf = PDF::loadView('reportPrint.generalReport', $data);
+         $pdf = PDF::loadView('reportPrint.generalReport',$data)->setPaper('a4', 'landscape');
    
       return $pdf->stream($doc_name.'.pdf');
-     return $pdf->download($doc_name.'.pdf');
+     return $pdf->download($doc_name.'.pdf')->setPaper('a4','landscape');
 
 
    // $id=$_GET['property_search'];

@@ -15,7 +15,11 @@
 
         .header { position: fixed; left: 0px; top: -40px; right: 0px;}
         .footer { position: fixed; left: 0px; bottom: 200px; right: 0px;}
+         .page {
+        size: A4 landscape;}
+    }
     </style>
+
 
 </head>
 <body>
@@ -25,7 +29,7 @@
         <div class="col-xs-9">
         <table cellspacing='0' cellpadding='5' style="border-width: 0 !important;padding:0px 0px 0px 60px;">
             <tr>
-                <td style="padding: 10px;"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('logo/logo.png')))}}" width="50px" height="50px"></td>
+                <td style="padding: 5px;"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/public/logo/logo.jpg'))) }}" width="80px" height="60px"></td>
                 <td>
                     <table style="text-align: center;style='width:45%'">
                         <tr><strong>{{$property->property_name}}</strong></tr>
@@ -174,31 +178,40 @@
 
             <thead>
                 <tr>
-                    <td style='width:7%;font-weight:bold;'>ITEM NO.</td>
-                    <td style='width:7%;font-weight:bold;'>QTY</td>
-                    <td style='width:7%;font-weight:bold;'>UNIT</td>
-                    <td style='width:49%;font-weight:bold;'>DESCRIPTION</td>
-                    <td style='width:15%;font-weight:bold;'>ESTIMATED UNIT OF</td>
-                    <td style='width:15%;font-weight:bold;'>ESTIMATED COST</td>
+                    <td style='width:7%;font-weight:bold;'>Index</td>
+                    <td style='width:7%;font-weight:bold;'>ID</td>
+                    <td style='width:7%;font-weight:bold;'>Metaname</td>
+                    <td style='width:20%;font-weight:bold;'> Asset name</td>
+                    <td style='width:40%;font-weight:bold;'>Qns</td>
+                    <td style='width:15%;font-weight:bold;'>Answer</td>
+                    <td style='width:15%;font-weight:bold;'>Notification</td>
+
+                    <td style='width:15%;font-weight:bold;'>Posted BY</td>
+                    <td style='width:15%;font-weight:bold;'>Date</td>
                 </tr>
             </thead>    
 
-            <tbody >
+            <tbody>
               
-                 @foreach ($answers as $indexKey => $list)
-
+               @foreach ($reportDailyReader as $indexKey => $DailyReader)
+            
                 <tr>
-                  <td>{{$indexKey}}</td>
-                  <td>{{$list->pr_qty}}</td>
-                  <td>{{$list->pr_unit}}</td>
-                  <td>{{$list->pr_description}}</td>
-                  <td  style='text-align: right;'>{{$list->pr_cost_per_unit}}</td>
-                  <td style='text-align: right;'>{{$list->pr_estimated_cost}}</td>
+                  <td>{{$indexKey+1}}</td>
+                    <td>{{$DailyReader->id}}</td>
+                  <td>{{$DailyReader->metaname_name}}</td>
+                  <td>{{$DailyReader->asset_name}}</td>
+                  <td>{{$DailyReader->qns}}</td>
+                  <td  style='text-align: center;'>{{$DailyReader->answer}}</td>
+                  <td  style='text-align: center;'>{{$DailyReader->answer_label}}</td>
+
+                  <td style='text-align: center;'>{{$DailyReader->PostedBy}}</td>
+                  <td style='text-align: center;'>{{$DailyReader->Date}}</td>
                 </tr>
 
-                @if($indexKey >= 9)
+                @if($indexKey >= 10)
                         @break
                 @endif
+           
 
                 @endforeach
 
@@ -210,19 +223,42 @@
 
             <tfoot>
                 <tr style="background-color: #b0b1b2;">
-                  <td colspan="5" style="text-align: right; font-weight: bold;">GRAND TOTAL</td>
-                  <td style="text-align: right; font-weight: bold;">
-                   790,000/=
+                    <td colspan="3" style="text-align: right; font-weight: bold;">
+                  {{$property->property_name}}
+                  </td>
+                  <td colspan="4" style="text-align: left; font-weight: bold;"></td>
+                  <td colspan="2" style="text-align: left; font-weight: bold;">
+                   Total Rows: 790,000/=
+                  </td>
+
+                </tr>
+                  <tr style="background-color: #b0b1b2;">
+                     <td colspan="3" style="text-align: right; font-weight: bold;">
+                 .
+                  </td>
+                  <td colspan="4" style="text-align: left; font-weight: bold;"></td>
+                  <td colspan="2" style="text-align: left; font-weight: bold;">
+                  .
+                  </td>
+                </tr>
+                  <tr style="background-color: #b0b1b2;">
+                     <td colspan="3" style="text-align: right; font-weight: bold;">
+                  </td>
+                  <td colspan="4" style="text-align: left; font-weight: bold;"></td>
+                  <td colspan="2" style="text-align: left; font-weight: bold;">
+                   Printed Date: 790,000/=
                   </td>
                 </tr>
             </tfoot>
+
         </table>
       </div>
   </div>
 
 
-
+ 
 </div>
+
 {{--
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
