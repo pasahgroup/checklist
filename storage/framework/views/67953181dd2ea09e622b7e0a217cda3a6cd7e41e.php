@@ -190,6 +190,7 @@
             </thead>    
 
             <tbody>
+<?php echo e($generalReportData); ?>
 
                <?php $__currentLoopData = $generalReportData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $indexKey => $DailyReader): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>            
                 <tr>

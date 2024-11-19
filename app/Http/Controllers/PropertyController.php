@@ -299,19 +299,14 @@ $user=user::on('clientdb')->where('id',$auth->id)->first();
              $count=answer::on('clientdb')->count();
    $data = [
             'date' => date('m/d/Y'),
-            'reportDailyReader' => $reportDailyReader,
+            'generalReportData' => $generalReportData ,
             'user' => $user,
              'count' => $count,
               'property' => $property,
                'current_date'=>$current_date,
-        ];
+     ];
 
-     // if($reportDailyReader ==null)
-     // {
-     //    dd('reportDailyReader null');
-     // }
-
-
+  
 $timestamp = time();  
 $doc_name="GeneralReport_".$timestamp;
 

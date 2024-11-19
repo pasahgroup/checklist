@@ -192,7 +192,7 @@
             </thead>    
 
             <tbody>
-
+{{$generalReportData}}
                @foreach($generalReportData as $indexKey => $DailyReader)            
                 <tr>
                   <td>{{$indexKey+1}}</td>
