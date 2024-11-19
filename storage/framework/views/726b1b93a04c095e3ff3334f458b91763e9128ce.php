@@ -226,7 +226,8 @@
                   </td>
                   <td colspan="3" style="text-align: left; font-weight: bold;"></td>
                   <td colspan="2" style="text-align: left; font-weight: bold;">
-                   Total Rows: 790,000/=
+                   Total Items: <?php echo e($reportData->count()); ?>
+
                   </td>
 
                 </tr>

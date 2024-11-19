@@ -266,11 +266,8 @@ $roomMonthly = $dataMonthly->where('metaname_name','Room')
 	 }
 }
 
-//dd('ddd');
-//dd($keyArray);
-
 //End of Request
-	 $reportDailyReader = answer::on('clientdb')->join('properties','answers.property_id','properties.id')
+	 $generalReportData = answer::on('clientdb')->join('properties','answers.property_id','properties.id')
 	 ->join('set_indicators','answers.indicator_id','set_indicators.id')
 	  ->join('users','answers.user_id','users.id')
 	   ->join('assets','answers.asset_id','assets.id')
@@ -287,7 +284,7 @@ $roomMonthly = $dataMonthly->where('metaname_name','Room')
    ->select('answers.id','answers.property_id','answers.indicator_id','answers.metaname_id','answers.asset_id','answers.opt_answer_id','answers.answer','answers.photo','answers.description','answers.datex as Date','answers.answer_label','metanames.metaname_name','assets.asset_name','properties.property_name','set_indicators.qns','users.name as PostedBy')
    ->orderBy('set_indicators.id')
 	 ->get();
-//dd($reportDailyReader);
+//dd($generalReportData->count());
    }
    else{
 	   //dd('Not role');
@@ -358,8 +355,8 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$property_id,"metanames"=>$m
    $totalqns=DB::connection('clientdb')->select('select a.metaname_id,metaname_name from assets a, qns_appliedtos q,metanames m where a.metaname_id=q.metaname_id and a.metaname_id=m.id and a.status="Active" and q.status="Active"');
 
    $totalqns = collect($totalqns);
-
-        return view('admin.settings.properties.dash.report-general',compact('properties','property','propertiesNames','metanames','keyIndicators','reportDailyReader','dailyMetaCollects','weeklyMetaCollects','monthlyMetaCollects','badDaily','badWeekly','badMonthly','criticalDaily','criticalWeekly','criticalMonthly','id','uri','answerCount','totalqns','prnt'));
+//dd($generalReportData);
+        return view('admin.settings.properties.dash.report-general',compact('properties','property','propertiesNames','metanames','keyIndicators','reportDailyReader','generalReportData','dailyMetaCollects','weeklyMetaCollects','monthlyMetaCollects','badDaily','badWeekly','badMonthly','criticalDaily','criticalWeekly','criticalMonthly','id','uri','answerCount','totalqns','prnt'));
          
     }
 

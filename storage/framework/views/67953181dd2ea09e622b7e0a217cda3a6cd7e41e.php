@@ -191,7 +191,7 @@
 
             <tbody>
 
-               <?php $__currentLoopData = $reportDailyReader; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $indexKey => $DailyReader): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>            
+               <?php $__currentLoopData = $generalReportData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $indexKey => $DailyReader): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>            
                 <tr>
                   <td><?php echo e($indexKey+1); ?></td>
                     <td><?php echo e($DailyReader->id); ?></td>
@@ -225,7 +225,8 @@
                   </td>
                   <td colspan="3" style="text-align: left; font-weight: bold;"></td>
                   <td colspan="2" style="text-align: left; font-weight: bold;">
-                   Total Rows: 790,000/=
+                   Total Items: <?php echo e($generalReportData->count()); ?>
+
                   </td>
 
                 </tr>
@@ -250,10 +251,7 @@
 
         </table>
       </div>
-  </div>
-
-
- 
+  </div> 
 </div>
 
 

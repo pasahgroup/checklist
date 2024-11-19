@@ -193,7 +193,7 @@
 
             <tbody>
 
-               @foreach ($reportDailyReader as $indexKey => $DailyReader)            
+               @foreach($generalReportData as $indexKey => $DailyReader)            
                 <tr>
                   <td>{{$indexKey+1}}</td>
                     <td>{{$DailyReader->id}}</td>
@@ -226,7 +226,7 @@
                   </td>
                   <td colspan="3" style="text-align: left; font-weight: bold;"></td>
                   <td colspan="2" style="text-align: left; font-weight: bold;">
-                   Total Rows: 790,000/=
+                   Total Items: {{$generalReportData->count()}}
                   </td>
 
                 </tr>
@@ -251,10 +251,7 @@
 
         </table>
       </div>
-  </div>
-
-
- 
+  </div> 
 </div>
 
 {{--

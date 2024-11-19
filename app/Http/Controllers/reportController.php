@@ -233,6 +233,8 @@ $doc_name="Daily-report".$timestamp;
   
   }
 
+   $reportData = collect($reportData);
+
   return view('reports.daily-report',compact('reportData','property','reportTime','metanames','keyIndicators','property_id','status'));
     }
 
@@ -377,6 +379,7 @@ $doc_name="Weekly-report".$timestamp;
   
   }
 
+   $reportData = collect($reportData);
     return view('reports.weekly-report',compact('reportData','property','reportTime','metanames','keyIndicators','property_id','status'));
     }
 
@@ -519,6 +522,8 @@ $doc_name="Monthly-report".$timestamp;
   
   }
 
+   $reportData = collect($reportData);
+//dd($reportData->count());
 
     return view('reports.monthly-report',compact('reportData','property','reportTime','metanames','keyIndicators','property_id','status','depart'));
     }
