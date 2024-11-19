@@ -54,7 +54,7 @@
                     <td style='width:40%'>
                         <table style='width:90%;padding-right: 0px;' cellpadding='0' cellspacing='0'>
                             <tr>
-                                <td style='width:100%;padding:1px;padding-left:10px;' colspan='2'>DEPARTMENT:</td>
+                                <td style='width:100%;padding:1px;padding-left:10px;' colspan='2'>DEPARTMENT: {{$user->department_name}}</td>
                             </tr>
                             <tr>
                                 <td style='width:100%;padding:0px;padding-left:10px;' colspan='2'>{{$user->department_id}}<hr style='color:#000000;height:1px;margin-bottom:3px;margin-top:0px;padding-left:10px;' /></td>
@@ -192,9 +192,8 @@
             </thead>    
 
             <tbody>
-              
-               @foreach ($reportDailyReader as $indexKey => $DailyReader)
-            
+
+               @foreach ($reportDailyReader as $indexKey => $DailyReader)            
                 <tr>
                   <td>{{$indexKey+1}}</td>
                     <td>{{$DailyReader->id}}</td>
@@ -210,8 +209,7 @@
 
                 @if($indexKey >= 10)
                         @break
-                @endif
-           
+                @endif          
 
                 @endforeach
 
@@ -223,10 +221,10 @@
 
             <tfoot>
                 <tr style="background-color: #b0b1b2;">
-                    <td colspan="3" style="text-align: right; font-weight: bold;">
-                  {{$property->property_name}}
+                    <td colspan="4" style="text-align: right; font-weight: bold;">
+                   Property: {{$property->property_name}}
                   </td>
-                  <td colspan="4" style="text-align: left; font-weight: bold;"></td>
+                  <td colspan="3" style="text-align: left; font-weight: bold;"></td>
                   <td colspan="2" style="text-align: left; font-weight: bold;">
                    Total Rows: 790,000/=
                   </td>
@@ -245,8 +243,8 @@
                      <td colspan="3" style="text-align: right; font-weight: bold;">
                   </td>
                   <td colspan="4" style="text-align: left; font-weight: bold;"></td>
-                  <td colspan="2" style="text-align: left; font-weight: bold;">
-                   Printed Date: 790,000/=
+                  <td colspan="2" style="text-align: left; font-weight:">
+                   Printed Date: <strong>{{$current_date}}</strong>
                   </td>
                 </tr>
             </tfoot>

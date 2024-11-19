@@ -142,7 +142,6 @@ $properties = property::on('clientdb')->where('company_id',$auth->company_id)
   $aData['dataC'] = dbsetting::getConnect($auth->id);
 
 $prnt="";
-///$userID=user::where('id',auth()->id())->first();
 $property=property::on('clientdb')->where('id',$auth->property_id)->first();
   //$segment = $request->segment(1);
  // $currenturl = Request::url();
@@ -221,11 +220,11 @@ $roomMonthly = $dataMonthly->where('metaname_name','Room')
         $end_date = Carbon::parse($end_d)->format('Y-m-d').' 23:59:00';
 
 	 //Metaname Array creation
-	 $metaNames=metaname::get();
+	 $metaNames=metaname::on('clientdb')->get();
 	 $collectAllMeta = collect($metaNames);
 
 	 //Metaname Array creation
-	 $keyNames=keyIndicator::get();
+	 $keyNames=keyIndicator::on('clientdb')->get();
      //dd($keyNames);
 	 $collectAllKey = collect($keyNames);
 
@@ -295,95 +294,35 @@ $roomMonthly = $dataMonthly->where('metaname_name','Room')
    }
 //dd($reportDailyReader);
     //dd(request('print'));
-	if(request('print')){
+	$current_date = date('Y-m-d');
+    if(request('print')){
         $prnt=2;
-
-$user=user::where('id',2)->first();
-             $answers=answer::get();
-             $count=answer::count();
+$user=user::on('clientdb')->where('id',$auth->id)->first();
+             $answers=answer::on('clientdb')->get();
+             $count=answer::on('clientdb')->count();
    $data = [
-            'title' => 'Laravel PDF Example',
             'date' => date('m/d/Y'),
             'reportDailyReader' => $reportDailyReader,
             'user' => $user,
              'count' => $count,
               'property' => $property,
+               'current_date'=>$current_date,
         ];
 
-    // $employees=employee::get();
-    //dd($reportDailyReader);
-     if($reportDailyReader ==null)
-     {
-        dd('reportDailyReader null');
-     }
+     // if($reportDailyReader ==null)
+     // {
+     //    dd('reportDailyReader null');
+     // }
 
-        //return view('myPDF', $data);
-
-// $dompdf = new DOMP//DF();
-// $dompdf->set_paper('A3','landscape'); //Changed A4 to A3
-// $dompdf->load_html($html);
-// $dompdf->render();
-// use Carbon\Carbon;
 
 $timestamp = time();  
 $doc_name="GeneralReport_".$timestamp;
-//dd($doc_name);
-//return view('reportPrint.generalReport',compact($data));
-     //$dompdf->stream('reportPrint.generalReport', array($data));
-        
+
          $pdf = PDF::loadView('reportPrint.generalReport',$data)->setPaper('a4', 'landscape');
    
       return $pdf->stream($doc_name.'.pdf');
      return $pdf->download($doc_name.'.pdf')->setPaper('a4','landscape');
 
-
-   // $id=$_GET['property_search'];
-        //dd('dddd');
-$prnt=1;
-    $datex=$_GET['date'];
-    $date_end = substr($datex, strpos($datex, "-") + 2);
-   //$date_start = explode("_", $datex)[1];
-$date_start = strtok($datex, " ");
-$date_start=date_create($date_start);
-$date_start=date_format($date_start,"Y-m-d");
-
-$date_end=date_create($date_end);
-$date_end=date_format($date_end,"Y-m-d");
-
-// $server="localhost";
-// $db="hakunama_checklistmasterdb";
-// $user="hakunama_tatas_user";
-// $pass="checklistmaster";
-// $version="1.1";
-
-// $pgport=3306; //only for postgresql
-
-   include_once(app_path().'/jrf/sample/setting.php');
-
-    $PHPJasperXML = new PHPJasperXML();
-    $v[]=1;
-
-//dd('print');
-    $metanameAll=array();
-    $indicatorAll=array();
-      //$param[]="active";
-      //$param[]="inactive";
-      //dd($indicatorAll);
-
-      $metanameAll=collect($metaArray);
-      $metaString=str_replace('[','',$metanameAll);
-      $metaString=str_replace(']','',$metaString);
-
-      $indicatorAll=collect($keyArray);
-      $indicatorString=str_replace('[','',$indicatorAll);
-      $indicatorString=str_replace(']','',$indicatorString);
-  //  dd($indicatorString);
-//$param=collect($param);
-
-
-  //dd($indicatorString);
-
-   // dd($indicatorString);
 
       if(request('indicator_search')=="All-not-Good")
         {           
@@ -392,30 +331,7 @@ $date_end=date_format($date_end,"Y-m-d");
      // dd($indicatorString);
         }
 
-
-//$datex=DateTime.Now(dd-MM-yyyy);
-//$d = new SimpleDateFormat("dd/MM/yyyy").format($P{datex});
-  //$enddb = '2022-08-02';
-//dd($d);
-  //  $PHPJasperXML->arrayParameter=array("property_id"=>$id);
-  //  $PHPJasperXML->arrayParameter=array("param"=>1,"param"=>2);
-//$date=date("d/m/Y")
-//dd($date);
-//$PHPJasperXML->sql="select * from answers";
-//dd($PHPJasperXML);
-
-// $PHPJasperXML->arrayParameter =array("property_id"=>$property_id,"metanames"=>$metaString,"indicator"=>$indicatorString,"date_from"=> '"'.$date_start.'"',"date_to"=> '"'.$date_end.'"');
-
-//dd('dsds');
-
 $PHPJasperXML->arrayParameter =array("property_id"=>$property_id,"metanames"=>$metaString,"indicator"=>$indicatorString,"date_from"=> '"'.$date_start.'"',"date_to"=> '"'.$date_end.'"');
-
-//dd($PHPJasperXML->arrayParameter);
-
-//$PHPJasperXML->arrayParameter =array("date_from"=> '"'.$date_start.'"',"date_to"=> '"'.$date_end.'"');
-//dd($PHPJasperXML->arrayParameter);
-//$PHPJasperXML->arrayParameter =array();
-//$PHPJasperXML->arrayParameter = array("param" => array('1' =>1, '3' =>3));
 
      $PHPJasperXML->load_xml_file(app_path().'/reports/propertyReportf.jrxml');
          //$PHPJasperXML->load_xml_file(app_path().'/reports/propertyReportf.jrxml');
@@ -439,8 +355,6 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$property_id,"metanames"=>$m
    $answerCount = collect($answerCount);
    $answerCount = $answerCount->groupBy('property_id','metaname_id','indicator_id','asset_id');
 
-//dd($answerCount);
-   //$totalqns=DB::select('select a.metaname_id,metaname_name,count(a.metaname_id)totalqns from assets a, qns_appliedtos q,metanames m where a.metaname_id=q.metaname_id and a.metaname_id=m.id and a.status="Active" and q.status="Active" group by a.metaname_id');
    $totalqns=DB::connection('clientdb')->select('select a.metaname_id,metaname_name from assets a, qns_appliedtos q,metanames m where a.metaname_id=q.metaname_id and a.metaname_id=m.id and a.status="Active" and q.status="Active"');
 
    $totalqns = collect($totalqns);

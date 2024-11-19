@@ -153,7 +153,7 @@
                                         </tr>
                                     </thead>
                                     <tbody class="kt-table-tbody text-dark">
-                                        @foreach ($reportMonthlyData as $monthlyData)
+                                        @foreach ($reportData as $monthlyData)
                                         <tr class="kt-table-row kt-table-row-level-0">
                                             <td>{{ $monthlyData->id }}</td>
                                             <td>{{ $monthlyData->metaname_name }}</td>

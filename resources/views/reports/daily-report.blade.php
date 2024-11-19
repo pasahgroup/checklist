@@ -157,7 +157,7 @@ table, th, td {
                                         </tr>
                                     </thead>
                                     <tbody class="kt-table-tbody text-dark">
-                                        @foreach ($reportDailyData as $dailyData)
+                                        @foreach ($reportData as $dailyData)
                                         <tr class="kt-table-row kt-table-row-level-0">
                                             <td>{{ $dailyData->id }}</td>
                                             <td>{{ $dailyData->metaname_name }}</td>

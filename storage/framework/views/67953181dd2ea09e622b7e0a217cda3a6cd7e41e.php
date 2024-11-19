@@ -52,7 +52,7 @@
                     <td style='width:40%'>
                         <table style='width:90%;padding-right: 0px;' cellpadding='0' cellspacing='0'>
                             <tr>
-                                <td style='width:100%;padding:1px;padding-left:10px;' colspan='2'>DEPARTMENT:</td>
+                                <td style='width:100%;padding:1px;padding-left:10px;' colspan='2'>DEPARTMENT: <?php echo e($user->department_name); ?></td>
                             </tr>
                             <tr>
                                 <td style='width:100%;padding:0px;padding-left:10px;' colspan='2'><?php echo e($user->department_id); ?><hr style='color:#000000;height:1px;margin-bottom:3px;margin-top:0px;padding-left:10px;' /></td>
@@ -190,9 +190,8 @@
             </thead>    
 
             <tbody>
-              
-               <?php $__currentLoopData = $reportDailyReader; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $indexKey => $DailyReader): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            
+
+               <?php $__currentLoopData = $reportDailyReader; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $indexKey => $DailyReader): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>            
                 <tr>
                   <td><?php echo e($indexKey+1); ?></td>
                     <td><?php echo e($DailyReader->id); ?></td>
@@ -208,8 +207,7 @@
 
                 <?php if($indexKey >= 10): ?>
                         <?php break; ?>
-                <?php endif; ?>
-           
+                <?php endif; ?>          
 
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
@@ -221,11 +219,11 @@
 
             <tfoot>
                 <tr style="background-color: #b0b1b2;">
-                    <td colspan="3" style="text-align: right; font-weight: bold;">
-                  <?php echo e($property->property_name); ?>
+                    <td colspan="4" style="text-align: right; font-weight: bold;">
+                   Property: <?php echo e($property->property_name); ?>
 
                   </td>
-                  <td colspan="4" style="text-align: left; font-weight: bold;"></td>
+                  <td colspan="3" style="text-align: left; font-weight: bold;"></td>
                   <td colspan="2" style="text-align: left; font-weight: bold;">
                    Total Rows: 790,000/=
                   </td>
@@ -244,8 +242,8 @@
                      <td colspan="3" style="text-align: right; font-weight: bold;">
                   </td>
                   <td colspan="4" style="text-align: left; font-weight: bold;"></td>
-                  <td colspan="2" style="text-align: left; font-weight: bold;">
-                   Printed Date: 790,000/=
+                  <td colspan="2" style="text-align: left; font-weight:">
+                   Printed Date: <strong><?php echo e($current_date); ?></strong>
                   </td>
                 </tr>
             </tfoot>
