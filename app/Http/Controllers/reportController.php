@@ -234,7 +234,6 @@ $doc_name="Daily-report".$timestamp;
   }
 
    $reportData = collect($reportData);
-
   return view('reports.daily-report',compact('reportData','property','reportTime','metanames','keyIndicators','property_id','status'));
     }
 
