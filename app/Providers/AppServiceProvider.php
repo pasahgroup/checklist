@@ -48,8 +48,11 @@ class AppServiceProvider extends ServiceProvider
              }
 
             $view->with('user', Auth::user());
-            $view->with('userx', User::all());
-            $view->with('qnsCountx', User::join('properties','users.property_id','properties.id')
+            // $view->with('userx', User::all());
+            
+             $view->with('userx', User::on('clientdb')->get());
+            
+            $view->with('qnsCountx', User::on('clientdb')->join('properties','users.property_id','properties.id')
             ->select('properties.property_name')->first());
 
             $view->with('qnsCount', answer::on('clientdb')->where('answer','!=','Yes')
@@ -57,9 +60,8 @@ class AppServiceProvider extends ServiceProvider
             ->where('property_id',$property_id)
              ->where('status','Active')
             ->get());
-            //dd($view->qnsCount);
-            
-  
+            //dd($view->userx);
+              
             //->select('properties.property_name')->first());
              //$view->with('qnsCount', collect($qnsCount));
 

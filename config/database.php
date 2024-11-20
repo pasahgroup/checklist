@@ -130,7 +130,7 @@ return [
     'clientdb' => [  
         'driver' => 'mysql',  
         'host' =>'127.0.0.1',  
-        'database' =>'assetdb',  
+        'database' =>'checkmasterdb2',  
         'username' =>'root',  
         'password' =>'',  
         'charset' => 'utf8mb4',  

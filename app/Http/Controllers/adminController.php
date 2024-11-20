@@ -60,6 +60,7 @@ class adminController extends Controller
        if(auth())
        {
 
+
         $now = Carbon::now();
         $weekStartDate = $now->startOfWeek()->format('Y-m-d H:i');
         $weekEndDate = $now->endOfWeek()->format('Y-m-d H:i');
