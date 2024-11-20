@@ -52,7 +52,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('qnsCountx', User::join('properties','users.property_id','properties.id')
             ->select('properties.property_name')->first());
 
-            $view->with('qnsCount', answer::where('answer','!=','Yes')
+            $view->with('qnsCount', answer::on('clientdb')->where('answer','!=','Yes')
             ->where('manager_checklist','!=','Cleared')
             ->where('property_id',$property_id)
              ->where('status','Active')
