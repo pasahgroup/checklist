@@ -217,7 +217,7 @@ border-color: #dddddd;
            <?php endif; ?>
 
                <?php if($metadata->datatype=="radio"): ?>
-              <input type="<?php echo e($metadata->datatype); ?>" name="idx<?php echo e($metaname_id); ?>_<?php echo e($qn->id); ?>_<?php echo e($metaname_id); ?>_<?php echo e($asset->asset_name); ?>_<?php echo e($qn->section); ?>[]" id="idx<?php echo e($metaname_id); ?>_<?php echo e($qn->id); ?>_<?php echo e($metaname_id); ?>_<?php echo e($asset->asset_name); ?>" value="<?php echo e($metadata->id); ?>" onclick="myFunctionMaintenance('<?php echo e($metaname_id); ?>','<?php echo e($qn->id); ?>','<?php echo e($asset->asset_name); ?>','<?php echo e($metadata->answer); ?>')" onkeyup="myFunctionMaintenance('<?php echo e($metaname_id); ?>','<?php echo e($qn->id); ?>','<?php echo e($asset->asset_name); ?>','<?php echo e($metadata->answer); ?>')"
+              <input type="<?php echo e($metadata->datatype); ?>" name="idx<?php echo e($metaname_id); ?>_<?php echo e($qn->id); ?>_<?php echo e($metaname_id); ?>_<?php echo e($asset->asset_name); ?>_<?php echo e($qn->section); ?>[]" id="idx<?php echo e($metaname_id); ?>_<?php echo e($qn->id); ?>_<?php echo e($metaname_id); ?>_<?php echo e($asset->asset_name); ?>_<?php echo e($qn->section); ?>" value="<?php echo e($metadata->id); ?>" onclick="myFunctionMaintenance('<?php echo e($metaname_id); ?>','<?php echo e($qn->id); ?>','<?php echo e($asset->asset_name); ?>','<?php echo e($metadata->answer); ?>')" onkeyup="myFunctionMaintenance('<?php echo e($metaname_id); ?>','<?php echo e($qn->id); ?>','<?php echo e($asset->asset_name); ?>','<?php echo e($metadata->answer); ?>')"
 
 
                  <?php $__currentLoopData = $checkQns; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $checkq): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -281,7 +281,7 @@ border-color: #dddddd;
           </div>
        
       <div id="collapsee<?php echo e($metaname_id); ?><?php echo e($qn->id); ?>" class="panel-collapse collapse">
-      <textarea rows="4" cols="40" id="desc" name="desc<?php echo e($metaname_id); ?>_<?php echo e($qn->id); ?>_<?php echo e($metaname_id); ?>_<?php echo e($asset->asset_name); ?>[]" placeholder="---enter description if any---" class="txtarea" style="white-space: normal;overflow:hidden">
+      <textarea rows="4" cols="40" id="desc" name="desc<?php echo e($metaname_id); ?>_<?php echo e($qn->id); ?>_<?php echo e($metaname_id); ?>_<?php echo e($asset->asset_name); ?>_<?php echo e($qn->section); ?>[]" placeholder="---enter description if any---" class="txtarea" style="white-space: normal;overflow:hidden">
           <?php $__currentLoopData = $checkQns; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $checkq): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
       <?php if($assetID ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $checkq->property_id ==$propertyID->property_id): ?>
        <?php if($checkq->description !=null): ?>
@@ -305,7 +305,7 @@ border-color: #dddddd;
                                 <!-- start webcam -->
     <div id="my_camera<?php echo e($metaname_id); ?>_<?php echo e($qn->id); ?>"></div>
     <br/>
-    <input type="file" name="attachment<?php echo e($metaname_id); ?>_<?php echo e($qn->id); ?>_<?php echo e($metaname_id); ?>_<?php echo e($asset->asset_name); ?>[]" accept="image/*" capture="camera">
+    <input type="file" name="attachment<?php echo e($metaname_id); ?>_<?php echo e($qn->id); ?>_<?php echo e($metaname_id); ?>_<?php echo e($asset->asset_name); ?>_<?php echo e($qn->section); ?>[]" accept="image/*" capture="camera">
    
                                     </div>
                                     </div>

@@ -72,6 +72,7 @@ class DailyController extends Controller
  
    public function index(Request $request)
     {
+
       $current_date = date('Y-m-d');
       //Extract date
       $datet=Carbon::now();
@@ -119,15 +120,10 @@ class DailyController extends Controller
           $metadatasCollects = collect($metadatasCollects);
           //$subset = $metadatas->map->only(['id', 'name', 'email']);
 
-
-
       $assets = asset::where('assets.metaname_id',$metaname_id)
       ->where('assets.property_id',auth()->user()->property_id)
       ->select('assets.id','assets.metaname_id','assets.asset_name','assets.property_id')
       ->paginate(8);
-
-
-   //dd($assets);
 
     $departApply= department::where('status','Active')->get();
     //dd('axssa');
@@ -348,7 +344,6 @@ class DailyController extends Controller
 //  $arrayPhoto=$arrayData;
 
 
-
 foreach ($arrayData as $key=>$val) {
 
   $saveff = explode("_", $key);//dd($saveff);
@@ -381,7 +376,7 @@ if($nameStr===$idxKey)
   if(count($value)>1){
 
  if($value[1]!=null){
-//dd($data[6]);
+//dd($data[5]);
 
 
 $insetqnsAns = answer::UpdateOrCreate([

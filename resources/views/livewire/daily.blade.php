@@ -216,7 +216,7 @@ border-color: #dddddd;
            @endif
 
                @if($metadata->datatype=="radio")
-              <input type="{{$metadata->datatype}}" name="idx{{$metaname_id}}_{{$qn->id}}_{{$metaname_id}}_{{$asset->asset_name}}_{{$qn->section}}[]" id="idx{{$metaname_id}}_{{$qn->id}}_{{$metaname_id}}_{{$asset->asset_name}}" value="{{$metadata->id}}" onclick="myFunctionMaintenance('{{$metaname_id}}','{{$qn->id}}','{{$asset->asset_name}}','{{$metadata->answer}}')" onkeyup="myFunctionMaintenance('{{$metaname_id}}','{{$qn->id}}','{{$asset->asset_name}}','{{$metadata->answer}}')"
+              <input type="{{$metadata->datatype}}" name="idx{{$metaname_id}}_{{$qn->id}}_{{$metaname_id}}_{{$asset->asset_name}}_{{$qn->section}}[]" id="idx{{$metaname_id}}_{{$qn->id}}_{{$metaname_id}}_{{$asset->asset_name}}_{{$qn->section}}" value="{{$metadata->id}}" onclick="myFunctionMaintenance('{{$metaname_id}}','{{$qn->id}}','{{$asset->asset_name}}','{{$metadata->answer}}')" onkeyup="myFunctionMaintenance('{{$metaname_id}}','{{$qn->id}}','{{$asset->asset_name}}','{{$metadata->answer}}')"
 
 
                  @foreach ($checkQns as $checkq)
@@ -280,7 +280,7 @@ border-color: #dddddd;
           </div>
        
       <div id="collapsee{{$metaname_id}}{{$qn->id}}" class="panel-collapse collapse">
-      <textarea rows="4" cols="40" id="desc" name="desc{{$metaname_id}}_{{$qn->id}}_{{$metaname_id}}_{{$asset->asset_name}}[]" placeholder="---enter description if any---" class="txtarea" style="white-space: normal;overflow:hidden">
+      <textarea rows="4" cols="40" id="desc" name="desc{{$metaname_id}}_{{$qn->id}}_{{$metaname_id}}_{{$asset->asset_name}}_{{$qn->section}}[]" placeholder="---enter description if any---" class="txtarea" style="white-space: normal;overflow:hidden">
           @foreach ($checkQns as $checkq)
       @if($assetID ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $checkq->property_id ==$propertyID->property_id)
        @if($checkq->description !=null)
@@ -303,7 +303,7 @@ border-color: #dddddd;
                                 <!-- start webcam -->
     <div id="my_camera{{$metaname_id}}_{{$qn->id}}"></div>
     <br/>
-    <input type="file" name="attachment{{$metaname_id}}_{{$qn->id}}_{{$metaname_id}}_{{$asset->asset_name}}[]" accept="image/*" capture="camera">
+    <input type="file" name="attachment{{$metaname_id}}_{{$qn->id}}_{{$metaname_id}}_{{$asset->asset_name}}_{{$qn->section}}[]" accept="image/*" capture="camera">
    
                                     </div>
                                     </div>
