@@ -390,7 +390,7 @@ $insetqnsAns = answer::UpdateOrCreate([
   'asset_id'=>$asset_id,
   'indicator_id'=>$data[1],
 
-  'section'=>$data[6],
+  'section'=>$data[5],
   'datex'=>$current_date,
 ],[
   'opt_answer_id'=>$value[0],
@@ -410,13 +410,14 @@ $answerTableUpdate2=DB::statement('update answers a set a.manager_checklist="Act
 //dd('Updated');
  }
   }else{
+
     $insetqnsAns = answer::UpdateOrCreate([
       'property_id'=>$property_id,
       'metaname_id'=>request('metaname_id'),
       'asset_id'=>$asset_id,
       'indicator_id'=>$data[1],
 
-      'section'=>$data[6],
+      'section'=>$data[5],
       'datex'=>$current_date,
     ],[
       'opt_answer_id'=>$value[0],
@@ -440,11 +441,13 @@ $answerTableUpdate2=DB::statement('update answers a set a.manager_checklist="Act
  }elseif($nameStr ===$descKey)
  {
 //desc
+//dd($data[7]);
+    //dd($data[5]);
 $updateqnsF = answer::where('property_id',$property_id)
 ->where('metaname_id',request('metaname_id'))
  ->where('asset_id',$asset_id)
    ->where('indicator_id',$data[1])
-    ->where('section',$data[6])
+    ->where('section',$data[5])
    ->where('datex',$current_date)
    ->where('indicator_id',$data[1])
 ->update([
@@ -495,7 +498,7 @@ $constraint->aspectRatio();
                       ->where('metaname_id',request('metaname_id'))
                        ->where('asset_id',$asset_id)
                          ->where('indicator_id',$data[1])
-                          ->where('section',$data[6])
+                          ->where('section',$data[5])
                          ->where('datex',$current_date)
                          ->where('indicator_id',$data[1])
                       ->update([
