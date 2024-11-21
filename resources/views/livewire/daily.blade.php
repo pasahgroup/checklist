@@ -281,10 +281,11 @@ border-color: #dddddd;
        
       <div id="collapsee{{$metaname_id}}{{$qn->id}}" class="panel-collapse collapse">
       <textarea rows="4" cols="40" id="desc" name="desc{{$metaname_id}}_{{$qn->id}}_{{$metaname_id}}_{{$asset->asset_name}}_{{$qn->section}}[]" placeholder="---enter description if any---" class="txtarea" style="white-space: normal;overflow:hidden">
+    
           @foreach ($checkQns as $checkq)
       @if($assetID ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $checkq->property_id ==$propertyID->property_id)
        @if($checkq->description !=null)
-        {{$checkq->description}}
+        {{$checkq->description}}:{{$assetID}}:{{$checkq->asset_id}}
         @endif
       @endif
     @endforeach
@@ -371,9 +372,7 @@ border-color: #dddddd;
       </div>
       </div>
       </div>
-
-
-      @endforeach
+            @endforeach
        
    <hr>                                            
   {!! $assets->links() !!}

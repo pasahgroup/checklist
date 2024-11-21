@@ -208,7 +208,7 @@ class DailyController extends Controller
     $qnsAppliedPerc=DB::select('select * from qns_appliedtos where department_id="'.$departments->department_id.'"');
     $qnsAppliedPerc = collect($qnsAppliedPerc);
 
-//dd($qnsAppliedPerc);
+//dd($checkQns);
 
 
     if(request('email_send')){
@@ -385,7 +385,7 @@ $insetqnsAns = answer::UpdateOrCreate([
   'asset_id'=>$asset_id,
   'indicator_id'=>$data[1],
 
-  'section'=>$data[5],
+  'section'=>$data[6],
   'datex'=>$current_date,
 ],[
   'opt_answer_id'=>$value[0],
@@ -412,7 +412,7 @@ $answerTableUpdate2=DB::statement('update answers a set a.manager_checklist="Act
       'asset_id'=>$asset_id,
       'indicator_id'=>$data[1],
 
-      'section'=>$data[5],
+      'section'=>$data[6],
       'datex'=>$current_date,
     ],[
       'opt_answer_id'=>$value[0],
@@ -437,12 +437,12 @@ $answerTableUpdate2=DB::statement('update answers a set a.manager_checklist="Act
  {
 //desc
 //dd($data[7]);
-    //dd($data[5]);
+    //dd($data[6]);
 $updateqnsF = answer::where('property_id',$property_id)
 ->where('metaname_id',request('metaname_id'))
  ->where('asset_id',$asset_id)
    ->where('indicator_id',$data[1])
-    ->where('section',$data[5])
+    ->where('section',$data[6])
    ->where('datex',$current_date)
    ->where('indicator_id',$data[1])
 ->update([
@@ -493,7 +493,7 @@ $constraint->aspectRatio();
                       ->where('metaname_id',request('metaname_id'))
                        ->where('asset_id',$asset_id)
                          ->where('indicator_id',$data[1])
-                          ->where('section',$data[5])
+                          ->where('section',$data[6])
                          ->where('datex',$current_date)
                          ->where('indicator_id',$data[1])
                       ->update([

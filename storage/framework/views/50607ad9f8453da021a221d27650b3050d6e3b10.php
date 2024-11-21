@@ -282,10 +282,11 @@ border-color: #dddddd;
        
       <div id="collapsee<?php echo e($metaname_id); ?><?php echo e($qn->id); ?>" class="panel-collapse collapse">
       <textarea rows="4" cols="40" id="desc" name="desc<?php echo e($metaname_id); ?>_<?php echo e($qn->id); ?>_<?php echo e($metaname_id); ?>_<?php echo e($asset->asset_name); ?>_<?php echo e($qn->section); ?>[]" placeholder="---enter description if any---" class="txtarea" style="white-space: normal;overflow:hidden">
+    
           <?php $__currentLoopData = $checkQns; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $checkq): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
       <?php if($assetID ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $checkq->property_id ==$propertyID->property_id): ?>
        <?php if($checkq->description !=null): ?>
-        <?php echo e($checkq->description); ?>
+        <?php echo e($checkq->description); ?>:<?php echo e($assetID); ?>:<?php echo e($checkq->asset_id); ?>
 
         <?php endif; ?>
       <?php endif; ?>
@@ -373,9 +374,7 @@ border-color: #dddddd;
       </div>
       </div>
       </div>
-
-
-      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
        
    <hr>                                            
   <?php echo $assets->links(); ?>
