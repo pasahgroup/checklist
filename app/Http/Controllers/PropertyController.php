@@ -65,12 +65,13 @@ if($level->level=="Main")
 {
 $properties = property::on('clientdb')->where('company_id',$auth->company_id)      
       ->where('status','Active')->get();
+//dd($auth->company_id);
 }else
 {
 $properties = property::on('clientdb')->where('company_id',$auth->company_id)
       ->where('id',$auth->property_id)
       ->where('status','Active')->get();
-      //dd($properties); 
+       
 }
 
   

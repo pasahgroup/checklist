@@ -38,7 +38,6 @@ class AppServiceProvider extends ServiceProvider
 
   $view->with('userCount', Auth::user());
   //dd($view->userCount);
-
              if($view->userCount !=NULL)
              {
                $property_id=Auth::user()->property_id;
@@ -49,7 +48,8 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('user', Auth::user());
             // $view->with('userx', User::all());
-            
+           // dd('user');
+
              $view->with('userx', User::on('clientdb')->get());
             
             $view->with('qnsCountx', User::on('clientdb')->join('properties','users.property_id','properties.id')
@@ -60,12 +60,13 @@ class AppServiceProvider extends ServiceProvider
             ->where('property_id',$property_id)
              ->where('status','Active')
             ->get());
-            //dd($view->userx);
+            //dd($view->user->company_id);
               
             //->select('properties.property_name')->first());
              //$view->with('qnsCount', collect($qnsCount));
 
-             $view->with('company', myCompany::where('status','Active')->first());
+             $view->with('company', myCompany::where('id',$view->user->company_id)->where('status','Active')->first());
+       //dd($view->company);
         });
     }
 }

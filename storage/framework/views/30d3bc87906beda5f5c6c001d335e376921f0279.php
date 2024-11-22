@@ -61,7 +61,9 @@
 		<!--begin::Logo-->
 		<a href="/admin" class="brand-logo">
 
-		<!-- 	<span class="brand-text"><img style="height: 35px;" alt="Logo" src="../../assets/images/misc/logox.png" /></span> -->
+						<?php if(isset($company->logo)): ?>
+ <span class="brand-logo" style="padding:8px;padding-left:30px;"><img style="height: 15vh;width: 100%;" alt="Logo" src="<?php echo e(asset('storage/logo/'.$company->logo)); ?>"/></span>
+<?php endif; ?>
 
 		</a>
 

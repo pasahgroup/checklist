@@ -543,10 +543,10 @@
                                                               <a href="/assets_" class="nav-link sub-nav-link {{ (request()->is('assets_')) ? 'active' : '' }}">
                                                                   <span class="svg-icon nav-icon d-flex justify-content-center">
                                                                       <svg xmlns="" width="9px" height="9px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
-                                                                          <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                                                        </svg>
+                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                    </svg>
                                                                   </span>
-                                                                  <span class="nav-text">Asset Edit</span>
+                            <span class="nav-text">Asset Edit</span>
                                                               </a>
                                                           </li>
 
@@ -712,7 +712,7 @@
          <div style="margin: 100px 10px 10px 10px">
                 <div class="text-center text-primary"><hr>
                     <strong>Checklist Master</strong>
-                    <img style="height: 20px;" alt="Logo" src="../../assets/images/misc/moran.png" /></div>
+                    <img style="height: 20px;" alt="Logo" src="../../assets/images/misc/hm.png" /></div>
               </div>
 
                             </ul>

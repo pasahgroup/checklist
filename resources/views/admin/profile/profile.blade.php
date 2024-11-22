@@ -87,11 +87,11 @@
 
 <div class="col-md-6">
                   <label>First name</label>
-                <input class="form-control" type="text" name="region" value="{{ $profile->first_name??'' }}">
+                <input class="form-control" type="text" name="first_name" value="{{ $profile->first_name??'' }}">
                                 </div>
              <div class="col-md-6">
                   <label >Last name</label>
-              <input class="form-control" type="text" name="district" value="{{ $profile->last_name??'' }}">
+              <input class="form-control" type="text" name="last_name" value="{{ $profile->last_name??'' }}">
                                 </div> 
 
 <div><br></div>

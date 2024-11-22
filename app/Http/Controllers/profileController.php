@@ -374,7 +374,59 @@ $assetData =asset::Create([
      */
     public function update(Request $request, $id)
     {
-        dd('upd');
+    //dd(request('phone_number'));
+        $auth=auth::user();
+      $myCompanyID = myCompany::where('id',$auth->company_id)
+             ->update([
+'company_name'=>request('business_name'),
+          'tin'=>request('tin'),
+          'vrn'=>request('vrn'),
+          'phone_number'=>request('phone_number'),
+          'email'=>request('email'),          
+          'address'=>request('address'),
+
+             'district'=>request('district'),
+             'region'=>request('region'),
+          
+          'first_name'=>request('first_name'),
+          'last_name'=>request('last_name'),
+           'code'=>request('code'),
+          'status'=>'Active'
+        ]);
+    
+
+      $myCompanyID = property::where('id',$auth->property_id)
+             ->update([         
+         'property_name'=>request('business_name'),               
+        ]);
+
+//Update Photos
+if(request('attachment')){
+            $attach = request('attachment');
+            foreach($attach as $attached){
+
+  // Get filename with extension
+                     $fileNameWithExt =$attached->getClientOriginalName();
+                     // Just Filename
+                     $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+                     // Get just Extension
+                     $extension = $attached->getClientOriginalExtension();
+                     //Filename to store
+                     $imageToStore = $filename.'_'.time().'.'.$extension;
+                     //upload the image
+                     $path =$attached->storeAs('public/logo/', $imageToStore);
+                 
+   
+      $myCompanyID = myCompany::where('id',$auth->company_id)
+             ->update([
+'logo'=>$imageToStore,         
+        ]);
+
+
+                 }
+             }
+
+return redirect()->back()->with('success','Updated successfully');
     }
 
     /**
