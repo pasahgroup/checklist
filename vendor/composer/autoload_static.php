@@ -58,7 +58,6 @@ class ComposerStaticInit9ab1de0d050ece0628ab8cf152939b34
         '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
         'b50cc3b860dd4b6f4f09e58a8f6b6ce7' => __DIR__ . '/..' . '/telesign/telesign/src/util.php',
         'a1b8cf771c4bf16e62bd369446b431fa' => __DIR__ . '/..' . '/telesign/telesign/src/version/version.php',
-        '4f50a1241a68f7555b3e87a83b1cb902' => __DIR__ . '/../..' . '/App/Http/Helpers/Helper.php',
     );
 
     public static $prefixLengthsPsr4 = array (

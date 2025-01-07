@@ -26,13 +26,13 @@ class dbsetting extends Model
           $value = DB::select('select * from dbconnects where user_id="'.$n.'"');
        //dd($value);
     
-$db="checkmasterdb2";
+$db="hmacadem_checkmasterdb";
   $setconfig= Config::set('database.connections.clientdb', [   
     'driver' => 'mysql',  
         'host' =>'127.0.0.1',  
         'database' =>$db,  
-        'username' =>'root',  
-        'password' =>'',  
+        'username' =>'hmacadem_user',  
+        'password' =>'pasah12345!',  
         'charset' => 'utf8mb4',  
         'collation' => 'utf8mb4_unicode_ci',  
         'prefix' => '',  

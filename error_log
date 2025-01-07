@@ -1,1 +1,55 @@
 
+[22-Nov-2024 04:55:21 UTC] PHP Warning:  require(/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php): Failed to open stream: No such file or directory in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
+[22-Nov-2024 04:55:21 UTC] PHP Warning:  require(/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php): Failed to open stream: No such file or directory in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
+[22-Nov-2024 04:55:21 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php:41
+Stack trace:
+#0 /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php(45): {closure}()
+#1 /home/hmacadem/checkmaster.hmacademy.net/vendor/autoload.php(25): ComposerAutoloaderInit9ab1de0d050ece0628ab8cf152939b34::getLoader()
+#2 /home/hmacadem/checkmaster.hmacademy.net/artisan(18): require('/home/hmacadem/...')
+#3 {main}
+  thrown in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
+[22-Nov-2024 04:55:38 UTC] PHP Warning:  require(/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php): Failed to open stream: No such file or directory in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
+[22-Nov-2024 04:55:38 UTC] PHP Warning:  require(/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php): Failed to open stream: No such file or directory in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
+[22-Nov-2024 04:55:38 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php:41
+Stack trace:
+#0 /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php(45): {closure}()
+#1 /home/hmacadem/checkmaster.hmacademy.net/vendor/autoload.php(25): ComposerAutoloaderInit9ab1de0d050ece0628ab8cf152939b34::getLoader()
+#2 /home/hmacadem/checkmaster.hmacademy.net/artisan(18): require('/home/hmacadem/...')
+#3 {main}
+  thrown in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
+[22-Nov-2024 04:55:48 UTC] PHP Warning:  require(/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php): Failed to open stream: No such file or directory in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
+[22-Nov-2024 04:55:48 UTC] PHP Warning:  require(/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php): Failed to open stream: No such file or directory in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
+[22-Nov-2024 04:55:48 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php:41
+Stack trace:
+#0 /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php(45): {closure}()
+#1 /home/hmacadem/checkmaster.hmacademy.net/vendor/autoload.php(25): ComposerAutoloaderInit9ab1de0d050ece0628ab8cf152939b34::getLoader()
+#2 /home/hmacadem/checkmaster.hmacademy.net/artisan(18): require('/home/hmacadem/...')
+#3 {main}
+  thrown in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
+[22-Nov-2024 04:55:57 UTC] PHP Warning:  require(/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php): Failed to open stream: No such file or directory in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
+[22-Nov-2024 04:55:57 UTC] PHP Warning:  require(/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php): Failed to open stream: No such file or directory in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
+[22-Nov-2024 04:55:57 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php:41
+Stack trace:
+#0 /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php(45): {closure}()
+#1 /home/hmacadem/checkmaster.hmacademy.net/vendor/autoload.php(25): ComposerAutoloaderInit9ab1de0d050ece0628ab8cf152939b34::getLoader()
+#2 /home/hmacadem/checkmaster.hmacademy.net/artisan(18): require('/home/hmacadem/...')
+#3 {main}
+  thrown in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
+[22-Nov-2024 04:56:11 UTC] PHP Warning:  require(/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php): Failed to open stream: No such file or directory in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
+[22-Nov-2024 04:56:11 UTC] PHP Warning:  require(/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php): Failed to open stream: No such file or directory in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
+[22-Nov-2024 04:56:11 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php:41
+Stack trace:
+#0 /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php(45): {closure}()
+#1 /home/hmacadem/checkmaster.hmacademy.net/vendor/autoload.php(25): ComposerAutoloaderInit9ab1de0d050ece0628ab8cf152939b34::getLoader()
+#2 /home/hmacadem/checkmaster.hmacademy.net/artisan(18): require('/home/hmacadem/...')
+#3 {main}
+  thrown in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
+[22-Nov-2024 04:56:20 UTC] PHP Warning:  require(/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php): Failed to open stream: No such file or directory in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
+[22-Nov-2024 04:56:20 UTC] PHP Warning:  require(/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php): Failed to open stream: No such file or directory in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
+[22-Nov-2024 04:56:20 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/hmacadem/checkmaster.hmacademy.net/vendor/composer/../../App/Http/Helpers/Helper.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php:41
+Stack trace:
+#0 /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php(45): {closure}()
+#1 /home/hmacadem/checkmaster.hmacademy.net/vendor/autoload.php(25): ComposerAutoloaderInit9ab1de0d050ece0628ab8cf152939b34::getLoader()
+#2 /home/hmacadem/checkmaster.hmacademy.net/artisan(18): require('/home/hmacadem/...')
+#3 {main}
+  thrown in /home/hmacadem/checkmaster.hmacademy.net/vendor/composer/autoload_real.php on line 41
