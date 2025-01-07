@@ -141,13 +141,14 @@ $properties = property::on('clientdb')->where('company_id',$auth->company_id)
     {
     $auth=auth::user();
   $aData['dataC'] = dbsetting::getConnect($auth->id);
-
+ dd($auth);
+ 
 $prnt="";
 $property=property::on('clientdb')->where('id',$auth->property_id)->first();
   //$segment = $request->segment(1);
  // $currenturl = Request::url();
 //dd($userID);
- dd($auth);
+
 
 
         $segments = request()->segments();
