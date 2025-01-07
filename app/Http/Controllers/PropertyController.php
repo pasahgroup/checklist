@@ -141,8 +141,8 @@ $properties = property::on('clientdb')->where('company_id',$auth->company_id)
     {
     $auth=auth::user();
   $aData['dataC'] = dbsetting::getConnect($auth->id);
- dd($auth);
- 
+// dd($auth);
+
 $prnt="";
 $property=property::on('clientdb')->where('id',$auth->property_id)->first();
   //$segment = $request->segment(1);
