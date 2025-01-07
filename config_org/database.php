@@ -42,7 +42,7 @@ return [
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
-            
+
             'landlord' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
@@ -68,7 +68,7 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'demodb'),
+            'database' => env('DB_DATABASE', 'checkmasterdb2'),
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
@@ -82,7 +82,7 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
-     
+
 
 
         'pgsql' => [
@@ -114,31 +114,31 @@ return [
         ],
 
         //Custom db connection
-        'conn1' => [  
-        'driver' => 'mysql',  
-        'host' => env('DB_HOST', '127.0.0.1'),  
-        'database' => env('DB_DATABASE', 'checkmasterdb'),  
-        'username' => env('DB_USERNAME', 'root'),  
-        'password' => env('DB_PASSWORD', ''),  
-        'charset' => 'utf8mb4',  
-        'collation' => 'utf8mb4_unicode_ci',  
-        'prefix' => '',  
-        'strict' => true,  
-        'engine' => null,  
-    ],  
+        'conn1' => [
+        'driver' => 'mysql',
+        'host' => env('DB_HOST', '127.0.0.1'),
+        'database' => env('DB_DATABASE', 'checkmasterdb'),
+        'username' => env('DB_USERNAME', 'root'),
+        'password' => env('DB_PASSWORD', ''),
+        'charset' => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'prefix' => '',
+        'strict' => true,
+        'engine' => null,
+    ],
 
-    'clientdb' => [  
-        'driver' => 'mysql',  
-        'host' =>'127.0.0.1',  
-        'database' =>'checkmasterdb2',  
-        'username' =>'root',  
-        'password' =>'',  
-        'charset' => 'utf8mb4',  
-        'collation' => 'utf8mb4_unicode_ci',  
-        'prefix' => '',  
-        'strict' => true,  
-        'engine' => null,  
-    ],  
+    'clientdb' => [
+        'driver' => 'mysql',
+        'host' =>'127.0.0.1',
+        'database' =>'hmacadem_checkmasterdb',
+        'username' =>'hmacadem_user',
+        'password' =>'pasah12345!',
+        'charset' => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'prefix' => '',
+        'strict' => true,
+        'engine' => null,
+    ],
 
     ],
 
@@ -167,7 +167,9 @@ return [
     */
 
     'redis' => [
+
         'client' => env('REDIS_CLIENT', 'phpredis'),
+
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
             'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),

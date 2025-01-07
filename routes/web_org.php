@@ -29,6 +29,7 @@ use App\Http\Controllers\warehouseController;
 use App\Http\Controllers\ChecklistController;
 use App\Http\Controllers\DailydutymanagerController;
 
+
 use App\Http\Controllers\ManageController;
 
 use App\Http\Livewire\Show;
