@@ -159,9 +159,9 @@ border-color: #dddddd;
 
    @foreach ($checkQnsProp as $chkp)
         @if($asset->id ==$chkp->asset_id && $qnsAppliedPerc->where('metaname_id',$chkp->metaname_id)->count()>0)
-      {{$answerPerc->where('metaname_id',$chkp->metaname_id)->where('asset_id',$chkp->asset_id)->count()}} | {{$qnsAppliedPerc->where('metaname_id',$chkp->metaname_id)->count()}}
+      {{$answerPerc->where('metaname_id',$chkp->metaname_id)->where('asset_id',$chkp->asset_id)->count()}} |{{$qnsAppliedPerc->where('metaname_id',$chkp->metaname_id)->count()}}
      
-     <input type="checkbox"  onclick="myFunctionxx()" id="statusx" name="statusx" value="0" @if ($asset->id==$chkp->asset_id) checked @endif> | ({{ number_format(($answerPerc->where('metaname_id',$chkp->metaname_id)->where('asset_id',$chkp->asset_id)->count())/($qnsAppliedPerc->where('metaname_id',$chkp->metaname_id)->count())*100),2}})%
+     <input type="checkbox"  onclick="myFunctionxx()" id="statusx" name="statusx" value="0" @if ($asset->id==$chkp->asset_id) checked @endif> |({{ number_format(($answerPerc->where('metaname_id',$chkp->metaname_id)->where('asset_id',$chkp->asset_id)->count())/($qnsAppliedPerc->where('metaname_id',$chkp->metaname_id)->count())*100),2}})%
      @endif
      @endforeach
    
@@ -283,9 +283,9 @@ border-color: #dddddd;
       <textarea rows="4" cols="40" id="desc" name="desc{{$metaname_id}}_{{$qn->id}}_{{$metaname_id}}_{{$asset->asset_name}}_{{$qn->section}}[]" placeholder="---enter description if any---" class="txtarea" style="white-space: normal;overflow:hidden">
     
           @foreach ($checkQns as $checkq)
-      @if($assetID ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $checkq->property_id ==$propertyID->property_id)
+      @if($asset->id ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $checkq->property_id ==$propertyID->property_id)
        @if($checkq->description !=null)
-        {{$checkq->description}}:{{$assetID}}:{{$checkq->asset_id}}
+        {{$checkq->description}}
         @endif
       @endif
     @endforeach
