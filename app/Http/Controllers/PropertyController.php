@@ -63,7 +63,7 @@ $level=property::on('clientdb')->where('id',$auth->property_id)->first();
 
 if($level->level=="Main")
 {
-$properties = property::on('clientdb')->where('company_id',$auth->company_id)      
+$properties = property::on('clientdb')->where('company_id',$auth->company_id)
       ->where('status','Active')->get();
 //dd($auth->company_id);
 }else
@@ -71,15 +71,15 @@ $properties = property::on('clientdb')->where('company_id',$auth->company_id)
 $properties = property::on('clientdb')->where('company_id',$auth->company_id)
       ->where('id',$auth->property_id)
       ->where('status','Active')->get();
-       
+
 }
 
-  
+
      return view('admin.settings.properties.property',compact('properties'));
     }
 
  public function dashProperty($id)
-    {       
+    {
   $auth=auth::user();
   $aData['dataC'] = dbsetting::getConnect($auth->id);
 
@@ -95,18 +95,18 @@ $properties = property::on('clientdb')->where('company_id',$auth->company_id)
 // dd($helperx);
 
 // $db="checkmasterdb2";
-        
-//     Config::set('database.connections.clientdb', [   
-//     'driver' => 'mysql',  
-//         'host' =>'127.0.0.1',  
-//         'database' =>$db,  
-//         'username' =>'root',  
-//         'password' =>'',  
-//         'charset' => 'utf8mb4',  
-//         'collation' => 'utf8mb4_unicode_ci',  
-//         'prefix' => '',  
-//         'strict' => true,  
-//         'engine' => null,  
+
+//     Config::set('database.connections.clientdb', [
+//     'driver' => 'mysql',
+//         'host' =>'127.0.0.1',
+//         'database' =>$db,
+//         'username' =>'root',
+//         'password' =>'',
+//         'charset' => 'utf8mb4',
+//         'collation' => 'utf8mb4_unicode_ci',
+//         'prefix' => '',
+//         'strict' => true,
+//         'engine' => null,
 //    // all the other params from config
 // ]);
 
@@ -115,7 +115,7 @@ $properties = property::on('clientdb')->where('company_id',$auth->company_id)
 
         //DB::purge('mynewconnection');
          // $properties = property::where('status','Active')->get();
-      
+
  // $databaseName = Helper::getDatabaseName();
  //    DB::connection($databaseName)
  //    ->table('your table name')
@@ -126,8 +126,8 @@ $properties = property::on('clientdb')->where('company_id',$auth->company_id)
 
       // $properties = property::where('status','Active')->get();
       //$propertyName = Property::where('id',1)->first();
-    
-     $properties=property::on('clientdb')->where('status','Active')->get(); 
+
+     $properties=property::on('clientdb')->where('status','Active')->get();
 
      // $users = DB::connection('conn2')->select('Select * from users');
     // $users = DB::connection('clientdb')->select('Select * from users');
@@ -147,7 +147,7 @@ $property=property::on('clientdb')->where('id',$auth->property_id)->first();
   //$segment = $request->segment(1);
  // $currenturl = Request::url();
 //dd($userID);
- //dd($property);
+ dd($auth);
 
 
         $segments = request()->segments();
@@ -173,7 +173,7 @@ $uri =request()->path();//dd($uri);
 //dd($properties);
 
          $reportDailyData=DB::connection('clientdb')->select('select * from reportdailydata_view where property_id="'.$property->id.'" order by metaname_name ASC');
-  
+
  $reportDailyReader=DB::connection('clientdb')->select('select * from issue_report_view where property_id="'.$property->id.'"');
 //dd($reportDailyReader);
 
@@ -281,7 +281,7 @@ $roomMonthly = $dataMonthly->where('metaname_name','Room')
 	   ->whereIn('optional_answers.answer_classification',$keyArray)
       //->where('set_indicators.qns','!=',"")
      ->whereBetween('answers.datex',[$start_date, $end_date])
-   
+
    ->select('answers.id','answers.property_id','answers.indicator_id','answers.metaname_id','answers.asset_id','answers.opt_answer_id','answers.answer','answers.photo','answers.description','answers.datex as Date','answers.answer_label','metanames.metaname_name','assets.asset_name','properties.property_name','set_indicators.qns','users.name as PostedBy')
    ->orderBy('set_indicators.id')
 	 ->get();
@@ -307,18 +307,18 @@ $user=user::on('clientdb')->where('id',$auth->id)->first();
                'current_date'=>$current_date,
      ];
 
-  
-$timestamp = time();  
+
+$timestamp = time();
 $doc_name="GeneralReport_".$timestamp;
 
          $pdf = PDF::loadView('reportPrint.generalReport',$data)->setPaper('a4', 'landscape');
-   
+
       return $pdf->stream($doc_name.'.pdf');
      return $pdf->download($doc_name.'.pdf')->setPaper('a4','landscape');
 
 
       if(request('indicator_search')=="All-not-Good")
-        {           
+        {
   //$indicatorString=str_replace('"Good",', '', $indicatorString);
               $indicatorString=str_replace(['"1":', '"2":', '"3":', '"4":','{','}'], '', $indicatorString);
      // dd($indicatorString);
@@ -343,7 +343,7 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$property_id,"metanames"=>$m
    //Metaname percent
 
    // $answerCount=DB::connection('clientdb')->select('select a.*,m.metaname_name from answers a,metanames m where a.metaname_id=m.id and DAY(a.datex)=DAY(NOW()) and a.status="Active" group by a.property_id,a.metaname_id,a.indicator_id,a.asset_id order by a.metaname_id ASC');
-     
+
      $answerCount=DB::connection('clientdb')->select('select a.*,m.metaname_name from answers a,metanames m where a.metaname_id=m.id and DAY(a.datex)=DAY(NOW()) and a.status="Active" order by a.metaname_id ASC');
    $answerCount = collect($answerCount);
    $answerCount = $answerCount->groupBy('property_id','metaname_id','indicator_id','asset_id');
@@ -353,7 +353,7 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$property_id,"metanames"=>$m
    $totalqns = collect($totalqns);
 //dd($generalReportData);
         return view('admin.settings.properties.dash.report-general',compact('properties','property','propertiesNames','metanames','keyIndicators','reportDailyReader','dailyMetaCollects','weeklyMetaCollects','monthlyMetaCollects','badDaily','badWeekly','badMonthly','criticalDaily','criticalWeekly','criticalMonthly','id','uri','answerCount','totalqns','prnt'));
-         
+
     }
 
 
@@ -383,7 +383,7 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$property_id,"metanames"=>$m
 
         //Daily Report
        $reportDailyData=DB::select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.property_id="'.$id.'" and a.opt_answer_id=o.id and a.datex="'.$current_date.'" order by m.metaname_name ASC');
-     
+
        //$reportDailyData2=DB::select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.property_id="'.$id.'" and a.opt_answer_id=o.id and a.datex="'.$current_date.'"');
 
        $reportDailyReader=DB::select('select a.id,a.property_id,p.property_name,a.metaname_id,m.metaname_name,a.answer,a.indicator_id,s.qns,a.asset_id,t.asset_name,u.name, a.opt_answer_id,o.answer_classification,a.description,a.photo,a.datex from answers a,properties p,set_indicators s,users u,assets t,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.user_id=u.id and a.asset_id=t.id and a.indicator_id=s.id and a.opt_answer_id=o.id and p.id=a.property_id and a.datex="'.$current_date.'" and a.property_id="'.$id.'"');
@@ -418,7 +418,7 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$property_id,"metanames"=>$m
       $badMonthly=$roomMonthly->where('answer_classification','Bad')->count();
       $criticalMonthly=$roomMonthly->where('answer_classification','Critical')->count();
 
-       
+
 
         if(request('search') || request('print')){
           $id=$_GET['property_search'];
@@ -500,7 +500,7 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$property_id,"metanames"=>$m
 
       //dd($metaArray);
    	if(request('print')){
-      
+
 
 
        $id=$_GET['property_search'];
@@ -570,7 +570,7 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$property_id,"metanames"=>$m
                   'answer'=>$optionalID->answer,
                    'user_id'=>auth()->id()
                 ]);
-              
+
   $update1=DB::select('UPDATE optional_answers set answer_classification="Good" where answer="Yes"');
  $update2=DB::select('UPDATE optional_answers set answer_classification="Bad" where answer="No"');
 
@@ -836,7 +836,7 @@ $updateUser = user::where('id',auth()->id())
        //$reportDailyData2=DB::select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.property_id="'.$id.'" and a.opt_answer_id=o.id and a.datex="'.$current_date.'"');
 
        $reportDailyReader=DB::select('select a.id,a.property_id,p.property_name,a.metaname_id,m.metaname_name,a.answer,a.indicator_id,s.qns,a.asset_id,t.asset_name,u.name, a.opt_answer_id,o.answer_classification,a.photo,a.description,a.datex from answers a,properties p,set_indicators s,users u,assets t,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.user_id=u.id and a.asset_id=t.id and a.indicator_id=s.id and a.opt_answer_id=o.id and p.id=a.property_id and a.datex="'.$current_date.'" and a.property_id="'.$id.'"');
-    
+
     //dd($reportDailyData);
 
     $dataDaily = collect($reportDailyData);
@@ -1057,8 +1057,8 @@ if($exists)
  return redirect()->back()->with('info','The Property already Exists');
 }
 
-     
-     $hotelUdate = property::UpdateOrCreate([    
+
+     $hotelUdate = property::UpdateOrCreate([
             //'photo'=>$imageToStore
                 'property_name'=>request('property_name'),
          'company_id'=>$auth->company_id,
@@ -1091,7 +1091,7 @@ if($exists)
                  //upload the image
                  $path = $attached->storeAs('public/properties/', $imageToStore);
 
-         
+
 $hotelUdatePhoto =property::where('id',$hotelUdate->id)
              ->update([
           'photo'=>$imageToStore
@@ -1139,8 +1139,8 @@ return redirect()->route('properties.index')->with('success','Property created s
      */
     public function update(Request $request,$id)
     {
-        $auth=auth()->user();      
-        
+        $auth=auth()->user();
+
         $propertyUpdate =property::where('id',$id)
              ->update([
         'property_name'=>request('property_name'),
@@ -1157,7 +1157,7 @@ return redirect()->route('properties.index')->with('success','Property created s
            'user_id'=>auth()->id()
             ]);
 
-  
+
   if(request('attachment')){
             $attach = request('attachment');
             //dd($attach);
@@ -1175,7 +1175,7 @@ return redirect()->route('properties.index')->with('success','Property created s
                  //upload the image
                  $path = $attached->storeAs('public/properties/', $imageToStore);
 
-         
+
 $hotelUdatePhoto =property::where('id',$id)
              ->update([
           'photo'=>$imageToStore
@@ -1192,7 +1192,7 @@ $hotelUdatePhoto =property::where('id',$id)
         }
 
 
-      return redirect()->back()->with('success','Successfully updeted'); 
+      return redirect()->back()->with('success','Successfully updeted');
     }
 
     /**
