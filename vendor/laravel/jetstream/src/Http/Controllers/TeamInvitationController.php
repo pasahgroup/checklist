@@ -48,6 +48,7 @@ class TeamInvitationController extends Controller
         }
 
         $invitation->delete();
+
         return back(303);
     }
 }
