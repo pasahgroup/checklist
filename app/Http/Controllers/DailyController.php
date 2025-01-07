@@ -202,13 +202,14 @@ class DailyController extends Controller
     //$checkQns = DB::select('select a.opt_answer_id,a.property_id,a.metaname_id,a.asset_id,a.indicator_id,a.photo,a.answer,a.answer_label,a.description from answers a,assets p where a.property_id=p.property_id and a.metaname_id=p.metaname_id and a.asset_id=p.id and a.datex="'.$current_date.'" and a.status="Active"');
     $checkQns = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'"');
     //$answerPerc=DB::select('select * from answers_view');
-     $answerPerc=DB::select('select * from answers_view_summary');
+     $answerPerc=DB::select('select a.*,s.duration from answers_view_summary a,set_indicators s where a.indicator_id=s.id and s.duration="Daily"');
     $answerPerc = collect($answerPerc);
     
-    $qnsAppliedPerc=DB::select('select * from qns_appliedtos where department_id="'.$departments->department_id.'"');
-    $qnsAppliedPerc = collect($qnsAppliedPerc);
+//dd($answerPerc);
 
-//dd($checkQns);
+    $qnsAppliedPerc=DB::select('select q.*,s.duration from qns_appliedtos q,set_indicators s where q.indicator_id=s.id and s.duration="Daily" and q.department_id="'.$departments->department_id.'"');
+    $qnsAppliedPerc = collect($qnsAppliedPerc);
+//dd($qnsAppliedPerc);
 
 
     if(request('email_send')){
@@ -314,7 +315,7 @@ class DailyController extends Controller
 
    if(request('save')){
    $save = request("save");
-      //dd($save); eg 1_
+      //dd($save);
    $save = explode("_", $save);
    //$asset_id=request('assetID');
    $section_id=$save[1];
@@ -385,7 +386,7 @@ $insetqnsAns = answer::UpdateOrCreate([
   'asset_id'=>$asset_id,
   'indicator_id'=>$data[1],
 
-  'section'=>$data[6],
+  'section'=>$data[3],
   'datex'=>$current_date,
 ],[
   'opt_answer_id'=>$value[0],

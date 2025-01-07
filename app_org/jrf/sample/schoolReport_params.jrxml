@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="schoolReportPHP" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e66ed67f-fade-430e-b490-714d87d7b1fa">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from locations where id=$P{id}]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="index_no" class="java.lang.String"/>
+	<field name="school_name" class="java.lang.String"/>
+	<field name="region" class="java.lang.String"/>
+	<field name="district" class="java.lang.String"/>
+	<field name="ward" class="java.lang.String"/>
+	<field name="established" class="java.lang.String"/>
+	<field name="about" class="java.lang.String"/>
+	<field name="medium" class="java.lang.String"/>
+	<field name="code" class="java.lang.Integer"/>
+	<field name="theme" class="java.lang.String"/>
+	<field name="created_at" class="java.sql.Timestamp"/>
+	<field name="updated_at" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="45" splitType="Stretch">
+			<componentElement>
+				<reportElement x="10" y="0" width="200" height="37" uuid="e093397b-3c29-4dd3-8b3c-ea81d31230c8"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code39 (Extended)" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA["1234"]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="187" y="0" width="237" height="20" uuid="e01ba509-1d92-4d88-9c24-6164baf4b9cc"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[SHOOL SAMPLE REPORT-WAWA]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="13" width="53" height="20" uuid="c8757eed-9df1-49e7-93e7-2458df0641f6"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="86" y="13" width="68" height="20" uuid="087022bf-6767-451a-bc1d-3e65bbeb118c"/>
+				<text><![CDATA[COUNTRY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="176" y="13" width="100" height="20" uuid="ed1e5afb-9ea1-4142-8bd2-cc720266b865"/>
+				<text><![CDATA[REGION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="289" y="13" width="100" height="20" uuid="b0f4aba4-d7ab-4a63-ab87-b1a8c665d1a2"/>
+				<text><![CDATA[DISTRICT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="404" y="13" width="100" height="20" uuid="e18c710a-c8be-4554-825d-7d20df60e032"/>
+				<text><![CDATA[WARD]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="37" splitType="Stretch">
+			<textField>
+				<reportElement x="176" y="11" width="100" height="20" uuid="3285f700-1ba5-48b9-92b0-c1d5679cf885"/>
+				<textFieldExpression><![CDATA[$F{region}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="289" y="11" width="100" height="20" uuid="20b1e6c9-2785-4fae-92b5-795ee9fb3a4e"/>
+				<textFieldExpression><![CDATA[$F{district}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="404" y="17" width="100" height="20" uuid="95d4b6b3-1014-4171-aa19-66f817d001aa"/>
+				<textFieldExpression><![CDATA[$F{ward}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="17" width="53" height="20" uuid="4562a749-d359-45d0-bb80-63709d3ae152"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

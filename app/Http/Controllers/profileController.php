@@ -92,6 +92,7 @@ class profileController extends Controller
   //           //'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
   //       ])->validate();
 
+//dd('print email');
 
 $department = department::where('department_name','Manager')->first();
 $role_name = role::where('name','Manager')->first();
@@ -99,13 +100,19 @@ $role_name = role::where('name','Manager')->first();
 //Company view
   $compEmail = myCompany::where('email',request('email'))
   ->where('status','Active')->first();
+
+   $userEmail = user::where('email',request('email'))
+  ->where('status','Active')->first();
   
   if(!is_null($compEmail))
-  {
-  
+  {  
    return redirect()->back()->with('info','Email alredy exist');
   }
 
+if(!is_null($userEmail))
+  {  
+   return redirect()->back()->with('info','Email alredy exist');
+  }
 
   if(request('attachment')){
             $attach = request('attachment');

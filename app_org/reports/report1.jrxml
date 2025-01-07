@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dfbb2579-5537-46f9-b88d-7ed3be2fff60">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\xampp\\htdocs\\horesyf\\app\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from answers]]>
+	</queryString>
+	<field name="id" class="java.math.BigInteger">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="property_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="metaname_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="indicator_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="opt_answer_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="answer" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="asset_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="action" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="user_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="datex" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="created_at" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="updated_at" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="224" y="43" width="100" height="20" uuid="5fcab32f-8f08-4920-a0b0-d9e8e9539fa8"/>
+				<text><![CDATA[Report Testing]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="55" height="20" uuid="f8fa4eab-460b-4331-b804-bc86f3b46337"/>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="0" width="55" height="20" uuid="e80c9bf4-acb4-48b7-830c-75c38b6f6677"/>
+				<text><![CDATA[property_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="0" width="55" height="20" uuid="313e2dcd-e311-48d3-aa84-1b17910ed1b0"/>
+				<text><![CDATA[metaname_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="0" width="55" height="20" uuid="50645a61-9c19-4cab-8bca-4eb7d7f41050"/>
+				<text><![CDATA[indicator_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="0" width="55" height="20" uuid="fcc2c00c-5a5e-473d-9fee-b639a76b9e8c"/>
+				<text><![CDATA[opt_answer_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="275" y="0" width="55" height="20" uuid="a6e56897-8fb7-4ccd-8543-9c27a10df1a6"/>
+				<text><![CDATA[answer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="0" width="55" height="20" uuid="5f9d4a80-a6f0-4bff-bda7-b3b59f32e7a3"/>
+				<text><![CDATA[asset_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="385" y="0" width="55" height="20" uuid="319dfe1c-9d85-4fc9-a201-596bfb801779"/>
+				<text><![CDATA[status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="0" width="55" height="20" uuid="d1fb6be3-ec68-4025-9cf0-a5b7fbab9a48"/>
+				<text><![CDATA[action]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="495" y="0" width="55" height="20" uuid="f7faaa17-ab37-4bfc-95d9-b9a06586cdac"/>
+				<text><![CDATA[user_id]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="55" height="20" uuid="2bf0384c-d723-4eb6-b1bd-a67810f3a4ee"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="55" y="0" width="55" height="20" uuid="3ad632fd-8c02-46f7-8f88-96d225c5fd95"/>
+				<textFieldExpression><![CDATA[$F{property_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="55" height="20" uuid="f00c4fee-d5c9-431e-ade7-134656e742aa"/>
+				<textFieldExpression><![CDATA[$F{metaname_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="165" y="0" width="55" height="20" uuid="55c44d8b-815f-4769-9a96-a618307470af"/>
+				<textFieldExpression><![CDATA[$F{indicator_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="0" width="55" height="20" uuid="8db0ec3e-5f03-419e-8f06-fcad592b8fac"/>
+				<textFieldExpression><![CDATA[$F{opt_answer_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="275" y="0" width="55" height="20" uuid="5a7bf287-cc9b-4221-ab0c-953b078d8ed3"/>
+				<textFieldExpression><![CDATA[$F{answer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="0" width="55" height="20" uuid="ca66400a-4af5-49ae-a3ae-d2d3d4d7b645"/>
+				<textFieldExpression><![CDATA[$F{asset_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="385" y="0" width="55" height="20" uuid="e3da3de6-f59f-41af-85f0-893b2420ec9e"/>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="0" width="55" height="20" uuid="64fe515f-0b1a-49bc-af8a-f7974df56f7e"/>
+				<textFieldExpression><![CDATA[$F{action}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="495" y="0" width="55" height="20" uuid="db787d24-19db-496b-b6aa-a08d299a3c4d"/>
+				<textFieldExpression><![CDATA[$F{user_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="27" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="96" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="96" uuid="f3a4f9da-e3ea-484c-a32f-9cef1e80a931"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "jj.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>
