@@ -53,13 +53,13 @@ class adminController extends Controller
     {
 //dd(request()->getHost());
       //dd(request('code'));
-       
+
 //dd(auth()->id());
 // DB::purge($dd);
 
        if(auth())
        {
-
+//dd(auth()->user());
 
         $now = Carbon::now();
         $weekStartDate = $now->startOfWeek()->format('Y-m-d H:i');
@@ -71,7 +71,10 @@ class adminController extends Controller
 //dd($users);
         //dd($user->hasRole('Housekeeper'));
       $property_name = property::where('id',$user->property_id)->first();
+
      //dd($property_name);
+
+
 
 if($property_name ==null)
 {

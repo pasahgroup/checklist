@@ -50,13 +50,12 @@ class LoginController extends Controller
     {
         $user = Auth::User();
 
-
         $act = new activities;
         $act->action = "User logged in to account";
         $act->user_id = $user->id;
         $act->save();
 
-      //dd($user->status);
+      dd($user->status);
 
         if($user->status == 0 || $user->status == 'New' || $user->status == 'pending')
         {

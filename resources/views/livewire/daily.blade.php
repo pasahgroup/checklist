@@ -141,7 +141,7 @@ border-color: #dddddd;
 <hr>
 
 
- <div class="row" id="data_display">    
+ <div class="row" id="data_display">
     @isset($assets)
     @if(!empty($selectedOption))
        @foreach ($assets as $asset)
@@ -160,12 +160,12 @@ border-color: #dddddd;
    @foreach ($checkQnsProp as $chkp)
         @if($asset->id ==$chkp->asset_id && $qnsAppliedPerc->where('metaname_id',$chkp->metaname_id)->count()>0)
       {{$answerPerc->where('metaname_id',$chkp->metaname_id)->where('asset_id',$chkp->asset_id)->count()}} |{{$qnsAppliedPerc->where('metaname_id',$chkp->metaname_id)->count()}}
-     
+
      <input type="checkbox"  onclick="myFunctionxx()" id="statusx" name="statusx" value="0" @if ($asset->id==$chkp->asset_id) checked @endif> |({{ number_format(($answerPerc->where('metaname_id',$chkp->metaname_id)->where('asset_id',$chkp->asset_id)->count())/($qnsAppliedPerc->where('metaname_id',$chkp->metaname_id)->count())*100),2}})%
      @endif
      @endforeach
-   
-  
+
+
   @endif
   </span>
     </div>
@@ -207,12 +207,12 @@ border-color: #dddddd;
               <input type="{{$metadata->datatype}}" name="ids{{$metaname_id}}[]" id="indicator_id" value="{{$metadata->id}}" onclick="myFunction('{{$qn->id}}')" onkeyup="myFunction('{{$qn->id}}')"
                  @foreach ($checkQns as $checkq)
                                    @if($selectedOption ==$checkq->asset_id && $checkq->indicator_id==$qn->id && $metadata->answer==$checkq->answer)
-            
-               @if ($selectedOption ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $metadata->answer==$checkq->answer) checked 
-               @endif 
-      
+
+               @if ($selectedOption ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $metadata->answer==$checkq->answer) checked
+               @endif
+
               @endif
-               @endforeach           
+               @endforeach
            @endif
 
                @if($metadata->datatype=="radio")
@@ -221,7 +221,7 @@ border-color: #dddddd;
 
                  @foreach ($checkQns as $checkq)
                   @if($asset->id ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $metadata->id==$checkq->opt_answer_id)
-               @if ($asset->id ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $metadata->id==$checkq->opt_answer_id) checked 
+               @if ($asset->id ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $metadata->id==$checkq->opt_answer_id) checked
               @endif
 
                @if($metadata->answer=="Maintenance")
@@ -274,14 +274,14 @@ border-color: #dddddd;
     </div>
 
           <div class="panel-heading">
-            <h4 class="panel-title"> 
+            <h4 class="panel-title">
               <div class="card"><a data-toggle="collapse" href="#collapsee{{$metaname_id}}{{$qn->id}}">Description if any</a>
            </div>
           </div>
-       
+
       <div id="collapsee{{$metaname_id}}{{$qn->id}}" class="panel-collapse collapse">
       <textarea rows="4" cols="40" id="desc" name="desc{{$metaname_id}}_{{$qn->id}}_{{$metaname_id}}_{{$asset->asset_name}}_{{$qn->section}}[]" placeholder="---enter description if any---" class="txtarea" style="white-space: normal;overflow:hidden">
-    
+
           @foreach ($checkQns as $checkq)
       @if($asset->id ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $checkq->property_id ==$propertyID->property_id)
        @if($checkq->description !=null)
@@ -305,7 +305,7 @@ border-color: #dddddd;
     <div id="my_camera{{$metaname_id}}_{{$qn->id}}"></div>
     <br/>
     <input type="file" name="attachment{{$metaname_id}}_{{$qn->id}}_{{$metaname_id}}_{{$asset->asset_name}}_{{$qn->section}}[]" accept="image/*" capture="camera">
-   
+
                                     </div>
                                     </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -324,7 +324,7 @@ border-color: #dddddd;
     <div id="my_camera{{$metaname_id}}_{{$qn->id}}">Browse</div>
     <br/>
     <input type="file" name="attachment{{$metaname_id}}_{{$qn->id}}_{{$metaname_id}}_{{$asset->asset_name}}[]" accept="image/*" capture="camera">
-   
+
                                     </div>
                                     </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -373,14 +373,14 @@ border-color: #dddddd;
       </div>
       </div>
             @endforeach
-       
-   <hr>                                            
+
+   <hr>
   {!! $assets->links() !!}
-                                 
+
       @endif
-      @endisset  
+      @endisset
       </div>
- 
+
 <br>
    <a href="/email-send/{id}" class="btn-sm btn btn-primary float-right" role="button">Finish</a>
  </div>

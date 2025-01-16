@@ -259,7 +259,7 @@ Route::resource('user-activity',UserActivityLivewire::class)->middleware(['role:
   Route::resource('checklist', Checklist::class)->middleware(['role:Admin|HouseKeeper|GeneralManager|Manager|GeneralAdmin|SuperAdmin']);
 
   Route::resource('managers-inspection', ManageController::class)->middleware(['role:Admin|GeneralManager|Manager|SuperAdmin|GeneralAdmin|Maintenancier']);
-  
+
   Route::get('managers-inspection/{id}',[ManageController::class,'index'])->middleware(['role:Admin|GeneralManager|Manager|SuperAdmin|GeneralAdmin|Maintenancier']);
 
   //Route::get('managers-inspection/{id}',Managerlist::class)->name('managers-inspection');
@@ -344,7 +344,7 @@ Route::put('riq-update/{id}',[MetadataController::class,'updateDatatype'])->name
 // Roles ontroller
   Route::resource('sessionm', SessionmController::class)->middleware(['role:SuperAdmin|GeneralAdmin|Admin|Account']);
     Route::get('delete-sessionm/{id}',[SessionmController::class,'destroy'])->name('delete-sessionm');
-    
+
 route::resource('/roles',roleController::class)->middleware(['role:SuperAdmin|GeneralAdmin|Admin|Account']);
   Route::resource('role-register', rolesController::class)->middleware(['role:SuperAdmin|GeneralAdmin|Admin|Account']);
   Route::get('delete-role/{id}',[rolesController::class,'edit'])->name('delete-role');
@@ -376,7 +376,7 @@ route::resource('/roles',roleController::class)->middleware(['role:SuperAdmin|Ge
 
           //General reportTest
   Route::get('report-general/{id}/dashboard',[PropertyController::class,'reportGeneral'])->name('report-general');
-  
+
   Route::get('report-action/{id}/dashboard',[PropertyController::class,'reportAction'])->name('report-action');
   Route::get('report-view/{sn}/{id}',[PropertyController::class,'reportView'])->name('report-view','report-view');
   // Route::post('report-view/{sn}/{id}',[PropertyController::class,'reportView'])->name('report-view','report-view');

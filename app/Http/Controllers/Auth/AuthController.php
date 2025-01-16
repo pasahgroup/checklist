@@ -1,14 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-  
+
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use Session;
-
 use App\Models\User;
 
 use Hash;
@@ -28,10 +26,9 @@ class AuthController extends Controller
 
     {
         return view('auth.login');
+    }
 
-    }  
 
-      
 
     /**
 
@@ -46,12 +43,10 @@ class AuthController extends Controller
     public function registration()
 
     {
-
         return view('auth.registration');
-
     }
 
-      
+
 
     /**
 
@@ -85,13 +80,13 @@ class AuthController extends Controller
 
         }
 
-  
+
 
         return redirect("login")->withSuccess('Oppes! You have entered invalid credentials');
 
     }
 
-      
+
 
     /**
 
@@ -105,7 +100,7 @@ class AuthController extends Controller
 
     public function postRegistration(Request $request)
 
-    {  
+    {
 
         $request->validate([
 
@@ -115,18 +110,16 @@ class AuthController extends Controller
 
         ]);
 
-           
+
 
         $data = $request->all();
         $check = $this->create($data);
-
-         
 
         return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
 
     }
 
-    
+
 
     /**
 
@@ -141,20 +134,14 @@ class AuthController extends Controller
     public function dashboard()
 
     {
-
         if(Auth::check()){
-
             return view('dashboard');
-
         }
-
-  
-
         return redirect("login")->withSuccess('Opps! You do not have access');
 
     }
 
-    
+
 
     /**
 
@@ -182,7 +169,7 @@ class AuthController extends Controller
 
     }
 
-    
+
 
     /**
 
@@ -195,10 +182,8 @@ class AuthController extends Controller
      */
 
     public function logout() {
-
         Session::flush();
-        Auth::logout();  
-
+        Auth::logout();
         return Redirect('login');
 
     }

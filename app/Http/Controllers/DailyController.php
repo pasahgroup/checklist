@@ -34,14 +34,18 @@ use App\Models\qnsview;
 use App\Models\answerUpdatePhoto;
 use App\Models\answerDescPhoto;
 // use Intervention\Image\Facades\Image as Image;
+use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Facades\Config;
 
 use App\Models\dynamicIndUpdate;
 use App\Models\optionalAnswer;
 use Livewire\Component;
-use DB;
+
 use PDF;
 use Mail;
 use App\Jobs\SendMailJobf;
+use App\Models\dbsetting;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -51,6 +55,7 @@ use Illuminate\Support\Benchmark;
 // use Illuminate\Http\UploadedFile;
 //use App\Http\Livewire\Input;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Auth;
 
 use PHPJasper\PHPJasper;
 require base_path().'/vendor/autoload.php';
@@ -60,6 +65,7 @@ require base_path().'/vendor/autoload.php';
 //include_once(app_path().'/fpdf184/mysql_table.php');
 //include_once(app_path().'/fpdf184/pdfg.php');
 // use PHPJasperXML;
+include_once(app_path().'/Models/dbsetting.php');
 
 
 class DailyController extends Controller
@@ -69,20 +75,25 @@ class DailyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
- 
+
    public function index(Request $request)
     {
+$auth=auth::user();
+$aData['dataC'] = dbsetting::getConnect($auth->id);
+//$valueDB=DB::table('dbconnects')->where('user_id',Auth::user()->id)->first();
+
+  //dd($userCount);
 
       $current_date = date('Y-m-d');
       //Extract date
       $datet=Carbon::now();
 
       $datet=$datet->format('H:i:s');
-    
+
         $metaname_id=request('asset_model');
         $assetID=request('assetID');
-        $assetIDf=request('assetID');       
-      
+        $assetIDf=request('assetID');
+
        if($metaname_id==null)
        {
          $metaname_id=1;
@@ -108,12 +119,35 @@ class DailyController extends Controller
 
   // dd($assetID);
 
-    $metanames = metaname::join('qns_appliedtos','qns_appliedtos.metaname_id','metanames.id')
+    $metanamesx = metaname::join('qns_appliedtos','qns_appliedtos.metaname_id','metanames.id')
      ->where('qns_appliedtos.department_id',$departments->department_id)
      ->select('metanames.id','metanames.metaname_name')
      ->groupby('metanames.id')
      ->get();
+// dd($metanames);
 
+// $metanames = DB::table('metanames')
+//             ->join('qns_appliedtos','qns_appliedtos.metaname_id','metanames.id')
+//                ->where('qns_appliedtos.department_id',$departments->department_id)
+//             ->select('metanames.id','metanames.metaname_name')
+//             // ->where('status', '<>', 1)
+//            ->groupby('metanames.id')
+//             ->get();
+
+  //dd($metanames);
+
+     $metanames = metaname::join('qns_appliedtos','qns_appliedtos.metaname_id','metanames.id')
+      ->where('qns_appliedtos.department_id',$departments->department_id)
+      ->select('metanames.id','metanames.metaname_name')
+      //->groupby('metanames.id')
+      ->get();
+      // dd($metanamesd);
+
+      $metanames = collect($metanames);
+    //$metanamesd=$metanamesd->groupBy('id');
+ // $metanamesd=array($metanamesd);
+ $metanames = $metanames->unique();
+ //dd($metanames);
 
       //$metadatas = optionalAnswer::get();
           $metadatasCollects = optionalAnswer::get();
@@ -141,7 +175,6 @@ class DailyController extends Controller
 
 
     $asset_show=asset::where('property_id',$departments->property_id)->first();
-
     if($datet>="23:45")
     {
 
@@ -170,21 +203,20 @@ class DailyController extends Controller
       'asset_show'=>1
     ]);
     }
-  
- $qnsapply=collect($qnsapply); 
-  $sections = DB::select("select section from qnsview where department_id in(".trim($qnsapply,'[]').") and duration='daily' and metaname_id in(".$metaname_id.") group by section");
 
+ $qnsapply=collect($qnsapply);
+  $sections = DB::select("select section from qnsview where department_id in(".trim($qnsapply,'[]').") and duration='daily' and metaname_id in(".$metaname_id.") group by section");
+//  $sectionCollects = collect($sections);
   //dd($sections);
 
-    $sectionCollects = collect($sections);
     $checkQnsProp = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'" group by asset_id');
-//dd($checkQnsProp);
+//dd($checkQnsProp);//Here to trace
 
    // $qns = DB::select("select * from qnsview where department_id in(".trim($qnsapply,'[]').") and duration='daily' and metaname_id in(".$metaname_id.")");
 
 //$qnsd=qnsview::get();
 //dd($qnsd);
-  
+
     $qns = DB::select("select * from qnsview where department_id=$departments->department_id and duration='daily' and metaname_id in(".$metaname_id.")");
 
 
@@ -202,10 +234,11 @@ class DailyController extends Controller
     //$checkQns = DB::select('select a.opt_answer_id,a.property_id,a.metaname_id,a.asset_id,a.indicator_id,a.photo,a.answer,a.answer_label,a.description from answers a,assets p where a.property_id=p.property_id and a.metaname_id=p.metaname_id and a.asset_id=p.id and a.datex="'.$current_date.'" and a.status="Active"');
     $checkQns = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'"');
     //$answerPerc=DB::select('select * from answers_view');
+//dd($checkQns);
+
      $answerPerc=DB::select('select a.*,s.duration from answers_view_summary a,set_indicators s where a.indicator_id=s.id and s.duration="Daily"');
-    $answerPerc = collect($answerPerc);
-    
-//dd($answerPerc);
+     $answerPerc = collect($answerPerc)->unique();
+  // dd($answerPerc);
 
     $qnsAppliedPerc=DB::select('select q.*,s.duration from qns_appliedtos q,set_indicators s where q.indicator_id=s.id and s.duration="Daily" and q.department_id="'.$departments->department_id.'"');
     $qnsAppliedPerc = collect($qnsAppliedPerc);
@@ -291,298 +324,294 @@ class DailyController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function store(Request $request)
-    {
-    //$rad=$this->rad;
-    //dd('sdsd');
 
-     // $aID = request("aID");
-     // $qnAID = request("qnAID");
-     // $indexs = request('index');
-
- //Array Declaration
- $dataQns=[];
- $dataDesc=[];
-   //dd($indexs);
- //$sections = $sections->except(['_token','_method','qnID','qnAID','aID','col','prop']);
- //$newSectionArray = array_filter($sections);
-
-   // $sections = request('section_name1_27');
-   $property_id = request('propertyID');
-   $current_date = date('Y-m-d');
-
-    // dd($current_date);
-
-   if(request('save')){
-   $save = request("save");
-      //dd($save);
-   $save = explode("_", $save);
-   //$asset_id=request('assetID');
-   $section_id=$save[1];
-   $asset_id=$save[2];
-   //Section request
- //dd($asset_id);
-
-   $section_name="section_name".$asset_id."_".$section_id."";
-
-   $descKey="desc".$save[0]."";
-   $photoKey="attachment".$save[0]."";
-   $idxKey="idx".$save[0]."";
-
- //dd($descKey);
- //$sections = request('section_name1_27');
-   $section = request($section_name);
-   $keyValue=$save[0].'_'.$save[1];
- //$data = $request->except(['_token','_method','qnID','qnAID','aID','col','prop']);
- //dd($section);
-//dd($section_id);
- // $query = $request->query();
- //$input = $request->all();
- $input = $request->except(['_token','_method','qnID','qnAID','aID','col','prop',$section_name]);
- $arrayData = array_filter($input);
-//  $arrayDataf= array();
-//  $arrayDataf=$arrayData;
-//  $arrayPhoto=$arrayData;
+     public function store(Request $request)
+     {
+       $auth=auth::user();
+       $aData['dataC'] = dbsetting::getConnect($auth->id);
 
 
-foreach ($arrayData as $key=>$val) {
+      // $aID = request("aID");
+      // $qnAID = request("qnAID");
+      // $indexs = request('index');
 
-  $saveff = explode("_", $key);//dd($saveff);
+   //Array Declaration
+   $dataQns=[];
+   $dataDesc=[];
+    //dd($indexs);
+   //$sections = $sections->except(['_token','_method','qnID','qnAID','aID','col','prop']);
+   //$newSectionArray = array_filter($sections);
 
-  if(count($saveff)>2){
-  if ($val[0] === null || $val[0] ==="no_value"){
-    unset($arrayData[$key]);
+    // $sections = request('section_name1_27');
+    $property_id = request('propertyID');
+    $current_date = date('Y-m-d');
+
+     // dd($current_date);
+
+    if(request('save')){
+    $save = request("save");
+       //dd($save);
+    $save = explode("_", $save);
+    //$asset_id=request('assetID');
+    $section_id=$save[1];
+    $asset_id=$save[2];
+    //Section request
+   //dd($asset_id);
+
+    $section_name="section_name".$asset_id."_".$section_id."";
+
+    $descKey="desc".$save[0]."";
+    $photoKey="attachment".$save[0]."";
+    $idxKey="idx".$save[0]."";
+
+   //dd($descKey);
+   //$sections = request('section_name1_27');
+    $section = request($section_name);
+    $keyValue=$save[0].'_'.$save[1];
+   //$data = $request->except(['_token','_method','qnID','qnAID','aID','col','prop']);
+   //dd($section);
+   //dd($section_id);
+   // $query = $request->query();
+   //$input = $request->all();
+   $input = $request->except(['_token','_method','qnID','qnAID','aID','col','prop',$section_name]);
+   $arrayData = array_filter($input);
+   //  $arrayDataf= array();
+   //  $arrayDataf=$arrayData;
+   //  $arrayPhoto=$arrayData;
+
+
+   foreach ($arrayData as $key=>$val) {
+   $saveff = explode("_", $key);//dd($saveff);
+
+   if(count($saveff)>2){
+   if ($val[0] === null || $val[0] ==="no_value"){
+     unset($arrayData[$key]);
+    }
+    }else{
+     unset($arrayData[$key]);
+      }
+   }
+
+   //dd($arrayData);
+   //Insert data
+   foreach ($arrayData as $key => $value) {
+
+   $descStr = Str::startsWith($key,$descKey);
+   $photoStr = Str::startsWith($key,$photoKey);
+   $idxStr = Str::startsWith($key,$idxKey);
+
+
+   $data = explode("_", $key);
+   $nameStr=$data[0];
+   //dd(count($value));
+
+   if($nameStr===$idxKey)
+   {
+   //dd($value[0]);
+   if(count($value)>1){
+
+   if($value[1]!=null){
+   //dd($data[5]);
+
+
+   $insetqnsAns = answer::UpdateOrCreate([
+   'property_id'=>$property_id,
+   'metaname_id'=>request('metaname_id'),
+   'asset_id'=>$asset_id,
+   'indicator_id'=>$data[1],
+
+   'section'=>$data[3],
+   'datex'=>$current_date,
+   ],[
+   'opt_answer_id'=>$value[0],
+   'answer_label'=>$value[1],
+   'status'=>'Active',
+   'action'=>1,
+   'user_id'=>auth()->id(),
+   ]);
+
+   //dd('Updated');
+
+   // $answerTableUpdate1=DB::statement('update answers a,optional_answers o set a.answer=o.answer,a.answer_label=o.answer_classification where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
+
+   $answerTableUpdate1=DB::statement('update answers a,optional_answers o set a.answer=o.answer where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
+   $answerTableUpdate2=DB::statement('update answers a set a.manager_checklist="Action required" where a.answer !="Yes" and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
+   //dd('Updated');
    }
    }else{
-    unset($arrayData[$key]);
-     }
-}
 
-  //dd($arrayData);
-//Insert data
-foreach ($arrayData as $key => $value) {
+     $insetqnsAns = answer::UpdateOrCreate([
+       'property_id'=>$property_id,
+       'metaname_id'=>request('metaname_id'),
+       'asset_id'=>$asset_id,
+       'indicator_id'=>$data[1],
 
-$descStr = Str::startsWith($key,$descKey);
-$photoStr = Str::startsWith($key,$photoKey);
-$idxStr = Str::startsWith($key,$idxKey);
+       'section'=>$data[6],
+       'datex'=>$current_date,
+     ],[
+       'opt_answer_id'=>$value[0],
+       'answer_label'=>"no_value",
+       'status'=>'Active',
+       'action'=>1,
+       'user_id'=>auth()->id(),
+     ]);
 
+     //Update value
 
-  $data = explode("_", $key);
-  $nameStr=$data[0];
-//dd(count($value));
+     // $answerTableUpdate1=DB::statement('update answers a,optional_answers o set a.answer=o.answer,a.answer_label=o.answer_classification where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
 
-if($nameStr===$idxKey)
- {
-  //dd($value[0]);
-  if(count($value)>1){
-
- if($value[1]!=null){
-//dd($data[5]);
+       $answerTableUpdate1=DB::statement('update answers a,optional_answers o set a.answer=o.answer where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
 
 
-$insetqnsAns = answer::UpdateOrCreate([
-  'property_id'=>$property_id,
-  'metaname_id'=>request('metaname_id'),
-  'asset_id'=>$asset_id,
-  'indicator_id'=>$data[1],
+   $answerTableUpdate2=DB::statement('update answers a set a.manager_checklist="Action required" where a.answer !="Yes" and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
+   //dd('Updated');
+   }
 
-  'section'=>$data[3],
-  'datex'=>$current_date,
-],[
-  'opt_answer_id'=>$value[0],
-  'answer_label'=>$value[1],
-  'status'=>'Active',
-  'action'=>1,
-  'user_id'=>auth()->id(),
-]);
+   }elseif($nameStr ===$descKey)
+   {
+   //desc
+   //dd($data[7]);
+     //dd($data[6]);
+   $updateqnsF = answer::where('property_id',$property_id)
+   ->where('metaname_id',request('metaname_id'))
+   ->where('asset_id',$asset_id)
+    ->where('indicator_id',$data[1])
+     ->where('section',$data[6])
+    ->where('datex',$current_date)
+    ->where('indicator_id',$data[1])
+   ->update([
+   'description'=>$value[0]
+   ]);
+   }elseif($nameStr ===$photoKey)
+   {
+   //photos
+   if($value){
+     $attach =$value;
+     foreach($attach as $attached){
 
-//dd('Updated');
+       if($request->hasFile('image')) {
+   $image       = $request->file('image');
+   $filename    = $image->getClientOriginalName();
+   //dd('ddd');
+   $image_resize = Image::make($image->getRealPath());
+   $image_resize->resize(300, 100);
+   $image_resize->save(public_path('img/'.$filename));
+   }
 
-// $answerTableUpdate1=DB::statement('update answers a,optional_answers o set a.answer=o.answer,a.answer_label=o.answer_classification where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
+   //Image can't save
+   $image       =$attached;
+   $filename    = $image->getClientOriginalName();
+   $fileNameWithExt = $attached->getClientOriginalName();
+   // Just Filename
+   $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+   // Get just Extension
+   //dd($filename);
+   $extension = $image->getClientOriginalExtension();
+   //Filename to store
+   $filename = $filename.'_'.time().'.'.$extension;
+   //dd($filename);
 
-$answerTableUpdate1=DB::statement('update answers a,optional_answers o set a.answer=o.answer where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
+   $image_resize = Image::make($image->getRealPath());
+   // $image_resize->resize(450, 300);
 
-$answerTableUpdate2=DB::statement('update answers a set a.manager_checklist="Action required" where a.answer !="Yes" and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
-//dd('Updated');
- }
-  }else{
+   //dd(storage_path());
 
-    $insetqnsAns = answer::UpdateOrCreate([
-      'property_id'=>$property_id,
-      'metaname_id'=>request('metaname_id'),
-      'asset_id'=>$asset_id,
-      'indicator_id'=>$data[1],
+   $image_resize->resize(280,200, function ($constraint)
+   {
+   $constraint->aspectRatio();
+   })->save(storage_path('app/public/img/'.$filename));
 
-      'section'=>$data[6],
-      'datex'=>$current_date,
-    ],[
-      'opt_answer_id'=>$value[0],
-      'answer_label'=>"no_value",
-      'status'=>'Active',
-      'action'=>1,
-      'user_id'=>auth()->id(),
-    ]);
+   //  $image_resize->save(public_path('storage/img/' .$filename));
 
-    //Update value
- 
-    // $answerTableUpdate1=DB::statement('update answers a,optional_answers o set a.answer=o.answer,a.answer_label=o.answer_classification where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
+          $updateqnsF = answer::where('property_id',$property_id)
+                       ->where('metaname_id',request('metaname_id'))
+                        ->where('asset_id',$asset_id)
+                          ->where('indicator_id',$data[1])
+                           ->where('section',$data[6])
+                          ->where('datex',$current_date)
+                          ->where('indicator_id',$data[1])
+                       ->update([
+                      'photo'=>$filename
+                    ]);
 
-      $answerTableUpdate1=DB::statement('update answers a,optional_answers o set a.answer=o.answer where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
+   }
+   }
 
-
-$answerTableUpdate2=DB::statement('update answers a set a.manager_checklist="Action required" where a.answer !="Yes" and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
-//dd('Updated');
-  }
-
- }elseif($nameStr ===$descKey)
- {
-//desc
-//dd($data[7]);
-    //dd($data[6]);
-$updateqnsF = answer::where('property_id',$property_id)
-->where('metaname_id',request('metaname_id'))
- ->where('asset_id',$asset_id)
-   ->where('indicator_id',$data[1])
-    ->where('section',$data[6])
-   ->where('datex',$current_date)
-   ->where('indicator_id',$data[1])
-->update([
-'description'=>$value[0]
-]);
- }elseif($nameStr ===$photoKey)
- {
-  //photos
-  if($value){
-    $attach =$value;
-    foreach($attach as $attached){
-
-      if($request->hasFile('image')) {
-$image       = $request->file('image');
-$filename    = $image->getClientOriginalName();
-//dd('ddd');
-$image_resize = Image::make($image->getRealPath());
-$image_resize->resize(300, 100);
-$image_resize->save(public_path('img/'.$filename));
-}
-
-//Image can't save
-$image       =$attached;
-$filename    = $image->getClientOriginalName();
-$fileNameWithExt = $attached->getClientOriginalName();
-// Just Filename
-$filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-// Get just Extension
-//dd($filename);
-$extension = $image->getClientOriginalExtension();
-//Filename to store
-$filename = $filename.'_'.time().'.'.$extension;
-//dd($filename);
-
-$image_resize = Image::make($image->getRealPath());
-// $image_resize->resize(450, 300);
-
-//dd(storage_path());
-
-$image_resize->resize(280,200, function ($constraint)
-{
-$constraint->aspectRatio();
-})->save(storage_path('app/public/img/'.$filename));
-
-//  $image_resize->save(public_path('storage/img/' .$filename));
-
-         $updateqnsF = answer::where('property_id',$property_id)
-                      ->where('metaname_id',request('metaname_id'))
-                       ->where('asset_id',$asset_id)
-                         ->where('indicator_id',$data[1])
-                          ->where('section',$data[6])
-                         ->where('datex',$current_date)
-                         ->where('indicator_id',$data[1])
-                      ->update([
-                     'photo'=>$filename
-                      ]);
-
-}
-}
-
- }
-
-}
+   }
+   }
 
 
- //$answerTableUpdate1=DB::statement('update answers a,optional_answers o set a.answer=o.answer where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
- return redirect()->back()->with('success','Submitted Successfully');
- }
-
- // dd(request('email_send'));
-
-     if(request('email_send')){
- //dd('ddddx');
-
- //dd('bvncx');
- $input =app_path().'/reports/pieChart.jrxml';
- //$input='/home3/hakunama/jvm/apache-tomcat-9.0.6/domains/test.hakunamatatas.net/app/reports';
-  //$input =app_path().'/reports/department.jrxml';
- $output =app_path().'/reports';
-
- $options = [
-     'format' => ['pdf'],
-     'locale' => 'en',
-     'params' => [
-  'property_id'=>1,
-     ],
-     'db_connection' => [
-          'driver' => 'mysql', //mysql, ....
-          'username' => 'root',
-         //'password' => '',
-         'host' => '127.0.0.1',
-         'database' => 'horesydb',
-         'port' => '3306'
-     ]
-
-     // \Config::get('database.connections.mysql')
-
- ];
- // dd('zz');
- //dd('zzkx');
- $jasper = new PHPJasper;
- //dd($jasper);
- $jasper->process(
-         $input,
-         $output,
-         $options
- )->execute();
-
- //dd('zzkx');
- //Send report
- $date=date('d-M-Y');
- $data["email"] = "buruwawa@gmail.com";
-
- $data["title"] = "Daily General Inspection Hotel Report (DGIR)";
- $data["body"] = "Manyara Best View Hotel: Daily General Inspection Report held on $date";
- $data["date"] = "Date: $date";
- //dd(app_path());
-
- $files = [
- app_path('reports/pieChart.pdf'),
- // public_path('files/reports.png'),
- ];
-   //SendMailJobf::dispatch($data);
-
- Mail::send('email.email', $data, function($message)use($data, $files) {
- $message->to($data["email"], $data["email"])
-         ->subject($data["title"]);
- foreach ($files as $file){
-     $message->attach($file);
- }
- });
-
- dd('Mail sent successfully');
-
-      }
-
+   //$answerTableUpdate1=DB::statement('update answers a,optional_answers o set a.answer=o.answer where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
    return redirect()->back()->with('success','Submitted Successfully');
+   }
 
-    }
+   // dd(request('email_send'));
+
+      if(request('email_send')){
+   //dd('ddddx');
+
+   //dd('bvncx');
+   $input =app_path().'/reports/pieChart.jrxml';
+   //$input='/home3/hakunama/jvm/apache-tomcat-9.0.6/domains/test.hakunamatatas.net/app/reports';
+   //$input =app_path().'/reports/department.jrxml';
+   $output =app_path().'/reports';
+
+   $options = [
+      'format' => ['pdf'],
+      'locale' => 'en',
+      'params' => [
+   'property_id'=>1,
+      ],
+      'db_connection' => [
+           'driver' => 'mysql', //mysql, ....
+           'username' => 'root',
+          //'password' => '',
+          'host' => '127.0.0.1',
+          'database' => 'horesydb',
+          'port' => '3306'
+      ]
+
+
+   ];
+   // dd('zz');
+   //dd('zzkx');
+   $jasper = new PHPJasper;
+   //dd($jasper);
+   $jasper->process(
+          $input,
+          $output,
+          $options
+   )->execute();
+
+   //dd('zzkx');
+   //Send report
+   $date=date('d-M-Y');
+   $data["email"] = "buruwawa@gmail.com";
+
+   $data["title"] = "Daily General Inspection Hotel Report (DGIR)";
+   $data["body"] = "Manyara Best View Hotel: Daily General Inspection Report held on $date";
+   $data["date"] = "Date: $date";
+   //dd(app_path());
+
+   $files = [
+   app_path('reports/pieChart.pdf'),
+   // public_path('files/reports.png'),
+   ];
+    //SendMailJobf::dispatch($data);
+
+   Mail::send('email.email', $data, function($message)use($data, $files) {
+   $message->to($data["email"], $data["email"])
+          ->subject($data["title"]);
+   foreach ($files as $file){
+      $message->attach($file);
+   }
+   });
+
+        dd('Mail sent successfully');
+       }
+    return redirect()->back()->with('success','Submitted Successfully');
+     }
+
 
     public function getA($p){
        // Fetch Employees by Departmentid

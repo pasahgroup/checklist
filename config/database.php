@@ -67,7 +67,7 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'checkmasterdb2'),
+            'database' => env('DB_DATABASE', 'checkmasterdb2xxx'),
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
@@ -81,7 +81,6 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
-
 
 
         'pgsql' => [
@@ -129,16 +128,15 @@ return [
     'clientdb' => [
         'driver' => 'mysql',
         'host' =>'127.0.0.1',
-        'database' =>'hmacadem_checkmasterdb',
-        'username' =>'hmacadem_user',
-        'password' =>'pasah12345!',
+        'database' =>'lodgelistdb',
+        'username' =>'root',
+        'password' =>'',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
         'prefix' => '',
         'strict' => true,
         'engine' => null,
     ],
-
     ],
 
     /*
@@ -166,7 +164,6 @@ return [
     */
 
     'redis' => [
-
         'client' => env('REDIS_CLIENT', 'phpredis'),
 
         'options' => [
