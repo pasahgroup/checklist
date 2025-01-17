@@ -20,6 +20,7 @@ use App\Models\qnsAppliedto;
 
 use App\Models\answer;
 use App\Models\answerCheckBox;
+use App\Models\dbsetting;
 
 use App\Models\userActivity;
 use App\Models\activityRole;
@@ -29,6 +30,7 @@ use App\Models\departmentRole;
 use App\Models\department;
 use App\Models\user;
 use App\Models\qnsview;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\answerUpdatePhoto;
 use App\Models\answerDescPhoto;
@@ -71,6 +73,8 @@ class ChecklistController extends Controller
 
      public function index(Request $request)
       {
+        $auth=auth::user();
+        $aData['dataC'] = dbsetting::getConnect($auth->id);
 
         $current_date = date('Y-m-d');
         //Extract date
@@ -275,6 +279,9 @@ class ChecklistController extends Controller
 
     public function index_org(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
       $current_date = date('Y-m-d');
       //Extract date
       $datet=Carbon::now();
@@ -502,6 +509,9 @@ $sectionCollects = collect($sections);
      */
     public function store(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
     //$rad=$this->rad;
     //dd('sdsd');
 
@@ -784,6 +794,9 @@ $constraint->aspectRatio();
 
 
     public function getA($p){
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
        // Fetch Employees by Departmentid
        $aData['dataA'] = checklist::getAsset($p);
        echo json_encode($aData);
@@ -791,6 +804,9 @@ $constraint->aspectRatio();
      }
 
      public function getDDM($p){
+       $auth=auth::user();
+       $aData['dataC'] = dbsetting::getConnect($auth->id);
+
        // Fetch Employees by Departmentid
        $aData['dataA'] = checklist::getAssetManager($p);
        echo json_encode($aData);

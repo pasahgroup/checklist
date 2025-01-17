@@ -36,6 +36,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Traits\HasRoles;
 use App\Http\Traits\GlobalTrait;
+use App\Models\dbsetting;
 // use App\Http\Controllers\Helpers;
 
 class adminController extends Controller
@@ -46,16 +47,20 @@ class adminController extends Controller
     public function __construct()
     {
         $this->settings = $this->getAllSettings();
-    }
+          }
 
 
  public function index()
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
 //dd(request()->getHost());
       //dd(request('code'));
 
 //dd(auth()->id());
 // DB::purge($dd);
+
 
        if(auth())
        {
@@ -255,6 +260,8 @@ elseif($user->hasRole('')){
      */
     public function store(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
 
         $sale = sale::where('id',request('sale_id'))->first();
         $payment = payment::where('sale_id',$sale->order_id)->get();
