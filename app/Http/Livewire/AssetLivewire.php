@@ -12,6 +12,8 @@ use App\Models\property;
 use App\Models\metaname;
 use Livewire\Component;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dbsetting;
 
 class AssetLivewire extends Component
 {
@@ -28,6 +30,8 @@ class AssetLivewire extends Component
 
       public function storeItem(request $request, $id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
 
    $id=$this->metaname_id;
         $metaname = metaname::where('id',$id)->first();
@@ -66,7 +70,9 @@ class AssetLivewire extends Component
 
    public function storeProperty(request $request, $id)
     {
- // $id=$this->metaname_id;
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
   $v=$this->names;
  //dd($v);
 
@@ -83,6 +89,9 @@ class AssetLivewire extends Component
 
    public function store(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           $hear_from = request('names');
          //dd($hear_from);
      $g='asset_serial';
@@ -114,7 +123,8 @@ class AssetLivewire extends Component
 
   public function groupMetaNameFilter(request $request, $id)
     {
-
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
   $metadatas = metadata::get();
     }
 
@@ -122,7 +132,9 @@ class AssetLivewire extends Component
 
     public function render()
     {
-      //dd('dd');
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+      
    $pos_id=$this->metaname_id;
 
                 $sites = property::get();

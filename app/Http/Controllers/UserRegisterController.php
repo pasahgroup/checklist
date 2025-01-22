@@ -14,6 +14,8 @@ use App\Models\property;
 use App\Models\userProperty;
 use App\Models\userRole;
 use App\Models\asset;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dbsetting;
 
 use DB;
 use Illuminate\Support\Facades\Hash;
@@ -29,7 +31,8 @@ class UserRegisterController extends Controller
      */
     public function index()
     {
-      $auth=auth()->user();
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
 
         $metadatas = metadata::where('status','Active')
           ->orWhere('status','Stop')
@@ -70,8 +73,8 @@ $properties=property::where('company_id',$auth->company_id)
      */
     public function store(Request $request)
     {
-       $auth=auth()->user();
-       //dd(request('role'));
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
 
 
   validator([
@@ -124,24 +127,24 @@ else
 
          $appliedto =userRole::Create([
         'sys_user_id'=>$userReg->id,
-        'role_id'=>request('role'),        
+        'role_id'=>request('role'),
         'status'=>'Active',
-        'user_id'=>auth()->id()        
+        'user_id'=>auth()->id()
         ]);
 
 
-//Insert one value in asset table             
+//Insert one value in asset table
 $assetData =asset::Create([
-     'property_id'=>request('property'), 
-     'metaname_id'=>1, 
+     'property_id'=>request('property'),
+     'metaname_id'=>1,
      'asset_name'=>"Room 1",
      'asset_type'=>"Room",
      'time_show'=>1,
      'asset_show'=>1,
 
-        'asset_description'=>"Room 1", 
-        'status'=>'Active',           
-'user_id'=>$userReg->id, 
+        'asset_description'=>"Room 1",
+        'status'=>'Active',
+'user_id'=>$userReg->id,
         ]);
 
  }
@@ -167,6 +170,9 @@ $assetData =asset::Create([
      */
     public function edit(request $request,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
         $user = user::where('id',$id)
                ->update([
                 'status'=>"Inactive",
@@ -185,6 +191,8 @@ $assetData =asset::Create([
      */
     public function update(Request $request,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
         //dd(request('property'));
        $user = user::where('id',$id)->first();
         if($user){
@@ -210,6 +218,9 @@ $assetData =asset::Create([
      */
     public function destroy(user $user,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
         $user = user::where('id',$id)->first();
         if($user){
             $user->delete();
@@ -223,6 +234,9 @@ $assetData =asset::Create([
 
     public function recoveryUpdate(user $user,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           $user = user::where('id',$id)
                ->update([
                 'status'=>"Active",
@@ -235,6 +249,8 @@ $assetData =asset::Create([
 
    public function recovery()
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
        //$user = user::where('status','Inactive')->get();
          // $datatypes = datatype::get();
          $users = DB::select('select u.id,u.name,u.department_id,d.department_name,u.email,u.status from users u,departments d where u.department_id=d.id and u.status="Inactive"');

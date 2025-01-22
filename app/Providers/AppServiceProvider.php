@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
            view()->composer('*',function($view) {
   // $view->with('userCount', Auth::user());
   $view->with('user', Auth::user());
-  //$aData['dataC'] = dbsetting::getConnect(Auth::user()->id);
+
    //$view->with('user_qnsCountxx', dbconnect::where('user_id',$$view->user->id))->first();
 
 
@@ -58,14 +58,20 @@ class AppServiceProvider extends ServiceProvider
                  //$aData['dataC'] = dbsetting::getConnect(Auth::user()->id);
                  //$view->with('user_qnsCountxx', dbconnect::where('user_id',$$view->user->id))->first();
     //dd($view->user);
+      $aData['dataC'] = dbsetting::getConnect(Auth::user()->id);
 
                 //DB::purge('mysql');
-                   Config::set('database.connections.mysql.host',$valueDB->host);
-                 Config::set('database.connections.mysql.database',$valueDB->db_name);
-                 Config::set('database.connections.mysql.username',$valueDB->db_username);
-                 Config::set('database.connections.mysql.password',$valueDB->pwd);
-                 DB::reconnect('mysql');
+                 //   Config::set('database.connections.mysql.host',$valueDB->host);
+                 // Config::set('database.connections.mysql.database',$valueDB->db_name);
+                 // Config::set('database.connections.mysql.username',$valueDB->db_username);
+                 // Config::set('database.connections.mysql.password',$valueDB->pwd);
+                 // DB::reconnect('mysql');
 
+                 $view->with('qnsCount', answer::where('answer','!=','Yes')
+                 ->where('manager_checklist','!=','Cleared')
+                 ->where('property_id',$property_id)
+                  ->where('status','Active')
+                 ->get());
              }
              else {
               // dd('null');
@@ -78,17 +84,14 @@ class AppServiceProvider extends ServiceProvider
             // $view->with('userx', User::all());
 
 
-             $view->with('userx', User::get());
+//dd($view->user);
+
+             //$view->with('userx', User::get());
             $view->with('qnsCountx', User::join('properties','users.property_id','properties.id')
             ->select('properties.property_name')->first());
-
-            $view->with('qnsCount', answer::where('answer','!=','Yes')
-            ->where('manager_checklist','!=','Cleared')
-            ->where('property_id',$property_id)
-             ->where('status','Active')
-            ->get());
+    //dd($view->user);
             //  dd($view->user);
-            //dd($company_id);
+
 
             //->select('properties.property_name')->first());
              //$view->with('qnsCount', collect($qnsCount));

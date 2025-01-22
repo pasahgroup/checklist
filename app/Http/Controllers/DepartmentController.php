@@ -9,6 +9,8 @@ use App\Models\metaname;
 use App\Models\qnsAppliedto;
 use App\Models\setIndicator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dbsetting;
 
 class DepartmentController extends Controller
 {
@@ -19,6 +21,9 @@ class DepartmentController extends Controller
      */
     public function index()
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
        $departments = department::where('status','Active')->get();
         return view('admin.settings.departments.department',compact('departments'));
     }
@@ -41,6 +46,9 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
            $stock = department::create(
             [
                 'department_name'=>request('department_name'),
@@ -71,6 +79,9 @@ class DepartmentController extends Controller
      */
     public function edit(department $department,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           $departments = department::where('id',$id)
                ->update([
                 'status'=>"Inactive",
@@ -89,7 +100,9 @@ class DepartmentController extends Controller
      */
     public function update(Request $request,$id)
     {
-       // dd('dddd');
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
             $department = department::where('id',$id)->first();
         if($department){
            $department->update([
@@ -115,7 +128,9 @@ class DepartmentController extends Controller
 
     public function destroy($id)
     {
-     //
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
         $department = department::where('id',$id)->first();
         if($department){
             $department->delete();
@@ -128,6 +143,9 @@ class DepartmentController extends Controller
 
   public function recoveryUpdate(department $department,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           $departments = department::where('id',$id)
                ->update([
                 'status'=>"Active",
@@ -140,12 +158,18 @@ class DepartmentController extends Controller
 
    public function recovery()
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
        $departments = department::where('status','Inactive')->get();
         return view('admin.settings.recovery.recoveryDepartment',compact('departments'));
     }
 //update qns applied //
 public function qnsapplied()
 {
+  $auth=auth::user();
+  $aData['dataC'] = dbsetting::getConnect($auth->id);
+
    $qnsapplied = qnsAppliedto::join('metanames','metanames.id','qns_appliedtos.metaname_id')
    ->join('set_indicators','set_indicators.id','qns_appliedtos.indicator_id')
    // ->leftjoin
@@ -158,22 +182,24 @@ public function qnsapplied()
    ->get();
 
     $departments = department::where('status','Active')->get();
-    $metanames = metaname::where('status','Active')->get();  
-    $sessionms = sessionm::where('status','Active')->get();     
+    $metanames = metaname::where('status','Active')->get();
+    $sessionms = sessionm::where('status','Active')->get();
    //dd($sectionms);
     return view('admin.settings.qnsapplied.qnsapplied',compact('qnsapplied','departments','metanames','sessionms'));
 }
 
  public function qnsUpdate(department $department,$id)
   {
-    //dd('update');
+    $auth=auth::user();
+    $aData['dataC'] = dbsetting::getConnect($auth->id);
+
  $department = department::where('id',request('department_name'))->first();
 // dd(request('department_name'));
     $qnsApplied = qnsAppliedto::where('id',$id)
          ->update([
           'department_id'=>request('department_name'),
-          'unit_name'=>$department->unit_name, 
-           'status'=>request('status'),         
+          'unit_name'=>$department->unit_name,
+           'status'=>request('status'),
            'user_id'=>auth()->id()
         ]);
 
@@ -183,7 +209,7 @@ public function qnsapplied()
             $setIndicatord = setIndicator::where('id',$qnss->indicator_id)
          ->update([
           'qns'=>request('qns'),
-          'duration'=>request('duration')          
+          'duration'=>request('duration')
         ]);
 
      return redirect()->back()->with('success','Question applied successfly');

@@ -58,17 +58,17 @@ class PropertyController extends Controller
   $aData['dataC'] = dbsetting::getConnect($auth->id);
 
 
-$level=property::on('clientdb')->where('id',$auth->property_id)->first();
+$level=property::where('id',$auth->property_id)->first();
  //dd($auth);
 
 if($level->level=="Main")
 {
-$properties = property::on('clientdb')->where('company_id',$auth->company_id)
+$properties = property::where('company_id',$auth->company_id)
       ->where('status','Active')->get();
 //dd($auth->company_id);
 }else
 {
-$properties = property::on('clientdb')->where('company_id',$auth->company_id)
+$properties = property::where('company_id',$auth->company_id)
       ->where('id',$auth->property_id)
       ->where('status','Active')->get();
 
@@ -80,10 +80,12 @@ $properties = property::on('clientdb')->where('company_id',$auth->company_id)
 
  public function dashProperty($id)
     {
+
+    //  dd($id);
   $auth=auth::user();
   $aData['dataC'] = dbsetting::getConnect($auth->id);
 
- //dd($auth);
+ //dd($auth->id);
 //Helper::shout('courses');
       // dd($auth_user);
 
@@ -127,12 +129,7 @@ $properties = property::on('clientdb')->where('company_id',$auth->company_id)
       // $properties = property::where('status','Active')->get();
       //$propertyName = Property::where('id',1)->first();
 
-     $properties=property::on('clientdb')->where('status','Active')->get();
-
-     // $users = DB::connection('conn2')->select('Select * from users');
-    // $users = DB::connection('clientdb')->select('Select * from users');
-    // dd($users);
-
+     $properties=property::where('status','Active')->get();
     return view('admin.settings.properties.dash.dash-property',compact('properties'));
     }
 
@@ -144,12 +141,10 @@ $properties = property::on('clientdb')->where('company_id',$auth->company_id)
 // dd($auth);
 
 $prnt="";
-$property=property::on('clientdb')->where('id',$auth->property_id)->first();
+$property=property::where('id',$auth->property_id)->first();
   //$segment = $request->segment(1);
  // $currenturl = Request::url();
 //dd($userID);
-
-
 
         $segments = request()->segments();
         $last  = end($segments);
@@ -164,18 +159,18 @@ $url="http://localhost:8000/report-general/{$property->id}/dashboard";
 //dd('mmm');
 $uri =request()->path();//dd($uri);
 
-      $keyIndicators = keyIndicator::on('clientdb')->get();
-      $metanames = metaname::on('clientdb')->get();
-      $propertiesNames = property::on('clientdb')->get();
+      $keyIndicators = keyIndicator::get();
+      $metanames = metaname::get();
+      $propertiesNames = property::get();
 //dd($metanames);
     $current_date = date('Y-m-d');
-    $properties = property::on('clientdb')->where('id',$property->id)
+    $properties = property::where('id',$property->id)
       ->where('status','Active')->first();
 //dd($properties);
 
-         $reportDailyData=DB::connection('clientdb')->select('select * from reportdailydata_view where property_id="'.$property->id.'" order by metaname_name ASC');
+         $reportDailyData=DB::select('select * from reportdailydata_view where property_id="'.$property->id.'" order by metaname_name ASC');
 
- $reportDailyReader=DB::connection('clientdb')->select('select * from issue_report_view where property_id="'.$property->id.'"');
+ $reportDailyReader=DB::select('select * from issue_report_view where property_id="'.$property->id.'"');
 //dd($reportDailyReader);
 
 $dataDaily = collect($reportDailyData);
@@ -188,7 +183,7 @@ $roomDaily = $dataDaily->where('metaname_name','Room')
 
 $xx=$dataDaily->count();
     //Weekly Report
-$reportWeeklyData=DB::connection('clientdb')->select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.property_id="'.$property->id.'" and a.opt_answer_id=o.id and WEEK(a.datex)=WEEK(NOW()) order by m.metaname_name ASC');
+$reportWeeklyData=DB::select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.property_id="'.$property->id.'" and a.opt_answer_id=o.id and WEEK(a.datex)=WEEK(NOW()) order by m.metaname_name ASC');
 
 $dataWeekly = collect($reportWeeklyData);
 $weeklyMetaCollects=$dataWeekly->groupBy('metaname_name');
@@ -198,7 +193,7 @@ $roomWeekly = $dataWeekly->where('metaname_name','Room')
    $criticalWeekly=$roomWeekly->where('answer_classification','Critical')->count();
 
     //Monthly Report
-$reportMonthlyData=DB::connection('clientdb')->select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.property_id="'.$property->id.'" and a.opt_answer_id=o.id and month(a.datex)=month(NOW()) order by m.metaname_name ASC');
+$reportMonthlyData=DB::select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.property_id="'.$property->id.'" and a.opt_answer_id=o.id and month(a.datex)=month(NOW()) order by m.metaname_name ASC');
 
  $dataMonthly = collect($reportMonthlyData);
 $monthlyMetaCollects=$dataMonthly->groupBy('metaname_name');
@@ -222,11 +217,11 @@ $roomMonthly = $dataMonthly->where('metaname_name','Room')
         $end_date = Carbon::parse($end_d)->format('Y-m-d').' 23:59:00';
 
 	 //Metaname Array creation
-	 $metaNames=metaname::on('clientdb')->get();
+	 $metaNames=metaname::get();
 	 $collectAllMeta = collect($metaNames);
 
 	 //Metaname Array creation
-	 $keyNames=keyIndicator::on('clientdb')->get();
+	 $keyNames=keyIndicator::get();
      //dd($keyNames);
 	 $collectAllKey = collect($keyNames);
 
@@ -269,7 +264,7 @@ $roomMonthly = $dataMonthly->where('metaname_name','Room')
 }
 
 //End of Request
-	 $generalReportData = answer::on('clientdb')->join('properties','answers.property_id','properties.id')
+	 $generalReportData = answer::join('properties','answers.property_id','properties.id')
 	 ->join('set_indicators','answers.indicator_id','set_indicators.id')
 	  ->join('users','answers.user_id','users.id')
 	   ->join('assets','answers.asset_id','assets.id')
@@ -296,9 +291,9 @@ $roomMonthly = $dataMonthly->where('metaname_name','Room')
 	$current_date = date('Y-m-d');
     if(request('print')){
         $prnt=2;
-$user=user::on('clientdb')->where('id',$auth->id)->first();
-             $answers=answer::on('clientdb')->get();
-             $count=answer::on('clientdb')->count();
+$user=user::where('id',$auth->id)->first();
+             $answers=answer::get();
+             $count=answer::count();
    $data = [
             'date' => date('m/d/Y'),
             'generalReportData' => $generalReportData ,
@@ -343,13 +338,13 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$property_id,"metanames"=>$m
    //dd('Not role');
    //Metaname percent
 
-   // $answerCount=DB::connection('clientdb')->select('select a.*,m.metaname_name from answers a,metanames m where a.metaname_id=m.id and DAY(a.datex)=DAY(NOW()) and a.status="Active" group by a.property_id,a.metaname_id,a.indicator_id,a.asset_id order by a.metaname_id ASC');
+   // $answerCount=DB::select('select a.*,m.metaname_name from answers a,metanames m where a.metaname_id=m.id and DAY(a.datex)=DAY(NOW()) and a.status="Active" group by a.property_id,a.metaname_id,a.indicator_id,a.asset_id order by a.metaname_id ASC');
 
-     $answerCount=DB::connection('clientdb')->select('select a.*,m.metaname_name from answers a,metanames m where a.metaname_id=m.id and DAY(a.datex)=DAY(NOW()) and a.status="Active" order by a.metaname_id ASC');
+     $answerCount=DB::select('select a.*,m.metaname_name from answers a,metanames m where a.metaname_id=m.id and DAY(a.datex)=DAY(NOW()) and a.status="Active" order by a.metaname_id ASC');
    $answerCount = collect($answerCount);
    $answerCount = $answerCount->groupBy('property_id','metaname_id','indicator_id','asset_id');
 
-   $totalqns=DB::connection('clientdb')->select('select a.metaname_id,metaname_name from assets a, qns_appliedtos q,metanames m where a.metaname_id=q.metaname_id and a.metaname_id=m.id and a.status="Active" and q.status="Active"');
+   $totalqns=DB::select('select a.metaname_id,metaname_name from assets a, qns_appliedtos q,metanames m where a.metaname_id=q.metaname_id and a.metaname_id=m.id and a.status="Active" and q.status="Active"');
 
    $totalqns = collect($totalqns);
 //dd($generalReportData);
@@ -362,8 +357,11 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$property_id,"metanames"=>$m
     public function reportAction(Request $request,$id)
        {
          $prnt="";
+         $auth=auth::user();
+         $aData['dataC'] = dbsetting::getConnect($auth->id);
    $userID=user::where('id',auth()->id())->first();
-   $property=property::on('clientdb')->where('id',$userID->property_id)->first();
+   $property=property::where('id',$userID->property_id)->first();
+
 
            $segments = request()->segments();
            $last  = end($segments);
@@ -560,6 +558,8 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$property_id,"metanames"=>$m
 
        public function reportViewUpdate(Request $request,$sn)
           {
+            $auth=auth::user();
+            $aData['dataC'] = dbsetting::getConnect($auth->id);
 
               $optionalID=optionalAnswer::where('id',request('optional_id'))->first();
               $answerID=answer::where('id',$sn)->first();
@@ -629,6 +629,9 @@ $PHPJasperXML->load_xml_file(app_path().'/reports/detailDailyReport.jrxml');
           public function reportViewPost(Request $request,$sn,$id)
              {
          $prnt="";
+         $auth=auth::user();
+         $aData['dataC'] = dbsetting::getConnect($auth->id);
+
          $userID=user::where('id',auth()->id())->first();
          $property=property::where('id',$userID->property_id)->first();
 
@@ -696,6 +699,9 @@ $PHPJasperXML->load_xml_file(app_path().'/reports/detailDailyReport.jrxml');
           public function reportViewPrint(Request $request,$sn,$id)
              {
          $prnt="";
+         $auth=auth::user();
+         $aData['dataC'] = dbsetting::getConnect($auth->id);
+
          $userID=user::where('id',auth()->id())->first();
          $property=property::where('id',$userID->property_id)->first();
 
@@ -756,6 +762,9 @@ $PHPJasperXML->load_xml_file(app_path().'/reports/detailDailyReport.jrxml');
        public function reportView(Request $request,$sn,$id)
           {
       $prnt="";
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
       $userID=user::where('id',auth()->id())->first();
       $property=property::where('id',$userID->property_id)->first();
 
@@ -816,6 +825,8 @@ $updateUser = user::where('id',auth()->id())
 
     public function reportProperty(Request $request,$id)
        {
+         $auth=auth::user();
+         $aData['dataC'] = dbsetting::getConnect($auth->id);
 //dd($id);
            $segments = request()->segments();
            $last  = end($segments);
@@ -1035,6 +1046,9 @@ $man="Managers";
      */
     public function create()
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
   $properties = property::get();
         return view('admin.settings.properties.property',compact('properties'));
     }
@@ -1047,7 +1061,9 @@ $man="Managers";
      */
     public function store(Request $request)
     {
-      $auth=auth()->user();
+    //  $auth=auth()->user();
+    $auth=auth::user();
+    $aData['dataC'] = dbsetting::getConnect($auth->id);
         //dd(request('id'));
           //See if the site is Exists
 //If value Exist
@@ -1122,6 +1138,10 @@ return redirect()->route('properties.index')->with('success','Property created s
      */
     public function edit(property $site,$id)
     {
+
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           $properties = property::where('id',$id)
                ->update([
                 'status'=>"Inactive",
@@ -1140,7 +1160,9 @@ return redirect()->route('properties.index')->with('success','Property created s
      */
     public function update(Request $request,$id)
     {
-        $auth=auth()->user();
+        //$auth=auth()->user();
+        $auth=auth::user();
+        $aData['dataC'] = dbsetting::getConnect($auth->id);
 
         $propertyUpdate =property::where('id',$id)
              ->update([
@@ -1204,6 +1226,9 @@ $hotelUdatePhoto =property::where('id',$id)
      */
     public function destroy($id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
          $property = property::where('id',$id)->first();
         if($property){
             $property->delete();
@@ -1216,6 +1241,9 @@ $hotelUdatePhoto =property::where('id',$id)
 
     public function updateTimeShow(Request $request,$property_id)
   {
+    $auth=auth::user();
+    $aData['dataC'] = dbsetting::getConnect($auth->id);
+
      // dd($request->indicator_setting);
      $date_time=date('H:i:s');
        //dd($request->indicator_setting);
@@ -1249,6 +1277,9 @@ $hotelUdatePhoto =property::where('id',$id)
 
       public function recoveryUpdate(property $site,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           $property = property::where('id',$id)
                ->update([
                 'status'=>"Active",
@@ -1261,6 +1292,9 @@ $hotelUdatePhoto =property::where('id',$id)
 
    public function recovery()
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
        $properties = property::where('status','Inactive')->get();
         return view('admin.settings.recovery.recoveryProperty',compact('properties'));
     }
@@ -1268,6 +1302,9 @@ $hotelUdatePhoto =property::where('id',$id)
 
     public function print()
      {
+       $auth=auth::user();
+       $aData['dataC'] = dbsetting::getConnect($auth->id);
+
         $properties = property::where('status','Inactive')->get();
          return view('admin.settings.recovery.recoveryProperty',compact('properties'));
      }

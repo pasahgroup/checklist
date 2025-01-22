@@ -22,6 +22,8 @@ use JasperPHP\JasperPHP as JasperPHP;
 use Illuminate\Http\Request;
 use PHPJasper\PHPJasper;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dbsetting;
 
  require base_path().'/vendor/autoload.php';
  //require base_path().'/vendor/autoload.php';
@@ -42,6 +44,9 @@ class AssetController extends Controller
      */
     public function index()
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
       $assets = asset::join('properties','properties.id','assets.property_id')
       ->join('metanames','assets.metaname_id','metanames.id')
       ->where('properties.status','Active')
@@ -58,6 +63,9 @@ class AssetController extends Controller
 
  public function dashProperty($id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
       $properties = property::where('status','Active')->get();
       //$propertyName = Property::where('id',1)->first();
     //dd($properties);
@@ -68,6 +76,9 @@ class AssetController extends Controller
 
  public function reportGeneral(Request $request,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
 $prnt="";
 $userID=user::where('id',auth()->id())->first();
 $property=property::where('id',$userID->property_id)->first();
@@ -271,6 +282,9 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$id,"metanames"=>$metaString
 
     public function reportAction(Request $request,$id)
        {
+         $auth=auth::user();
+         $aData['dataC'] = dbsetting::getConnect($auth->id);
+
          $prnt="";
    $userID=user::where('id',auth()->id())->first();
    $property=property::where('id',$userID->property_id)->first();
@@ -464,6 +478,9 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$id,"metanames"=>$metaString
 
        public function reportViewUpdate(Request $request,$sn)
           {
+            $auth=auth::user();
+            $aData['dataC'] = dbsetting::getConnect($auth->id);
+
               $optionalID=optionalAnswer::where('id',request('optional_id'))->first();
               $answerID=answer::where('id',$sn)->first();
          //dd($optionalID->id);
@@ -548,6 +565,9 @@ $uri=user::where('id',auth()->id())->first();
 
           public function reportViewPrint(Request $request,$sn,$id)
              {
+               $auth=auth::user();
+               $aData['dataC'] = dbsetting::getConnect($auth->id);
+
          $prnt="";
          $userID=user::where('id',auth()->id())->first();
          $property=property::where('id',$userID->property_id)->first();
@@ -608,6 +628,9 @@ $uri=user::where('id',auth()->id())->first();
 
        public function reportView(Request $request,$sn,$id)
           {
+            $auth=auth::user();
+            $aData['dataC'] = dbsetting::getConnect($auth->id);
+
       $prnt="";
       $userID=user::where('id',auth()->id())->first();
       $property=property::where('id',$userID->property_id)->first();
@@ -667,6 +690,9 @@ $updateUser = user::where('id',auth()->id())
 
     public function reportProperty(Request $request,$id)
        {
+         $auth=auth::user();
+         $aData['dataC'] = dbsetting::getConnect($auth->id);
+
            $segments = request()->segments();
            $last  = end($segments);
     $first = reset($segments);
@@ -871,6 +897,9 @@ $updateUser = user::where('id',auth()->id())
      */
     public function create()
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
   $properties = property::get();
         return view('admin.settings.properties.property',compact('properties'));
     }
@@ -883,6 +912,9 @@ $updateUser = user::where('id',auth()->id())
      */
     public function store(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           //See if the site is Exists
          $site=property::where('property_name',request('property_name'))
         ->where('id',request('id'))->first();
@@ -965,7 +997,9 @@ $updateUser = user::where('id',auth()->id())
      */
     public function edit(Request $site,$id)
     {
-      //dd($id);
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           $assets = asset::where('id',$id)
                ->update([
                 'status'=>"Inactive",
@@ -984,7 +1018,8 @@ $updateUser = user::where('id',auth()->id())
      */
     public function update(Request $request,$id)
     {
-
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
       //dd($id);
       $asset = asset::where('id',$id)
            ->update([
@@ -1059,7 +1094,9 @@ $updateUser = user::where('id',auth()->id())
      */
     public function destroy($id)
     {
-      //dd($id);
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
          $asset = asset::where('id',$id)->first();
         if($asset){
             $asset->delete();
@@ -1072,6 +1109,9 @@ $updateUser = user::where('id',auth()->id())
 
     public function updateTimeShow(Request $request,$property_id)
   {
+    $auth=auth::user();
+    $aData['dataC'] = dbsetting::getConnect($auth->id);
+
      // dd($request->indicator_setting);
     if($request->indicator_setting ==null)
     {
@@ -1090,6 +1130,9 @@ $updateUser = user::where('id',auth()->id())
 
       public function recoveryUpdate(asset $site,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           $asset = asset::where('id',$id)
                ->update([
                 'status'=>"Active",
@@ -1105,8 +1148,14 @@ $updateUser = user::where('id',auth()->id())
 
    public function recovery()
     {
-       //$assets = asset::where('status','Inactive')->get();
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
 
+       //$assets = asset::where('status','Inactive')->get();
+       $auth=auth::user();
+       $aData['dataC'] = dbsetting::getConnect($auth->id);
+
+//dd($auth);
        $assets = asset::join('properties','properties.id','assets.property_id')
     //   ->join('metanames','assets.metaname_id','metanames.id')
        // ->where('properties.status','Active')
@@ -1120,6 +1169,9 @@ $updateUser = user::where('id',auth()->id())
 
     public function print()
      {
+       $auth=auth::user();
+       $aData['dataC'] = dbsetting::getConnect($auth->id);
+
         $properties = asset::where('status','Inactive')->get();
          return view('admin.settings.recovery.recoveryAsset',compact('properties'));
      }

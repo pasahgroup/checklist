@@ -10,6 +10,8 @@ use App\Http\Requests\UpdatemanageRequest;
 use App\Models\departmentRole;
 use App\Models\department;
 use App\Models\user;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dbsetting;
 
 use App\Models\userActivity;
 use App\Models\activityRole;
@@ -36,7 +38,12 @@ class ManageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
+
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+//dd($auth);
+
           $meta=request('meta');
           $current_date = date('Y-m-d');
           $metaname_id=request('metaname_id');
@@ -61,7 +68,7 @@ class ManageController extends Controller
           }
           // $indicators = setIndicator::get();
       // $metanames = metaname::get();
-         
+
       $metanames = answer::join('metanames','metanames.id','answers.metaname_id')
      //->where('assets.metaname_id',$metaname_id)
      ->where('answers.manager_checklist','!=',"Cleared")
@@ -74,7 +81,7 @@ class ManageController extends Controller
             // $metadatas = optionalAnswer::get();
       //Assign Activities to userActivities
       $departments=user::where('id',auth()->id())->first();
-      
+
       //dd($departments);
       //Get Department name
         $departGetName= department::where('status','Active')
@@ -164,14 +171,14 @@ class ManageController extends Controller
       //Extract date
       $datet=Carbon::now();
       $datet=$datet->format('H:i:s');
-      
+
       //Get asset_show from assets table
       $asset_show=asset::where('property_id',$departments->property_id)->first();
       //dd($asset_show->time_show);
-     
+
       if($datet>="23:45")
       {
-        
+
       $date_time = date('H:i:s',strtotime(date($asset_show->extra_time, mktime()) . " + 1 hours"));
       $date_time_init=date('H:i:s',strtotime(date($asset_show->extra_time, mktime()) . " + 0 hours"));
       //$date_timex=date('H:i:s',strtotime("1 hours"));
@@ -237,7 +244,7 @@ class ManageController extends Controller
           ->get();
          //dd($sections);
 
-        
+
          $datatypes = datatype::get();
         // $checkQnsProp = DB::select('select d.property_id,d.metaname_id,d.asset_id,d.value from dynamic_ind_updates d,assets p where d.property_id=p.property_id and d.metaname_id=p.metaname_id and d.asset_id=p.id and d.datex="'.$current_date.'" and d.status="Active" group by d.asset_id');
          $checkQnsProp = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'" group by asset_id');
@@ -275,7 +282,9 @@ class ManageController extends Controller
 
 
       $qnsCount = collect($qnsCount);
-            return view("admin.managerlist",compact(['departGetName','qnsCount','datatypes','metanames','metanamess','assets','assetIDf','metanameCollects','pp','metas','qns','metaname_id','assetID','propertyID','sections','userActitivities','userMetanames','checkQnsProp','checkQns','assetPerc','answerPerc','answerCount','totalqns','qnsAppliedPerc','property_id']));
+      $n=5;
+      //dd($qnsCount);
+            return view("admin.managerlist",compact(['departGetName','n','qnsCount','datatypes','metanames','metanamess','assets','assetIDf','metanameCollects','pp','metas','qns','metaname_id','assetID','propertyID','sections','userActitivities','userMetanames','checkQnsProp','checkQns','assetPerc','answerPerc','answerCount','totalqns','qnsAppliedPerc','property_id']));
             //->layout("layouts.app");
         }
 

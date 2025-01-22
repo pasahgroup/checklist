@@ -59,7 +59,7 @@ class adminController extends Controller
       //dd(request('code'));
 
 //dd(auth()->id());
-// DB::purge($dd);
+// dd('dddd');
 
 
        if(auth())
@@ -141,7 +141,6 @@ if($property_name ==null)
 
 //IF THE USER HAS ADMIN PRIVILEDGES
      if($user->hasRole('GeneralAdmin|SuperAdmin|Admin')){
-
 
         // $collection_daily = $thedailypaid->paid_cash - $thedaily->daily_cash;
         // $collection_weekly = $theweeklypaid->paid_cash - $theweekly->weekly_cash;

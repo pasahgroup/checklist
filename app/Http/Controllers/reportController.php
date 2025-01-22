@@ -58,6 +58,8 @@ class reportController extends Controller
 
     public function index()
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
 
           include_once(app_path().'/jrf/sample/setting.php');
     $PHPJasperXML = new PHPJasperXML();
@@ -90,14 +92,15 @@ dd('sasa');
 
 
 
-public function dailyReport(Request $request,$id,$status){
+public function dailyReport(Request $request,$id,$status)
+{
 $auth=auth::user();
   $aData['dataC'] = dbsetting::getConnect($auth->id);
 
 $property_id=$id;
 
 ///dd(request('metaname_id'));
-$depart=department::on('clientdb')->where('id',$auth->department_id)->first();
+$depart=department::where('id',$auth->department_id)->first();
 //dd($depart);
 
 $current_date = date('Y-m-d');
@@ -117,9 +120,9 @@ $col='o.answer_classification';
 }
 
     $metaID=(request('metaname_id'));
-		 $reportData=DB::connection('clientdb')->select('select a.id,a.property_id,p.property_name,a.metaname_id,m.metaname_name,a.answer,a.indicator_id,s.qns,a.asset_id,t.asset_name,u.name, a.opt_answer_id,a.answer,a.answer_label,o.answer_classification,u.department_id,a.photo,a.description,a.datex from answers a,properties p,set_indicators s,users u,assets t,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.user_id=u.id and a.asset_id=t.id and a.indicator_id=s.id and a.property_id="'.$id.'"  and '.$col.'="'.$last_segment.'" and a.opt_answer_id=o.id and p.id=a.property_id and a.metaname_id="'.$metaID.'" and a.datex="'.$current_date.'"');
-	  $property=property::on('clientdb')->where('id',$id)->first();
-    
+		 $reportData=DB::select('select a.id,a.property_id,p.property_name,a.metaname_id,m.metaname_name,a.answer,a.indicator_id,s.qns,a.asset_id,t.asset_name,u.name, a.opt_answer_id,a.answer,a.answer_label,o.answer_classification,u.department_id,a.photo,a.description,a.datex from answers a,properties p,set_indicators s,users u,assets t,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.user_id=u.id and a.asset_id=t.id and a.indicator_id=s.id and a.property_id="'.$id.'"  and '.$col.'="'.$last_segment.'" and a.opt_answer_id=o.id and p.id=a.property_id and a.metaname_id="'.$metaID.'" and a.datex="'.$current_date.'"');
+	  $property=property::where('id',$id)->first();
+
 	}
 //dd($reportData);
 
@@ -128,8 +131,8 @@ $col='o.answer_classification';
 	// $property=property::where('id',request('property_id'))->first();
 	// }
 $status =$status;
-$metanames = metaname::on('clientdb')->get();
-$keyIndicators = keyIndicator::on('clientdb')->get();
+$metanames = metaname::get();
+$keyIndicators = keyIndicator::get();
 
   if(request('search') || request('print')){
   $metaArray=array();
@@ -141,11 +144,11 @@ $keyIndicators = keyIndicator::on('clientdb')->get();
      $end_date = Carbon::parse($end_d)->format('Y-m-d').' 23:59:00';
 
   //Metaname Array creation
-  $metaNames=metaname::on('clientdb')->get();
+  $metaNames=metaname::get();
   $collectAllMeta = collect($metaNames);
 
   //Metaname Array creation
-  $keyNames=keyIndicator::on('clientdb')->get();
+  $keyNames=keyIndicator::get();
   $collectAllKey = collect($keyNames);
 
   //The Request is metaArray
@@ -182,7 +185,7 @@ $keyIndicators = keyIndicator::on('clientdb')->get();
 
 
   //End of Request
-  $reportData = answer::on('clientdb')->join('properties','answers.property_id','properties.id')
+  $reportData = answer::join('properties','answers.property_id','properties.id')
   ->join('set_indicators','answers.indicator_id','set_indicators.id')
   ->join('users','answers.user_id','users.id')
   ->join('assets','answers.asset_id','assets.id')
@@ -204,13 +207,13 @@ $keyIndicators = keyIndicator::on('clientdb')->get();
   //dd('Not role');
   }
 
- 
+
   if(request('print')){
-   
+
        $prnt=2;
-$user=user::on('clientdb')->where('id',$auth->id)->first();
-             $answers=answer::on('clientdb')->get();
-             $count=answer::on('clientdb')->count();
+$user=user::where('id',$auth->id)->first();
+             $answers=answer::get();
+             $count=answer::count();
    $data = [
             'date' => date('m/d/Y'),
             'reportData' => $reportData,
@@ -223,14 +226,14 @@ $user=user::on('clientdb')->where('id',$auth->id)->first();
          ];
 
 
-$timestamp = time();  
+$timestamp = time();
 $doc_name="Daily-report".$timestamp;
 
          $pdf = PDF::loadView('reportPrint.dwm',$data)->setPaper('a4', 'landscape');
-   
+
       return $pdf->stream($doc_name.'.pdf');
      return $pdf->download($doc_name.'.pdf')->setPaper('a4','landscape');
-  
+
   }
 
    $reportData = collect($reportData);
@@ -241,10 +244,11 @@ $doc_name="Daily-report".$timestamp;
     public function weeklyReport(Request $request,$id,$status){
 $auth=auth::user();
   $aData['dataC'] = dbsetting::getConnect($auth->id);
+
 $property_id=$id;
 
 ///dd(request('metaname_id'));
-$depart=department::on('clientdb')->where('id',$auth->department_id)->first();
+$depart=department::where('id',$auth->department_id)->first();
 //dd($status);
     $current_date = date('Y-m-d');
       $reportTime="Weekly Reports";
@@ -264,9 +268,9 @@ $col='o.answer_classification';
 }
 
     $metaID=(request('metaname_id'));
-	 $reportData=DB::connection('clientdb')->select('select a.id,a.property_id,p.property_name,a.metaname_id,m.metaname_name,a.answer,a.answer_label,a.indicator_id,s.qns,a.asset_id,a.photo,a.description,t.asset_name,u.name, a.opt_answer_id,a.answer,o.answer_classification,a.datex from answers a,properties p,set_indicators s,users u,assets t,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.user_id=u.id and a.asset_id=t.id and a.indicator_id=s.id and a.property_id="'.$id.'"  and '.$col.'="'.$last_segment.'" and a.opt_answer_id=o.id and p.id=a.property_id and a.metaname_id="'.$metaID.'" and WEEK(a.datex)=WEEK(NOW())');
+	 $reportData=DB::select('select a.id,a.property_id,p.property_name,a.metaname_id,m.metaname_name,a.answer,a.answer_label,a.indicator_id,s.qns,a.asset_id,a.photo,a.description,t.asset_name,u.name, a.opt_answer_id,a.answer,o.answer_classification,a.datex from answers a,properties p,set_indicators s,users u,assets t,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.user_id=u.id and a.asset_id=t.id and a.indicator_id=s.id and a.property_id="'.$id.'"  and '.$col.'="'.$last_segment.'" and a.opt_answer_id=o.id and p.id=a.property_id and a.metaname_id="'.$metaID.'" and WEEK(a.datex)=WEEK(NOW())');
 
-	$property=property::on('clientdb')->where('id',$id)->first();
+	$property=property::where('id',$id)->first();
 	}
 
 
@@ -276,8 +280,8 @@ $col='o.answer_classification';
 	// }
 
   $status =$status;
-  $metanames = metaname::on('clientdb')->get();
-  $keyIndicators = keyIndicator::on('clientdb')->get();
+  $metanames = metaname::get();
+  $keyIndicators = keyIndicator::get();
 
   if(request('search') || request('print')){
   $metaArray=array();
@@ -289,7 +293,7 @@ $col='o.answer_classification';
      $end_date = Carbon::parse($end_d)->format('Y-m-d').' 23:59:00';
 
   //Metaname Array creation
-  $metaNames=metaname::on('clientdb')->get();
+  $metaNames=metaname::get();
   $collectAllMeta = collect($metaNames);
 
   //Metaname Array creation
@@ -329,7 +333,7 @@ $col='o.answer_classification';
   }
 
   //End of Request
-  $reportData = answer::on('clientdb')->join('properties','answers.property_id','properties.id')
+  $reportData = answer::join('properties','answers.property_id','properties.id')
   ->join('set_indicators','answers.indicator_id','set_indicators.id')
   ->join('users','answers.user_id','users.id')
   ->join('assets','answers.asset_id','assets.id')
@@ -352,11 +356,11 @@ $col='o.answer_classification';
 
 
  if(request('print')){
-   
+
        $prnt=2;
-$user=user::on('clientdb')->where('id',$auth->id)->first();
-             $answers=answer::on('clientdb')->get();
-             $count=answer::on('clientdb')->count();
+$user=user::where('id',$auth->id)->first();
+             $answers=answer::get();
+             $count=answer::count();
    $data = [
             'date' => date('m/d/Y'),
             'reportData' => $reportData,
@@ -368,14 +372,14 @@ $user=user::on('clientdb')->where('id',$auth->id)->first();
               'current_date'=>$current_date,
          ];
 
-$timestamp = time();  
+$timestamp = time();
 $doc_name="Weekly-report".$timestamp;
 
          $pdf = PDF::loadView('reportPrint.dwm',$data)->setPaper('a4', 'landscape');
-   
+
       return $pdf->stream($doc_name.'.pdf');
      return $pdf->download($doc_name.'.pdf')->setPaper('a4','landscape');
-  
+
   }
 
    $reportData = collect($reportData);
@@ -386,8 +390,9 @@ $doc_name="Weekly-report".$timestamp;
 public function monthlyReport(Request $request,$id,$status){
 $auth=auth::user();
   $aData['dataC'] = dbsetting::getConnect($auth->id);
+
 $property_id=$id;
-$depart=department::on('clientdb')->where('id',$auth->department_id)->first();
+$depart=department::where('id',$auth->department_id)->first();
 
     $current_date = date('Y-m-d');
       $reportTime="Monthly Reports";
@@ -407,9 +412,9 @@ $col='o.answer_classification';
 }
 
   $metaID=(request('metaname_id'));
- $reportData=DB::connection('clientdb')->select('select a.id,a.property_id,p.property_name,a.metaname_id,m.metaname_name,a.answer,a.answer_label,a.indicator_id,s.qns,a.asset_id,t.asset_name,u.name, a.opt_answer_id,a.answer,o.answer_classification,a.photo,a.description,a.datex from answers a,properties p,set_indicators s,users u,assets t,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.user_id=u.id and a.asset_id=t.id and a.indicator_id=s.id and a.property_id="'.$id.'"  and '.$col.'="'.$last_segment.'" and a.opt_answer_id=o.id and p.id=a.property_id and a.metaname_id="'.$metaID.'" and MONTH(a.datex)=MONTH(NOW())');
+ $reportData=DB::select('select a.id,a.property_id,p.property_name,a.metaname_id,m.metaname_name,a.answer,a.answer_label,a.indicator_id,s.qns,a.asset_id,t.asset_name,u.name, a.opt_answer_id,a.answer,o.answer_classification,a.photo,a.description,a.datex from answers a,properties p,set_indicators s,users u,assets t,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.user_id=u.id and a.asset_id=t.id and a.indicator_id=s.id and a.property_id="'.$id.'"  and '.$col.'="'.$last_segment.'" and a.opt_answer_id=o.id and p.id=a.property_id and a.metaname_id="'.$metaID.'" and MONTH(a.datex)=MONTH(NOW())');
 
-	$property=property::on('clientdb')->where('id',$id)->first();
+	$property=property::where('id',$id)->first();
 	}
  //  else{
  // $reportMonthlyData=DB::select('select a.id,a.property_id,p.property_name,a.metaname_id,m.metaname_name,a.answer,a.indicator_id,s.qns,a.asset_id,t.asset_name,u.name, a.opt_answer_id,a.answer,o.answer_classification,a.datex from answers a,properties p,set_indicators s,users u,assets t,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.user_id=u.id and a.asset_id=t.id and a.indicator_id=s.id and a.property_id="'.request('property_id').'" and a.opt_answer_id=o.id and p.id=a.property_id and a.metaname_id="'.request('metaname_id').'" and MONTH(a.datex)=MONTH(NOW())');
@@ -417,8 +422,8 @@ $col='o.answer_classification';
 	// }
   //dd($id);
   $status=$status;
-  $metanames = metaname::on('clientdb')->get();
-  $keyIndicators = keyIndicator::on('clientdb')->get();
+  $metanames = metaname::get();
+  $keyIndicators = keyIndicator::get();
 
 
   if(request('search') || request('print')){
@@ -431,7 +436,7 @@ $col='o.answer_classification';
      $end_date = Carbon::parse($end_d)->format('Y-m-d').' 23:59:00';
 
   //Metaname Array creation
-  $metaNames=metaname::on('clientdb')->get();
+  $metaNames=metaname::get();
   $collectAllMeta = collect($metaNames);
 
   //Metaname Array creation
@@ -472,7 +477,7 @@ $col='o.answer_classification';
 
 
   //End of Request
-  $reportData = answer::on('clientdb')->join('properties','answers.property_id','properties.id')
+  $reportData = answer::join('properties','answers.property_id','properties.id')
   ->join('set_indicators','answers.indicator_id','set_indicators.id')
   ->join('users','answers.user_id','users.id')
   ->join('assets','answers.asset_id','assets.id')
@@ -495,11 +500,11 @@ $col='o.answer_classification';
 
 
  if(request('print')){
-   
+
        $prnt=2;
-$user=user::on('clientdb')->where('id',$auth->id)->first();
-             $answers=answer::on('clientdb')->get();
-             $count=answer::on('clientdb')->count();
+$user=user::where('id',$auth->id)->first();
+             $answers=answer::get();
+             $count=answer::count();
    $data = [
             'date' => date('m/d/Y'),
             'reportData' => $reportData,
@@ -511,14 +516,14 @@ $user=user::on('clientdb')->where('id',$auth->id)->first();
               'current_date'=>$current_date,
          ];
 
-$timestamp = time();  
+$timestamp = time();
 $doc_name="Monthly-report".$timestamp;
 
          $pdf = PDF::loadView('reportPrint.dwm',$data)->setPaper('a4', 'landscape');
-   
+
       return $pdf->stream($doc_name.'.pdf');
      return $pdf->download($doc_name.'.pdf')->setPaper('a4','landscape');
-  
+
   }
 
    $reportData = collect($reportData);
@@ -529,6 +534,10 @@ $doc_name="Monthly-report".$timestamp;
 
     public function expensesReport(){
           //
+
+          $auth=auth::user();
+          $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           $expenses = direct_expenses::
           whereBetween('updated_at',
           [Carbon::now()->startOfMonth(),
@@ -568,6 +577,9 @@ $doc_name="Monthly-report".$timestamp;
     }
     public function expensesFilter(Request $request){
         //
+        $auth=auth::user();
+        $aData['dataC'] = dbsetting::getConnect($auth->id);
+
         $start_d = substr(request('date'),0,10);
         $start_date = Carbon::parse($start_d)->format('Y-m-d').' 00:00:00';
         $end_d = substr(request('date'),-10);
@@ -747,6 +759,9 @@ $doc_name="Monthly-report".$timestamp;
     public function purchaseReport()
     {
         //
+        $auth=auth::user();
+        $aData['dataC'] = dbsetting::getConnect($auth->id);
+
         $sales = purchaseOrder::
         join('suppliers','suppliers.id','purchase_orders.supplier_id')
         ->join('users','purchase_orders.user_id','users.id')
@@ -790,6 +805,9 @@ $doc_name="Monthly-report".$timestamp;
  * filter sales
  */
     public function filtersales(Request $request){
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
          $start_d = substr(request('date'),0,10);
          $start_date = Carbon::parse($start_d)->format('Y-m-d').' 00:00:00';
          $end_d = substr(request('date'),-10);
@@ -924,6 +942,9 @@ $doc_name="Monthly-report".$timestamp;
  * filter Purchase
  */
 public function filterPurchase(Request $request){
+  $auth=auth::user();
+  $aData['dataC'] = dbsetting::getConnect($auth->id);
+
     $start_d = substr(request('date'),0,10);
     $start_date = Carbon::parse($start_d)->format('Y-m-d').' 00:00:00';
     $end_d = substr(request('date'),-10);
@@ -1034,6 +1055,9 @@ public function filterPurchase(Request $request){
  */
 public function showOrder($id){
     //
+    $auth=auth::user();
+    $aData['dataC'] = dbsetting::getConnect($auth->id);
+
     $sales = orderItem::join('orders','order_items.order_id','orders.id')
     ->join('stocks','order_items.item_id','stocks.id')
     ->select('order_items.*','stocks.item')
@@ -1052,6 +1076,9 @@ public function showOrder($id){
 
 public function showPurchase($id){
     //
+    $auth=auth::user();
+    $aData['dataC'] = dbsetting::getConnect($auth->id);
+
     $purchase = purchaseOrder::
     join('purchase_items','purchase_items.order_id','purchase_orders.id')
     ->join('stocks','purchase_items.item_id','stocks.id')
@@ -1075,6 +1102,9 @@ public function showPurchase($id){
  */
 
  public function itemSold(){
+   $auth=auth::user();
+   $aData['dataC'] = dbsetting::getConnect($auth->id);
+
     $sales = sale::join('order_items','order_items.order_id','sales.id')
     ->join('stocks','stocks.id','order_items.item_id')
     ->select(['sales.*','stocks.item',
@@ -1094,6 +1124,8 @@ public function showPurchase($id){
  * Filter sold items
  */
 public function soldFilter(){
+  $auth=auth::user();
+  $aData['dataC'] = dbsetting::getConnect($auth->id);
 
     $start_d = substr(request('date'),0,10);
     $start_date = Carbon::parse($start_d)->format('Y-m-d').' 00:00:00';
@@ -1167,6 +1199,9 @@ public function soldFilter(){
      *
      */
     public function customersale($id){
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
         $sales = orderItem::join('orders','order_items.order_id','orders.id')
         ->join('stocks','order_items.item_id','stocks.id')
         ->select('order_items.*','stocks.item')
@@ -1181,6 +1216,8 @@ public function soldFilter(){
 
  public function transaction_report(){
     //
+    $auth=auth::user();
+    $aData['dataC'] = dbsetting::getConnect($auth->id);
 
     $sales = payment::
     join('users','users.id','payments.user_id')
@@ -1218,6 +1255,9 @@ public function soldFilter(){
 
 public function transactions($id){
     //
+    $auth=auth::user();
+    $aData['dataC'] = dbsetting::getConnect($auth->id);
+
     $user = User::where('id',auth()->id())->first();
     // For admins only
     if($user->hasRole('Admin')){
@@ -1376,6 +1416,9 @@ if($user->hasRole('Sales')){
  */
 
 public function transaction_filter(){
+  $auth=auth::user();
+  $aData['dataC'] = dbsetting::getConnect($auth->id);
+
         $start_d = substr(request('date'),0,10);
         $start_date = Carbon::parse($start_d)->format('Y-m-d').' 00:00:00';
         $end_d = substr(request('date'),-10);
@@ -1479,6 +1522,9 @@ if( $warehouse_name != 'All'){
 
 public function anyViewreport($report='')
   {
+    $auth=auth::user();
+    $aData['dataC'] = dbsetting::getConnect($auth->id);
+
                 if ($report == 'testreport') {
                     $param1 = Input::get('id');
 
@@ -1512,6 +1558,9 @@ public function anyViewreport($report='')
      */
     public function store(Request $request,$report='')
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
      if ($report == 'location') {
                     $param1 = Input::get('param1');
 
@@ -1542,7 +1591,9 @@ public function anyViewreport($report='')
      */
     public function show($id)
     {
-        //
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
         $sales = sale::join('customers','customers.id','sales.customer_id')
         ->join('users','sales.user_id','users.id')
         ->select('sales.*','customers.customer_name','users.name')
@@ -1583,7 +1634,9 @@ public function anyViewreport($report='')
      */
     public function destroy($id)
     {
-        //
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
         $sale_value = sale::where('id',$id)->first();
         $account = account::where('main_account',1)->first();
 

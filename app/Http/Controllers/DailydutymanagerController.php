@@ -17,6 +17,8 @@ use Carbon\Carbon;
 use App\Models\setIndicator;
 use App\Models\qnsAppliedto;
 use App\Models\dutymanager;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dbsetting;
 
 use App\Models\answer;
 use App\Models\answerCheckBox;
@@ -75,35 +77,38 @@ class DailydutymanagerController extends Controller
      */
      public function index(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
 
         //dd('print');
       $current_date = date('Y-m-d');
       //Extract date
       $datet=Carbon::now();
 
-    
+
 
       $datet=$datet->format('H:i');
       //dd($departments->property_id);
 
  // dd($datet);
 
-       $metaname_id= metaname::where('metanames.metaname_name',"Managers")->first();     
+       $metaname_id= metaname::where('metanames.metaname_name',"Managers")->first();
 
        // dd($metaname_id->id);
          $metaname_id=$metaname_id->id;
 
-      
+
         $assetID=request('assetID');
         $assetIDf=request('assetID');
-       
-      
-     
+
+
+
        if($metaname_id==null)
        {
           //dd($metaname_id);
              $metaname_id = metaname::where('metanames.metaname_name',"Managers")->first();
-           
+
        }
 
 
@@ -121,7 +126,7 @@ class DailydutymanagerController extends Controller
     //$metaname_id=$this->metaname_model;
     $metanamess = metaname::where('metanames.metaname_name',"Managers")->first();
    $assetss = asset::where('assets.id',$assetID)->first();
-   
+
     $users=user::where('id',auth()->id())->first();
     $propertyID=asset::where('id',$assetID)->first();
   //  $assetss=$propertyID;
@@ -154,7 +159,7 @@ class DailydutymanagerController extends Controller
       ->select('assets.id','assets.asset_name')
       ->get();
 
-  
+
 
     $departApply= department::where('status','Active')->get();
     //dd('axssa');
@@ -233,19 +238,19 @@ class DailydutymanagerController extends Controller
 
 
        $qns = DB::select("select * from qnsview where department_id in(".$users->department_id.") and duration='".$daily_morningb."' and metaname_id in(select metaname_id from qnsview where duration='".$daily_morningb."')");
-  
+
   //dd($qns);
     }else{
 
  $daily_afternoon="Daily Afternoon";
-  $qns = DB::select("select * from qnsview where department_id in(".$users->department_id.") and duration='".$daily_afternoon."' and metaname_id in(select metaname_id from qnsview where duration='".$daily_afternoon."')");  
+  $qns = DB::select("select * from qnsview where department_id in(".$users->department_id.") and duration='".$daily_afternoon."' and metaname_id in(select metaname_id from qnsview where duration='".$daily_afternoon."')");
 
   /// dd('popo cc');
     }
 
  // $departNames=collect($users->department_id);
   // $qns = DB::select("select * from qnsview where department_id in(".trim($qnsapply,'[]').") and duration='Weekly' and metaname_id in(".$metaname_id.")");
- 
+
 
 //dd($qns);
 
@@ -254,7 +259,7 @@ class DailydutymanagerController extends Controller
     //$answerPerc=DB::select('select * from answers_view');
      $answerPerc=DB::select('select * from answers_view_summary');
 
-     //dd($checkQns);   
+     //dd($checkQns);
     //sqlite
 
     $answerPerc = collect($answerPerc);
@@ -318,7 +323,7 @@ class DailydutymanagerController extends Controller
 
       dd('Mail sent successfully');
     }
-    
+
 
     // dd($metaname_id);
 
@@ -347,7 +352,8 @@ class DailydutymanagerController extends Controller
      */
     public function store(Request $request)
     {
-
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
        //$rad=$this->rad;
     //dd('sdsd');
 
@@ -481,7 +487,7 @@ $answerTableUpdate2=DB::statement('update dutymanagers a set a.manager_checklist
 
     //Update value
    // $answerTableUpdate1=DB::statement('update dutymanagers a,optional_answers o set a.answer=o.answer,a.answer_label=o.answer_classification where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
-    
+
     $answerTableUpdate1=DB::statement('update dutymanagers a,optional_answers o set a.answer=o.answer where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
 
 
