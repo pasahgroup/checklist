@@ -7,6 +7,8 @@ use App\Models\metadata;
 use App\Models\metanameDatatype;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dbsetting;
 
 class MetanameController extends Controller
 {
@@ -17,6 +19,9 @@ class MetanameController extends Controller
      */
     public function index()
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
          $metanames = metaname::where('status','Active')->get();
          $metadatas = metadata::where('status','Active')->get();
         $metanameDatatypes = metanameDatatype::where('status','Active')->get();
@@ -42,6 +47,9 @@ class MetanameController extends Controller
      */
     public function store(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
          $property='asset_';
          $metadatas = request('metadata_name');
 
@@ -96,6 +104,9 @@ foreach ($metadatas as $metadata) {
      */
     public function edit(metaname $property,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           $metanames = metaname::where('id',$id)
                ->update([
                 'status'=>"Inactive",
@@ -110,7 +121,7 @@ foreach ($metadatas as $metadata) {
                return redirect()->back()->with('success','Metaname deleted successfly');
             }
 
-            
+
 
     /**
      * Update the specified resource in storage.
@@ -121,6 +132,9 @@ foreach ($metadatas as $metadata) {
      */
     public function update(Request $request,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
       $metaname = metaname::where('id',$id)->first();
               //dd($metaname);
         if($metaname){
@@ -178,6 +192,9 @@ $insetMetadata = metanameDatatype::UpdateOrCreate([
 
     public function destroy($id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
         $metanameDatatype = metanameDatatype::where('metaname_id',$id)->first();
         $Metaname = metaname::where('id',$id)->first();
         if($Metaname){
@@ -193,6 +210,9 @@ $insetMetadata = metanameDatatype::UpdateOrCreate([
 
   public function recoveryUpdate(metaname $department,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           $metanames = metaname::where('id',$id)
                ->update([
                 'status'=>"Active",
@@ -210,6 +230,9 @@ $insetMetadata = metanameDatatype::UpdateOrCreate([
 
    public function recovery()
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
        $metanames = metaname::where('status','Inactive')->get();
          // $datatypes = datatype::get();
         return view('admin.settings.recovery.recoveryMetaname',compact('metanames'));

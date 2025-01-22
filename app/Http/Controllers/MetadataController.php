@@ -9,6 +9,8 @@ use App\Models\setIndicator;
 use App\Models\optionalAnswer;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dbsetting;
 
 class MetadataController extends Controller
 {
@@ -19,6 +21,9 @@ class MetadataController extends Controller
      */
     public function index()
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           $metadatas = metadata::where('status','Active')
           ->orWhere('status','Stop')
           ->get();
@@ -39,6 +44,9 @@ class MetadataController extends Controller
 
  public function riqDatatype()
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           $riqs = optionalAnswer::join('set_indicators','set_indicators.id','optional_answers.indicator_id')
           // ->where('set_indicators.status','InActive')
           ->groupby('optional_answers.indicator_id')
@@ -52,6 +60,9 @@ class MetadataController extends Controller
 
  public function updateDatatype(Request $request,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
          $setIndicator = setIndicator::where('id',$id)
                ->update([
                 'qns'=>request('qn_name'),
@@ -76,6 +87,9 @@ class MetadataController extends Controller
      */
     public function store(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
               $stock = metadata::UpdateOrCreate(
             [
                 'metadata_name'=>request('metadata_name'),
@@ -107,6 +121,9 @@ class MetadataController extends Controller
      */
     public function edit(metadata $metadata,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
          $metadatas = metadata::where('id',$id)
                ->update([
                 'status'=>"Inactive",
@@ -124,6 +141,9 @@ class MetadataController extends Controller
      */
     public function update(Request $request,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
     $metadata = metadata::where('id',$id)->first();
     //$metadataType=request('metadata_name');
 $metaName=$metadata->metadata_name;
@@ -161,6 +181,9 @@ $metaName=$metadata->metadata_name;
 
     public function destroy($id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
         $metadata = metadata::where('id',$id)->first();
         if($metadata){
             $metadata->delete();
@@ -173,6 +196,9 @@ $metaName=$metadata->metadata_name;
 
   public function recoveryUpdate(metadata $department,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           $departments = metadata::where('id',$id)
                ->update([
                 'status'=>"Active",
@@ -185,6 +211,9 @@ $metaName=$metadata->metadata_name;
 
    public function recovery()
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
        $metadatas = metadata::where('status','Inactive')->get();
           $datatypes = datatype::get();
         return view('admin.settings.recovery.recoveryMetadata',compact('metadatas','datatypes'));
