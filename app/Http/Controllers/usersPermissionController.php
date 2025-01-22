@@ -14,6 +14,8 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dbsetting;
 
 class usersPermissionController extends Controller
 {
@@ -25,7 +27,7 @@ class usersPermissionController extends Controller
     public function index()
     {
          $users= User::get();
-         $departments= department::get();
+         $departments= department::on()->get();
 
         $userRoles = User::join('user_roles','users.id','user_roles.sys_user_id')
         ->join('roles','user_roles.role_id','roles.id')
