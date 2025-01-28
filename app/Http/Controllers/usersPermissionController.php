@@ -27,7 +27,7 @@ class usersPermissionController extends Controller
     public function index()
     {
          $users= User::get();
-         $departments= department::on()->get();
+         $departments= department::get();
 
         $userRoles = User::join('user_roles','users.id','user_roles.sys_user_id')
         ->join('roles','user_roles.role_id','roles.id')

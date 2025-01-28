@@ -17,6 +17,8 @@ use App\Models\qnsAppliedto;
 use App\Models\activityRole;
 use App\Models\user;
 use App\Models\userActivity;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dbsetting;
 
 use App\Models\departmentRole;
 use Livewire\Component;
@@ -41,6 +43,9 @@ class UserActivityLivewire extends Component
 
 public function store(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
  $users = request('users');
  $activities = request('activities');
          // $names = request('names');
@@ -111,6 +116,9 @@ return redirect()->back()->with('error','Users not selected');
 
     public function render(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+      
      $pos_id=$this->metaname_id;
      $qnType=$this->qnType;
      $times=$this->qnNo;

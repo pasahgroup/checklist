@@ -15,6 +15,9 @@ use App\Models\metaname;
 use App\Models\setIndicator;
 use App\Models\qnsAppliedto;
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\dbsetting;
+
 use App\Models\departmentRole;
 use Livewire\Component;
 use Illuminate\Http\Request;
@@ -38,6 +41,9 @@ class AssignRolesLivewire extends Component
 
 public function store(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
 
  $roles = request('roles');
          $departs = request('departs');
@@ -109,6 +115,9 @@ return redirect()->back()->with('error','Department not selected');
 
     public function render(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
      $pos_id=$this->metaname_id;
      $qnType=$this->qnType;
      $times=$this->qnNo;

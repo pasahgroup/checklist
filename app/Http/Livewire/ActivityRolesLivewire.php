@@ -15,6 +15,8 @@ use App\Models\metaname;
 use App\Models\setIndicator;
 use App\Models\qnsAppliedto;
 use App\Models\activityRole;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dbsetting;
 
 use App\Models\departmentRole;
 use Livewire\Component;
@@ -39,6 +41,9 @@ class ActivityRolesLivewire extends Component
 
 public function store(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
  $roles = request('roles');
  $activities = request('activities');
          // $names = request('names');
@@ -109,6 +114,9 @@ return redirect()->back()->with('error','Roles not selected');
 
     public function render(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+      
      $pos_id=$this->metaname_id;
      $qnType=$this->qnType;
      $times=$this->qnNo;

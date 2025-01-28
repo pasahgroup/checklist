@@ -8,19 +8,18 @@
   }
   ul#stepForm li {
     list-style: none outside none;
-  } 
+  }
   label{margin-top: 10px;}
   .help-inline-error{color:red;}
 </style>
   </head>
   <body>
-  
+
   <br />
   <br />
   <br />
 
-
-    <div class="card card-custom gutter-b bg-white border-0" >  
+    <div class="card card-custom gutter-b bg-white border-0" >
       <div class="clearfix"></div>
 <div class="container" style="padding-left: 0px; padding-right: 15px;">
    <div class="page-header">
@@ -46,9 +45,9 @@
                   <div class="col-md-6">
                                   <label >Business Name</label>
   <input type="text" name="business_name" class="form-control border-dark"  placeholder="bisiness name">
-                                  
+
 </div>
-     
+
 
   <div class="col-md-6">
             <label >TIN</label>
@@ -63,7 +62,7 @@
                 <input class="form-control" type="number" name="phone_number" placeholder="company mobile number" required>
                                 </div>
 
-			  <div class="clearfix" style="height: 10px;clear: both;"></div>
+			  <div class="clearfix" style="height: 1px;clear: both;"></div>
 
          <div class="col-md-6">
                   <label>Region</label>
@@ -72,14 +71,14 @@
              <div class="col-md-6">
                   <label >District</label>
               <input class="form-control" type="text" name="district" placeholder="district">
-                                </div>     
-                               
-       
-       <div class="clearfix" style="height: 10px;clear: both;"></div>
+                                </div>
+
+
+       <div class="clearfix" style="height: 1px;clear: both;"></div>
 
             <div class="form-group">
               <div class="col-lg-10 col-lg-offset-2">
-                <button class="btn btn-success open1 float-right" type="button">Next<span class="fa fa-arrow-right"></span></button> 
+                <button class="btn btn-success open1 float-right" type="button">Next<span class="fa fa-arrow-right"></span></button>
               </div>
             </div>
 
@@ -90,7 +89,7 @@
           <fieldset>
             <legend>Step 2 of 3</legend>
 
-           
+
             <div class="form-group">
               <label class="col-lg-2 control-label" for="upass1">Address: </label>
               <div class="col-lg-6">
@@ -98,7 +97,7 @@
               </div>
             </div>
 
- <div class="clearfix" style="height: 10px;clear: both;"></div>
+ <div class="clearfix" style="height: 1px;clear: both;"></div>
             <div class="form-group">
               <label class="col-lg-2 control-label" for="upass1">Category:</label>
                 <select  name="property_category" id="property_category" class="">
@@ -109,19 +108,19 @@
                      </select>
             </div>
 
-            <div class="clearfix" style="height: 10px;clear: both;"></div>
+            <div class="clearfix" style="height: 1px;clear: both;"></div>
 
             <div class="form-group">
               <label class="col-lg-2 control-label" for="upass1">Upload Logo: </label>
-              <div class="col-lg-6">                           
+              <div class="col-lg-6">
             <fieldset class="form-group mb-3 border-dark rounded p-1">
           <input type="file" class="d-block w-100" id="attachment" name="attachment[]" accept="image/*">
                                   </fieldset>
                                 </div>
 
-<div class="clearfix" style="height: 10px;clear: both;"></div>
+<div class="clearfix" style="height: 1px;clear: both;"></div>
 <label class="col-lg-2 control-label" for="upass1">Who Registered: </label>
-<div class="clearfix" style="height: 10px;clear: both;"></div>
+<div class="clearfix" style="height: 1px;clear: both;"></div>
   <div class="form-group">
               <label class="col-lg-2 control-label" for="upass1">First name: </label>
               <div class="col-lg-6">
@@ -129,19 +128,19 @@
               </div>
             </div>
 
-            <div class="clearfix" style="height: 10px;clear: both;"></div>
+            <div class="clearfix" style="height: 1px;clear: both;"></div>
               <div class="form-group">
               <label class="col-lg-2 control-label" for="upass1">Last name: </label>
               <div class="col-lg-6">
                <input class="form-control" type="text" name="last_name" placeholder="last name">
               </div>
             </div>
-<div class="clearfix" style="height: 10px;clear: both;"></div>
+<div class="clearfix" style="height: 1px;clear: both;"></div>
 
             <div class="form-group">
               <div class="col-lg-10 col-lg-offset-2">
-                <button class="btn btn-warning back2 float-left" type="button"><span class="fa fa-arrow-left"></span> Back</button> 
-                <button class="btn btn-success open2 float-right" type="button">Next <span class="fa fa-arrow-right"></span></button> 
+                <button class="btn btn-warning back2 float-left" type="button"><span class="fa fa-arrow-left"></span> Back</button>
+                <button class="btn btn-success open2 float-right" type="button">Next <span class="fa fa-arrow-right"></span></button>
               </div>
             </div>
 
@@ -157,16 +156,16 @@
                 <input type="text" value="{{$pin}}" id="code" name="code" class="form-control" autocomplete="off" required readonly>
               </div>
             </div>
-             <div class="clearfix" style="height: 10px;clear: both;"></div>
+             <div class="clearfix" style="height: 1px;clear: both;"></div>
               <div class="form-group">
               <label class="col-lg-2 control-label" for="upass1">User Email: </label>
               <div class="col-lg-6">
                 <input class="form-control" type="email" id="email" name="email" placeholder="company email">
               </div>
             </div>
-            <div class="clearfix" style="height: 10px;clear: both;"></div>
+            <div class="clearfix" style="height: 1px;clear: both;"></div>
 
-           
+
  {{--
              <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Password') }}" />
@@ -178,8 +177,8 @@
                 <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 --}}
-        
-       
+
+
             <div class="form-group">
               <label class="col-lg-2 control-label" for="upass1">Password:</label>
               <div class="col-lg-6">
@@ -187,7 +186,7 @@
               </div>
             </div>
 
-            <div class="clearfix" style="height: 10px;clear: both;"></div>
+            <div class="clearfix" style="height: 1px;clear: both;"></div>
 
             <div class="form-group">
               <label class="col-lg-2 control-label" for="upass1">Confirm Password: </label>
@@ -196,12 +195,12 @@
               </div>
             </div>
 
-            <div class="clearfix" style="height: 10px;clear: both;"></div>
+            <div class="clearfix" style="height: 1px;clear: both;"></div>
 
             <div class="form-group">
               <div class="col-lg-10 col-lg-offset-2">
-                <button class="btn btn-warning back3" type="button"><span class="fa fa-arrow-left"></span> Back</button> 
-                <button class="btn btn-success float-right" type="submit" name="submit">Submit </button> 
+                <button class="btn btn-warning back3" type="button"><span class="fa fa-arrow-left"></span> Back</button>
+                <button class="btn btn-success float-right" type="submit" name="submit">Submit </button>
                 <img src="images/spinner.gif" alt="" id="loader" style="display: none">
               </div>
             </div>
@@ -216,7 +215,7 @@
 </div>
 </div>
 
-<script type="text/javascript">  
+<script type="text/javascript">
   jQuery().ready(function() {
 
     // validate form on keyup and submit
@@ -287,7 +286,7 @@
         $("#sf3").show("slow");
       }
     });
-    
+
     $(".open3").click(function() {
       if (v.form()) {
         $("#loader").show();
@@ -297,7 +296,7 @@
         return false;
       }
     });
-    
+
     $(".back2").click(function() {
       $(".frm").hide("fast");
       $("#sf1").show("slow");

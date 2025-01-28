@@ -35,10 +35,10 @@ class profileController extends Controller
     {
      $auth=auth::user();
      $aData['dataC'] = dbsetting::getConnect($auth->id);
-     
+
      if(!is_null($auth->company_id))
      {
-        $profile = myCompany::on('clientdb')->where('id',$auth->company_id)->first();         
+        $profile = myCompany::on('clientdb')->where('id',$auth->company_id)->first();
          }
          else{
              return redirect()->back()->with('info','Company ID is null');
@@ -49,7 +49,7 @@ class profileController extends Controller
 
  public function companyWeb()
     {
-           $auth=auth()->user();
+           ///$auth=auth()->user();
 
       //  $profile = myCompany::first();
          $pin=rand(111111, 999999);
@@ -60,10 +60,10 @@ class profileController extends Controller
             $properties=property::where('status','Active')
             ->get();
              $roles = role::where('status','Active')->get();
-            $departments=department::get();
+            //$departments=department::get();
 
-
-        return view('admin.profile.profile_web',compact('pin','properties','departments','roles'));    
+  return view('admin.profile.profile_web',compact('pin','properties','roles'));
+        // return view('admin.profile.profile_web',compact('pin','properties','departments','roles'));
     }
     /**
      * Show the form for creating a new resource.
@@ -93,8 +93,8 @@ class profileController extends Controller
   //       ])->validate();
 
 //dd('print email');
-
-$department = department::where('department_name','Manager')->first();
+// $department = department::where('department_name','Manager')->first();
+$department =1;
 $role_name = role::where('name','Manager')->first();
 
 //Company view
@@ -103,14 +103,14 @@ $role_name = role::where('name','Manager')->first();
 
    $userEmail = user::where('email',request('email'))
   ->where('status','Active')->first();
-  
+
   if(!is_null($compEmail))
-  {  
+  {
    return redirect()->back()->with('info','Email alredy exist');
   }
 
 if(!is_null($userEmail))
-  {  
+  {
    return redirect()->back()->with('info','Email alredy exist');
   }
 
@@ -129,7 +129,7 @@ if(!is_null($userEmail))
                      //upload the image
                      $path =$attached->storeAs('public/logo/', $imageToStore);
 
-                
+
     //Insert to user
 //Insert to user
        $userReg = user::Create([
@@ -173,13 +173,13 @@ if(!is_null($userEmail))
 $userReg->assignRole($role_name->id);
 $appliedto =userRole::Create([
         'sys_user_id'=>$userReg->id,
-        'role_id'=>$role_name->id,        
+        'role_id'=>$role_name->id,
         'status'=>'Active',
-        'user_id'=>$userReg->id     
+        'user_id'=>$userReg->id
         ]);
 
 //Insert into property table
- $insert_property = property::UpdateOrCreate([       
+ $insert_property = property::UpdateOrCreate([
         'company_id'=>$insetqnsy->id,
           'level'=>'Main',
       ],[
@@ -195,7 +195,7 @@ $appliedto =userRole::Create([
          'email'=>request('email'),
          //'password'=>Hash::make(request('password')),
          'password'=>Hash::make(request('password')),
-          'property_description'=>'First company registration',        
+          'property_description'=>'First company registration',
            'photo'=>$imageToStore,
          'status'=>'Active',
           'user_id'=>$userReg->id
@@ -211,23 +211,23 @@ $updateUserPID = user::where('id',$userReg->id)
 
 //Insert data to dbconnects table
 $dbconnect =dbconnect::Create([
-     'user_id'=>$userReg->id, 
-        'company_id'=>$insetqnsy->id,       
-        'status'=>'Active'     
+     'user_id'=>$userReg->id,
+        'company_id'=>$insetqnsy->id,
+        'status'=>'Active'
         ]);
 
-//Insert one value in asset table             
+//Insert one value in asset table
 $assetData =asset::Create([
-     'property_id'=>$insert_property->id, 
-     'metaname_id'=>1, 
+     'property_id'=>$insert_property->id,
+     'metaname_id'=>1,
      'asset_name'=>"Room 1",
      'asset_type'=>"Room",
      'time_show'=>1,
      'asset_show'=>1,
 
-        'asset_description'=>"Room 1", 
-        'status'=>'Active',           
-'user_id'=>$userReg->id, 
+        'asset_description'=>"Room 1",
+        'status'=>'Active',
+'user_id'=>$userReg->id,
         ]);
 
 
@@ -255,12 +255,12 @@ else
           'tin'=>request('tin'),
           'vrn'=>request('vrn'),
           'phone_number'=>request('phone_number'),
-          'email'=>request('email'),          
+          'email'=>request('email'),
           'address'=>request('address'),
 
              'district'=>request('district'),
              'region'=>request('region'),
-          
+
           'first_name'=>request('first_name'),
           'last_name'=>request('last_name'),
            'code'=>request('code'),
@@ -268,7 +268,7 @@ else
           'user_id'=>$userReg->id
         ]);
 
-      
+
         $userSiteReg = userProperty::Create([
         'sys_user_id'=>$userReg->id,
         'property_id'=>$insetqnsy->id,
@@ -281,13 +281,13 @@ else
 
 $appliedto =userRole::Create([
         'sys_user_id'=>$userReg->id,
-         'role_id'=>$role_name->id,         
+         'role_id'=>$role_name->id,
         'status'=>'Active',
-        'user_id'=>$userReg->id   
+        'user_id'=>$userReg->id
         ]);
 
 //Insert data into properties table
- $insert_property = property::UpdateOrCreate([       
+ $insert_property = property::UpdateOrCreate([
         'company_id'=>$insetqnsy->id,
          'level'=>'Main',
     ],[
@@ -302,7 +302,7 @@ $appliedto =userRole::Create([
 
          'email'=>request('email'),
          'password'=>Hash::make(request('password')),
-          'property_description'=>'First company registration',         
+          'property_description'=>'First company registration',
          'status'=>'Active',
           'user_id'=>$userReg->id
         ]);
@@ -318,36 +318,34 @@ $updateUserPID = user::where('id',$userReg->id)
   //Insert data to
 $dbconnect =dbconnect::Create([
          'user_id'=>$userReg->id,
-        'company_id'=>$insetqnsy->id,       
-        'status'=>'Active'     
+        'company_id'=>$insetqnsy->id,
+        'status'=>'Active'
         ]);
-     
-//Insert one value in asset table             
+
+//Insert one value in asset table
 $assetData =asset::Create([
      'property_id'=>$insert_property->id,
-     'metaname_id'=>1, 
+     'metaname_id'=>1,
      'asset_name'=>"Room 1",
      'asset_type'=>"Room",
      'time_show'=>1,
      'asset_show'=>1,
 
-        'asset_description'=>"Room 1", 
-        'status'=>'Active',          
-'user_id'=>$userReg->id, 
+        'asset_description'=>"Room 1",
+        'status'=>'Active',
+'user_id'=>$userReg->id,
         ]);
 
      }
 
-       
-
        $code=request('code');
      if(request('profile_web'))
      {
-        return redirect()->route('login',compact('code'))->with('success','Registered successfully, Now Login');     
+        return redirect()->route('login',compact('code'))->with('success','Registered successfully, Now Login');
      }else{
         return redirect()->route('company-profile.index')->with('success','Updated successfully');
       }
-  
+
     }
 
     /**
@@ -389,22 +387,22 @@ $assetData =asset::Create([
           'tin'=>request('tin'),
           'vrn'=>request('vrn'),
           'phone_number'=>request('phone_number'),
-          'email'=>request('email'),          
+          'email'=>request('email'),
           'address'=>request('address'),
 
              'district'=>request('district'),
              'region'=>request('region'),
-          
+
           'first_name'=>request('first_name'),
           'last_name'=>request('last_name'),
            'code'=>request('code'),
           'status'=>'Active'
         ]);
-    
+
 
       $myCompanyID = property::where('id',$auth->property_id)
-             ->update([         
-         'property_name'=>request('business_name'),               
+             ->update([
+         'property_name'=>request('business_name'),
         ]);
 
 //Update Photos
@@ -422,11 +420,11 @@ if(request('attachment')){
                      $imageToStore = $filename.'_'.time().'.'.$extension;
                      //upload the image
                      $path =$attached->storeAs('public/logo/', $imageToStore);
-                 
-   
+
+
       $myCompanyID = myCompany::where('id',$auth->company_id)
              ->update([
-'logo'=>$imageToStore,         
+'logo'=>$imageToStore,
         ]);
 
 

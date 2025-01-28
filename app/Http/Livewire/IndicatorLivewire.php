@@ -12,6 +12,8 @@ use App\Models\property;
 use App\Models\metaname;
 
 use App\Models\sessionm;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dbsetting;
 
 use App\Models\setIndicator;
 use App\Models\qnsAppliedto;
@@ -41,6 +43,9 @@ class IndicatorLivewire extends Component
 
 public function store(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
          $names = request('names');
  $answer_class = request('answer_class');
 //dd(request('duration'));
@@ -94,12 +99,15 @@ foreach ($names as $key=>$name) {
 
     public function render(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+      
      $pos_id=$this->metaname_id;
      //$qnType=$this->qnType;
      $times=$this->qnNo;
 $qns_type=$this->qns_type;
 $qn_no=$this->qn_no;
-  
+
             $properties = property::get();
             $metanames = metaname::orderby('metaname_name')
             ->get();
@@ -112,6 +120,6 @@ $qn_no=$this->qn_no;
       return view('livewire.indicator',compact('metadatas','metanames','sessions','properties','qn_no','qns_type'))
       ->layout('layouts.app');
 
-    
+
   }
 }

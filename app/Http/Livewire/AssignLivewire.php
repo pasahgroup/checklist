@@ -16,6 +16,8 @@ use App\Models\sessionm;
 
 use App\Models\setIndicator;
 use App\Models\qnsAppliedto;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dbsetting;
 
 use App\Models\optionalAnswer;
 use Livewire\Component;
@@ -41,6 +43,8 @@ class AssignLivewire extends Component
 
 public function store(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
 
  $metaname= request('metaname');
   $depart= request('depart');
@@ -59,15 +63,15 @@ return redirect()->back()->with('error','Indicators not selected');
      {
       // {{$indicators}}
    $section = request('section');
-    foreach ($indicators as $indicator) {  
-    
+    foreach ($indicators as $indicator) {
+
     //dd($section);
     $appliedto = qnsAppliedto::UpdateOrCreate([
         'metaname_id'=>$metaname,
-        'indicator_id'=>$indicator,   
+        'indicator_id'=>$indicator,
         'section'=>$section,
     ],
-        [            
+        [
        'department_id'=>request('depart'),
        'unit_name'=>$unit->unit_name,
         'status'=>'Active',
@@ -89,6 +93,9 @@ return redirect()->back()->with('error','Indicators not selected');
 
     public function render(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
      $pos_id=$this->metaname_id;
      $qnType=$this->qnType;
      $times=$this->qnNo;

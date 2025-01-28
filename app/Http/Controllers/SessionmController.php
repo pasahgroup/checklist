@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 // use App\Http\Requests\Request;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdatesessionmRequest;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dbsetting;
 
 class SessionmController extends Controller
 {
@@ -17,6 +19,9 @@ class SessionmController extends Controller
      */
     public function index()
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
         $sessionms = sessionm::get();
         //dd($sessionms);
         return view('admin.settings.sessions.sessionm',compact('sessionms'));
@@ -40,6 +45,8 @@ class SessionmController extends Controller
      */
     public function store(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
 
       // $stringx=str_replace(' ', '-',request('session'));
        $stringx = preg_replace('/\s+/', '-', request('session'));
@@ -49,7 +56,7 @@ class SessionmController extends Controller
                 'session_name'=>$stringx,
                 'status'=>'Active',
                 'user_id'=>auth()->id()
-            ]);          
+            ]);
             return redirect()->back()->with('success','Session Registered successfly');
     }
 
@@ -72,6 +79,9 @@ class SessionmController extends Controller
      */
     public function edit(sessionm $role,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           $stringx = preg_replace('/\s+/', '-', request('session'));
           $roles = sessionm::where('id',$id)
                ->update([
@@ -92,7 +102,8 @@ class SessionmController extends Controller
      */
     public function update(Request $request,$id)
     {
-
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
         //dd('ss');
         $stringx = preg_replace('/\s+/', '-', request('session'));
             $sessionm = sessionm::where('id',$id)->first();
@@ -119,7 +130,9 @@ class SessionmController extends Controller
 
     public function destroy($id)
     {
-     //
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
        // dd('dssd');
         $section = sessionm::where('id',$id)->first();
         if($section){
@@ -133,6 +146,9 @@ class SessionmController extends Controller
 
   public function recoveryUpdate(role $role,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           $roles = role::where('id',$id)
                ->update([
                 'status'=>"Active",

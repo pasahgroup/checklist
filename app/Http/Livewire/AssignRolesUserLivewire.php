@@ -18,6 +18,9 @@ use App\Models\activityRole;
 use App\Models\user;
 use App\Models\userRole;
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\dbsetting;
+
 use App\Models\departmentRole;
 use Livewire\Component;
 use Illuminate\Http\Request;
@@ -41,6 +44,9 @@ class AssignRolesUserLivewire extends Component
 
 public function store(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
  $users = request('users');
  $roles = request('roles');
 
@@ -81,6 +87,9 @@ return redirect()->back()->with('error','Users not selected');
 
     public function render(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
      $pos_id=$this->metaname_id;
      $qnType=$this->qnType;
      $times=$this->qnNo;
