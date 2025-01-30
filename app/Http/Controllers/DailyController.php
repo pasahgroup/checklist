@@ -85,7 +85,6 @@ class DailyController extends Controller
 // $aData['dataC'] = dbsetting::getConnect($auth->id);
 
 
-
       $current_date = date('Y-m-d');
       //Extract date
       $datet=Carbon::now();
