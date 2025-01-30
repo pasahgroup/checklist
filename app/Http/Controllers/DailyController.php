@@ -78,10 +78,10 @@ class DailyController extends Controller
 
    public function index(Request $request)
     {
-
+$valueDB=DB::table('dbconnects')->where('user_id',Auth::user()->id)->first();
 $auth=auth::user();
 $aData['dataC'] = dbsetting::getConnect($auth->id);
-$valueDB=DB::table('dbconnects')->where('user_id',Auth::user()->id)->first();
+
   dd($valueDB);
 
       $current_date = date('Y-m-d');
