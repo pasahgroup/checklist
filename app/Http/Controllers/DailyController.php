@@ -80,7 +80,6 @@ class DailyController extends Controller
     {
 // $valueDB=DB::table('dbconnects')->where('user_id',Auth::user()->id)->first();
 //   dd($valueDB);
-//
 $auth=auth::user();
 $aData['dataC'] = dbsetting::getConnect($auth->id);
 
