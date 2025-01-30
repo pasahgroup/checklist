@@ -80,9 +80,9 @@ class DailyController extends Controller
     {
 $auth=auth::user();
 $aData['dataC'] = dbsetting::getConnect($auth->id);
-//$valueDB=DB::table('dbconnects')->where('user_id',Auth::user()->id)->first();
+$valueDB=DB::table('dbconnects')->where('user_id',Auth::user()->id)->first();
 
-  dd($auth);
+  dd($valueDB);
 
       $current_date = date('Y-m-d');
       //Extract date
