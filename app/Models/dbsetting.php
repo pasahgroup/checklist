@@ -22,16 +22,18 @@ class dbsetting extends Model
    // ];
 
     public static function getConnect($n){
-              $valueDB=DB::table('dbconnects')->where('user_id',$n)->first();
-
+              //$valueDB=DB::table('dbconnects')->where('user_id',$n)->first();
+   $auth=auth::user();
 //$db=$valueDB->db_name;
-//dd($db);
+//dd($auth);
+
 // DB::close('mysql');
-      Config::set('database.connections.mysql.host',$valueDB->host);
-        Config::set('database.connections.mysql.database',$valueDB->db_name);
-        Config::set('database.connections.mysql.username',$valueDB->db_username);
-       Config::set('database.connections.mysql.password',$valueDB->pwd);
+      Config::set('database.connections.mysql.host',$auth->host);
+        Config::set('database.connections.mysql.database',$auth->db_name);
+        Config::set('database.connections.mysql.username',$auth->db_username);
+       Config::set('database.connections.mysql.password',$auth->pwd);
      DB::reconnect('mysql');
+
       // DB::statement("use $db");
 
 
