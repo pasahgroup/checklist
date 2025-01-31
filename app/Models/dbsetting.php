@@ -32,7 +32,7 @@ class dbsetting extends Model
         Config::set('database.connections.mysql.database',$auth->db_name);
         Config::set('database.connections.mysql.username',$auth->db_username);
        Config::set('database.connections.mysql.password',$auth->pwd);
-     DB::reconnect('mysql');
+         DB::reconnect('mysql');
 
       // DB::statement("use $db");
 
