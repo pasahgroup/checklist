@@ -25,7 +25,7 @@ class dbsetting extends Model
               //$valueDB=DB::table('dbconnects')->where('user_id',$n)->first();
    $auth=auth::user();
 //$db=$valueDB->db_name;
-dd($auth);
+//dd($auth);
 
 // DB::close('mysql');
       Config::set('database.connections.mysql.host',$auth->host);
