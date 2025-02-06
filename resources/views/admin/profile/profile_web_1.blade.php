@@ -17,12 +17,6 @@
   </head>
   <body>
  <header class="intro">
- <h1> Bootstrap 5 Multi-step Form Example </h1>
- <p> Multi step form with progressbar and search using Bootstrap 5, Jquery and CSS.</p>
- <div class="action">
- <a href="https://www.codehim.com/bootstrap/bootstrap-5-multi-step-form-with-search/" title="Back to download and tutorial page" class="btn back">Back to Tutorial</a>
- </div>
-
  </header>
 
  <main>
@@ -31,9 +25,7 @@
     <!-- partial:index.partial.html -->
 <div class="container d-flex justify-content-center pt-2">
 </div>
-<div class="container d-flex justify-content-center pt-2">
-  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Display features</button>
-</div>
+
 <div class="col-12 p-3 collapse" id="collapseExample">
   <div class="card">
     <div class="card-header font-weight-bold">Available features</div>
@@ -76,14 +68,14 @@
         <div class="radio-group row justify-content-between px-3 text-center" style="justify-content:center !important">
           <div class="col-auto me-sm-2 mx-1 card-block py-0 text-center radio">
             <div class="opt-icon"><i class="fas fa-user-plus" style="font-size: 80px; margin-left: 25px;"></i></div>
-            <p><b>Add new user</b></p>
+            <p><b>Register</b></p>
           </div>
           <div id="suser" class="selected col-auto ms-sm-2 mx-1 card-block py-0 text-center radio">
             <div class="opt-icon"><i class="fas fa-users" style="font-size: 80px;"></i></div>
-            <p><b>Search existing user</b></p>
+            <p><b>Existing user</b></p>
           </div>
         </div>
-        <div class="searchfield text-center pb-1" style="font-size:12px">Search for example <b>Gary Hendren</b></div>
+        <div class="searchfield text-center pb-1" style="font-size:12px">Enter<b> Credentials</b></div>
         <div class="searchfield input-group px-5">
           <span class="input-group-text" id="basic-addon1"><i class="fas fa-search text-white" aria-hidden="true"></i></span>
           <input id="txt-search" class="form-control" type="text" placeholder="Search" aria-label="Search">
