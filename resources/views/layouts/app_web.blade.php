@@ -9,7 +9,7 @@
 	<title>Company Registration Form</title>
 	<meta name="description" content="Checklist Master, Sales and CRM system" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	
+
 	<!--begin::Global Theme Styles(used by all pages)-->
 	<link href="../../../assets/css/style.css?v=1.0" rel="stylesheet" type="text/css" />
   	<link href="../../../assets/scss/stylepanel.css" rel="stylesheet" type="text/css" />
@@ -52,12 +52,12 @@
 }
     </script>
     <script src="../../js/jQuery311.min.js" type="text/javascript"></script>
-  
+
 <link rel="shortcut icon" href="../../assets/images/misc/logo.svg" />
 </head>
 
 <body id="tc_body" class="header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-fixed">
-   
+
 
 	<!--begin::Header Mobile-->
 	<div id="tc_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
@@ -89,8 +89,8 @@
 		</div>
 		<!--end::Toolbar-->
 	</div>
-	
-	
+
+
 				<!--end::Header-->
                 @if($message= Session::get('success'))
 <div class="alert alert-success" role="alert">

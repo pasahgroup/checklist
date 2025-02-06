@@ -155,3 +155,4 @@
  <script src="../../multi2/js/bootstrap-multi-step-form.js" type="text/javascript"></script>
   </body>
 </html>
+<?php /**PATH C:\xampp\htdocs\checkmaster\resources\views/admin/profile/profile_web_1.blade.php ENDPATH**/ ?>
