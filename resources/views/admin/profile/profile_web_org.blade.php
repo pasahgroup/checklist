@@ -45,7 +45,6 @@
                   <div class="col-md-6">
                                   <label >Business Name</label>
   <input type="text" name="business_name" class="form-control border-dark"  placeholder="bisiness name">
-
 </div>
 
 

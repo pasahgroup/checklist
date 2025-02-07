@@ -1,312 +1,222 @@
-@extends('layouts.app_web')
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 5 Multi-step Form Example</title>
 
-	<style>
-  ul#stepForm, ul#stepForm li {
-    margin: 0;
-    padding: 0;
-  }
-  ul#stepForm li {
-    list-style: none outside none;
-  }
-  label{margin-top: 10px;}
-  .help-inline-error{color:red;}
-</style>
+    <!-- Bootstrap 5 CSS -->
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css'>
+    <!-- Font Awesome 5 -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css'>
+
+	<!-- Demo CSS -->
+	<link rel="stylesheet" href="css/demo.css">
+  	<link href="../../../multi2/css/demo.css" rel="stylesheet" type="text/css" />
+
   </head>
   <body>
+ <header class="intro">
+ </header>
 
-  <br />
-  <br />
-  <br />
+ <main>
+  <article>
 
-    <div class="card card-custom gutter-b bg-white border-0" >
-      <div class="clearfix"></div>
-<div class="container" style="padding-left: 0px; padding-right: 15px;">
-   <div class="page-header">
-        <h4>Lodge Registration Form</h4>
-      </div>
-  <div class="panel panel-success">
-    <div class="panel-heading">
-      <h3 class="panel-title">Complete this form in 3 steps!</h3>
-    </div>
-    <div class="panel-body">
-      <!-- <form name="basicform" id="basicform" method="post" action="#" enctype="multipart/form-data"> -->
-<x-guest-layout>
-   <form   id="basicform"  name="basicform" method="POST"  action="{{ route('company-profile-create.store') }}" enctype="multipart/form-data">
-                             @csrf
-    <input type="hidden" name="_method" value="post">
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-       <input type="hidden"  id="profile_web" name="profile_web" class="form-control" value="profile_web">
-
-        <div id="sf1" class="frm">
-          <fieldset>
-            <legend>Step 1 of 3</legend>
-
-                  <div class="col-md-6">
-                                  <label >Business Name</label>
-  <input type="text" name="business_name" class="form-control border-dark"  placeholder="bisiness name">
-
+    <!-- partial:index.partial.html -->
+<div class="container d-flex justify-content-center pt-2">
 </div>
 
-
-  <div class="col-md-6">
-            <label >TIN</label>
-          <input class="form-control" type="text" name="tin" placeholder="tin">
-                                </div>
-                                        <div class="col-md-6">
-                  <label >VRN</label>
-              <input class="form-control" type="text" name="vrn" placeholder="vrn">
-                                </div>
-      <div class="col-md-6">
-                  <label >Phone Number</label>
-                <input class="form-control" type="number" name="phone_number" placeholder="company mobile number" required>
-                                </div>
-
-			  <div class="clearfix" style="height: 1px;clear: both;"></div>
-
-         <div class="col-md-6">
-                  <label>Region</label>
-                <input class="form-control" type="text" name="region" placeholder="region">
-                                </div>
-             <div class="col-md-6">
-                  <label >District</label>
-              <input class="form-control" type="text" name="district" placeholder="district">
-                                </div>
-
-
-       <div class="clearfix" style="height: 1px;clear: both;"></div>
-
-            <div class="form-group">
-              <div class="col-lg-10 col-lg-offset-2">
-                <button class="btn btn-success open1 float-right" type="button">Next<span class="fa fa-arrow-right"></span></button>
-              </div>
-            </div>
-
-          </fieldset>
-        </div>
-
-        <div id="sf2" class="frm" style="display: none;">
-          <fieldset>
-            <legend>Step 2 of 3</legend>
-
-
-            <div class="form-group">
-              <label class="col-lg-2 control-label" for="upass1">Address: </label>
-              <div class="col-lg-6">
-               <input class="form-control" type="text" name="address" placeholder="company address">
-              </div>
-            </div>
-
- <div class="clearfix" style="height: 1px;clear: both;"></div>
-            <div class="form-group">
-              <label class="col-lg-2 control-label" for="upass1">Category:</label>
-                <select  name="property_category" id="property_category" class="">
-                          <option value="">--- Select property category ---</option>
-                         <option>Camp site</option>
-                         <option>Lodge</option>
-                         <option>Hotel</option>
-                     </select>
-            </div>
-
-            <div class="clearfix" style="height: 1px;clear: both;"></div>
-
-            <div class="form-group">
-              <label class="col-lg-2 control-label" for="upass1">Upload Logo: </label>
-              <div class="col-lg-6">
-            <fieldset class="form-group mb-3 border-dark rounded p-1">
-          <input type="file" class="d-block w-100" id="attachment" name="attachment[]" accept="image/*">
-                                  </fieldset>
-                                </div>
-
-<div class="clearfix" style="height: 1px;clear: both;"></div>
-<label class="col-lg-2 control-label" for="upass1">Who Registered: </label>
-<div class="clearfix" style="height: 1px;clear: both;"></div>
-  <div class="form-group">
-              <label class="col-lg-2 control-label" for="upass1">First name: </label>
-              <div class="col-lg-6">
-               <input class="form-control" type="text" name="first_name" placeholder="first name">
-              </div>
-            </div>
-
-            <div class="clearfix" style="height: 1px;clear: both;"></div>
-              <div class="form-group">
-              <label class="col-lg-2 control-label" for="upass1">Last name: </label>
-              <div class="col-lg-6">
-               <input class="form-control" type="text" name="last_name" placeholder="last name">
-              </div>
-            </div>
-<div class="clearfix" style="height: 1px;clear: both;"></div>
-
-            <div class="form-group">
-              <div class="col-lg-10 col-lg-offset-2">
-                <button class="btn btn-warning back2 float-left" type="button"><span class="fa fa-arrow-left"></span> Back</button>
-                <button class="btn btn-success open2 float-right" type="button">Next <span class="fa fa-arrow-right"></span></button>
-              </div>
-            </div>
-
-          </fieldset>
-        </div>
-
-        <div id="sf3" class="frm" style="display: none;">
-          <fieldset>
-            <legend>Step 3 of 3</legend>
-         <div class="form-group">
-              <label class="col-lg-2 control-label" for="upass1">User code: </label>
-              <div class="col-lg-6">
-                <input type="text" value="{{$pin}}" id="code" name="code" class="form-control" autocomplete="off" required readonly>
-              </div>
-            </div>
-             <div class="clearfix" style="height: 1px;clear: both;"></div>
-              <div class="form-group">
-              <label class="col-lg-2 control-label" for="upass1">User Email: </label>
-              <div class="col-lg-6">
-                <input class="form-control" type="email" id="email" name="email" placeholder="company email">
-              </div>
-            </div>
-            <div class="clearfix" style="height: 1px;clear: both;"></div>
-
-
- {{--
-             <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
---}}
-
-
-            <div class="form-group">
-              <label class="col-lg-2 control-label" for="upass1">Password:</label>
-              <div class="col-lg-6">
-                <input type="password" placeholder="Your Password" id="password" name="password" class="form-control" autocomplete="off">
-              </div>
-            </div>
-
-            <div class="clearfix" style="height: 1px;clear: both;"></div>
-
-            <div class="form-group">
-              <label class="col-lg-2 control-label" for="upass1">Confirm Password: </label>
-              <div class="col-lg-6">
-                <input type="password" placeholder="Confirm Password" id="password_confirmation" name="password_confirmation" class="form-control" autocomplete="off">
-              </div>
-            </div>
-
-            <div class="clearfix" style="height: 1px;clear: both;"></div>
-
-            <div class="form-group">
-              <div class="col-lg-10 col-lg-offset-2">
-                <button class="btn btn-warning back3" type="button"><span class="fa fa-arrow-left"></span> Back</button>
-                <button class="btn btn-success float-right" type="submit" name="submit">Submit </button>
-                <img src="images/spinner.gif" alt="" id="loader" style="display: none">
-              </div>
-            </div>
-
-          </fieldset>
-        </div>
-      </form>
-      </x-guest-layout>
+<div class="col-12 p-3 collapse" id="collapseExample">
+  <div class="card">
+    <div class="card-header font-weight-bold">Available features</div>
+    <div class="card-body">
+      <ul>
+        <li>Multi step form using Bootstrap 5, Jquery and CSS</li>
+        <li>Automatically percentage calculation of the progress bar</li>
+        <li><b>Step 1:</b> Add new user / Search existing user</li>
+        <ul>
+          <li>Option "Add new user"</li>
+          <ul>
+            <li>Abilty to click on Next button</li>
+          </ul>
+          <li>Option Search existing user</li>
+          <ul>
+            <li>Display input field, which is searchable</li>
+            <li>Next button is disabled until a available option is selected from the searchlist.</li>
+            <li>Next button will be deactivated when the selected value is being altered.</li>
+            <li>When a user is selected the step 2 form will be filled with all available data.</li>
+          </ul>
+        </ul>
+        <li><b>Step 2:</b> User information</li>
+        <ul>
+          <li>Input field "first name" and "last name" are required to advance to step 3.</li>
+          <li>When first and/or last name is empty an invalid warning will be displayed.</li>
+        </ul>
+      </ul>
     </div>
   </div>
-
-</div>
 </div>
 
-<script type="text/javascript">
-  jQuery().ready(function() {
+<div class="container d-flex justify-content-center" style="min-width:720px!important">
+  <div class="col-11 col-offset-2">
+    <!-- <div class="progress mt-3" style="height: 30px;">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" style="font-weight:bold; font-size:15px;" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+    </div> -->
 
-    // validate form on keyup and submit
-    var v = jQuery("#basicform").validate({
-      rules: {
-		    tin: {
-          required: true,
-          minlength: 2,
-          maxlength: 16
-        },
-         business_name: {
-          required: true,
-          minlength: 2,
-          maxlength: 64
-        },
- address: {
-          required: true,
-          minlength: 2,
-          maxlength: 64
-        },
-        first_name: {
-          required: true,
-          minlength: 2,
-          maxlength: 64
-        },
-        last_name: {
-          required: true,
-          minlength: 2,
-          maxlength: 64
-        },
-        u_name: {
-          required: true,
-          minlength: 2,
-          maxlength: 16
-        },
-        email: {
-          required: true,
-          minlength: 2,
-          email: true,
-          maxlength: 100,
-        },
-        upass1: {
-          required: true,
-          minlength: 6,
-          maxlength: 15,
-        },
-        upass2: {
-          required: true,
-          minlength: 6,
-          equalTo: "#upass1",
-        }
+  <x-guest-layout>
+    <form   id="basicform"  name="basicform" method="POST"  action="{{ route('company-profile-create.store') }}" enctype="multipart/form-data">
+                              @csrf
+     <input type="hidden" name="_method" value="post">
+     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <input type="hidden"  id="profile_web" name="profile_web" class="form-control" value="profile_web">
 
-      },
-      errorElement: "span",
-      errorClass: "help-inline-error",
-    });
+    <div class="card mt-3">
+      <div class="card-header font-weight-bold">Register a New Lodge</div>
+      <div class="card-body p-4 step">
 
-    $(".open1").click(function() {
-      if (v.form()) {
-        $(".frm").hide("fast");
-        $("#sf2").show("slow");
-      }
-    });
+        <div class="searchfield text-center pb-1" style="font-size:12px"></div>
+        <div class="form-group row">
+          <div class="col-2"></div>
+          <div class="col-4">
+            <label for="fname">First Name<b style="color: #dc3545;">*</b></label>
+            <input type="text" name="name" class="form-control" id="fname" required>
+            <div class="invalid-feedback">This field is required</div>
+          </div>
+          <div class="col-4">
+            <label for="lname">Last Name<b style="color: #dc3545;">*</b></label>
+            <input type="text" class="form-control" id="lname" required>
+            <div class="invalid-feedback">This field is required</div>
+          </div>
+        </div>
 
-    $(".open2").click(function() {
-      if (v.form()) {
-        $(".frm").hide("fast");
-        $("#sf3").show("slow");
-      }
-    });
 
-    $(".open3").click(function() {
-      if (v.form()) {
-        $("#loader").show();
-         setTimeout(function(){
-           $("#basicform").html('<h2>Thanks for your time.</h2>');
-         }, 1000);
-        return false;
-      }
-    });
 
-    $(".back2").click(function() {
-      $(".frm").hide("fast");
-      $("#sf1").show("slow");
-    });
 
-    $(".back3").click(function() {
-      $(".frm").hide("fast");
-      $("#sf2").show("slow");
-    });
 
-  });
-</script>
-@endsection
+                          <div class="col-md-12">
+                                          <label >Business Name</label>
+          <input type="text" name="business_name" class="form-control border-dark"  placeholder="bisiness name">
+        </div>
+
+
+          <div class="col-md-6">
+                    <label >TIN</label>
+                  <input class="form-control" type="text" name="tin" placeholder="tin">
+                                        </div>
+                                                <div class="col-md-6">
+                          <label >VRN</label>
+                      <input class="form-control" type="text" name="vrn" placeholder="vrn">
+                                        </div>
+              <div class="col-md-6">
+                          <label >Phone Number</label>
+                        <input class="form-control" type="number" name="phone_number" placeholder="company mobile number" required>
+                                        </div>
+
+        			  <div class="clearfix" style="height: 1px;clear: both;"></div>
+
+                 <div class="col-md-6">
+                          <label>Region</label>
+                        <input class="form-control" type="text" name="region" placeholder="region">
+                                        </div>
+                     <div class="col-md-6">
+                          <label >District</label>
+                      <input class="form-control" type="text" name="district" placeholder="district">
+                                        </div>
+
+
+
+    </div>
+
+      <div id="userinfo" class="card-body p-4 step" style="display: none">
+        <div class="text-center">
+          <h5 class="card-title font-weight-bold pb-2">User information</h5>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-2"></div>
+          <div class="col-4">
+            <label for="fname">First Name<b style="color: #dc3545;">*</b></label>
+            <input type="text" name="name" class="form-control" id="fname" required>
+            <div class="invalid-feedback">This field is required</div>
+          </div>
+          <div class="col-4">
+            <label for="lname">Last Name<b style="color: #dc3545;">*</b></label>
+            <input type="text" class="form-control" id="lname" required>
+            <div class="invalid-feedback">This field is required</div>
+          </div>
+        </div>
+        <div class="form-group row pt-2">
+          <label for="team" class="col-2 text-end control-label col-form-label">Team</label>
+          <div class="col-8">
+            <input type="text" class="form-control" id="team">
+          </div>
+        </div>
+        <div class="form-group row pt-2">
+          <label for="address" class="col-2 text-end control-label col-form-label">Address</label>
+          <div class="col-8">
+            <input type="text" class="form-control" id="address">
+          </div>
+        </div>
+        <div class="form-group row pt-2">
+          <label for="tel" class="col-2 text-end control-label col-form-label">Tel/Gsm</label>
+          <div class="col-8">
+            <input type="text" class="form-control" id="tel">
+          </div>
+        </div>
+        <div class="text-center text-muted"><b style="color: #dc3545;">*</b> required fields</div>
+      </div>
+
+      <div class="card-body p-5 step" style="display: none">
+        <div class="form-group row pt-2">
+          <label for="address" class="col-2 text-end control-label col-form-label">Address</label>
+          <div class="col-8">
+            <input type="text" class="form-control" id="address">
+          </div>
+        </div>
+        <div class="form-group row pt-2">
+          <label for="tel" class="col-2 text-end control-label col-form-label">Tel/Gsm</label>
+          <div class="col-8">
+            <input type="text" class="form-control" id="tel">
+          </div>
+        </div>
+      </div>
+      <div class="card-body p-5 step" style="display: none">
+        <div class="form-group row pt-2">
+          <label for="address" class="col-2 text-end control-label col-form-label">Address</label>
+          <div class="col-8">
+            <input type="text" class="form-control" id="address">
+          </div>
+        </div>
+        <div class="form-group row pt-2">
+          <label for="tel" class="col-2 text-end control-label col-form-label">Tel/Gsm</label>
+          <div class="col-8">
+            <input type="text" class="form-control" id="tel">
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="action back btn btn-sm btn-outline-warning" style="display: none">Back</button>
+        <button class="action next btn btn-sm btn-outline-secondary float-end"="">Next</button>
+        <button class="action submit btn btn-sm btn-outline-success float-end" style="display: none">Submit</button>
+      </div>
+    </div>
+  </form>
+      </x-guest-layout>
+
+  </div>
+</div>
+<!-- partial -->
+
+  </article>
+ </main>
+
+  <footer class="credit">Author: Crezzur - Distributed By: <a title="Awesome web design code & scripts" href="https://www.codehim.com?source=demo-page" target="_blank">CodeHim</a></footer>
+<!-- jQuery JS -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+<!-- Bootstrap 5 JS -->
+<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js'></script>
+<!-- Multi-step Form JS -->
+<script src="js/bootstrap-multi-step-form.js"></script>
+ <script src="../../multi2/js/bootstrap-multi-step-form.js" type="text/javascript"></script>
+  </body>
+</html>
