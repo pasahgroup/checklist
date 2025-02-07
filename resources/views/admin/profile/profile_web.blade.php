@@ -70,7 +70,6 @@
      <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden"  id="profile_web" name="profile_web" class="form-control" value="profile_web">
 
-    <div class="card mt-3">
       <div class="card-header font-weight-bold">Register a New Lodge</div>
       <div class="card-body p-4 step">
 
@@ -116,8 +115,8 @@
 
 
         <div class="form-group row pt-2">
-          <label for="team" class="col-3 text-end control-label col-form-label">Address:</label>
-          <div class="col-7">
+          <label for="team" class="col-4 text-end control-label col-form-label">Address:</label>
+          <div class="col-8">
             <input type="text" class="form-control" id="address" placeholder="company address" required>
               <div class="invalid-feedback">This field is required</div>
           </div>
@@ -125,8 +124,8 @@
 
 
         <div class="form-group row pt-2">
-          <label for="team" class="col-3 text-end control-label col-form-label">Category:</label>
-          <div class="col-7">
+          <label for="team" class="col-4 text-end control-label col-form-label">Category:</label>
+          <div class="col-8">
               <fieldset class="form-group mb-3 border-dark rounded p-1">
                 <select  name="property_category" id="property_category" class="">
                           <option value="">--- Select property category ---</option>
@@ -142,8 +141,8 @@
 
 
                         <div class="form-group row pt-2">
-                          <label for="team" class="col-3 text-end control-label col-form-label">Upload logo:</label>
-                          <div class="col-7">
+                          <label for="team" class="col-4 text-end control-label col-form-label">Upload logo:</label>
+                          <div class="col-8">
                               <fieldset class="form-group mb-3 border-dark rounded p-1">
                           <input type="file" class="d-block w-100" id="attachment" name="attachment[]" accept="image/*">
                               <div class="invalid-feedback">This field is required</div>
@@ -157,16 +156,16 @@
 
 
         <div class="form-group row pt-2">
-          <label for="team" class="col-3 text-end control-label col-form-label">First Name</label>
-          <div class="col-7">
+          <label for="team" class="col-4 text-end control-label col-form-label">First Name</label>
+          <div class="col-8">
             <input type="text" class="form-control" id="first_name" required>
               <div class="invalid-feedback">This field is required</div>
           </div>
         </div>
 
         <div class="form-group row pt-2">
-          <label for="team" class="col-3 text-end control-label col-form-label">Last Name</label>
-          <div class="col-7">
+          <label for="team" class="col-4 text-end control-label col-form-label">Last Name</label>
+          <div class="col-8">
             <input type="text" class="form-control" id="last_name" required>
               <div class="invalid-feedback">This field is required</div>
           </div>
@@ -174,26 +173,47 @@
       </div>
 
       <div class="card-body p-5 step" style="display: none">
-        <div class="form-group row pt-2">
-          <label for="address" class="col-2 text-end control-label col-form-label">Address</label>
-          <div class="col-8">
-            <input type="text" class="form-control" id="address">
-          </div>
-        </div>
-        <div class="form-group row pt-2">
-          <label for="tel" class="col-2 text-end control-label col-form-label">Tel/Gsm</label>
-          <div class="col-8">
-            <input type="text" class="form-control" id="tel">
-          </div>
-        </div>
+
+           <div class="form-group row pt-2">
+             <label for="team" class="col-4 text-end control-label col-form-label">User Code:</label>
+             <div class="col-8">
+                 <input type="text" value="{{$pin}}" id="code" name="code" class="form-control" autocomplete="off" required readonly>
+                 <div class="invalid-feedback">This field is required</div>
+             </div>
+           </div>
+
+
+           <div class="form-group row pt-2">
+             <label for="team" class="col-4 text-end control-label col-form-label">User Email:</label>
+             <div class="col-8">
+              <input class="form-control" type="email" id="email" name="email" placeholder="company email">
+                 <div class="invalid-feedback">This field is required</div>
+             </div>
+           </div>
+
+
+           <div class="form-group row pt-2">
+             <label for="team" class="col-4 text-end control-label col-form-label">Password</label>
+             <div class="col-8">
+               <input type="password" placeholder="Your Password" id="password" name="password" class="form-control" autocomplete="off">
+                 <div class="invalid-feedback">This field is required</div>
+             </div>
+           </div>
+
+           <div class="form-group row pt-2">
+             <label for="team" class="col-4 text-end control-label col-form-label">Confirm Password:</label>
+             <div class="col-8">
+             <input type="password" placeholder="Your Password" id="password" name="password" class="form-control" autocomplete="off">
+                 <div class="invalid-feedback">This field is required</div>
+             </div>
+           </div>
       </div>
-  
+
       <div class="card-footer">
         <button class="action back btn btn-sm btn-outline-warning" style="display: none">Back</button>
         <button class="action next btn btn-sm btn-outline-secondary float-end"="">Next</button>
         <button class="action submit btn btn-sm btn-outline-success float-end" type="submit" name="submit" style="display: none">Submit</button>
       </div>
-    </div>
   </form>
       </x-guest-layout>
 
