@@ -83,7 +83,7 @@
 
                           <div class="col-md-12">
                                           <label >Business Name</label>
-          <input type="text" name="business_name" class="form-control border-dark"  placeholder="bisiness name">
+          <input type="text" name="business_name" class="form-control border-dark"  placeholder="bisiness name" required>
         </div>
 
 
@@ -120,6 +120,47 @@
         </div>
 
 
+
+        <div class="form-group">
+          <label class="col-lg-2 control-label" for="upass1">Category:</label>
+            <select  name="property_category" id="property_category" class="">
+                      <option value="">--- Select property category ---</option>
+                     <option>Camp site</option>
+                     <option>Lodge</option>
+                     <option>Hotel</option>
+                 </select>
+        </div>
+
+
+
+        <div class="form-group row pt-2">
+          <label for="team" class="col-3 text-end control-label col-form-label">Category:</label>
+          <div class="col-7">
+              <fieldset class="form-group mb-3 border-dark rounded p-1">
+                <select  name="property_category" id="property_category" class="">
+                          <option value="">--- Select property category ---</option>
+                         <option>Camp site</option>
+                         <option>Lodge</option>
+                         <option>Hotel</option>
+                     </select>
+              <div class="invalid-feedback">This field is required</div>
+                </fieldset>
+          </div>
+        </div>
+
+
+
+                        <div class="form-group row pt-2">
+                          <label for="team" class="col-3 text-end control-label col-form-label">Upload logo:</label>
+                          <div class="col-7">
+                              <fieldset class="form-group mb-3 border-dark rounded p-1">
+                          <input type="file" class="d-block w-100" id="attachment" name="attachment[]" accept="image/*">
+                              <div class="invalid-feedback">This field is required</div>
+                                </fieldset>
+                          </div>
+                        </div>
+
+
         <div class="form-group row pt-2">
           <label for="team" class="col-3 text-end control-label col-form-label">First Name</label>
           <div class="col-7">
@@ -139,9 +180,13 @@
         <div class="form-group row pt-2">
           <label for="address" class="col-2 text-end control-label col-form-label">Address</label>
           <div class="col-8">
-            <input type="text" class="form-control" id="address">
+            <input type="text" class="form-control" id="address" required>
           </div>
         </div>
+
+
+
+
         <div class="form-group row pt-2">
           <label for="tel" class="col-2 text-end control-label col-form-label">Tel/Gsm</label>
           <div class="col-8">

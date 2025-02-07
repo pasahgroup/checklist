@@ -88,7 +88,6 @@
           <fieldset>
             <legend>Step 2 of 3</legend>
 
-
             <div class="form-group">
               <label class="col-lg-2 control-label" for="upass1">Address: </label>
               <div class="col-lg-6">
