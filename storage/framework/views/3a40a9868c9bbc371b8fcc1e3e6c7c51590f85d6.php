@@ -192,24 +192,11 @@
           </div>
         </div>
       </div>
-      <div class="card-body p-5 step" style="display: none">
-        <div class="form-group row pt-2">
-          <label for="address" class="col-2 text-end control-label col-form-label">Address</label>
-          <div class="col-8">
-            <input type="text" class="form-control" id="address">
-          </div>
-        </div>
-        <div class="form-group row pt-2">
-          <label for="tel" class="col-2 text-end control-label col-form-label">Tel/Gsm</label>
-          <div class="col-8">
-            <input type="text" class="form-control" id="tel">
-          </div>
-        </div>
-      </div>
+  
       <div class="card-footer">
         <button class="action back btn btn-sm btn-outline-warning" style="display: none">Back</button>
         <button class="action next btn btn-sm btn-outline-secondary float-end"="">Next</button>
-        <button class="action submit btn btn-sm btn-outline-success float-end" style="display: none">Submit</button>
+        <button class="action submit btn btn-sm btn-outline-success float-end" type="submit" name="submit" style="display: none">Submit</button>
       </div>
     </div>
   </form>
