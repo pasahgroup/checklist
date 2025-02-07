@@ -135,14 +135,12 @@
               </div>
             </div>
 <div class="clearfix" style="height: 1px;clear: both;"></div>
-
             <div class="form-group">
               <div class="col-lg-10 col-lg-offset-2">
                 <button class="btn btn-warning back2 float-left" type="button"><span class="fa fa-arrow-left"></span> Back</button>
                 <button class="btn btn-success open2 float-right" type="button">Next <span class="fa fa-arrow-right"></span></button>
               </div>
             </div>
-
           </fieldset>
         </div>
 

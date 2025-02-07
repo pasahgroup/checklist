@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 5 Multi-step Form Example</title>
+    <title>Lodge Registration Form</title>
 
     <!-- Bootstrap 5 CSS -->
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css'>
@@ -75,23 +75,6 @@
       <div class="card-body p-4 step">
 
         <div class="searchfield text-center pb-1" style="font-size:12px"></div>
-        <div class="form-group row">
-          <div class="col-2"></div>
-          <div class="col-4">
-            <label for="fname">First Name<b style="color: #dc3545;">*</b></label>
-            <input type="text" name="name" class="form-control" id="fname" required>
-            <div class="invalid-feedback">This field is required</div>
-          </div>
-          <div class="col-4">
-            <label for="lname">Last Name<b style="color: #dc3545;">*</b></label>
-            <input type="text" class="form-control" id="lname" required>
-            <div class="invalid-feedback">This field is required</div>
-          </div>
-        </div>
-
-
-
-
 
                           <div class="col-md-12">
                                           <label >Business Name</label>
@@ -99,58 +82,55 @@
         </div>
 
 
-          <div class="col-md-6">
+          <div class="col-md-12">
                     <label >TIN</label>
                   <input class="form-control" type="text" name="tin" placeholder="tin">
                                         </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                           <label >VRN</label>
                       <input class="form-control" type="text" name="vrn" placeholder="vrn">
                                         </div>
-              <div class="col-md-6">
+              <div class="col-md-12">
                           <label >Phone Number</label>
                         <input class="form-control" type="number" name="phone_number" placeholder="company mobile number" required>
                                         </div>
 
         			  <div class="clearfix" style="height: 1px;clear: both;"></div>
 
-                 <div class="col-md-6">
+                 <div class="col-md-12">
                           <label>Region</label>
                         <input class="form-control" type="text" name="region" placeholder="region">
                                         </div>
-                     <div class="col-md-6">
+                     <div class="col-md-12">
                           <label >District</label>
                       <input class="form-control" type="text" name="district" placeholder="district">
                                         </div>
 
-
-
     </div>
+
 
       <div id="userinfo" class="card-body p-4 step" style="display: none">
         <div class="text-center">
           <h5 class="card-title font-weight-bold pb-2">User information</h5>
         </div>
 
-        <div class="form-group row">
-          <div class="col-2"></div>
-          <div class="col-4">
-            <label for="fname">First Name<b style="color: #dc3545;">*</b></label>
-            <input type="text" name="name" class="form-control" id="fname" required>
-            <div class="invalid-feedback">This field is required</div>
-          </div>
-          <div class="col-4">
-            <label for="lname">Last Name<b style="color: #dc3545;">*</b></label>
-            <input type="text" class="form-control" id="lname" required>
-            <div class="invalid-feedback">This field is required</div>
-          </div>
-        </div>
+
         <div class="form-group row pt-2">
-          <label for="team" class="col-2 text-end control-label col-form-label">Team</label>
-          <div class="col-8">
-            <input type="text" class="form-control" id="team">
+          <label for="team" class="col-3 text-end control-label col-form-label">First Name</label>
+          <div class="col-7">
+            <input type="text" class="form-control" id="fname" required>
+              <div class="invalid-feedback">This field is required</div>
           </div>
         </div>
+
+        <div class="form-group row pt-2">
+          <label for="team" class="col-3 text-end control-label col-form-label">Last Name</label>
+          <div class="col-7">
+            <input type="text" class="form-control" id="lname" required>
+              <div class="invalid-feedback">This field is required</div>
+          </div>
+        </div>
+
         <div class="form-group row pt-2">
           <label for="address" class="col-2 text-end control-label col-form-label">Address</label>
           <div class="col-8">
