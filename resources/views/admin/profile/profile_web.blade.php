@@ -114,6 +114,16 @@
           <h5 class="card-title font-weight-bold pb-2">User information</h5>
         </div>
 
+
+        <div class="form-group row pt-2">
+          <label for="team" class="col-3 text-end control-label col-form-label">Address:</label>
+          <div class="col-7">
+            <input type="text" class="form-control" id="address" placeholder="company address" required>
+              <div class="invalid-feedback">This field is required</div>
+          </div>
+        </div>
+
+
         <div class="form-group row pt-2">
           <label for="team" class="col-3 text-end control-label col-form-label">Category:</label>
           <div class="col-7">
@@ -142,10 +152,14 @@
                         </div>
 
 
+                        <label class="col-lg-12 control-label" for="upass1">Who Registered: </label>
+                        <div class="clearfix" style="height: 1px;clear: both;"></div>
+
+
         <div class="form-group row pt-2">
           <label for="team" class="col-3 text-end control-label col-form-label">First Name</label>
           <div class="col-7">
-            <input type="text" class="form-control" id="fname" required>
+            <input type="text" class="form-control" id="first_name" required>
               <div class="invalid-feedback">This field is required</div>
           </div>
         </div>
@@ -153,28 +167,10 @@
         <div class="form-group row pt-2">
           <label for="team" class="col-3 text-end control-label col-form-label">Last Name</label>
           <div class="col-7">
-            <input type="text" class="form-control" id="lname" required>
+            <input type="text" class="form-control" id="last_name" required>
               <div class="invalid-feedback">This field is required</div>
           </div>
         </div>
-
-        <div class="form-group row pt-2">
-          <label for="address" class="col-2 text-end control-label col-form-label">Address</label>
-          <div class="col-8">
-            <input type="text" class="form-control" id="address" required>
-          </div>
-        </div>
-
-
-
-
-        <div class="form-group row pt-2">
-          <label for="tel" class="col-2 text-end control-label col-form-label">Tel/Gsm</label>
-          <div class="col-8">
-            <input type="text" class="form-control" id="tel">
-          </div>
-        </div>
-        <div class="text-center text-muted"><b style="color: #dc3545;">*</b> required fields</div>
       </div>
 
       <div class="card-body p-5 step" style="display: none">
@@ -208,7 +204,7 @@
       <div class="card-footer">
         <button class="action back btn btn-sm btn-outline-warning" style="display: none">Back</button>
         <button class="action next btn btn-sm btn-outline-secondary float-end"="">Next</button>
-        <button class="action submit btn btn-sm btn-outline-success float-end" style="display: none">Submit</button>
+        <button class="action submit btn btn-sm btn-outline-success float-end" type="submit" name="submit" style="display: none">Submit</button>
       </div>
     </div>
   </form>

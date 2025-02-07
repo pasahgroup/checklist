@@ -120,17 +120,13 @@
         </div>
 
 
-
-        <div class="form-group">
-          <label class="col-lg-2 control-label" for="upass1">Category:</label>
-            <select  name="property_category" id="property_category" class="">
-                      <option value="">--- Select property category ---</option>
-                     <option>Camp site</option>
-                     <option>Lodge</option>
-                     <option>Hotel</option>
-                 </select>
+        <div class="form-group row pt-2">
+          <label for="team" class="col-3 text-end control-label col-form-label">Address:</label>
+          <div class="col-7">
+            <input type="text" class="form-control" id="address" placeholder="company address" required>
+              <div class="invalid-feedback">This field is required</div>
+          </div>
         </div>
-
 
 
         <div class="form-group row pt-2">
@@ -161,10 +157,14 @@
                         </div>
 
 
+                        <label class="col-lg-12 control-label" for="upass1">Who Registered: </label>
+                        <div class="clearfix" style="height: 1px;clear: both;"></div>
+
+
         <div class="form-group row pt-2">
           <label for="team" class="col-3 text-end control-label col-form-label">First Name</label>
           <div class="col-7">
-            <input type="text" class="form-control" id="fname" required>
+            <input type="text" class="form-control" id="first_name" required>
               <div class="invalid-feedback">This field is required</div>
           </div>
         </div>
@@ -172,28 +172,10 @@
         <div class="form-group row pt-2">
           <label for="team" class="col-3 text-end control-label col-form-label">Last Name</label>
           <div class="col-7">
-            <input type="text" class="form-control" id="lname" required>
+            <input type="text" class="form-control" id="last_name" required>
               <div class="invalid-feedback">This field is required</div>
           </div>
         </div>
-
-        <div class="form-group row pt-2">
-          <label for="address" class="col-2 text-end control-label col-form-label">Address</label>
-          <div class="col-8">
-            <input type="text" class="form-control" id="address" required>
-          </div>
-        </div>
-
-
-
-
-        <div class="form-group row pt-2">
-          <label for="tel" class="col-2 text-end control-label col-form-label">Tel/Gsm</label>
-          <div class="col-8">
-            <input type="text" class="form-control" id="tel">
-          </div>
-        </div>
-        <div class="text-center text-muted"><b style="color: #dc3545;">*</b> required fields</div>
       </div>
 
       <div class="card-body p-5 step" style="display: none">
