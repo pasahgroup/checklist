@@ -93,6 +93,25 @@ class profileController extends Controller
   //       ])->validate();
 
 //dd('print email');
+
+
+$validatedData = $request->validate([
+         'business_name' => 'required',
+            'tin' => 'required',
+             'phone_number' => 'required',
+            //  'travel_date' => 'required',
+         'email' => 'required',
+            // 'email' => 'required|email|unique:users',
+     ], [
+         'business_name.required' => 'Business name field is required.',
+           'tin.required' => 'TIN field is required.',
+            'phone_number.required' => 'Phone number field is required.',
+             //'travel_date.required' => 'Travel date field is required.',
+
+         'email.required' => 'Email field is required. test 2',
+         'email.email' => 'Email field must be email address.',
+     ]);
+
 // $department = department::where('department_name','Manager')->first();
 $department =1;
 $role_name = role::where('name','Manager')->first();
@@ -106,7 +125,7 @@ $role_name = role::where('name','Manager')->first();
 
   if(!is_null($compEmail))
   {
-   return redirect()->back()->with('info','Email alredy exist');
+   return redirect()->back()->with('info','Email already exist');
   }
 
 if(!is_null($userEmail))
@@ -134,7 +153,7 @@ if(!is_null($userEmail))
 //Insert to user
        $userReg = user::Create([
         'name'=>request('first_name').' '.request('last_name'),
-        'department_id'=>$department->id,
+        'department_id'=>1, //$department->id
         // 'property_id'=>$insetqnsy->id,
          'email'=>request('email'),
          'password'=>Hash::make(request('password')),

@@ -1,8 +1,0 @@
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteCond %{HTTP_HOST} ^checkmaster\.hmacademy\.net [NC]
-RewriteCond %{SERVER_PORT} 80
-RewriteRule ^(.*)$ https://checkmaster.hmacademy.net/$1 [R,L]
-RewriteEngine On
-RewriteRule ^(.*)$ public/$1 [L]
-</IfModule>

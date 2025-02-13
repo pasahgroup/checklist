@@ -107,7 +107,6 @@
             </div>
 
             <div class="clearfix" style="height: 1px;clear: both;"></div>
-
             <div class="form-group">
               <label class="col-lg-2 control-label" for="upass1">Upload Logo: </label>
               <div class="col-lg-6">
@@ -133,6 +132,7 @@
                <input class="form-control" type="text" name="last_name" placeholder="last name">
               </div>
             </div>
+
 <div class="clearfix" style="height: 1px;clear: both;"></div>
             <div class="form-group">
               <div class="col-lg-10 col-lg-offset-2">
