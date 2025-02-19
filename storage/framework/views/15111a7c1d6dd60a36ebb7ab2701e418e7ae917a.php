@@ -95,7 +95,7 @@ background-image:url(<?php echo e(URL::asset('../../assets/images/misc/bg-login.
 
 
 
-                   <form  method="post"  action="<?php echo e(route('login')); ?>" enctype="multipart/form-data">
+                   <form method="post"  action="<?php echo e(route('login')); ?>" enctype="multipart/form-data">
                 <?php echo csrf_field(); ?>
               <input type="hidden" name="_method" value="post">
     <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
@@ -194,8 +194,8 @@ background-image:url(<?php echo e(URL::asset('../../assets/images/misc/bg-login.
             </div>
             <a href="<?php echo e(route('forget.password.get')); ?>"><u>Forget Password</u></a><br>
             
+							  <a href="<?php echo e(url('company-profile-web')); ?>"><strong style="color:green"><u>Register Lodge</u></strong></a>
                       </form>
-                        <button href="#bookNow" type="button" class="btn btn-success" data-toggle="modal">Book Now</button>
    </div>
 
      <?php echo $__env->renderComponent(); ?>
@@ -225,6 +225,8 @@ background-image:url(<?php echo e(URL::asset('../../assets/images/misc/bg-login.
 </main>
 
 
+
+
 <div class="modal fade modal-book-now" id="bookNow" tabindex="-1" role="dialog" style="margin-top:50px;">
 <div class="modal-dialog modal-lg" role="document">
   <div class="modal-content">
@@ -236,7 +238,7 @@ background-image:url(<?php echo e(URL::asset('../../assets/images/misc/bg-login.
       <div class="preview-wrap">
         <div class="form-wrap">
 
-                      <form id="msform"  method="post"  action="<?php echo e(route('company-profile-create.store')); ?>" class="registration-form">
+                      <form id="msform"  method="post"  action="<?php echo e(route('company-profile-create.store')); ?>" class="registration-form" enctype="multipart/form-data">
                       <?php echo csrf_field(); ?>
 
            <!-- progressbar -->
@@ -247,8 +249,50 @@ background-image:url(<?php echo e(URL::asset('../../assets/images/misc/bg-login.
                     <li id="confirm"><strong>Finish</strong></li>
                 </ul>
                   <div class="alert alert-danger print-error-msg" style="display:none">
-                    <ul></ul>
+                    <ul>
+										<?php if(session('status')): ?>
+						            <div class="mb-4 font-medium text-sm text-green-600">
+						                <?php echo e(session('status')); ?>
+
+						            </div>
+						        <?php endif; ?>
+
+
+
+										<?php if($message = Session::get('success')): ?>
+									  <div class="alert alert-success">
+									    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+									    <span aria-hidden="true">&times;</span></button>
+									    <strong>Well!: </strong> <?php echo e($message); ?>
+
+									  </div>
+									  <?php endif; ?>
+
+									 <?php if($message = Session::get('info')): ?>
+									  <div class="alert alert-warning">
+									    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+									    <span aria-hidden="true">&times;</span></button>
+									    <strong>Ops!: </strong> <?php echo e($message); ?>
+
+									  </div>
+									  <?php endif; ?>
+
+									 <?php if($message = Session::get('error')): ?>
+									  <div class="alert alert-danger">
+									    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+									    <span aria-hidden="true">&times;</span></button>
+									    <strong>Sorry!: </strong> <?php echo e($message); ?>
+
+									  </div>
+									  <?php endif; ?>
+
+										</ul>
                 </div>
+
+
+
+
+
 
                 <fieldset>
                     <div class="form-card">
@@ -259,7 +303,7 @@ background-image:url(<?php echo e(URL::asset('../../assets/images/misc/bg-login.
                         </div>
 
 
- <div class="row form-group">
+ <div class="form-group">
 <div class="col-md-12">
 								<label >Business Name</label>
 <input type="text" name="business_name" class="form-control border-dark"  placeholder="bisiness name">
@@ -267,7 +311,8 @@ background-image:url(<?php echo e(URL::asset('../../assets/images/misc/bg-login.
 
 							</div>
 
-							<div class="row form-group">
+							<div class="form-group">
+							<div class="row">
 							<div class="col-md-6">
 							<label >TIN</label>
 							<input class="form-control" type="text" name="tin" placeholder="tin">
@@ -278,30 +323,53 @@ background-image:url(<?php echo e(URL::asset('../../assets/images/misc/bg-login.
 					  <input class="form-control" type="text" name="vrn" placeholder="vrn">
 						 </div>
 						 							</div>
+													</div>
 
-																			<div class="row form-group">
-																		 <label>Region</label>
+																			<div class="form-group">
+																			<div class="col-md-2">
+																		<label>Region</label>
+																		</div>
+
 																		 <div class="col-md-10">
 																	 <input class="form-control" type="text" name="region" placeholder="region">
 																									</div>
 																									</div>
 
-																									<div class="row form-group">
-																								 <label>District</label>
+																									<div class="form-group">
+																								 <div class="col-md-2">
+																							<label>District</label>
+																							</div>
+
 																								 <div class="col-md-10">
 																							 <input class="form-control" type="text" name="district" placeholder="district">
 																															</div>
 																									</div>
 
 
-                          <!-- <label class="fieldlabels">Phone: *</label> -->
-                           <input type="text" name="phone_number" placeholder="Phone(+00 00 000 000)"/>
-                        <input type="email" name="email" placeholder="email"/>
+																									<div class="form-group">
+																										 <div class="col-md-2">
+																								 <label>Phone</label>
+																								 </div>
+																								 <div class="col-md-10">
+																						 <input type="text" name="phone_number" placeholder="Phone(+00 00 000 000)"/>
+																															</div>
+																									</div>
+
+
+																									<div class="form-group">
+																										 <div class="col-md-2">
+																								 <label>Email</label>
+																								 </div>
+																								 <div class="col-md-10">
+																							 <input type="email" name="email" placeholder="email"/>
+																															</div>
+																									</div>
 
                     </div>
                          <button type="button" class="close float-left" data-dismiss="modal" style="background-color:#b32121;padding: 4px 20px;">Close</button>
                     <input type="button" name="next" class="next action-button" value="Next" />
-                </fieldset>
+
+							  </fieldset>
 
                 <fieldset>
                         <div class="form-card">
@@ -379,7 +447,7 @@ background-image:url(<?php echo e(URL::asset('../../assets/images/misc/bg-login.
 																		<div class="form-group">
 																			<label class="col-lg-2 control-label" for="upass1">User code:</label>
 																			<div class="col-lg-6">
-																			   <input type="text" value="000000" id="code" name="code" class="form-control" autocomplete="off" required readonly>
+																			   <input type="text" value="000000" id="code" name="code" class="form-control" autocomplete="off" required>
 																			</div>
 																		</div>
 

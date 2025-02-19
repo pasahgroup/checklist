@@ -63,6 +63,8 @@
       <div class="progress-bar progress-bar-striped progress-bar-animated" style="font-weight:bold; font-size:15px;" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
     <div class="card mt-3">
+      <form   id="basicform1"  name="basicform1" method="POST"  action="{{ route('company-profile-create.store') }}" enctype="multipart/form-data">
+                                @csrf
       <div class="card-header font-weight-bold">My Bootstrap 5 multi-step-form</div>
       <div class="card-body p-4 step">
         <div class="radio-group row justify-content-between px-3 text-center" style="justify-content:center !important">
@@ -70,10 +72,10 @@
             <div class="opt-icon"><i class="fas fa-user-plus" style="font-size: 80px; margin-left: 25px;"></i></div>
             <p><b>Register</b></p>
           </div>
-          <div id="suser" class="selected col-auto ms-sm-2 mx-1 card-block py-0 text-center radio">
+          <!-- <div id="suser" class="selected col-auto ms-sm-2 mx-1 card-block py-0 text-center radio">
             <div class="opt-icon"><i class="fas fa-users" style="font-size: 80px;"></i></div>
             <p><b>Existing user</b></p>
-          </div>
+          </div> -->
         </div>
         <div class="searchfield text-center pb-1" style="font-size:12px">Enter<b> Credentials</b></div>
         <div class="searchfield input-group px-5">
@@ -86,6 +88,11 @@
         <div class="text-center">
           <h5 class="card-title font-weight-bold pb-2">User information</h5>
         </div>
+
+
+         <input type="hidden" name="_method" value="post">
+         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="hidden"  id="profile_web" name="profile_web" class="form-control" value="profile_web">
 
         <div class="form-group row">
           <div class="col-2"></div>
@@ -119,15 +126,16 @@
           </div>
         </div>
         <div class="text-center text-muted"><b style="color: #dc3545;">*</b> required fields</div>
+
       </div>
-      <div class="card-body p-5 step" style="display: none">Step 3</div>
-      <div class="card-body p-5 step" style="display: none">Step 4</div>
+
       <div class="card-body p-5 step" style="display: none">Step 5</div>
       <div class="card-footer">
         <button class="action back btn btn-sm btn-outline-warning" style="display: none">Back</button>
         <button class="action next btn btn-sm btn-outline-secondary float-end" disabled="">Next</button>
         <button class="action submit btn btn-sm btn-outline-success float-end" style="display: none">Submit</button>
       </div>
+        </form>
     </div>
 
   </div>

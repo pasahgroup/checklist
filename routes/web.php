@@ -103,7 +103,6 @@ use JasperPHP\JasperPHP as JasperPHP;
  // Route::get('image', [ImageController::class, 'index']);
  // Route::post('image', [ImageController::class, 'store']);
 
-
 Route::get('pdf', [EmailSendController::class, 'generatePDF']);
 Route::get('company-profile-web', [profileController::class, 'companyWeb'])->name('company-profile-web');
 // Route::resource('company-profile-create', [profileController::class, 'create']);

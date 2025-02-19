@@ -20,7 +20,7 @@
 
                                                 <div class="col-md-12 col-sm-12">
                                   <div class="tab-content" id="v-pills-tabContent1">
-                                
+
          <div class="tab-pane fade show active" id="general" role="tabpanel" >
          {{--
          <form  method="GET"  action="{{ route('company-profile.update') }}" enctype="multipart/form-data">
@@ -37,9 +37,9 @@
 											<div class="col-md-6">
 											<label >Business Name</label>
 	<input type="text" name="business_name" class="form-control border-dark"  placeholder="" value="{{ $profile->company_name??'' }}">
-																	
+
 </div>
-		
+
 									<div class="col-md-6">
 									<label >Phone Number</label>
 								<input class="form-control" type="number" name="phone_number" value="{{ $profile->phone_number??'' }}" required>
@@ -62,7 +62,7 @@
 							<input class="form-control" type="text" name="vrn" value="{{ $profile->vrn??'' }}">
 																</div>
 
- 
+
 <div class="col-md-6">
                   <label>Region</label>
                 <input class="form-control" type="text" name="region" value="{{ $profile->region??'' }}">
@@ -70,7 +70,7 @@
              <div class="col-md-6">
                   <label >District</label>
               <input class="form-control" type="text" name="district" value="{{ $profile->district??'' }}">
-                                </div> 
+                                </div>
 
 
 								<div class="col-md-6">
@@ -92,10 +92,10 @@
              <div class="col-md-6">
                   <label >Last name</label>
               <input class="form-control" type="text" name="last_name" value="{{ $profile->last_name??'' }}">
-                                </div> 
+                                </div>
 
 <div><br></div>
-	          												
+
 
 						<div class="col-md-12">
 																	<button type="submit" class="btn btn-primary float-right">Update</button>
@@ -116,4 +116,3 @@
 </body>
 <!--end::Body-->
 @endsection
-
