@@ -195,10 +195,9 @@ background-image:url(<?php echo e(URL::asset('../../assets/images/misc/bg-login.
             <a href="<?php echo e(route('forget.password.get')); ?>"><u>Forget Password</u></a><br>
             
 							  <a href="<?php echo e(url('company-profile-web')); ?>"><strong style="color:green"><u>Register Lodge</u></strong></a>
-                      </form>
+                </form>
    </div>
-
-     <?php echo $__env->renderComponent(); ?>
+ <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>

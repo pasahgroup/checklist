@@ -63,7 +63,7 @@ class profileController extends Controller
              $roles = role::where('status','Active')->get();
             //$departments=department::get();
 
-      return view('admin.profile.profile_web_2',compact('pin','properties','roles'));
+      return view('admin.profile.profile_web',compact('pin','properties','roles'));
        //return view('admin.profile.profile_web',compact('pin','properties','departments','roles'));
     }
     /**
