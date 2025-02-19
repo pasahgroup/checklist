@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use App\Models\user;
 use App\Models\answer;
 use App\Models\myCompany;
 use App\Models\dbsetting;
@@ -87,7 +87,7 @@ class AppServiceProvider extends ServiceProvider
 //dd($view->user);
 
              //$view->with('userx', User::get());
-            $view->with('qnsCountx', User::join('properties','users.property_id','properties.id')
+            $view->with('qnsCountx', user::join('properties','users.property_id','properties.id')
             ->select('properties.property_name')->first());
     //dd($view->user);
             //  dd($view->user);
