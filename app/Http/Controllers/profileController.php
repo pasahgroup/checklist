@@ -292,14 +292,14 @@ else
         ]);
 
 //User role
-//  $userReg->assignRole($role_name->id);
-//
-// $appliedto =userRole::Create([
-//         'sys_user_id'=>$userReg->id,
-//          'role_id'=>$role_name->id,
-//         'status'=>'Active',
-//         'user_id'=>$userReg->id
-//         ]);
+ $userReg->assignRole($role_name->id);
+
+$appliedto =userRole::Create([
+        'sys_user_id'=>$userReg->id,
+         'role_id'=>$role_name->id,
+        'status'=>'Active',
+        'user_id'=>$userReg->id
+        ]);
 
 //Insert data into properties table
  $insert_property = property::UpdateOrCreate([

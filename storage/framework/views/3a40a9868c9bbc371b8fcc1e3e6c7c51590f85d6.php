@@ -163,7 +163,7 @@
         <div class="form-group row pt-2">
           <label for="team" class="col-4 text-end control-label col-form-label">First Name</label>
           <div class="col-8">
-            <input type="text" class="form-control" id="first_name" required>
+            <input type="text" class="form-control" id="first_name" name="first_name" required>
               <div class="invalid-feedback">This field is required</div>
           </div>
         </div>
@@ -171,7 +171,7 @@
         <div class="form-group row pt-2">
           <label for="team" class="col-4 text-end control-label col-form-label">Last Name</label>
           <div class="col-8">
-            <input type="text" class="form-control" id="last_name" required>
+            <input type="text" class="form-control" id="last_name" name="last_name" required>
               <div class="invalid-feedback">This field is required</div>
           </div>
         </div>
