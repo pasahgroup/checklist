@@ -149,8 +149,8 @@ if(!is_null($userEmail))
 //Insert to user
        $userReg = user::Create([
 
-             'name'=>"yyy2",
-      //  'name'=>request('first_name').' '.request('last_name'),
+          //   'name'=>"yyy2",
+       'name'=>request('first_name').' '.request('last_name'),
         'department_id'=>1, //$department->id
         // 'property_id'=>$insetqnsy->id,
          'email'=>request('email'),
