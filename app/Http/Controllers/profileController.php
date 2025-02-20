@@ -85,185 +85,7 @@ class profileController extends Controller
      */
 
 
-     public function store(Request $request)
-     {
- $validatedData = $request->validate([
-          'business_name' => 'required',
-             'tin' => 'required',
-              'phone_number' => 'required',
-             //  'travel_date' => 'required',
-          'email' => 'required',
-             // 'email' => 'required|email|unique:users',
-      ], [
-          'business_name.required' => 'Business name field is required.',
-            'tin.required' => 'TIN field is required.',
-             'phone_number.required' => 'Phone number field is required.',
-              //'travel_date.required' => 'Travel date field is required.',
-
-          'email.required' => 'Email field is required. test 2',
-          'email.email' => 'Email field must be email address.',
-      ]);
-
-
- //dd('printxx');
-
- // $department = department::where('department_name','Manager')->first();
- $department =1;
- $role_name = role::where('name','Manager')->first();
-
- //Company view
- //   $compEmail = myCompany::where('email',request('email'))
- //   ->where('status','Active')->first();
- //
- //    $userEmail = user::where('email',request('email'))
- //   ->where('status','Active')->first();
- //
- //   if(!is_null($compEmail))
- //   {
- //    return redirect()->back()->with('info','Email already exist');
- //   }
- //
- // if(!is_null($userEmail))
- //   {
- //    return redirect()->back()->with('info','Email alredy exist');
- //   }
-
-   if(request('attachment')){
-
-             $attach = request('attachment');
-             foreach($attach as $attached){
-
-   // Get filename with extension
-                      $fileNameWithExt =$attached->getClientOriginalName();
-                      // Just Filename
-                      $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-                      // Get just Extension
-                      $extension = $attached->getClientOriginalExtension();
-                      //Filename to store
-                      $imageToStore = $filename.'_'.time().'.'.$extension;
-                      //upload the image
-                      $path =$attached->storeAs('public/logo/', $imageToStore);
-
-
-     //Insert to user
- //Insert to user
-        $userReg = user::Create([
-         'name'=>request('first_name').' '.request('last_name'),
-         'department_id'=>1, //$department->id
-         // 'property_id'=>$insetqnsy->id,
-          'email'=>request('email'),
-          'password'=>Hash::make(request('password')),
-          'status'=>'Active',
-           'user_id'=>0
-         ]);
-
- //dd('prints');
-  $insetqnsy = myCompany::Create([
-           'company_name'=>request('business_name'),
-            'logo'=>$imageToStore,
-           'tin'=>request('tin'),
-           'vrn'=>request('vrn'),
-           'phone_number'=>request('phone_number'),
-           'email'=>request('email'),
-           'address'=>request('address'),
-
-            'district'=>request('district'),
-             'region'=>request('region'),
-
-           'first_name'=>request('first_name'),
-           'last_name'=>request('last_name'),
-           'code'=>request('code'),
-           'status'=>'Active',
-           'user_id'=>$userReg->id
-              ]);
-
-         $userSiteReg = userProperty::Create([
-         'sys_user_id'=>$userReg->id,
-         'property_id'=>$insetqnsy->id,
-         'status'=>'Active',
-         'user_id'=>$userReg->id
-         ]);
-
- //Assign to Role
- $userReg->assignRole($role_name->id);
- $appliedto =userRole::Create([
-         'sys_user_id'=>$userReg->id,
-         'role_id'=>$role_name->id,
-         'status'=>'Active',
-         'user_id'=>$userReg->id
-         ]);
-
- //Insert into property table
-  // $insert_property = property::UpdateOrCreate([
-  //        'company_id'=>$insetqnsy->id,
-  //          'level'=>'Main',
-  //      ],[
-  //          'company_code'=>request('code'),
-  //         'property_name'=>request('business_name'),
-  //        'property_category'=>request('property_category'),
-  //         'property_rank'=>2,
-  //         'property_rank'=>1,
-  //         'location_name'=>request('district').'('.request('region').')',
-  //         'room_no'=>1,
-  //         'phone'=>request('phone_number'),
-  //
-  //         'email'=>request('email'),
-  //         //'password'=>Hash::make(request('password')),
-  //         'password'=>Hash::make(request('password')),
-  //          'property_description'=>'First company registration',
-  //           'photo'=>$imageToStore,
-  //         'status'=>'Active',
-  //          'user_id'=>$userReg->id
-  //        ]);
-
- //Update user property ID
- // $updateUserPID = user::where('id',$userReg->id)
- //              ->update([
- // 'property_id'=>$insert_property->id,
- //  'company_id'=>$insetqnsy->id,
- //   'company_code'=>request('code')
- //         ]);
-
- //Insert data to dbconnects table
- // $dbconnect =dbconnect::Create([
- //      'user_id'=>$userReg->id,
- //         'company_id'=>$insetqnsy->id,
- //         'status'=>'Active'
- //         ]);
-
- //Insert one value in asset table
- // $assetData =asset::Create([
- //      'property_id'=>$insert_property->id,
- //      'metaname_id'=>1,
- //      'asset_name'=>"Room 1",
- //      'asset_type'=>"Room",
- //      'time_show'=>1,
- //      'asset_show'=>1,
- //
- //         'asset_description'=>"Room 1",
- //         'status'=>'Active',
- // 'user_id'=>$userReg->id,
- //         ]);
-
-
-     }
- }
-        $code=request('code');
-       // dd($code);
-
-      if(request('profile_web'))
-      {
-         return redirect()->route('login',compact('code'))->with('success','Registered successfully, Now Login');
-      }else{
-         return redirect()->route('company-profile.index')->with('success','Updated successfully');
-       }
-
-     }
-
-
-
-
-    public function store_org(Request $request)
+    public function store(Request $request)
     {
 $validatedData = $request->validate([
          'business_name' => 'required',
@@ -326,7 +148,9 @@ if(!is_null($userEmail))
     //Insert to user
 //Insert to user
        $userReg = user::Create([
-        'name'=>request('first_name').' '.request('last_name'),
+
+             'name'=>"yyy2",
+      //  'name'=>request('first_name').' '.request('last_name'),
         'department_id'=>1, //$department->id
         // 'property_id'=>$insetqnsy->id,
          'email'=>request('email'),
@@ -430,7 +254,9 @@ else
 {
        $userReg = user::Create([
         'name'=>request('first_name').' '.request('last_name'),
-        'department_id'=>$department->id,
+      //  'name'=>"yyy",
+        //'department_id'=>$department->id,
+          'department_id'=>1,
         // 'property_id'=>$insetqnsy->id,
          'email'=>request('email'),
          'password'=>Hash::make(request('password')),
@@ -466,14 +292,14 @@ else
         ]);
 
 //User role
- $userReg->assignRole($role_name->id);
-
-$appliedto =userRole::Create([
-        'sys_user_id'=>$userReg->id,
-         'role_id'=>$role_name->id,
-        'status'=>'Active',
-        'user_id'=>$userReg->id
-        ]);
+//  $userReg->assignRole($role_name->id);
+//
+// $appliedto =userRole::Create([
+//         'sys_user_id'=>$userReg->id,
+//          'role_id'=>$role_name->id,
+//         'status'=>'Active',
+//         'user_id'=>$userReg->id
+//         ]);
 
 //Insert data into properties table
  $insert_property = property::UpdateOrCreate([
