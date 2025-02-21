@@ -39,10 +39,11 @@ class ManageController extends Controller
      */
     public function index()
     {
+       $auth=auth::user();
+             $asset_show=asset::where('property_id',$auth->property_id)->first();
+             //The line above must placed before new database connection
 
-      $auth=auth::user();
-      $aData['dataC'] = dbsetting::getConnect($auth->id);
-//dd($auth);
+       $aData['dataC'] = dbsetting::getConnect($auth->id);//New Database connection
 
           $meta=request('meta');
           $current_date = date('Y-m-d');
@@ -56,7 +57,6 @@ class ManageController extends Controller
             $metaname_id=1;
           }
 
-
           if($assetID==null)
           {
              $assetID=1;
@@ -69,6 +69,14 @@ class ManageController extends Controller
           // $indicators = setIndicator::get();
       // $metanames = metaname::get();
 
+      //$departments=user::where('id',auth()->id())->first();
+
+      //dd(auth()->id());
+      //Get Department name
+         $departGetName= department::where('status','Active')
+         ->where('id',$auth->department_id)->first();
+      // dd($departments->department_id);
+
       $metanames = answer::join('metanames','metanames.id','answers.metaname_id')
      //->where('assets.metaname_id',$metaname_id)
      ->where('answers.manager_checklist','!=',"Cleared")
@@ -77,16 +85,9 @@ class ManageController extends Controller
     ->get();
      //dd($metanames);
 
-
             // $metadatas = optionalAnswer::get();
       //Assign Activities to userActivities
-      $departments=user::where('id',auth()->id())->first();
 
-      //dd($departments);
-      //Get Department name
-        $departGetName= department::where('status','Active')
-        ->where('id',$departments->department_id)->first();
-      //dd($departments->department_id);
 
       //$assets = asset::where('assets.metaname_id',$metaname_id)
      $assets = asset::join('answers','answers.asset_id','assets.id')
@@ -134,7 +135,7 @@ class ManageController extends Controller
 
         $userActitivitiesff = departmentRole::join('activity_roles','activity_roles.role_id','department_roles.role_id')
         ->join('metanames','metanames.id','activity_roles.activity_id')
-        ->where('department_roles.department_id',$departments->department_id)
+        ->where('department_roles.department_id',$auth->department_id)
        ->where('activity_roles.status','Active')
        ->select('metanames.id','metanames.metaname_name')
         ->get();
@@ -147,7 +148,6 @@ class ManageController extends Controller
         ->where('qns_appliedtos.status','Active')
         ->select('metanames.id','metanames.metaname_name','qns_appliedtos.indicator_id')
         ->get();
-
 
 //dd($userActitivitiesfff);
 
@@ -173,8 +173,8 @@ class ManageController extends Controller
       $datet=$datet->format('H:i:s');
 
       //Get asset_show from assets table
-      $asset_show=asset::where('property_id',$departments->property_id)->first();
-      //dd($asset_show->time_show);
+
+      //dd($auth->property_id);
 
       if($datet>="23:45")
       {
@@ -188,14 +188,14 @@ class ManageController extends Controller
       if($asset_show->asset_show==1 && $date_time>$datet && $date_time_init!="00:00:00")
       {
 //dd('overtime');
-        $update = asset::where('property_id',$departments->property_id)->update([
+        $update = asset::where('property_id',$auth->property_id)->update([
             'time_show'=>1,
             'asset_show'=>1,
         ]);
       }
         else
         {
-          $update = asset::where('property_id',$departments->property_id)->update([
+          $update = asset::where('property_id',$auth->property_id)->update([
               'time_show'=>0,
               'asset_show'=>0,
                   'extra_time'=>'00:00:00',
@@ -203,18 +203,19 @@ class ManageController extends Controller
         }
       }
       else{
-          $update = asset::where('property_id',$departments->property_id)->update([
+          $update = asset::where('property_id',$auth->property_id)->update([
             'time_show'=>1,
             'asset_show'=>1
         ]);
       }
 //$assetID
-//dd(request('asset_model'));
+//dd($asset_show);
+
        $pp = asset::where('assets.status','Active')
        ->where('assets.time_show',1)
          ->where('assets.id',request('asset_model'))
          ->where('assets.asset_name','!=',"")
-         ->where('assets.property_id',$departments->property_id)
+         ->where('assets.property_id',$auth->property_id)
          ->whereIn('assets.metaname_id',[$metaname_id])
          ->select('assets.id','assets.property_id','assets.metaname_id','assets.asset_name')
          ->orderBy('assets.id')->get();
@@ -224,7 +225,7 @@ class ManageController extends Controller
            ->where('assets.status','Active')
              ->where('assets.time_show',$asset_show->time_show)
              ->where('assets.asset_name','!=',"")
-             ->where('assets.property_id',$departments->property_id)
+             ->where('assets.property_id',$auth->property_id)
               ->whereIn('assets.metaname_id',$a)
              //->whereIn('assets.metaname_id',[$metaname_id])
              // $metaname_id
@@ -234,7 +235,7 @@ class ManageController extends Controller
 
 
 
-          $qns = DB::select("select * from qnsview_answer where property_id in(".$departments->property_id.")");
+          $qns = DB::select("select * from qnsview_answer where property_id in(".$auth->property_id.")");
           $qns=collect($qns);
 
              //dd($qns);
@@ -267,12 +268,12 @@ class ManageController extends Controller
       $qnsAppliedPerc=DB::select('select * from qns_appliedtos');
       $qnsAppliedPerc = collect($qnsAppliedPerc);
 
-      $property_id=$departments->property_id;
+      $property_id=$auth->property_id;
       $metanameCollects=collect($metanames);
       //Count Questions
       $qnsCount=answer::where('answer','!=','Yes')
       ->where('manager_checklist','!=','Cleared')
-      ->where('property_id',$departments->property_id)
+      ->where('property_id',$auth->property_id)
        ->where('status','Active')
       ->get();
 

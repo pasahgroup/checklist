@@ -110,6 +110,7 @@ $validatedData = $request->validate([
 // $department = department::where('department_name','Manager')->first();
 $department =1;
 $role_name = role::where('name','Manager')->first();
+//dd($role_name);
 
 //Company view
   $compEmail = myCompany::where('email',request('email'))
@@ -188,6 +189,7 @@ if(!is_null($userEmail))
 
 //Assign to Role
 $userReg->assignRole($role_name->id);
+
 $appliedto =userRole::Create([
         'sys_user_id'=>$userReg->id,
         'role_id'=>$role_name->id,

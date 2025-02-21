@@ -53,7 +53,7 @@ class adminController extends Controller
 
  public function index()
     {
-  //     $auth=auth::user();
+      $auth=auth::user();
   // $aData['dataC'] = dbsetting::getConnect($auth->id);
 
 //dd(request()->getHost());
@@ -70,13 +70,11 @@ class adminController extends Controller
         $user->hasRole('Admin');
        //$int = (int)$user->property_id;
 
-//dd($users);
+//dd($user);
         //dd($user->hasRole('Housekeeper'));
       $property_name = property::where('id',$user->property_id)->first();
 
-     //dd($property_name);
-
-
+  //  dd($property_name);
 if($property_name ==null)
 {
   $property_name=1;
@@ -90,6 +88,7 @@ if($property_name ==null)
         if($users->count()<=1 && $user->hasRole('Admin') == 0){
       $auth=auth::user();
       $aData['dataC'] = dbsetting::getConnect($auth->id);
+
 
             // Create and assign user to be admin
                 if(Role::where('name',request('name'))->exists()){
@@ -201,11 +200,10 @@ $properties=property::get();
           return redirect('daily');
 }
 
-
 if($user->hasRole('Manager')){
   $auth=auth::user();
 $aData['dataC'] = dbsetting::getConnect($auth->id);
-//dd($departments);
+
 
   $current_date = date('Y-m-d');
 
@@ -239,7 +237,6 @@ elseif($user->hasRole('')){
        {
          Auth::logout();
        }
-
     }
 
 

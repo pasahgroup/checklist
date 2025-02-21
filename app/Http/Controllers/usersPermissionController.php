@@ -26,6 +26,9 @@ class usersPermissionController extends Controller
      */
     public function index()
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
          $users= User::get();
          $departments= department::get();
 
@@ -72,6 +75,9 @@ class usersPermissionController extends Controller
      */
     public function store(Request $request)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
         $user_id = User::where('id',request('users_id'))->first();
         $user_id->assignRole(request('roles'));
         return redirect()->back()->with('success','Role added successfly');
@@ -96,6 +102,9 @@ class usersPermissionController extends Controller
      */
     public function edit($id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
         $datas = User::where('id',$id)->first();
         $roles= Role::get();
         // $myroles = $datas->getRoleNames();
@@ -107,6 +116,9 @@ class usersPermissionController extends Controller
 
         public function roleremove($id,$role)
         {
+          $auth=auth::user();
+          $aData['dataC'] = dbsetting::getConnect($auth->id);
+
             $user = User::where('id',$id)->first();
             $user->removeRole($role);
             return redirect()->back()->with('success','Role removed successfly');
@@ -115,6 +127,9 @@ class usersPermissionController extends Controller
 
           public function recoveryUpdate(user $department,$id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
           $user = user::where('id',$id)
                ->update([
                 'department_id'=>"",
@@ -143,6 +158,9 @@ class usersPermissionController extends Controller
      */
     public function destroy($id)
     {
+      $auth=auth::user();
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
         if(request('role')){
 
             $userRole = userRole::where('id',$id)
