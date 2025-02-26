@@ -18,7 +18,7 @@ use App\Models\purchaseOrder;
 use App\Models\sale;
 use App\Models\stock;
 use App\Models\tenant;
-use App\Models\User;
+use App\Models\user;
 use App\Models\property;
 use Illuminate\Support\Facades\Config;
 
