@@ -40,10 +40,31 @@ class ManageController extends Controller
     public function index()
     {
        $auth=auth::user();
-             $asset_show=asset::where('property_id',$auth->property_id)->first();
+
              //The line above must placed before new database connection
 
        $aData['dataC'] = dbsetting::getConnect($auth->id);//New Database connection
+   $asset_show=asset::where('property_id',$auth->property_id)->first();
+
+
+  if($asset_show==null)
+  {
+$assetData =asset::Create([
+     'property_id'=>$auth->property_id,
+     'metaname_id'=>1,
+     'asset_name'=>"Room 1",
+     'asset_type'=>"Room",
+     'time_show'=>1,
+     'asset_show'=>1,
+
+        'asset_description'=>"Room 1",
+        'status'=>'Active',
+'user_id'=>$auth->user_id,
+]);
+$asset_show=asset::where('property_id',$auth->property_id)->first();
+}
+//dd($asset_show);
+
 
           $meta=request('meta');
           $current_date = date('Y-m-d');

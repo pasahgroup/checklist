@@ -109,7 +109,7 @@ $validatedData = $request->validate([
 
 // $department = department::where('department_name','Manager')->first();
 $department =1;
-$role_name = role::where('name','Manager')->first();
+$role_name = role::where('name','GeneralAdmin')->first();
 //dd($role_name);
 
 //Company view
@@ -149,7 +149,6 @@ if(!is_null($userEmail))
     //Insert to user
 //Insert to user
        $userReg = user::Create([
-
           //   'name'=>"yyy2",
        'name'=>request('first_name').' '.request('last_name'),
         'department_id'=>1, //$department->id
@@ -236,18 +235,20 @@ $dbconnect =dbconnect::Create([
         ]);
 
 //Insert one value in asset table
-$assetData =asset::Create([
-     'property_id'=>$insert_property->id,
-     'metaname_id'=>1,
-     'asset_name'=>"Room 1",
-     'asset_type'=>"Room",
-     'time_show'=>1,
-     'asset_show'=>1,
 
-        'asset_description'=>"Room 1",
-        'status'=>'Active',
-'user_id'=>$userReg->id,
-        ]);
+
+// $assetData =asset::Create([
+//      'property_id'=>$insert_property->id,
+//      'metaname_id'=>1,
+//      'asset_name'=>"Room 1",
+//      'asset_type'=>"Room",
+//      'time_show'=>1,
+//      'asset_show'=>1,
+//
+//         'asset_description'=>"Room 1",
+//         'status'=>'Active',
+// 'user_id'=>$userReg->id,
+//         ]);
 
 
     }
@@ -340,19 +341,19 @@ $dbconnect =dbconnect::Create([
         ]);
 
 //Insert one value in asset table
-$assetData =asset::Create([
-     'property_id'=>$insert_property->id,
-     'metaname_id'=>1,
-     'asset_name'=>"Room 1",
-     'asset_type'=>"Room",
-     'time_show'=>1,
-     'asset_show'=>1,
 
-        'asset_description'=>"Room 1",
-        'status'=>'Active',
-'user_id'=>$userReg->id,
-        ]);
-
+// $assetData =asset::Create([
+//      'property_id'=>$insert_property->id,
+//      'metaname_id'=>1,
+//      'asset_name'=>"Room 1",
+//      'asset_type'=>"Room",
+//      'time_show'=>1,
+//      'asset_show'=>1,
+//
+//         'asset_description'=>"Room 1",
+//         'status'=>'Active',
+// 'user_id'=>$userReg->id,
+//         ]);
      }
 
 

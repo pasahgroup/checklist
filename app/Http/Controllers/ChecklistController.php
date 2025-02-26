@@ -74,6 +74,8 @@ class ChecklistController extends Controller
      public function index(Request $request)
       {
         $auth=auth::user();
+        $departments=user::where('id',auth()->id())->first();
+
         $aData['dataC'] = dbsetting::getConnect($auth->id);
 
         $current_date = date('Y-m-d');
@@ -105,14 +107,13 @@ class ChecklistController extends Controller
       //$metaname_id=$this->metaname_model;
       $metanamess = metaname::where('metanames.id',$metaname_id)->first();
     //  $assetss = asset::where('assets.id',$assetID)->first();
-      $departments=user::where('id',auth()->id())->first();
       $propertyID=asset::where('id',$assetID)->first();
     //  $assetss=$propertyID;
 
     // dd($assetID);
 
       $metanames = metaname::join('qns_appliedtos','qns_appliedtos.metaname_id','metanames.id')
-       ->where('qns_appliedtos.department_id',$departments->department_id)
+       ->where('qns_appliedtos.department_id',$auth->department_id)
        ->select('metanames.id','metanames.metaname_name')
        ->groupby('metanames.id')
        ->get();
@@ -139,11 +140,11 @@ class ChecklistController extends Controller
       else{
       $qnsapply=array();
       $departments=user::where('id',auth()->id())->first();
-      $qnsapply[]=$departments->department_id;
+      $qnsapply[]=$auth->department_id;
       }
 
 
-      $asset_show=asset::where('property_id',$departments->property_id)->first();
+      $asset_show=asset::where('property_id',$auth->property_id)->first();
 
       if($datet>="23:45")
       {
@@ -153,14 +154,14 @@ class ChecklistController extends Controller
 
       if($asset_show->asset_show==1 && $date_time>$datet && $date_time_init!="00:00:00")
       {
-      $update = asset::where('property_id',$departments->property_id)->update([
+      $update = asset::where('property_id',$auth->property_id)->update([
         'time_show'=>1,
         'asset_show'=>1,
       ]);
       }
       else
       {
-      $update = asset::where('property_id',$departments->property_id)->update([
+      $update = asset::where('property_id',$auth->property_id)->update([
           'time_show'=>0,
           'asset_show'=>0,
               'extra_time'=>'00:00:00',
@@ -168,7 +169,7 @@ class ChecklistController extends Controller
       }
       }
       else{
-      $update = asset::where('property_id',$departments->property_id)->update([
+      $update = asset::where('property_id',$auth->property_id)->update([
         'time_show'=>1,
         'asset_show'=>1
       ]);
@@ -188,18 +189,18 @@ class ChecklistController extends Controller
   //$qnsd=qnsview::get();
   //dd($qnsd);
 
-      $qns = DB::select("select * from qnsview where department_id=$departments->department_id and duration='Weekly' and metaname_id in(".$metaname_id.")");
+      $qns = DB::select("select * from qnsview where department_id=$auth->department_id and duration='Weekly' and metaname_id in(".$metaname_id.")");
 
 
     //$users = DB::table('qnsview')->paginate(15);
 
-  // $qns=qnsview::where('department_id',$departments->department_id)
+  // $qns=qnsview::where('department_id',$auth->department_id)
   // ->where('duration','Weekly')
   // //->whereIn('metaname_id',$metaname_id)
   // ->paginate(1);
 
   //dd($qns);
-      // $qns = DB::select("select * from qnsview where department_id=$departments->department_id and section='General' and metaname_id in(".$metaname_id.")");
+      // $qns = DB::select("select * from qnsview where department_id=$auth->department_id and section='General' and metaname_id in(".$metaname_id.")");
     //dd($qns);
 
       //$checkQns = DB::select('select a.opt_answer_id,a.property_id,a.metaname_id,a.asset_id,a.indicator_id,a.photo,a.answer,a.answer_label,a.description from answers a,assets p where a.property_id=p.property_id and a.metaname_id=p.metaname_id and a.asset_id=p.id and a.datex="'.$current_date.'" and a.status="Active"');
@@ -211,7 +212,7 @@ class ChecklistController extends Controller
       $answerPerc = collect($answerPerc);
 //dd($answerPerc);
 
- $qnsAppliedPerc=DB::select('select q.*,s.duration from qns_appliedtos q,set_indicators s where q.indicator_id=s.id and s.duration="Weekly" and q.department_id="'.$departments->department_id.'"');
+ $qnsAppliedPerc=DB::select('select q.*,s.duration from qns_appliedtos q,set_indicators s where q.indicator_id=s.id and s.duration="Weekly" and q.department_id="'.$auth->department_id.'"');
 
       $qnsAppliedPerc = collect($qnsAppliedPerc);
 

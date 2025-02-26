@@ -48,7 +48,7 @@
 }
     </script>
     <script src="../../js/jQuery311.min.js" type="text/javascript"></script>
-   
+
 <link rel="shortcut icon" href="../../assets/images/misc/logo.svg" />
 </head>
 
@@ -165,7 +165,7 @@
 						</div>
 						<!--end::Header Menu Wrapper-->
 						<!--begin::Topbar-->
-						<div class="topbar">                          
+						<div class="topbar">
 							<div class="topbar-item">
 								<div class="quick-search quick-search-inline ml-20 mr-1 w-300px"
 									id="kt_quick_search_inline">
@@ -354,10 +354,10 @@
     </ul>
 </div>
 @endif
-						
+
 					</div>
 				</div>
-				
+
  @isset($slot)
  {{ $slot }}
  @else

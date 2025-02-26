@@ -352,6 +352,7 @@ route::resource('/roles',roleController::class)->middleware(['role:SuperAdmin|Ge
 
 // Property controller
       Route::resource('properties',PropertyController::class)->middleware(['role:SuperAdmin|GeneralAdmin|Admin|Account']);
+
       Route::get('delete-property/{id}',[PropertyController::class,'edit'])->name('delete-property');
       Route::get('recovery-property',[PropertyController::class,'recovery'])->name('recovery-property');
       Route::get('update-property/{id}',[PropertyController::class,'recoveryUpdate'])->name('update-property');
@@ -368,9 +369,12 @@ route::resource('/roles',roleController::class)->middleware(['role:SuperAdmin|Ge
     //Route::resource('accommodations',siteController::class);
        //Dashboard properties
 
-          Route::get('dash-property/{id}',[PropertyController::class,'dashProperty'])->name('dash-property');
+          //Route::get('dash-property/{id}',[PropertyController::class,'dashProperty'])->name('dash-property');
+          Route::get('dashx',[PropertyController::class,'dashPropertyg'])->name('dash-property');
+            Route::get('dash-property/{id}',[PropertyController::class,'dashProperty'])->middleware(['role:SuperAdmin|GeneralAdmin|Admin|Account']);
 
-          Route::get('report-property/{id}',[PropertyController::class,'reportProperty'])->name('report-property');
+          //Route::get('report-property/{id}',[PropertyController::class,'reportProperty'])->name('report-property');
+            Route::get('report-property/{id}',[PropertyController::class,'reportProperty'])->middleware(['role:SuperAdmin|GeneralAdmin|Admin|Account']);
           Route::get('report-property/{id}/dashboard',[PropertyController::class,'reportProperty'])->name('report-propertyDarsh');//changed
 
           //General reportTest

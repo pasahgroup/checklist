@@ -77,9 +77,10 @@ class DailydutymanagerController extends Controller
      */
      public function index(Request $request)
     {
-      $auth=auth::user();
+          $auth=auth::user();
+          $users=user::where('id',auth()->id())->first();
+          //The two lines above must placed before
       $aData['dataC'] = dbsetting::getConnect($auth->id);
-
 
         //dd('print');
       $current_date = date('Y-m-d');
@@ -94,21 +95,15 @@ class DailydutymanagerController extends Controller
  // dd($datet);
 
        $metaname_id= metaname::where('metanames.metaname_name',"Managers")->first();
-
-       // dd($metaname_id->id);
          $metaname_id=$metaname_id->id;
-
 
         $assetID=request('assetID');
         $assetIDf=request('assetID');
 
 
-
        if($metaname_id==null)
        {
-          //dd($metaname_id);
              $metaname_id = metaname::where('metanames.metaname_name',"Managers")->first();
-
        }
 
 
@@ -127,11 +122,12 @@ class DailydutymanagerController extends Controller
     $metanamess = metaname::where('metanames.metaname_name',"Managers")->first();
    $assetss = asset::where('assets.id',$assetID)->first();
 
-    $users=user::where('id',auth()->id())->first();
+
     $propertyID=asset::where('id',$assetID)->first();
   //  $assetss=$propertyID;
 
-//dd($metanamess);
+//dd($users);
+
     // $metanames = metaname::join('qns_appliedtos','qns_appliedtos.metaname_id','metanames.id')
     //  ->select('metanames.id','metanames.metaname_name')
     //  ->groupby('metanames.id')
@@ -171,7 +167,7 @@ class DailydutymanagerController extends Controller
     }
     else{
     $qnsapply=array();
-    $users=user::where('id',auth()->id())->first();
+    //$users=user::where('id',auth()->id())->first();
     $qnsapply[]=$users->department_id;
     }
 

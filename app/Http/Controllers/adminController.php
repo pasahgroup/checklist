@@ -87,7 +87,7 @@ if($property_name ==null)
 //ADD ROLE FOR THE FIRST TIME
         if($users->count()<=1 && $user->hasRole('Admin') == 0){
       $auth=auth::user();
-      $aData['dataC'] = dbsetting::getConnect($auth->id);
+      //$aData['dataC'] = dbsetting::getConnect($auth->id);
 
 
             // Create and assign user to be admin
@@ -140,22 +140,22 @@ if($property_name ==null)
 //IF THE USER HAS ADMIN PRIVILEDGES
      if($user->hasRole('GeneralAdmin|SuperAdmin|Admin')){
        $auth=auth::user();
-   $aData['dataC'] = dbsetting::getConnect($auth->id);
+       $sessions = session::join('users','users.id','sessions.user_id')
+       ->groupby('sessions.user_id')
+       ->get();
+$properties=property::get();
+
+  $aData['dataC'] = dbsetting::getConnect($auth->id);
         // $collection_daily = $thedailypaid->paid_cash - $thedaily->daily_cash;
         // $collection_weekly = $theweeklypaid->paid_cash - $theweekly->weekly_cash;
         // $collection_monthly =  $themonthlypaid->paid_cash - $themonthly->monthly_cash ;
 
-        $sessions = session::join('users','users.id','sessions.user_id')
-        ->groupby('sessions.user_id')
-        ->get();
 
  $current_date = date('Y-m-d');
-
 //$properties=property::leftjoin('answers','properties.id','answers.property_id')->get();
 //$properties=DB::select("select p.id,p.property_name,a.metaname_id,a.datex from properties p left join answers a on p.id=a.property_id  and a.datex='".$current_date."' group by p.property_name,a.metaname_id");
 
-  //dd('dds');
-$properties=property::get();
+
  $reportDailyData=DB::select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.opt_answer_id=o.id and a.datex="'.$current_date.'"');
   $dataDaily = collect($reportDailyData);
 
@@ -166,12 +166,13 @@ $properties=property::get();
  $reportWeeklyData=DB::select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.opt_answer_id=o.id and WEEK(a.datex)=WEEK(NOW())');
  $dataWeekly = collect($reportWeeklyData);
 //$weeklyMetaCollects=$dataWeekly->groupBy('metaname_name');
-// dd('dds');
+ //dd('dds');
 
 //Report monthly dataDaily
  $reportMonthlyData=DB::select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.opt_answer_id=o.id and month(a.datex)=month(NOW())');
  $dataMonthly = collect($reportMonthlyData);
 
+//dd('dashboard');
     return redirect('dash-property/{id}');
   }
 
@@ -180,9 +181,9 @@ $properties=property::get();
         if($user->hasRole('GeneralManager|HouseKeeper|Maintenancier|MaintenanceReport')){
       $auth=auth::user();
       $aData['dataC'] = dbsetting::getConnect($auth->id);
+$properties=property::get();
 
   $current_date = date('Y-m-d');
-          $properties=property::get();
           $reportDailyData=DB::select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.opt_answer_id=o.id and a.datex="'.$current_date.'"');
            $dataDaily = collect($reportDailyData);
          //$dailyMetaCollects=$dataDaily->groupBy('metaname_name');
@@ -202,12 +203,11 @@ $properties=property::get();
 
 if($user->hasRole('Manager')){
   $auth=auth::user();
+  $properties=property::get();
 $aData['dataC'] = dbsetting::getConnect($auth->id);
-
 
   $current_date = date('Y-m-d');
 
-  $properties=property::get();
   $reportDailyData=DB::select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.opt_answer_id=o.id and a.datex="'.$current_date.'"');
    $dataDaily = collect($reportDailyData);
  //$dailyMetaCollects=$dataDaily->groupBy('metaname_name');

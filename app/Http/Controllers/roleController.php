@@ -52,7 +52,7 @@ class roleController extends Controller
     public function store(Request $request)
     {
         //dd('hh');
-      
+
         if(request('role')){
             if(Role::where('name',request('name'))->exists()){
                 return redirect()->back()->with('error','This role already created');
@@ -62,7 +62,7 @@ class roleController extends Controller
         return redirect()->back()->with('success','Role created successefuly');
             }
         }
-        elseif(request('department_id')){           
+        elseif(request('department_id')){
                 $user = User::where('id',request('user_id'))
                 ->update([
                  'department_id'=>request('department_id'),
@@ -77,6 +77,7 @@ class roleController extends Controller
                 return redirect()->back()->with('error','This permission already created');
             }
             else{
+            //  dd(request('name'));
             $permission = Permission::create(['name' => request('name')]);
             return redirect()->back()->with('success','Permission created successefuly');
             }
@@ -103,9 +104,9 @@ class roleController extends Controller
 //dd('popol');
    $appliedto =userRole::Create([
         'sys_user_id'=>request('user_id'),
-        'role_id'=>request('role_name'),        
+        'role_id'=>request('role_name'),
         'status'=>'Active',
-        'user_id'=>auth()->id()        
+        'user_id'=>auth()->id()
         ]);
 
             return redirect()->back()->with('success','Role Updated successfully');
@@ -123,38 +124,35 @@ class roleController extends Controller
         }
         elseif(request('permission_to_assign')){
 
-            // dd(auth()->user()->id);
+            //dd(auth()->user()->id);
          //dd(request('permission_to_assign'));
-           
+
         $user = User::findorfail(request('user_id'));
        $user->update([
             'property_id'=>request('permission_to_assign'),
             'user_id'=>auth()->id()
-           ]);
-
-
+          ]);
 
   // $user = user::where('id',auth()->user()->id)
   //              ->update([
   //               'department_id'=>"",
   //                'user_id'=>auth()->id()
-
   //             ]);
 
 
- // $userSiteReg = userProperty::UpdateOrCreate([
- //        'sys_user_id'=>request('user_id'),
- //        'property_id'=>request('permission_to_assign'),
- //    ],
- //    [
- //        'status'=>'Active',
- //        'user_id'=>auth()->id()
- //        ]);
+ $userSiteReg = userProperty::UpdateOrCreate([
+        'sys_user_id'=>request('user_id'),
+        'property_id'=>request('permission_to_assign'),
+    ],
+    [
+        'status'=>'Active',
+        'user_id'=>auth()->id()
+        ]);
 }
 
          return redirect()->back()->with('success','Permission given to the user successefuly');
         }
-    
+
 
     /**
      * Display the specified resource.

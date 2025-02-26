@@ -113,7 +113,7 @@
                                     <span class="nav-text" data-toggle="tooltip" data-placement="bottom" title="Assign Indicators to Metaname">Daily Duty Manager</span>
                                 </a>
                             </li>
-                            
+
                          <li class="nav-item {{ (request()->is('managers-inspection')) ? 'sub-active' : '' }}">
                           <a href="/managers-inspection" class="nav-link sub-nav-link {{ (request()->is('managers-inspection')) ? 'active' : '' }}">
                               <span class="svg-icon nav-icon d-flex justify-content-center">
@@ -155,7 +155,7 @@
     <div id="accordion">
         <ul class="nav flex-column">
 
-           
+
 
   <li class="nav-item {{ (request()->is('report-general/{id}/dashboard')) ? 'sub-active' : '' }}">
                                 <a href="/report-general/{{$property->id ?? 0}}/dashboard" class="nav-link sub-nav-link {{ (request()->is('report-general/{id}/dashboard')) ? 'active' : '' }}">
@@ -424,7 +424,7 @@
                 {{ (request()->is('users')) ? 'show' : '' }}
                 " id="setting" data-parent="#accordion">
                     <div id="accordion">
-                        <ul class="nav flex-column">                            
+                        <ul class="nav flex-column">
 
                               <li class="nav-item {{ (request()->is('role-register')) ? 'sub-active' : '' }}">
                                 <a href="{{ route('role-register.index') }}" class="nav-link sub-nav-link {{ (request()->is('role-register')) ? 'active' : '' }}">

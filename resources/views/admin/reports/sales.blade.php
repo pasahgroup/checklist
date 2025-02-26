@@ -2,7 +2,6 @@
 @section('content')
 
 <!--begin::Content-->
-<div class="content d-flex flex-column flex-column-fluid" id="tc_content">
     <!--begin::Subheader-->
     <div class="subheader py-2 py-lg-6 subheader-solid">
         <div class="container-fluid">
@@ -16,7 +15,7 @@
     </div>
     <!--end::Subheader-->
     <!--begin::Entry-->
-    <div class="d-flex flex-column-fluid">
+    <div class="d-flex flex-column">
         <!--begin::Container-->
         <div class="container-fluid">
             <div class="row">
@@ -43,7 +42,6 @@
 
                             </div>
                         </div>
-
                     </div>
 
 
@@ -66,11 +64,6 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{{ number_format($total_customers->total_customers) }}</td>
-                                    <td>{{ number_format($totals->total_cash) }}</td>
-                                    <td>{{ number_format($totals->total_credit) }}</td>
-                                    <td>{{ number_format($totals->total_revenue) }}</td>
-
 
                                 </tr>
                             </tbody>
@@ -104,11 +97,7 @@
                                                 <select class="arabic-select w-100 mb-3 h-30px" name="sales_person" >
 
                                                     <option value="All" selected>All</option>
-                                                    @foreach ($salespeople as $salesperson)
-                                                    <option value="{{ $salesperson->id }}">{{ $salesperson->name }}</option>
-                                                    @endforeach
-
-                                                </select>
+                                                                                                </select>
                                           </div>
                                     </div>
 
@@ -117,10 +106,7 @@
                                             <label class="text-dark" >Customer</label>
                                                 <select class="arabic-select w-100 mb-3 h-30px" name="customer" >
                                                     <option value="All" selected>All</option>
-                                                    @foreach ($customers as $customer)
-                                                    <option value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
-                                                    @endforeach
-                                                </select>
+                                                                                                    </select>
                                           </div>
                                     </div>
 
@@ -160,40 +146,7 @@
                                             </tr>
                                         </thead>
                                         <tbody class="kt-table-tbody text-dark">
-                                            @foreach ($sales as $sale)
-                                            <tr class="kt-table-row kt-table-row-level-0">
-                                                <td><a href="{{ route('show-order',$sale->order_id) }}"> {{ $sale->id }}</a></td>
-                                                @role('Admin')
-                                                <td>{{ $sale->name }}</td>
-                                                @endrole
-                                                <td>{{ $sale->customer_name }}</td>
-                                                <td>
-                                                    @switch($sale->status)
-                                                        @case('Credit')
-                                                        <span class="btn-sm bg-warning text-black ">Credit</span>
-                                                            @break
 
-                                                            @case('Cash')
-                                                            <span class="btn-sm bg-success text-white">Cash</span>
-                                                            @break
-                                                            @case('Installment')
-                                                            <span class="btn-sm bg-warning ">Installment</span>
-                                                            @break
-                                                            @case('Bank')
-                                                            <span class="btn-sm bg-dark text-white">Bank</span>
-                                                            @break
-                                                        @default
-
-                                                    @endswitch
-
-                                                </td>
-                                                <td>{{ number_format($sale->paid) }}</td>
-                                                <td>{{ number_format($sale->balance) }}</td>
-                                                <td>{{ date("d/m/Y", strtotime($sale->created_at)) }}</td>
-
-
-                                            </tr>
-                                            @endforeach
                                         </tbody>
                                         <tfoot>
 
@@ -201,8 +154,6 @@
                                             <th></th>
                                             <th></th>
                                         <th></th>
-                                    <th>{{ number_format($totals->total_cash) }}</th>
-                                    <th>{{ number_format($totals->total_credit) }}</th>
 
                                     <th></th>
                                         </tfoot>
@@ -222,7 +173,6 @@
 
 </div>
 
-</div>
 
 <iframe name="print_frame" width="0" height="0"  src="about:blank"></iframe>
 
@@ -251,4 +201,3 @@ jQuery(document).ready( function () {
 });
 </script>
 @endsection
-

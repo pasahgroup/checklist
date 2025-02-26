@@ -26,13 +26,10 @@ class usersPermissionController extends Controller
      */
     public function index()
     {
-      $auth=auth::user();
-      $aData['dataC'] = dbsetting::getConnect($auth->id);
+         $auth=auth::user();
 
          $users= User::get();
-         $departments= department::get();
-
-        $userRoles = User::join('user_roles','users.id','user_roles.sys_user_id')
+            $userRoles = User::join('user_roles','users.id','user_roles.sys_user_id')
         ->join('roles','user_roles.role_id','roles.id')
         ->where('user_roles.status','Active')
         ->select('roles.name as role_name','user_roles.sys_user_id as sys_user_id','user_roles.id as arole_id','users.*')
@@ -54,6 +51,9 @@ class usersPermissionController extends Controller
         $roles = Role::get();
         //$limitation = myPayment::latest()->first();
 
+//The line must not moved
+  $aData['dataC'] = dbsetting::getConnect($auth->id);
+   $departments= department::get();
         return view('admin.settings.users.users',compact('users','userRoles','permissions','permit','roles','departments'));
     }
 
@@ -76,7 +76,7 @@ class usersPermissionController extends Controller
     public function store(Request $request)
     {
       $auth=auth::user();
-      $aData['dataC'] = dbsetting::getConnect($auth->id);
+    //  $aData['dataC'] = dbsetting::getConnect($auth->id);
 
         $user_id = User::where('id',request('users_id'))->first();
         $user_id->assignRole(request('roles'));
@@ -103,7 +103,7 @@ class usersPermissionController extends Controller
     public function edit($id)
     {
       $auth=auth::user();
-      $aData['dataC'] = dbsetting::getConnect($auth->id);
+      //$aData['dataC'] = dbsetting::getConnect($auth->id);
 
         $datas = User::where('id',$id)->first();
         $roles= Role::get();
@@ -117,7 +117,7 @@ class usersPermissionController extends Controller
         public function roleremove($id,$role)
         {
           $auth=auth::user();
-          $aData['dataC'] = dbsetting::getConnect($auth->id);
+        //  $aData['dataC'] = dbsetting::getConnect($auth->id);
 
             $user = User::where('id',$id)->first();
             $user->removeRole($role);
@@ -128,7 +128,7 @@ class usersPermissionController extends Controller
           public function recoveryUpdate(user $department,$id)
     {
       $auth=auth::user();
-      $aData['dataC'] = dbsetting::getConnect($auth->id);
+      //$aData['dataC'] = dbsetting::getConnect($auth->id);
 
           $user = user::where('id',$id)
                ->update([
@@ -159,7 +159,7 @@ class usersPermissionController extends Controller
     public function destroy($id)
     {
       $auth=auth::user();
-      $aData['dataC'] = dbsetting::getConnect($auth->id);
+      //$aData['dataC'] = dbsetting::getConnect($auth->id);
 
         if(request('role')){
 
@@ -177,7 +177,7 @@ $userModel=request('user_id');
 
 $answerTableUpdate1=DB::statement('delete from model_has_roles where model_id="'.$userRole_id->sys_user_id .'" and role_id="'.$userRole_id->role_id.'"');
 
-      return redirect()->back()->with('success','role has been revoked successefuly');
+      return redirect()->back()->with('success','role has been revoked successfuly');
         }
 
         if(request('department')){
@@ -187,14 +187,16 @@ $answerTableUpdate1=DB::statement('delete from model_has_roles where model_id="'
                 'department_id'=>0,
                  'user_id'=>auth()->id()
                ]);
-      return redirect()->back()->with('success','role has been revoked successefuly');
+      return redirect()->back()->with('success','role has been revoked successfuly');
         }
 
          if(request('permission')){
-           // dd(request('siteid'));
+          // dd(request('siteid'));
+
             $userSite = userProperty::where('sys_user_id',$id)
             ->where('property_id',request('siteid'))
             ->first();
+            //dd($userSite);
 
         if($userSite){
                  $userSite->update([
@@ -202,7 +204,7 @@ $answerTableUpdate1=DB::statement('delete from model_has_roles where model_id="'
              'user_id'=>auth()->id()
            ]);
 
-                return redirect()->back()->with('success','role has been revoked successefuly');
+                return redirect()->back()->with('success','role has been revoked successfuly');
             }
             else{
                 return redirect()->back()->with('error','role can not be revoked');

@@ -32,24 +32,24 @@ class UserRegisterController extends Controller
     public function index()
     {
       $auth=auth::user();
-      $aData['dataC'] = dbsetting::getConnect($auth->id);
+      $users = user::where('status','Active')
+      ->where('name','!=',"")
+      ->get();
+        $roles = role::where('status','Active')->get();
+        $properties=property::get();
 
+        // $properties=property::where('company_id',$auth->company_id)
+        // ->where('status','Active')
+        // ->get();
+        //dd($properties);
+        //New connection
+
+      $aData['dataC'] = dbsetting::getConnect($auth->id);
         $metadatas = metadata::where('status','Active')
           ->orWhere('status','Stop')
           ->get();
           $datatypes = datatype::get();
-
-  $users = user::where('status','Active')
-  ->where('name','!=',"")
-  ->get();
-
-    $roles = role::where('status','Active')->get();
- //dd($roles);
-
-$departments=department::get();
-$properties=property::where('company_id',$auth->company_id)
-->where('status','Active')
-->get();
+      $departments=department::get();
 
 //dd($metadatas);
  return view('auth.register',compact('departments','users','datatypes','properties','roles'));
@@ -74,8 +74,6 @@ $properties=property::where('company_id',$auth->company_id)
     public function store(Request $request)
     {
       $auth=auth::user();
-      $aData['dataC'] = dbsetting::getConnect($auth->id);
-
 
   validator([
             'name' => ['required', 'string', 'max:255'],
@@ -124,7 +122,6 @@ else
 
  // $user = User::where('id',$userReg->id);
  $userReg->assignRole(request('role'));
-
          $appliedto =userRole::Create([
         'sys_user_id'=>$userReg->id,
         'role_id'=>request('role'),
@@ -134,6 +131,10 @@ else
 
 
 //Insert one value in asset table
+
+//dd('dddd');
+//New database connections
+$aData['dataC'] = dbsetting::getConnect($auth->id);
 $assetData =asset::Create([
      'property_id'=>request('property'),
      'metaname_id'=>1,
@@ -145,8 +146,7 @@ $assetData =asset::Create([
         'asset_description'=>"Room 1",
         'status'=>'Active',
 'user_id'=>$userReg->id,
-        ]);
-
+]);
  }
       return redirect()->back()->with('success','User Registered successfuly');
     }
@@ -170,10 +170,9 @@ $assetData =asset::Create([
      */
     public function edit(request $request,$id)
     {
+      //dd('ttt');
       $auth=auth::user();
-      $aData['dataC'] = dbsetting::getConnect($auth->id);
-
-        $user = user::where('id',$id)
+            $user = user::where('id',$id)
                ->update([
                 'status'=>"Inactive",
                  'user_id'=>auth()->id()
@@ -192,8 +191,7 @@ $assetData =asset::Create([
     public function update(Request $request,$id)
     {
       $auth=auth::user();
-      $aData['dataC'] = dbsetting::getConnect($auth->id);
-        //dd(request('property'));
+
        $user = user::where('id',$id)->first();
         if($user){
            $user->update([
@@ -219,8 +217,6 @@ $assetData =asset::Create([
     public function destroy(user $user,$id)
     {
       $auth=auth::user();
-      $aData['dataC'] = dbsetting::getConnect($auth->id);
-
         $user = user::where('id',$id)->first();
         if($user){
             $user->delete();
@@ -235,8 +231,6 @@ $assetData =asset::Create([
     public function recoveryUpdate(user $user,$id)
     {
       $auth=auth::user();
-      $aData['dataC'] = dbsetting::getConnect($auth->id);
-
           $user = user::where('id',$id)
                ->update([
                 'status'=>"Active",
@@ -250,9 +244,11 @@ $assetData =asset::Create([
    public function recovery()
     {
       $auth=auth::user();
-      $aData['dataC'] = dbsetting::getConnect($auth->id);
+
        //$user = user::where('status','Inactive')->get();
          // $datatypes = datatype::get();
+
+         //$aData['dataC'] = dbsetting::getConnect($auth->id);
          $users = DB::select('select u.id,u.name,u.department_id,d.department_name,u.email,u.status from users u,departments d where u.department_id=d.id and u.status="Inactive"');
 
 $departments=department::get();

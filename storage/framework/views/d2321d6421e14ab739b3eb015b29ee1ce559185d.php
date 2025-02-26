@@ -23,7 +23,7 @@
                                         <div class="col-lg-12 col-xl-12">
                                            <!--  <div class="card card-custom gutter-b bg-transparent shadow-none border-0" > -->
 
-                                            
+
                                                   <div class="card card-custom bg-transparent shadow-none border-1" >
                                                 <div class="card-header align-items-center  border-bottom-dark px-0">
                                                     <div class="card-title mb-0">
@@ -139,7 +139,7 @@
                         <label class="text-dark" >Edit Property/Accommodation</label>
                         <select name="property" id="property" class="form-control">
 
-                                        <option value="<?php echo e($user->property_id); ?>">  
+                                        <option value="<?php echo e($user->property_id); ?>">
                                             <?php if(isset($properties)): ?>
                                             <?php $__currentLoopData = $properties; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $property): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                         <?php if($user->property_id==$property->id): ?>

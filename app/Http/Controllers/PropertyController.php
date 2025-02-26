@@ -78,16 +78,21 @@ $properties = property::where('company_id',$auth->company_id)
      return view('admin.settings.properties.property',compact('properties'));
     }
 
+
+
+
+
+
+
+
  public function dashProperty($id)
     {
-
-    //  dd($id);
   $auth=auth::user();
-  $aData['dataC'] = dbsetting::getConnect($auth->id);
+  //$aData['dataC'] = dbsetting::getConnect($auth->id);
 
  //dd($auth->id);
 //Helper::shout('courses');
-      // dd($auth_user);
+       //dd($auth);
 
  //$dd=Config::get(app_path().'/db/dbconn.php');
 //dd($dd);
@@ -124,24 +129,26 @@ $properties = property::where('company_id',$auth->company_id)
  //    ->select('*')
  //    ->get();
 
-   //dd(session("auth_user"));
+  // dd($id);
 
       // $properties = property::where('status','Active')->get();
       //$propertyName = Property::where('id',1)->first();
 
+$id=$id;
      $properties=property::where('status','Active')->get();
-    return view('admin.settings.properties.dash.dash-property',compact('properties'));
+   return view('admin.settings.properties.dash.dash-property',compact('properties','id'));
     }
 
 
  public function reportGeneral(Request $request,$id)
     {
     $auth=auth::user();
+    $property=property::where('id',$auth->property_id)->first();
+    //The line must be placed before the new connection
   $aData['dataC'] = dbsetting::getConnect($auth->id);
 // dd($auth);
 
 $prnt="";
-$property=property::where('id',$auth->property_id)->first();
   //$segment = $request->segment(1);
  // $currenturl = Request::url();
 //dd($userID);
@@ -826,6 +833,9 @@ $updateUser = user::where('id',auth()->id())
     public function reportProperty(Request $request,$id)
        {
          $auth=auth::user();
+         $properties = property::where('id',$id)
+           ->where('status','Active')->first();
+
          $aData['dataC'] = dbsetting::getConnect($auth->id);
 //dd($id);
            $segments = request()->segments();
@@ -840,8 +850,7 @@ $updateUser = user::where('id',auth()->id())
          $metanames = metaname::get();
     //dd($metanames);
        $current_date = date('Y-m-d');
-       $properties = property::where('id',$id)
-         ->where('status','Active')->first();
+
 
         //Daily Report
        $reportDailyData=DB::select('select a.property_id,a.metaname_id,m.metaname_name,a.indicator_id,a.asset_id, a.opt_answer_id,a.answer,a.answer_label,o.answer_classification from answers a,optional_answers o,metanames m where a.indicator_id=o.indicator_id and a.metaname_id=m.id and a.property_id="'.$id.'" and a.opt_answer_id=o.id and a.datex="'.$current_date.'" order by m.metaname_name ASC');
