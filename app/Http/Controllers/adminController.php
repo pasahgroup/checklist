@@ -65,8 +65,8 @@ class adminController extends Controller
         $now = Carbon::now();
         $weekStartDate = $now->startOfWeek()->format('Y-m-d H:i');
         $weekEndDate = $now->endOfWeek()->format('Y-m-d H:i');
-        $user = User::where('id',auth()->id())->first();
-        $users= User::get();
+        $user = user::where('id',auth()->id())->first();
+        $users= user::get();
         $user->hasRole('Admin');
        //$int = (int)$user->property_id;
 
@@ -110,7 +110,7 @@ if($property_name ==null)
             $user->assignRole('Admin');
                 }
             //create master accounts
-            $super_admin = User::create([
+            $super_admin = user::create([
                 'name' =>'SuperAdmin',
                 'email' =>'superadmin@pasah.net',
                 'password' => Hash::make('pasah12345!')
