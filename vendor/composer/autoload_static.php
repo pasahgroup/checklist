@@ -230,6 +230,7 @@ class ComposerStaticInit62fb9f276daf1d6353bd91f355138eb1
         array (
             'Cron\\' => 5,
             'Composer\\Semver\\' => 16,
+            'Composer\\Pcre\\' => 14,
             'Complex\\' => 8,
             'Carbon\\Doctrine\\' => 16,
             'Carbon\\' => 7,
@@ -432,8 +433,8 @@ class ComposerStaticInit62fb9f276daf1d6353bd91f355138eb1
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -692,6 +693,10 @@ class ComposerStaticInit62fb9f276daf1d6353bd91f355138eb1
         array (
             0 => __DIR__ . '/..' . '/composer/semver/src',
         ),
+        'Composer\\Pcre\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/pcre/src',
+        ),
         'Complex\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
@@ -884,7 +889,6 @@ class ComposerStaticInit62fb9f276daf1d6353bd91f355138eb1
         'App\\Jobs\\SendMailJobf' => __DIR__ . '/../..' . '/app/Jobs/SendMailJobf.php',
         'App\\Mail\\SendMail' => __DIR__ . '/../..' . '/app/Mail/SendMail.php',
         'App\\Models\\Image' => __DIR__ . '/../..' . '/app/Models/Image.php',
-        'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\account' => __DIR__ . '/../..' . '/app/Models/account.php',
         'App\\Models\\activityRole' => __DIR__ . '/../..' . '/app/Models/activityRole.php',
         'App\\Models\\answer' => __DIR__ . '/../..' . '/app/Models/answer.php',
@@ -956,6 +960,7 @@ class ComposerStaticInit62fb9f276daf1d6353bd91f355138eb1
         'App\\Models\\supplierWallet' => __DIR__ . '/../..' . '/app/Models/supplierWallet.php',
         'App\\Models\\supplierWalletSummury' => __DIR__ . '/../..' . '/app/Models/supplierWalletSummury.php',
         'App\\Models\\tenant' => __DIR__ . '/../..' . '/app/Models/tenant.php',
+        'App\\Models\\user' => __DIR__ . '/../..' . '/app/Models/user.php',
         'App\\Models\\userActivity' => __DIR__ . '/../..' . '/app/Models/userActivity.php',
         'App\\Models\\userProperty' => __DIR__ . '/../..' . '/app/Models/userProperty.php',
         'App\\Models\\userRegister' => __DIR__ . '/../..' . '/app/Models/userRegister.php',
@@ -1214,6 +1219,23 @@ class ComposerStaticInit62fb9f276daf1d6353bd91f355138eb1
         'Complex\\Functions' => __DIR__ . '/..' . '/markbaker/complex/classes/src/Functions.php',
         'Complex\\Operations' => __DIR__ . '/..' . '/markbaker/complex/classes/src/Operations.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Composer\\Pcre\\MatchAllResult' => __DIR__ . '/..' . '/composer/pcre/src/MatchAllResult.php',
+        'Composer\\Pcre\\MatchAllStrictGroupsResult' => __DIR__ . '/..' . '/composer/pcre/src/MatchAllStrictGroupsResult.php',
+        'Composer\\Pcre\\MatchAllWithOffsetsResult' => __DIR__ . '/..' . '/composer/pcre/src/MatchAllWithOffsetsResult.php',
+        'Composer\\Pcre\\MatchResult' => __DIR__ . '/..' . '/composer/pcre/src/MatchResult.php',
+        'Composer\\Pcre\\MatchStrictGroupsResult' => __DIR__ . '/..' . '/composer/pcre/src/MatchStrictGroupsResult.php',
+        'Composer\\Pcre\\MatchWithOffsetsResult' => __DIR__ . '/..' . '/composer/pcre/src/MatchWithOffsetsResult.php',
+        'Composer\\Pcre\\PHPStan\\InvalidRegexPatternRule' => __DIR__ . '/..' . '/composer/pcre/src/PHPStan/InvalidRegexPatternRule.php',
+        'Composer\\Pcre\\PHPStan\\PregMatchFlags' => __DIR__ . '/..' . '/composer/pcre/src/PHPStan/PregMatchFlags.php',
+        'Composer\\Pcre\\PHPStan\\PregMatchParameterOutTypeExtension' => __DIR__ . '/..' . '/composer/pcre/src/PHPStan/PregMatchParameterOutTypeExtension.php',
+        'Composer\\Pcre\\PHPStan\\PregMatchTypeSpecifyingExtension' => __DIR__ . '/..' . '/composer/pcre/src/PHPStan/PregMatchTypeSpecifyingExtension.php',
+        'Composer\\Pcre\\PHPStan\\PregReplaceCallbackClosureTypeExtension' => __DIR__ . '/..' . '/composer/pcre/src/PHPStan/PregReplaceCallbackClosureTypeExtension.php',
+        'Composer\\Pcre\\PHPStan\\UnsafeStrictGroupsCallRule' => __DIR__ . '/..' . '/composer/pcre/src/PHPStan/UnsafeStrictGroupsCallRule.php',
+        'Composer\\Pcre\\PcreException' => __DIR__ . '/..' . '/composer/pcre/src/PcreException.php',
+        'Composer\\Pcre\\Preg' => __DIR__ . '/..' . '/composer/pcre/src/Preg.php',
+        'Composer\\Pcre\\Regex' => __DIR__ . '/..' . '/composer/pcre/src/Regex.php',
+        'Composer\\Pcre\\ReplaceResult' => __DIR__ . '/..' . '/composer/pcre/src/ReplaceResult.php',
+        'Composer\\Pcre\\UnexpectedNullMatchException' => __DIR__ . '/..' . '/composer/pcre/src/UnexpectedNullMatchException.php',
         'Composer\\Semver\\Comparator' => __DIR__ . '/..' . '/composer/semver/src/Comparator.php',
         'Composer\\Semver\\CompilingMatcher' => __DIR__ . '/..' . '/composer/semver/src/CompilingMatcher.php',
         'Composer\\Semver\\Constraint\\Bound' => __DIR__ . '/..' . '/composer/semver/src/Constraint/Bound.php',

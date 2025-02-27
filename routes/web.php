@@ -226,7 +226,8 @@ Route::get('possale/{post}',Show::class)->name('possale');
 Route::get('posfinal/{post}',Showfinal::class)->name('posfinal');
 // Authenticated area
 Route::get('create-company',[tenantController::class,'index'])->name('create-company');
-Route::get('/license', [adminController::class,'license']);
+// Route::post('license', [adminController::class,'license']);
+Route::get('license', [adminController::class, 'license'])->name('license');
 
 Route::get('webcam', [WebcamController::class, 'index']);
 Route::post('webcam', [WebcamController::class, 'store'])->name('webcam.capture');

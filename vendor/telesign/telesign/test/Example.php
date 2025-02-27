@@ -12,4 +12,16 @@ class Example {
   const REFERENCE_ID = "AEBC93B5898342F790E4E19FED41A7DA";
   const ACCOUNT_LIFECYCLE_EVENT = "create";
 
+  static function objExampleVerification() {
+    $obj = [
+      "verification_policy" => [
+        [ "method" => "sms" ]
+      ],
+      "recipient" => [
+        "phone_number" => self::PHONE_NUMBER
+      ]
+    ];
+
+    return $obj;
+  }
 }

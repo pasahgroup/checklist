@@ -37,6 +37,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Traits\HasRoles;
 use App\Http\Traits\GlobalTrait;
 use App\Models\dbsetting;
+use Illuminate\Support\Facades\Validator;
 // use App\Http\Controllers\Helpers;
 
 class adminController extends Controller
@@ -57,8 +58,40 @@ class adminController extends Controller
   // $aData['dataC'] = dbsetting::getConnect($auth->id);
 
 //dd(request()->getHost());
-      //dd(request('code'));
-//dd($auth);
+      // dd('jkl');
+      //
+      //
+      // $validator = Validator::make(
+      //     data: [
+      //         'db_name' => $auth->db_name,
+      //     ],
+      //     rules: [
+      //         'db_name' => ['required', 'string', 'max:100'],
+      //     ]
+      // );
+      //
+      // if ($validator->fails()) {
+      //     // One or more of the fields failed validation.
+      //   //dd('No data');
+      //   return redirect('admin')
+      //                    ->withErrors($validator)
+      //                    ->withInput();
+      // }
+
+
+if($auth->db_name==null)
+{
+
+  //return redirect()->route('/login')->with('info','The User is not Activated');
+    //return redirect()->route('admin.index')->with('error','There is no any property ID set');
+    //return redirect('admin.index');
+   //dd('The Account Not Yet Activated');
+
+//'email' => 'unique:users,email_address,10'
+//'email' => "required|email|exists:users,email,email,$request->email",
+//return view('dashboard');
+  return redirect()->route('license')->with('success','Updated successfully');
+}
 
        if(auth())
        {
@@ -82,7 +115,6 @@ if($property_name ==null)
 }else {
  $property_name=$property_name->property_name;
 }
-
 
 //ADD ROLE FOR THE FIRST TIME
         if($users->count()<=1 && $user->hasRole('Admin') == 0){
@@ -242,7 +274,7 @@ elseif($user->hasRole('')){
 
     //license
     public function license(){
-        return view('admin.license');
+       dd('The Account not activated,We will activate and Inform you via the Email you Registerd, Thank you!');
     }
 
     /**
