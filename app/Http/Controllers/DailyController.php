@@ -132,14 +132,14 @@ class DailyController extends Controller
 //            ->groupby('metanames.id')
 //             ->get();
 
-  //dd($metanames);
+  //dd($metanamess);
 
      $metanames = metaname::join('qns_appliedtos','qns_appliedtos.metaname_id','metanames.id')
       ->where('qns_appliedtos.department_id',$auth->department_id)
       ->select('metanames.id','metanames.metaname_name')
       //->groupby('metanames.id')
       ->get();
-      // dd($metanamesd);
+      //dd($metanames);
 
       $metanames = collect($metanames);
     //$metanamesd=$metanamesd->groupBy('id');
