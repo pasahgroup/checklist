@@ -109,9 +109,6 @@ dd($users);
 
 
 
-
-
-
       // $answerTableUpdate1=DB::statement('update answers a,optional_answers o set a.answer=o.answer,a.answer_label=o.answer_classification where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
         //$ff=DB::statement('CREATE DATABASE :schema','wawaddbg');
      }
@@ -120,6 +117,7 @@ dd($users);
 
     public function store(Request $request)
     {
+
 $validatedData = $request->validate([
          'business_name' => 'required',
             'tin' => 'required',
@@ -136,6 +134,8 @@ $validatedData = $request->validate([
          'email.required' => 'Email field is required. test 2',
          'email.email' => 'Email field must be email address.',
      ]);
+
+///  $current_date = date('Y-m-d');
 
 // $department = department::where('department_name','Manager')->first();
 $department =1;
@@ -164,7 +164,7 @@ if(!is_null($userEmail))
 //$answerTableUpdate1=DB::statement('create ');
 
 
-  $answerTableUpdate1=DB::statement('update answers a,optional_answers o set a.answer=o.answer,a.answer_label=o.answer_classification where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
+  //$answerTableUpdate1=DB::statement('update answers a,optional_answers o set a.answer=o.answer,a.answer_label=o.answer_classification where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
 
  //return DB::getConnection()->statement('CREATE DATABASE :schema', array('schema' => $schemaName));
 
@@ -231,7 +231,6 @@ if(!is_null($userEmail))
 
 //Assign to Role
 $userReg->assignRole($role_name->id);
-
 $appliedto =userRole::Create([
         'sys_user_id'=>$userReg->id,
         'role_id'=>$role_name->id,
