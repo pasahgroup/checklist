@@ -157,6 +157,7 @@ class DailyController extends Controller
       // ->select('assets.id','assets.metaname_id','assets.asset_name','assets.property_id')
       // ->get();
 
+//d($metadatasCollects);
 
       // $assets = asset::where('assets.metaname_id',$metaname_id)
       // ->where('assets.property_id',auth()->user()->property_id)
@@ -223,7 +224,7 @@ class DailyController extends Controller
     $checkQnsProp = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'" group by asset_id');
     $qns = DB::select("select * from qnsview where department_id=$auth->department_id and duration='daily' and metaname_id in(".$metaname_id.")");
 
-
+//dd($qns);
 
     //$checkQns = DB::select('select a.opt_answer_id,a.property_id,a.metaname_id,a.asset_id,a.indicator_id,a.photo,a.answer,a.answer_label,a.description from answers a,assets p where a.property_id=p.property_id and a.metaname_id=p.metaname_id and a.asset_id=p.id and a.datex="'.$current_date.'" and a.status="Active"');
     $checkQns = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'"');
@@ -327,6 +328,7 @@ class DailyController extends Controller
       // $aID = request("aID");
       // $qnAID = request("qnAID");
       // $indexs = request('index');
+      //dd($auth);
 
    //Array Declaration
    $dataQns=[];
@@ -336,10 +338,12 @@ class DailyController extends Controller
    //$newSectionArray = array_filter($sections);
 
     // $sections = request('section_name1_27');
-    $property_id = request('propertyID');
+    //$property_id = request('propertyID');
+
+      $property_id =$auth->property_id;
     $current_date = date('Y-m-d');
 
-     // dd($current_date);
+  // dd($property_id);
 
     if(request('save')){
     $save = request("save");

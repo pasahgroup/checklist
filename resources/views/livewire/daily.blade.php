@@ -198,7 +198,6 @@ border-color: #dddddd;
           <div class="row-card">
            @foreach ($metadatasCollects->where('indicator_id',$qn->id) as $metadata)
            @if($metadata->indicator_id ==$qn->id)
-
               <div class="col-xl-3 col-md-3 col-sm-3" id="{{$metadata->answer}}">
                 {{$metadata->answer}}
 

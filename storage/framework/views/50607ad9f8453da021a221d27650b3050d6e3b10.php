@@ -198,7 +198,6 @@ border-color: #dddddd;
           <div class="row-card">
            <?php $__currentLoopData = $metadatasCollects->where('indicator_id',$qn->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $metadata): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
            <?php if($metadata->indicator_id ==$qn->id): ?>
-
               <div class="col-xl-3 col-md-3 col-sm-3" id="<?php echo e($metadata->answer); ?>">
                 <?php echo e($metadata->answer); ?>
 
