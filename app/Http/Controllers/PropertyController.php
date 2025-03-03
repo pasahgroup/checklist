@@ -52,11 +52,11 @@ class PropertyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
   $auth=auth::user();
   $aData['dataC'] = dbsetting::getConnect($auth->id);
-
 
 $level=property::where('id',$auth->property_id)->first();
  //dd($auth);
@@ -77,10 +77,6 @@ $properties = property::where('company_id',$auth->company_id)
 
      return view('admin.settings.properties.property',compact('properties'));
     }
-
-
-
-
 
 
 

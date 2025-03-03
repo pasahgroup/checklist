@@ -205,7 +205,7 @@ $sectionCollects = collect($sections);
     //$answerPerc=DB::select('select * from answers_view');
      $answerPerc=DB::select('select * from answers_view_summary');
 
-     //dd($qns);    
+     //dd($qns);
     //sqlite
 
 
@@ -297,12 +297,6 @@ $sectionCollects = collect($sections);
      */
     public function store(Request $request)
     {
-    //$rad=$this->rad;
-    //dd('sdsd');
-
-     // $aID = request("aID");
-     // $qnAID = request("qnAID");
-     // $indexs = request('index');
 
  //Array Declaration
  $dataQns=[];
@@ -576,7 +570,6 @@ $constraint->aspectRatio();
 
     }
 
-    
 
     public function getA($p){
        // Fetch Employees by Departmentid

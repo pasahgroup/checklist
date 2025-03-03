@@ -90,7 +90,7 @@ if($auth->db_name==null)
 //'email' => 'unique:users,email_address,10'
 //'email' => "required|email|exists:users,email,email,$request->email",
 //return view('dashboard');
-  return redirect()->route('license')->with('success','Updated successfully');
+  //return redirect()->route('license')->with('success','Updated successfully');
 }
 
        if(auth())

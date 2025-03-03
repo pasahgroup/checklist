@@ -78,18 +78,14 @@ class DailyController extends Controller
 
    public function index(Request $request)
     {
-// $valueDB=DB::table('dbconnects')->where('user_id',Auth::user()->id)->first();
-//   dd($valueDB);
-$auth=auth::user();
+  $auth=auth::user();
   $departments=user::where('id',auth()->id())->first();
-
-$aData['dataC'] = dbsetting::getConnect($auth->id);
-
+  $aData['dataC'] = dbsetting::getConnect($auth->id);
+//dd($auth);
 
       $current_date = date('Y-m-d');
       //Extract date
       $datet=Carbon::now();
-
       $datet=$datet->format('H:i:s');
 
         $metaname_id=request('asset_model');
@@ -114,7 +110,7 @@ $aData['dataC'] = dbsetting::getConnect($auth->id);
 
     //$metaname_id=$this->metaname_model;
     $metanamess = metaname::where('metanames.id',$metaname_id)->first();
-  //  $assetss = asset::where('assets.id',$assetID)->first();
+    //$assetss = asset::where('assets.id',$assetID)->first();
 
     $propertyID=asset::where('id',$assetID)->first();
   //  $assetss=$propertyID;
@@ -156,10 +152,23 @@ $aData['dataC'] = dbsetting::getConnect($auth->id);
           $metadatasCollects = collect($metadatasCollects);
           //$subset = $metadatas->map->only(['id', 'name', 'email']);
 
+      // $assets = asset::where('assets.metaname_id',$metaname_id)
+      // ->where('assets.property_id',auth()->user()->property_id)
+      // ->select('assets.id','assets.metaname_id','assets.asset_name','assets.property_id')
+      // ->get();
+
+
+      // $assets = asset::where('assets.metaname_id',$metaname_id)
+      // ->where('assets.property_id',auth()->user()->property_id)
+      // ->select('assets.id','assets.metaname_id','assets.asset_name','assets.property_id')
+      // ->get();
+
       $assets = asset::where('assets.metaname_id',$metaname_id)
       ->where('assets.property_id',auth()->user()->property_id)
       ->select('assets.id','assets.metaname_id','assets.asset_name','assets.property_id')
       ->paginate(8);
+
+      //dd($asset_links);
 
     $departApply= department::where('status','Active')->get();
     //dd('axssa');
@@ -299,7 +308,7 @@ $aData['dataC'] = dbsetting::getConnect($auth->id);
     foreach ($files as $file){
     $message->attach($file);
     }
-    });
+  });
 
       dd('Mail sent successfully');
     }
@@ -331,7 +340,6 @@ $aData['dataC'] = dbsetting::getConnect($auth->id);
      {
        $auth=auth::user();
        $aData['dataC'] = dbsetting::getConnect($auth->id);
-
 
       // $aID = request("aID");
       // $qnAID = request("qnAID");

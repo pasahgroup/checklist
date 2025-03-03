@@ -103,6 +103,10 @@ use JasperPHP\JasperPHP as JasperPHP;
  // Route::get('image', [ImageController::class, 'index']);
  // Route::post('image', [ImageController::class, 'store']);
 
+
+Route::get('createdb', [profileController::class, 'createdb']);
+
+
 Route::get('pdf', [EmailSendController::class, 'generatePDF']);
 Route::get('company-profile-web', [profileController::class, 'companyWeb'])->name('company-profile-web');
 // Route::resource('company-profile-create', [profileController::class, 'create']);
@@ -188,7 +192,7 @@ $jasper = new PHPJasper;
 
 $jasper->compile($input)->execute();
 
- });
+});
 
  Route::resource('ins', InsController::class)->middleware(['role:SuperAdmin|GeneralAdmin|Admin|Account']);
 
@@ -372,7 +376,7 @@ route::resource('/roles',roleController::class)->middleware(['role:SuperAdmin|Ge
 
           //Route::get('dash-property/{id}',[PropertyController::class,'dashProperty'])->name('dash-property');
           Route::get('dashx',[PropertyController::class,'dashPropertyg'])->name('dash-property');
-            Route::get('dash-property/{id}',[PropertyController::class,'dashProperty'])->middleware(['role:SuperAdmin|GeneralAdmin|Admin|Account']);
+            Route::get('dash-property/{id}',[PropertyController::class,'dashProperty'])->middleware(['role:SuperAdmin|GeneralAdmin|Admin|Account|HouseKeeper']);
 
           //Route::get('report-property/{id}',[PropertyController::class,'reportProperty'])->name('report-property');
             Route::get('report-property/{id}',[PropertyController::class,'reportProperty'])->middleware(['role:SuperAdmin|GeneralAdmin|Admin|Account']);

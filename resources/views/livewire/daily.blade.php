@@ -107,6 +107,7 @@ border-color: #dddddd;
   </script>
 </label>
 
+
 <div class="row">
        <form  method="GET"  action="{{ route('daily.index') }}" enctype="multipart/form-data">
             @csrf
@@ -147,8 +148,6 @@ border-color: #dddddd;
        @foreach ($assets as $asset)
             <div class="col-lg-12 col-md-12 col-sm-12">
               <div class="panel-heading">
-
-
     <div class="card" data-toggle="collapse" href="#collapp{{$metaname_id}}_{{$asset->id}}" id="" class="panel-group btn-sm" onclick="setSectionFunction('{{$metaname_id}}','{{$asset->asset_name}}')" onkeyup ="setSectionFunction('{{$metaname_id}}','{{$asset->asset_name}}')" style="background-color:#979186 !important">
                     <div class="row">
                       <div class="col-lg-10 col-md-10 col-sm-10" style="color:">

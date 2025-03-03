@@ -48,7 +48,7 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        $user = Auth::User();
+        $user = Auth::ser();
 
         $act = new activities;
         $act->action = "User logged in to account";

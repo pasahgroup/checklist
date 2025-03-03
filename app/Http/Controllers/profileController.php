@@ -49,14 +49,7 @@ class profileController extends Controller
 
  public function companyWeb()
     {
-           ///$auth=auth()->user();
-
-      //  $profile = myCompany::first();
          $pin=rand(111111, 999999);
-         //dd($pin);
-//          $properties=property::where('company_id',$auth->company_id)
-// ->where('status','Active')
-// ->get();
 
             $properties=property::where('status','Active')
             ->get();
@@ -85,6 +78,46 @@ class profileController extends Controller
      */
 
 
+     // function createSchema($schemaName)
+     // {
+     //     return DB::getConnection()->statement('CREATE DATABASE :schema', array('schema' => $schemaName));
+     // }
+
+     // Now we can create a MySQL Database
+     public function createdb(Request $request)
+     {
+       // $answerTableUpdate1o=DB::statement('CREATE DATABASE bbbxv');
+       // dd($answerTableUpdate1o);
+
+       $dbName = 'bbdddgbs';  // Your Database name to be created
+       DB::statement("CREATE DATABASE ".$dbName);
+       //$users = DB::connection($dbName)->select('select * from users');
+
+        DB::statement('USE DATABASE '.$dbName);
+         \Artisan::call('migrate');
+
+dd($users);
+
+       // if(empty($hasDb)) {
+       //             DB::connection($connection)->select('CREATE DATABASE '. $dbname);
+       //             $this->info("Database '$dbname' created for '$connection' connection");
+       //         }
+       //         else {
+       //             $this->info("Database $dbname already exists for $connection connection");
+       //         }
+
+
+
+
+
+
+
+      // $answerTableUpdate1=DB::statement('update answers a,optional_answers o set a.answer=o.answer,a.answer_label=o.answer_classification where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
+        //$ff=DB::statement('CREATE DATABASE :schema','wawaddbg');
+     }
+
+
+
     public function store(Request $request)
     {
 $validatedData = $request->validate([
@@ -103,9 +136,6 @@ $validatedData = $request->validate([
          'email.required' => 'Email field is required. test 2',
          'email.email' => 'Email field must be email address.',
      ]);
-
-
-//dd('printxx');
 
 // $department = department::where('department_name','Manager')->first();
 $department =1;
@@ -128,6 +158,19 @@ if(!is_null($userEmail))
   {
    return redirect()->back()->with('info','Email alredy exist');
   }
+
+// \Artisan::call('route:clear');
+  //$answerTableUpdate1=DB::statement('update answers a,optional_answers o set a.answer=o.answer,a.answer_label=o.answer_classification where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
+//$answerTableUpdate1=DB::statement('create ');
+
+
+  $answerTableUpdate1=DB::statement('update answers a,optional_answers o set a.answer=o.answer,a.answer_label=o.answer_classification where a.opt_answer_id=o.id and a.datex="'.$current_date .'" and a.property_id="'.$property_id.'" and a.asset_id="'.$asset_id.'"');
+
+ //return DB::getConnection()->statement('CREATE DATABASE :schema', array('schema' => $schemaName));
+
+  //Create Database
+ // createSchema('cczadqdkmfeokkioaackazcoobffmkaz');
+  //End of create Database
 
   if(request('attachment')){
 

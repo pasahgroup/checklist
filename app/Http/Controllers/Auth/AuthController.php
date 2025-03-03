@@ -110,13 +110,10 @@ class AuthController extends Controller
 
         ]);
 
-
-
         $data = $request->all();
         $check = $this->create($data);
 
         return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
-
     }
 
 
@@ -156,13 +153,9 @@ class AuthController extends Controller
     public function create(array $data)
 
     {
-
       return User::create([
-
         'name' => $data['name'],
-
         'email' => $data['email'],
-
         'password' => Hash::make($data['password'])
 
       ]);
@@ -185,7 +178,5 @@ class AuthController extends Controller
         Session::flush();
         Auth::logout();
         return Redirect('login');
-
     }
-
 }
