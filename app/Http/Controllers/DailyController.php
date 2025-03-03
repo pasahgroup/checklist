@@ -340,7 +340,7 @@ class DailyController extends Controller
     // $sections = request('section_name1_27');
     //$property_id = request('propertyID');
 
-      $property_id =$auth->property_id;
+    $property_id =$auth->property_id;
     $current_date = date('Y-m-d');
 
   // dd($property_id);
@@ -425,7 +425,7 @@ class DailyController extends Controller
    'status'=>'Active',
    'action'=>1,
    'user_id'=>auth()->id(),
-   ]);
+ ]);
 
    //dd('Updated');
 
@@ -436,7 +436,6 @@ class DailyController extends Controller
    //dd('Updated');
    }
    }else{
-
      $insetqnsAns = answer::UpdateOrCreate([
        'property_id'=>$property_id,
        'metaname_id'=>request('metaname_id'),
@@ -545,8 +544,6 @@ class DailyController extends Controller
    // dd(request('email_send'));
 
       if(request('email_send')){
-   //dd('ddddx');
-
    //dd('bvncx');
    $input =app_path().'/reports/pieChart.jrxml';
    //$input='/home3/hakunama/jvm/apache-tomcat-9.0.6/domains/test.hakunamatatas.net/app/reports';
@@ -557,7 +554,7 @@ class DailyController extends Controller
       'format' => ['pdf'],
       'locale' => 'en',
       'params' => [
-   'property_id'=>1,
+   'property_id'=>$property_id,
       ],
       'db_connection' => [
            'driver' => 'mysql', //mysql, ....
@@ -567,8 +564,6 @@ class DailyController extends Controller
           'database' => 'horesydb',
           'port' => '3306'
       ]
-
-
    ];
    // dd('zz');
    //dd('zzkx');

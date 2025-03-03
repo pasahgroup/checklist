@@ -75,7 +75,6 @@ class ChecklistController extends Controller
       {
         $auth=auth::user();
         $departments=user::where('id',auth()->id())->first();
-
         $aData['dataC'] = dbsetting::getConnect($auth->id);
 
         $current_date = date('Y-m-d');
@@ -128,6 +127,8 @@ class ChecklistController extends Controller
         ->where('assets.property_id',auth()->user()->property_id)
         ->select('assets.id','assets.metaname_id','assets.asset_name','assets.property_id')
         ->paginate(8);
+
+
 
       $departApply= department::where('status','Active')->get();
       //dd('axssa');
@@ -514,7 +515,7 @@ $sectionCollects = collect($sections);
       $aData['dataC'] = dbsetting::getConnect($auth->id);
 
     //$rad=$this->rad;
-    //dd('sdsd');
+  //  dd('sdsd');
 
      // $aID = request("aID");
      // $qnAID = request("qnAID");
@@ -528,7 +529,7 @@ $sectionCollects = collect($sections);
  //$newSectionArray = array_filter($sections);
 
    // $sections = request('section_name1_27');
-   $property_id = request('propertyID');
+   $property_id =$auth->property_id;
    $current_date = date('Y-m-d');
 
     // dd($current_date);
