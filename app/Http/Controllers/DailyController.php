@@ -221,26 +221,9 @@ class DailyController extends Controller
   //dd($sections);
 
     $checkQnsProp = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'" group by asset_id');
-//dd($checkQnsProp);//Here to trace
-
-   // $qns = DB::select("select * from qnsview where department_id in(".trim($qnsapply,'[]').") and duration='daily' and metaname_id in(".$metaname_id.")");
-
-//$qnsd=qnsview::get();
-//dd($qnsd);
-
     $qns = DB::select("select * from qnsview where department_id=$auth->department_id and duration='daily' and metaname_id in(".$metaname_id.")");
 
 
-  //$users = DB::table('qnsview')->paginate(15);
-
-// $qns=qnsview::where('department_id',$auth->department_id)
-// ->where('duration','daily')
-// //->whereIn('metaname_id',$metaname_id)
-// ->paginate(1);
-
-//dd($qns);
-    // $qns = DB::select("select * from qnsview where department_id=$auth->department_id and section='General' and metaname_id in(".$metaname_id.")");
-  //dd($qns);
 
     //$checkQns = DB::select('select a.opt_answer_id,a.property_id,a.metaname_id,a.asset_id,a.indicator_id,a.photo,a.answer,a.answer_label,a.description from answers a,assets p where a.property_id=p.property_id and a.metaname_id=p.metaname_id and a.asset_id=p.id and a.datex="'.$current_date.'" and a.status="Active"');
     $checkQns = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'"');
