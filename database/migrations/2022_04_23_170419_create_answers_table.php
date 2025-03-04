@@ -26,6 +26,7 @@ class CreateAnswersTable extends Migration
            $table->date('cleared_date')->nullable();
            $table->integer('asset_id')->nullable();
             $table->string('section',24)->nullable();
+            $table->string('duration',24)->nullable();
             $table->string('photo')->nullable();
              $table->string('description',420)->nullable();
             $table->string('status')->default('Active');

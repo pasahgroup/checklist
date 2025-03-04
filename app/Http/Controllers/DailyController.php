@@ -221,13 +221,13 @@ class DailyController extends Controller
 //  $sectionCollects = collect($sections);
   //dd($sections);
 
-    $checkQnsProp = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'" group by asset_id');
+    $checkQnsProp = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'" and duration="Daily" group by asset_id');
     $qns = DB::select("select * from qnsview where department_id=$auth->department_id and duration='daily' and metaname_id in(".$metaname_id.")");
 
 //dd($qns);
 
     //$checkQns = DB::select('select a.opt_answer_id,a.property_id,a.metaname_id,a.asset_id,a.indicator_id,a.photo,a.answer,a.answer_label,a.description from answers a,assets p where a.property_id=p.property_id and a.metaname_id=p.metaname_id and a.asset_id=p.id and a.datex="'.$current_date.'" and a.status="Active"');
-    $checkQns = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'"');
+    $checkQns = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'" and duration="Daily"');
     //$answerPerc=DB::select('select * from answers_view');
 //dd($checkQns);
 
@@ -401,6 +401,7 @@ class DailyController extends Controller
    $data = explode("_", $key);
    $nameStr=$data[0];
    //dd(count($value));
+$duration = setIndicator::where('id',$data[1])->first();
 
    if($nameStr===$idxKey)
    {
@@ -420,6 +421,7 @@ class DailyController extends Controller
    'section'=>$data[3],
    'datex'=>$current_date,
    ],[
+    'duration'=>$duration->duration,
    'opt_answer_id'=>$value[0],
    'answer_label'=>$value[1],
    'status'=>'Active',
@@ -445,6 +447,7 @@ class DailyController extends Controller
        'section'=>$data[6],
        'datex'=>$current_date,
      ],[
+        'duration'=>$duration->duration,
        'opt_answer_id'=>$value[0],
        'answer_label'=>"no_value",
        'status'=>'Active',
@@ -477,7 +480,7 @@ class DailyController extends Controller
     ->where('indicator_id',$data[1])
    ->update([
    'description'=>$value[0]
-   ]);
+ ]);
    }elseif($nameStr ===$photoKey)
    {
    //photos

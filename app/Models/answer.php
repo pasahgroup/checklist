@@ -19,6 +19,7 @@ class answer extends Model
         'cleared_date',
         'asset_id',
         'section',
+        'duration',
         'photo',
         'description',
         'status',

@@ -182,39 +182,20 @@ class ChecklistController extends Controller
     //dd($sections);
 
       $sectionCollects = collect($sections);
-      $checkQnsProp = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'" group by asset_id');
-  //dd($checkQnsProp);
+      $checkQnsProp = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'" and duration="Weekly" group by asset_id');
 
-     // $qns = DB::select("select * from qnsview where department_id in(".trim($qnsapply,'[]').") and duration='Weekly' and metaname_id in(".$metaname_id.")");
-
-  //$qnsd=qnsview::get();
-  //dd($qnsd);
 
       $qns = DB::select("select * from qnsview where department_id=$auth->department_id and duration='Weekly' and metaname_id in(".$metaname_id.")");
 
 
-    //$users = DB::table('qnsview')->paginate(15);
-
-  // $qns=qnsview::where('department_id',$auth->department_id)
-  // ->where('duration','Weekly')
-  // //->whereIn('metaname_id',$metaname_id)
-  // ->paginate(1);
-
-  //dd($qns);
-      // $qns = DB::select("select * from qnsview where department_id=$auth->department_id and section='General' and metaname_id in(".$metaname_id.")");
-    //dd($qns);
-
       //$checkQns = DB::select('select a.opt_answer_id,a.property_id,a.metaname_id,a.asset_id,a.indicator_id,a.photo,a.answer,a.answer_label,a.description from answers a,assets p where a.property_id=p.property_id and a.metaname_id=p.metaname_id and a.asset_id=p.id and a.datex="'.$current_date.'" and a.status="Active"');
-      $checkQns = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'"');
-      //$answerPerc=DB::select('select * from answers_view');
-       //$answerPerc=DB::select('select * from answers_view_summary');
+      $checkQns = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'" and duration="Weekly"');
 
        $answerPerc=DB::select('select a.*,s.duration from answers_view_summary a,set_indicators s where a.indicator_id=s.id and s.duration="Weekly"');
-      $answerPerc = collect($answerPerc);
-//dd($answerPerc);
+       $answerPerc = collect($answerPerc);
 
- $qnsAppliedPerc=DB::select('select q.*,s.duration from qns_appliedtos q,set_indicators s where q.indicator_id=s.id and s.duration="Weekly" and q.department_id="'.$auth->department_id.'"');
 
+      $qnsAppliedPerc=DB::select('select q.*,s.duration from qns_appliedtos q,set_indicators s where q.indicator_id=s.id and s.duration="Weekly" and q.department_id="'.$auth->department_id.'"');
       $qnsAppliedPerc = collect($qnsAppliedPerc);
 
 
@@ -278,219 +259,6 @@ class ChecklistController extends Controller
               return view("livewire.weekly",compact(['checkQnsProp','metadatasCollects','selectedOption','assetID','assetIDf','metanames','assets','departments','sections','qns','metaname_id','metanamess','checkQns','propertyID','answerPerc','qnsAppliedPerc']));
              // return view('livewire.checklistTest',compact('properties'));
             }
-
-    public function index_org(Request $request)
-    {
-      $auth=auth::user();
-      $aData['dataC'] = dbsetting::getConnect($auth->id);
-
-      $current_date = date('Y-m-d');
-      //Extract date
-      $datet=Carbon::now();
-
-     // dd($current_date);
-
-      $datet=$datet->format('H:i:s');
-      //dd($departments->property_id);
-
-
-       $metaname_id=request('metaname_id');
-        $assetID=request('assetID');
-        $assetIDf=request('assetID');
-       //dd($metaname_id);
-       if($metaname_id==null)
-       {
-         $metaname_id=1;
-       }
-
-
-       if($assetID==null)
-       {
-          $assetID=1;
-          $assetIDf=1;
-          $selectedOption=1;
-       }else{
-          $selectedOption=$assetID;
-          $assetIDf=$assetID;
-       }
-
-    //$metaname_id=$this->metaname_model;
-    $metanamess = metaname::where('metanames.id',$metaname_id)->first();
-  //  $assetss = asset::where('assets.id',$assetID)->first();
-    $departments=user::where('id',auth()->id())->first();
-    $propertyID=asset::where('id',$assetID)->first();
-  //  $assetss=$propertyID;
-
-    // $metanames = metaname::join('qns_appliedtos','qns_appliedtos.metaname_id','metanames.id')
-    //  ->select('metanames.id','metanames.metaname_name')
-    //  ->groupby('metanames.id')
-    //  ->get();
-
-    $metanames = metaname::join('qns_appliedtos','qns_appliedtos.metaname_id','metanames.id')
-     ->where('qns_appliedtos.department_id',$departments->department_id)
-     ->select('metanames.id','metanames.metaname_name')
-     ->groupby('metanames.id')
-     ->get();
-
-
-
-     //$metanames = metaname::get();
-
-      //$metadatas = optionalAnswer::get();
-          $metadatasCollects = optionalAnswer::get();
-          $metadatasCollects = collect($metadatasCollects);
-          //$subset = $metadatas->map->only(['id', 'name', 'email']);
-
-      $assets = asset::where('assets.metaname_id',$metaname_id)
-       ->where('assets.property_id',auth()->user()->property_id)
-      ->select('assets.id','assets.asset_name')
-      ->get();
-
-      // $sections = qnsAppliedto::where('qns_appliedtos.metaname_id',$metaname_id)
-      // ->groupby('qns_appliedtos.section')
-      // ->select('qns_appliedtos.section')
-      // ->get();
-    //dd($sections);
-
-    // get sections from database
-    //$sectionCollects = collect($sections);
-   // $checkQnsProp = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'" group by asset_id');
-
-   //dd($metadatasCollects);
-
-    $departApply= department::where('status','Active')->get();
-    //dd('axssa');
-    if($departments->hasRole('SuperAdmin') || $departments->hasRole('GeneralAdmin')){
-    $qnsapply=array();
-    foreach ($departApply as $apply) {
-    $qnsapply[]=$apply->id;
-    }
-    }
-    else{
-    $qnsapply=array();
-    $departments=user::where('id',auth()->id())->first();
-    $qnsapply[]=$departments->department_id;
-    }
-
-    $asset_show=asset::where('property_id',$departments->property_id)->first();
-
-    if($datet>="23:45")
-    {
-
-    $date_time = date('H:i:s',strtotime(date($asset_show->extra_time, mktime()) . " + 1 hours"));
-    $date_time_init=date('H:i:s',strtotime(date($asset_show->extra_time, mktime()) . " + 0 hours"));
-
-    if($asset_show->asset_show==1 && $date_time>$datet && $date_time_init!="00:00:00")
-    {
-    $update = asset::where('property_id',$departments->property_id)->update([
-      'time_show'=>1,
-      'asset_show'=>1,
-    ]);
-    }
-    else
-    {
-    $update = asset::where('property_id',$departments->property_id)->update([
-        'time_show'=>0,
-        'asset_show'=>0,
-            'extra_time'=>'00:00:00',
-    ]);
-    }
-    }
-    else{
-    $update = asset::where('property_id',$departments->property_id)->update([
-      'time_show'=>1,
-      'asset_show'=>1
-    ]);
-    }
-
-
-   $qnsapply=collect($qnsapply);
-  $sections = DB::select("select section from qnsview where department_id in(".trim($qnsapply,'[]').") and duration='weekly' and metaname_id in(".$metaname_id.") group by section");
-
-$sectionCollects = collect($sections);
-    $checkQnsProp = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'" group by asset_id');
-
-
-   //$qns= DB::select("select * from qnsview where department_id in(".trim($qnsapply,'[]').") and metaname_id in(".$metaname_id.")");
-   $qns = DB::select("select * from qnsview where department_id in(".trim($qnsapply,'[]').") and duration='Weekly' and metaname_id in(".$metaname_id.")");
-
-    //$checkQns = DB::select('select a.opt_answer_id,a.property_id,a.metaname_id,a.asset_id,a.indicator_id,a.photo,a.answer,a.answer_label,a.description from answers a,assets p where a.property_id=p.property_id and a.metaname_id=p.metaname_id and a.asset_id=p.id and a.datex="'.$current_date.'" and a.status="Active"');
-    $checkQns = DB::select('select * from checkqnsprop_view where datex="'.$current_date.'"');
-    //$answerPerc=DB::select('select * from answers_view');
-     $answerPerc=DB::select('select * from answers_view_summary');
-
-     //dd($qns);
-    //sqlite
-
-
-    $answerPerc = collect($answerPerc);
-    $qnsAppliedPerc=DB::select('select * from qns_appliedtos where department_id="'.$departments->department_id.'"');
-    $qnsAppliedPerc = collect($qnsAppliedPerc);
-
-
-    if(request('email_send')){
-    $input =app_path().'/reports/pieChart.jrxml';
-    //$input =app_path().'/reports/department.jrxml';
-    $output =app_path().'/reports';
-
-    $options = [
-    'format' => ['pdf'],
-    'locale' => 'en',
-    'params' => [
-    'property_id'=>1,
-    ],
-    'db_connection' => [
-         'driver' => 'mysql', //mysql, ....
-         'username' => 'root',
-        //'password' => '',
-        'host' => '127.0.0.1',
-        'database' => 'checkmasterdb',
-        'port' => '3306'
-    ]
-
-    // \Config::get('database.connections.mysql')
-    ];
-
-    $jasper = new PHPJasper;
-    //dd($jasper);
-    $jasper->process(
-        $input,
-        $output,
-        $options
-    )->execute();
-
-    //dd('zzkx');
-    //Send report
-    $date=date('d-M-Y');
-    $data["email"] = "buruwawa@gmail.com";
-
-    $data["title"] = "WEEKLY General Inspection Hotel Report (DGIR)";
-    $data["body"] = "Manyara Best View Hotel: WEEKLY General Inspection Report held on $date";
-    $data["date"] = "Date: $date";
-    //dd(app_path());
-
-    $files = [
-    app_path('reports/pieChart.pdf'),
-    // public_path('files/reports.png'),
-  ];
-
-    Mail::send('email.email', $data, function($message)use($data, $files) {
-    $message->to($data["email"], $data["email"])
-        ->subject($data["title"]);
-    foreach ($files as $file){
-    $message->attach($file);
-    }
-    });
-
-      dd('Mail sent successfully');
-    }
-    //dd('ddd');
-
-             return view("livewire.weekly",compact(['checkQnsProp','metadatasCollects','selectedOption','assetID','assetIDf','metanames','assets','departments','sections','qns','metaname_id','metanamess','assetID','checkQns','propertyID','answerPerc','qnsAppliedPerc']));
-
-           //// return view('livewire.checklistTest',compact('properties'));
-  }
-
 
 
     /**
@@ -590,24 +358,22 @@ $idxStr = Str::startsWith($key,$idxKey);
   $data = explode("_", $key);
   $nameStr=$data[0];
 //dd(count($value));
-
+$duration = setIndicator::where('id',$data[1])->first();
 if($nameStr===$idxKey)
  {
   //dd($value[0]);
   if(count($value)>1){
 
  if($value[1]!=null){
-//dd($data[3]);
-
 $insetqnsAns = answer::UpdateOrCreate([
   'property_id'=>$property_id,
   'metaname_id'=>request('metaname_id'),
   'asset_id'=>$asset_id,
   'indicator_id'=>$data[1],
-
   'section'=>$data[3],
   'datex'=>$current_date,
 ],[
+  'duration'=>$duration->duration,
   'opt_answer_id'=>$value[0],
   'answer_label'=>$value[1],
   'status'=>'Active',
@@ -630,6 +396,7 @@ $answerTableUpdate2=DB::statement('update answers a set a.manager_checklist="Act
       'section'=>$data[3],
       'datex'=>$current_date,
     ],[
+      'duration'=>$duration->duration,
       'opt_answer_id'=>$value[0],
       'answer_label'=>"no_value",
       'status'=>'Active',
@@ -708,7 +475,7 @@ $constraint->aspectRatio();
                          ->where('indicator_id',$data[1])
                       ->update([
                      'photo'=>$filename
-                      ]);
+                   ]);
 
 }
 }

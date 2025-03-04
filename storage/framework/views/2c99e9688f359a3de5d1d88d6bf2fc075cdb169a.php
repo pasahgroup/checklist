@@ -140,7 +140,7 @@ border-color: #dddddd;
 <hr>
 
 
- <div class="row" id="data_display">    
+ <div class="row" id="data_display">
     <?php if(isset($assets)): ?>
     <?php if(!empty($selectedOption)): ?>
        <?php $__currentLoopData = $assets; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asset): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -160,12 +160,12 @@ border-color: #dddddd;
         <?php if($asset->id ==$chkp->asset_id && $qnsAppliedPerc->where('metaname_id',$chkp->metaname_id)->count()>0): ?>
       <?php echo e($answerPerc->where('metaname_id',$chkp->metaname_id)->where('asset_id',$chkp->asset_id)->count()); ?> | <?php echo e($qnsAppliedPerc->where('metaname_id',$chkp->metaname_id)->count()); ?>
 
-     
+
      <input type="checkbox"  onclick="myFunctionxx()" id="statusx" name="statusx" value="0" <?php if($asset->id==$chkp->asset_id): ?> checked <?php endif; ?>> | (<?php echo e(number_format(($answerPerc->where('metaname_id',$chkp->metaname_id)->where('asset_id',$chkp->asset_id)->count())/($qnsAppliedPerc->where('metaname_id',$chkp->metaname_id)->count())*100),2); ?>)%
      <?php endif; ?>
      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-   
-  
+
+
   <?php endif; ?>
   </span>
     </div>
@@ -208,12 +208,12 @@ border-color: #dddddd;
               <input type="<?php echo e($metadata->datatype); ?>" name="ids<?php echo e($metaname_id); ?>[]" id="indicator_id" value="<?php echo e($metadata->id); ?>" onclick="myFunction('<?php echo e($qn->id); ?>')" onkeyup="myFunction('<?php echo e($qn->id); ?>')"
                  <?php $__currentLoopData = $checkQns; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $checkq): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                    <?php if($selectedOption ==$checkq->asset_id && $checkq->indicator_id==$qn->id && $metadata->answer==$checkq->answer): ?>
-            
-               <?php if($selectedOption ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $metadata->answer==$checkq->answer): ?> checked 
-               <?php endif; ?> 
-      
+
+               <?php if($selectedOption ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $metadata->answer==$checkq->answer): ?> checked
+               <?php endif; ?>
+
               <?php endif; ?>
-               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>           
+               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
            <?php endif; ?>
 
                <?php if($metadata->datatype=="radio"): ?>
@@ -222,7 +222,7 @@ border-color: #dddddd;
 
                  <?php $__currentLoopData = $checkQns; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $checkq): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                   <?php if($asset->id ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $metadata->id==$checkq->opt_answer_id): ?>
-               <?php if($asset->id ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $metadata->id==$checkq->opt_answer_id): ?> checked 
+               <?php if($asset->id ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $metadata->id==$checkq->opt_answer_id): ?> checked
               <?php endif; ?>
 
                <?php if($metadata->answer=="Maintenance"): ?>
@@ -275,14 +275,14 @@ border-color: #dddddd;
     </div>
 
           <div class="panel-heading">
-            <h4 class="panel-title"> 
+            <h4 class="panel-title">
               <div class="card"><a data-toggle="collapse" href="#collapsee<?php echo e($metaname_id); ?><?php echo e($qn->id); ?>">Description if any</a>
            </div>
           </div>
-       
+
       <div id="collapsee<?php echo e($metaname_id); ?><?php echo e($qn->id); ?>" class="panel-collapse collapse">
       <textarea rows="4" cols="40" id="desc" name="desc<?php echo e($metaname_id); ?>_<?php echo e($qn->id); ?>_<?php echo e($metaname_id); ?>_<?php echo e($asset->asset_name); ?>_<?php echo e($qn->section); ?>[]" placeholder="---enter description if any---" class="txtarea" style="white-space: normal;overflow:hidden">
-    
+
           <?php $__currentLoopData = $checkQns; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $checkq): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
       <?php if($asset->id ==$checkq->asset_id && $checkq->indicator_id ==$qn->id && $checkq->property_id ==$propertyID->property_id): ?>
        <?php if($checkq->description !=null): ?>
@@ -307,7 +307,7 @@ border-color: #dddddd;
     <div id="my_camera<?php echo e($metaname_id); ?>_<?php echo e($qn->id); ?>"></div>
     <br/>
     <input type="file" name="attachment<?php echo e($metaname_id); ?>_<?php echo e($qn->id); ?>_<?php echo e($metaname_id); ?>_<?php echo e($asset->asset_name); ?>_<?php echo e($qn->section); ?>[]" accept="image/*" capture="camera">
-   
+
                                     </div>
                                     </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -326,7 +326,7 @@ border-color: #dddddd;
     <div id="my_camera<?php echo e($metaname_id); ?>_<?php echo e($qn->id); ?>">Browse</div>
     <br/>
     <input type="file" name="attachment<?php echo e($metaname_id); ?>_<?php echo e($qn->id); ?>_<?php echo e($metaname_id); ?>_<?php echo e($asset->asset_name); ?>[]" accept="image/*" capture="camera">
-   
+
                                     </div>
                                     </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -375,15 +375,15 @@ border-color: #dddddd;
       </div>
       </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-       
-   <hr>                                            
+
+   <hr>
   <?php echo $assets->links(); ?>
 
-                                 
+
       <?php endif; ?>
-      <?php endif; ?>  
+      <?php endif; ?>
       </div>
- 
+
 <br>
    <a href="/email-send/{id}" class="btn-sm btn btn-primary float-right" role="button">Finish</a>
  </div>
