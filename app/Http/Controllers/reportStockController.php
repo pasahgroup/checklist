@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\customer;
 use App\Models\orderItem;
 use App\Models\stock;
-use App\Models\User;
+use App\Models\user;
 use App\Models\warehouse;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -58,7 +58,7 @@ class reportStockController extends Controller
       ->first();
 
         $customers = customer::get();
-        $salespeople = User::get();
+        $salespeople = user::get();
 
 
         return view('admin.reports.stocks.index',compact('sales','customers','salespeople','stock_alert','fast_moving_stock','fast_moving_rate'));
@@ -105,7 +105,7 @@ class reportStockController extends Controller
       ->first();
 
         $customers = customer::get();
-        $salespeople = User::get();
+        $salespeople = user::get();
 
 
         return view('admin.reports.stocks.stock-alert',compact('sales','customers','salespeople','stock_alert','fast_moving_stock','fast_moving_rate'));

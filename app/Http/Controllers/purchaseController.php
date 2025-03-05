@@ -13,7 +13,7 @@ use App\Models\store;
 use App\Models\subStore;
 use App\Models\supplier;
 use App\Models\supplierAccountSummary;
-use App\Models\User;
+use App\Models\user;
 use App\Models\warehouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

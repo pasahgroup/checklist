@@ -110,7 +110,7 @@ class profileController extends Controller
         //DB::statement('USE DATABASE '.$dbName);
          //\Artisan::call('migrate');
 //dd('ppp');
-dd($users);
+//d($users);
 
        // if(empty($hasDb)) {
        //             DB::connection($connection)->select('CREATE DATABASE '. $dbname);

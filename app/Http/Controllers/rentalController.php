@@ -18,7 +18,7 @@ use App\Models\sale;
 use App\Models\stock;
 use App\Models\stocking;
 use App\Models\subStore;
-use App\Models\User;
+use App\Models\user;
 use App\Models\warehouse;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -134,8 +134,8 @@ $newOrder = rentalOrder::create([
             else{
 
         // find warehouse using permission
-        $user = User::where('id',auth()->id())->first();
-      $permissions = User::join('model_has_permissions','users.id','model_has_permissions.model_id')
+        $user = user::where('id',auth()->id())->first();
+      $permissions = user::join('model_has_permissions','users.id','model_has_permissions.model_id')
         ->join('permissions','model_has_permissions.permission_id','permissions.id')
         ->select('permissions.name as permission_name','model_has_permissions.model_id as model_id','users.*')
         ->where('model_has_permissions.model_id',auth()->id())->limit(1)

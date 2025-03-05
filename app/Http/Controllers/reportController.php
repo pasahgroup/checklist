@@ -31,7 +31,7 @@ use App\Models\stock;
 use App\Models\stocking;
 use App\Models\subStore;
 use App\Models\supplier;
-use App\Models\User;
+use App\Models\user;
 use App\Models\warehouse;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -929,9 +929,9 @@ $doc_name="Monthly-report".$timestamp;
         }
         $dates = request('date');
         $cust = customer::where('id',request('customer'))->first();
-        $salesp = User::where('id', request('sales_person'))->first();
+        $salesp = user::where('id', request('sales_person'))->first();
         $customers = customer::get();
-        $salespeople = User::get();
+        $salespeople = user::get();
 
         return view('admin.reports.sales-filter',compact('sales','customers','salespeople','total_customers',
         'totals','dates','cust','salesp'));
@@ -1258,7 +1258,7 @@ public function transactions($id){
     $auth=auth::user();
     $aData['dataC'] = dbsetting::getConnect($auth->id);
 
-    $user = User::where('id',auth()->id())->first();
+    $user = user::where('id',auth()->id())->first();
     // For admins only
     if($user->hasRole('Admin')){
     if($id == 'daily'){

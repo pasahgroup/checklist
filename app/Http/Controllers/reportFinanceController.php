@@ -20,7 +20,7 @@ use App\Models\store;
 use App\Models\subStore;
 use App\Models\supplier;
 use App\Models\supplierWallet;
-use App\Models\User;
+use App\Models\user;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -108,7 +108,7 @@ $stock_cost = subStore::join('stocks','sub_stores.item_id','stocks.id')
                 ->select(DB::raw('SUM(sub_stores.current_qty*stocks.price)total_cost'))
                 ->first();
  $customers = customer::get();
- $salespeople = User::get();
+ $salespeople = user::get();
 
 
  return view('admin.reports.finance.finance',compact('assets','liabilities','sales','customers','salespeople','totals','total_customers','last_month_data',
@@ -152,7 +152,7 @@ $stock_cost = subStore::join('stocks','sub_stores.item_id','stocks.id')
  ->first();
 
  $customers = customer::get();
- $salespeople = User::get();
+ $salespeople = user::get();
 
  $cash_in_hand = account::where('main_account',1)->first();
 $credit_customer = customer::select(DB::raw('SUM(customers.to) as total_credit'))->first();

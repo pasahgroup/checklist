@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Models\bundle;
-use App\Models\User;
+use App\Models\user;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -61,13 +61,13 @@ public function store_bundle(Request $request){
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
 
-        $user = User::create([
+        $user = user::create([
             'name' =>request('name'),
             'email' =>request('email'),
             'agent_id' =>auth()->id(),
             'password' => Hash::make(request('password')),
         ]);
-        $users = User::where('id',$user->id)->first();
+        $users = user::where('id',$user->id)->first();
         $users->assignRole('Sales');
         return redirect()->back()->with('success','New user added successfuly');
 
