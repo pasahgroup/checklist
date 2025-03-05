@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\user;
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 class Locale
 {
@@ -22,10 +22,10 @@ class Locale
           // $auth_user=Auth::user();
           // $auth_user=user::where('status','Active')->get();
              //$response = $next($request);
-//             $auth_user=1; 
+//             $auth_user=1;
 //                //Auth::user();
-//             //dd($auth_user);   
-           
+//             //dd($auth_user);
+
 //            if(!is_null($auth_user)){
 //            //$auth_user = Auth::user()
 
@@ -42,8 +42,7 @@ class Locale
 //         //  "auth_user" => $auth_user,
 //         //     //"current-country" => geoip(request()->ip())->iso_code,
 //         // ]);
-       
+
     return $next($request);
        }
     }
-

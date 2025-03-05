@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\property;
 use App\Models\keyIndicator;
 use App\Models\answer;
-use App\Models\user;
+use App\Models\User;
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -80,7 +80,7 @@ class AssetController extends Controller
       $aData['dataC'] = dbsetting::getConnect($auth->id);
 
 $prnt="";
-$userID=user::where('id',auth()->id())->first();
+$userID=User::where('id',auth()->id())->first();
 $property=property::where('id',$userID->property_id)->first();
 
         $segments = request()->segments();
@@ -286,7 +286,7 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$id,"metanames"=>$metaString
          $aData['dataC'] = dbsetting::getConnect($auth->id);
 
          $prnt="";
-   $userID=user::where('id',auth()->id())->first();
+   $userID=User::where('id',auth()->id())->first();
    $property=property::where('id',$userID->property_id)->first();
 
            $segments = request()->segments();
@@ -411,7 +411,7 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$id,"metanames"=>$metaString
    	  ->get();
 //update user.url column table
     //  dd(auth()->id());
-      $updateUser = user::where('id',auth()->id())
+      $updateUser = User::where('id',auth()->id())
            ->update([
             'url'=>$_SERVER['REQUEST_URI']
           ]);
@@ -496,7 +496,7 @@ $PHPJasperXML->arrayParameter =array("property_id"=>$id,"metanames"=>$metaString
 //return back();
 // return redirect()->url()->previous();
 //return Redirect::to(url()->previous());
-$uri=user::where('id',auth()->id())->first();
+$uri=User::where('id',auth()->id())->first();
 //$uri =request()->input('uri');
 // dd($_SERVER['REQUEST_URI']);
 //dd($uri->url);
@@ -507,7 +507,7 @@ $uri=user::where('id',auth()->id())->first();
           public function reportViewPost(Request $request,$sn,$id)
              {
          $prnt="";
-         $userID=user::where('id',auth()->id())->first();
+         $userID=User::where('id',auth()->id())->first();
          $property=property::where('id',$userID->property_id)->first();
 
                  $segments = request()->segments();
@@ -549,7 +549,7 @@ $uri=user::where('id',auth()->id())->first();
         //dd($reportDailyReader->property_id);
         //get optionals answers
 
-        $updateUser = user::where('id',auth()->id())
+        $updateUser = User::where('id',auth()->id())
             ->update([
              // 'url'=>$_SERVER['REQUEST_URI']
              'url'=>request('uri')
@@ -569,7 +569,7 @@ $uri=user::where('id',auth()->id())->first();
                $aData['dataC'] = dbsetting::getConnect($auth->id);
 
          $prnt="";
-         $userID=user::where('id',auth()->id())->first();
+         $userID=User::where('id',auth()->id())->first();
          $property=property::where('id',$userID->property_id)->first();
 
                  $segments = request()->segments();
@@ -611,7 +611,7 @@ $uri=user::where('id',auth()->id())->first();
        //dd($reportDailyReader->property_id);
        //get optionals answers
 
-       $updateUser = user::where('id',auth()->id())
+       $updateUser = User::where('id',auth()->id())
             ->update([
              // 'url'=>$_SERVER['REQUEST_URI']
              'url'=>request('uri')
@@ -632,7 +632,7 @@ $uri=user::where('id',auth()->id())->first();
             $aData['dataC'] = dbsetting::getConnect($auth->id);
 
       $prnt="";
-      $userID=user::where('id',auth()->id())->first();
+      $userID=User::where('id',auth()->id())->first();
       $property=property::where('id',$userID->property_id)->first();
 
               $segments = request()->segments();
@@ -674,7 +674,7 @@ $uri=user::where('id',auth()->id())->first();
   //dd($reportDailyReader->property_id);
 //get optionals answers
 
-$updateUser = user::where('id',auth()->id())
+$updateUser = User::where('id',auth()->id())
          ->update([
           // 'url'=>$_SERVER['REQUEST_URI']
           'url'=>request('uri')
