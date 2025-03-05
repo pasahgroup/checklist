@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\User;
+use App\Models\user;
 use App\Models\dynamicIndUpdate;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -13,10 +13,10 @@ class DynamicIndUpdatePolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\user  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(user $user)
     {
         //
     }
@@ -24,11 +24,11 @@ class DynamicIndUpdatePolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\user  $user
      * @param  \App\Models\dynamicIndUpdate  $dynamicIndUpdate
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, dynamicIndUpdate $dynamicIndUpdate)
+    public function view(user $user, dynamicIndUpdate $dynamicIndUpdate)
     {
         //
     }
@@ -36,10 +36,10 @@ class DynamicIndUpdatePolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\user  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(user $user)
     {
         //
     }
@@ -47,11 +47,11 @@ class DynamicIndUpdatePolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\user  $user
      * @param  \App\Models\dynamicIndUpdate  $dynamicIndUpdate
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, dynamicIndUpdate $dynamicIndUpdate)
+    public function update(user $user, dynamicIndUpdate $dynamicIndUpdate)
     {
         //
     }
@@ -59,11 +59,11 @@ class DynamicIndUpdatePolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\user  $user
      * @param  \App\Models\dynamicIndUpdate  $dynamicIndUpdate
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, dynamicIndUpdate $dynamicIndUpdate)
+    public function delete(user $user, dynamicIndUpdate $dynamicIndUpdate)
     {
         //
     }
@@ -71,11 +71,11 @@ class DynamicIndUpdatePolicy
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\user  $user
      * @param  \App\Models\dynamicIndUpdate  $dynamicIndUpdate
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, dynamicIndUpdate $dynamicIndUpdate)
+    public function restore(user $user, dynamicIndUpdate $dynamicIndUpdate)
     {
         //
     }
@@ -83,11 +83,11 @@ class DynamicIndUpdatePolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\user  $user
      * @param  \App\Models\dynamicIndUpdate  $dynamicIndUpdate
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, dynamicIndUpdate $dynamicIndUpdate)
+    public function forceDelete(user $user, dynamicIndUpdate $dynamicIndUpdate)
     {
         //
     }

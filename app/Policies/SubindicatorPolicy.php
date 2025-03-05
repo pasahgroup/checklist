@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\User;
+use App\Models\user;
 use App\Models\subindicator;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -13,10 +13,10 @@ class SubindicatorPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\user  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(user $user)
     {
         //
     }
@@ -24,11 +24,11 @@ class SubindicatorPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\user  $user
      * @param  \App\Models\subindicator  $subindicator
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, subindicator $subindicator)
+    public function view(user $user, subindicator $subindicator)
     {
         //
     }
@@ -36,10 +36,10 @@ class SubindicatorPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\user  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(user $user)
     {
         //
     }
@@ -47,11 +47,11 @@ class SubindicatorPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\user  $user
      * @param  \App\Models\subindicator  $subindicator
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, subindicator $subindicator)
+    public function update(user $user, subindicator $subindicator)
     {
         //
     }
@@ -59,11 +59,11 @@ class SubindicatorPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\user  $user
      * @param  \App\Models\subindicator  $subindicator
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, subindicator $subindicator)
+    public function delete(user $user, subindicator $subindicator)
     {
         //
     }
@@ -71,11 +71,11 @@ class SubindicatorPolicy
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\user  $user
      * @param  \App\Models\subindicator  $subindicator
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, subindicator $subindicator)
+    public function restore(user $user, subindicator $subindicator)
     {
         //
     }
@@ -83,11 +83,11 @@ class SubindicatorPolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\user  $user
      * @param  \App\Models\subindicator  $subindicator
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, subindicator $subindicator)
+    public function forceDelete(user $user, subindicator $subindicator)
     {
         //
     }

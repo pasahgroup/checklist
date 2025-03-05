@@ -16,7 +16,7 @@ use App\Models\stock;
 use App\Models\stocking;
 use App\Models\store;
 use App\Models\subStore;
-use App\Models\User;
+use App\Models\user;
 use App\Models\warehouse;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -102,7 +102,7 @@ class Show extends Component
 
     //     $pos_id=$this->post;
     //        //
-    //     $permissions = User::join('model_has_permissions','users.id','model_has_permissions.model_id')
+    //     $permissions = user::join('model_has_permissions','users.id','model_has_permissions.model_id')
     //     ->join('permissions','model_has_permissions.permission_id','permissions.id')
     //     ->where('model_has_permissions.model_id',auth()->id())
     //     ->select('permissions.name as permission_name','model_has_permissions.model_id as model_id','users.*')
@@ -196,7 +196,7 @@ class Show extends Component
         //     'email' => 'required|email',
         // ]);
 
-        // User::create($validatedDate);
+        // user::create($validatedDate);
 
         // session()->flash('message', 'Users Created Successfully.');
 
@@ -216,8 +216,8 @@ class Show extends Component
             else{
 
         // find warehouse using permission
-        $user = User::where('id',auth()->id())->first();
-      $permissions = User::join('model_has_permissions','users.id','model_has_permissions.model_id')
+        $user = user::where('id',auth()->id())->first();
+      $permissions = user::join('model_has_permissions','users.id','model_has_permissions.model_id')
         ->join('permissions','model_has_permissions.permission_id','permissions.id')
         ->select('permissions.name as permission_name','model_has_permissions.model_id as model_id','users.*')
         ->where('model_has_permissions.model_id',auth()->id())->limit(1)
@@ -489,7 +489,7 @@ class Show extends Component
     public function edit($id)
     {
         $this->updateMode = true;
-        $user = User::where('id',$id)->first();
+        $user = user::where('id',$id)->first();
         $this->user_id = $id;
         $this->name = $user->name;
         $this->email = $user->email;
@@ -511,7 +511,7 @@ class Show extends Component
         ]);
 
         if ($this->user_id) {
-            $user = User::find($this->user_id);
+            $user = user::find($this->user_id);
             $user->update([
                 'name' => $this->name,
                 'email' => $this->email,

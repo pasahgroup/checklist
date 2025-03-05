@@ -118,7 +118,7 @@ return redirect()->back()->with('error','Users not selected');
     {
       $auth=auth::user();
       $aData['dataC'] = dbsetting::getConnect($auth->id);
-      
+
      $pos_id=$this->metaname_id;
      $qnType=$this->qnType;
      $times=$this->qnNo;
