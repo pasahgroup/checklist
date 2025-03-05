@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\user;
+use App\Models\User;
 
 /**
  * @template TModel of \App\Models\User

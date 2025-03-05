@@ -86,7 +86,7 @@ class RegisterController extends Controller
         $this->email = $data['email'];
         $this->usr = $data['username'];
 
-        return user::create([
+        return User::create([
             'firstname' => trim($data['Fname']),
             'lastname' => trim($data['Lname']),
             // 'phone' => trim($data['phone']),
