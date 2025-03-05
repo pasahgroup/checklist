@@ -10,7 +10,7 @@ use App\Models\stocking;
 use App\Models\store;
 use App\Models\subStore;
 use App\Models\supplier;
-use App\Models\User;
+use App\Models\user;
 use App\Models\warehouse;
 use App\Models\pendingStock;
 
@@ -42,8 +42,8 @@ class stockingController extends Controller
 
    public function my_stock()
     {
-        $user = User::where('id',auth()->id())->first();
-        $permissions = User::join('model_has_permissions','users.id','model_has_permissions.model_id')
+        $user = user::where('id',auth()->id())->first();
+        $permissions = user::join('model_has_permissions','users.id','model_has_permissions.model_id')
         ->join('permissions','model_has_permissions.permission_id','permissions.id')
         ->where('model_has_permissions.model_id',auth()->id())
         ->select('permissions.name as permission_name','model_has_permissions.model_id as model_id','users.*')
@@ -63,7 +63,7 @@ class stockingController extends Controller
         $suppliers = supplier::get();
         $warehouses = warehouse::wheremain_warehouse(1)->get();
         $from_wherehouse = warehouse::where('id',$wharehouse_id)->first();
-       
+
         return view('admin.stocking.mystock',compact('stockings','stocks','suppliers','warehouses','permissions','from_wherehouse'));
     }
     else{
@@ -85,13 +85,13 @@ class stockingController extends Controller
      public function pendingIndex()
     {
      $main_store = warehouse::where('main_warehouse',1)->first();
-        
+
      $pendingStocks = pendingStock::join('stocks','pending_stocks.item_id','stocks.id')
        ->join('warehouses','pending_stocks.to_store','warehouses.warehouse')
        ->select('pending_stocks.*','stocks.item','pending_stocks.id as pending_id','warehouses.id')
        ->where('trans_type','Issued')
          ->get();
-       
+
         $stocks = stock::get();
         $suppliers = supplier::get();
         $warehouses = warehouse::get();
@@ -100,8 +100,8 @@ class stockingController extends Controller
 
     public function returnedIndex()
     {
-        $user = User::where('id',auth()->id())->first();
-        $permissions = User::join('model_has_permissions','users.id','model_has_permissions.model_id')
+        $user = user::where('id',auth()->id())->first();
+        $permissions = user::join('model_has_permissions','users.id','model_has_permissions.model_id')
         ->join('permissions','model_has_permissions.permission_id','permissions.id')
         ->where('model_has_permissions.model_id',auth()->id())
         ->select('permissions.name as permission_name','model_has_permissions.model_id as model_id','users.*')
@@ -130,7 +130,7 @@ class stockingController extends Controller
         $suppliers = supplier::get();
         $warehouses = warehouse::wheremain_warehouse(1)->get();
         $from_wherehouse = warehouse::where('id',$wharehouse_id)->first();
-       
+
         return view('admin.stocking.returned-stock',compact('stockings','stocks','suppliers','warehouses','permissions','from_wherehouse','pendingStocks'));
     }
     else{
@@ -150,8 +150,8 @@ if(request('return_stock'))
 
     $pin=rand(111111,999999);
      $warehouse = warehouse::where('id',request('to'))->first();
-      
-       $pendingStock = pendingStock::UpdateOrCreate([            
+
+       $pendingStock = pendingStock::UpdateOrCreate([
             'item_id'=>request('item_id'),
             'trans_no'=>$pin,
             'from_store'=>request('from'),
@@ -172,8 +172,8 @@ if(request('return_stock'))
      */
     public function store(Request $request)
     {
-     
-        if(request('receive')){   
+
+        if(request('receive')){
 //  create purchase order
         $purchase_order = purchaseOrder::create([
             'supplier_id'=>request('from'),
@@ -215,11 +215,11 @@ if(request('return_stock'))
 
     }
     elseif(request('issue')){
-        
+
         $main_store = warehouse::where('main_warehouse',1)->first();
-      
+
         $currentstock = subStore::where('item_id',request('item_id'))->where('warehouse',$main_store->id)->latest()->first();
-      
+
         if($currentstock->current_qty >= request('qty')){
         $substore = subStore::where('item_id',request('item_id'))->where('warehouse',request('
             '))->first();
@@ -229,7 +229,7 @@ if(request('return_stock'))
         else{
             $current_stock = 0;
         }
- 
+
     // Update pending_stock
       $UpdatePendingStock = pendingStock::where('id',request('pending_id'))
              // ->where('tour_addon','Programs')
@@ -267,10 +267,10 @@ if(request('return_stock'))
             $store = subStore::where('id',$subcurrentstock->id)->update([
                 'current_qty'=>$substore_stock + $receive_stock
             ]);
-            
+
         }
         else{
-             
+
              $store = subStore::create([
             'warehouse'=>request('to'),
             'warehouse_name'=>$main_store->warehouse,
@@ -289,10 +289,10 @@ if(request('return_stock'))
     elseif(request('return_stock')){
 
         $main_store = warehouse::where('main_warehouse',1)->first();
-      
+
         // $warehouse_id = warehouse::where('warehouse_name',request('from'))
         // ->where('item_id',request('item_id'))
-        
+
    $warehouse_id  = subStore::where('warehouse_name',request('from'))
         ->where('item_id',request('item_id'))
         ->first();
@@ -302,7 +302,7 @@ if(request('return_stock'))
         ->first();
 
         $currentstock = subStore::where('item_id',request('item_id'))->where('warehouse',$main_store->id)->latest()->first();
-     
+
         if($return_stock->current_qty >= request('qty')){
             // reduce sub store
         $substore = subStore::where('warehouse',$warehouse_id->warehouse)
@@ -349,7 +349,7 @@ if(request('return_stock'))
      */
     public function show($id)
     {
-       
+
     }
 
     /**
@@ -384,12 +384,12 @@ if(request('return_stock'))
     public function destroy($id)
     {
        $toupdate = pendingStock::where('id',$id)->update([
-        
+
             'trans_type'=>'Cancelled',
                'user_id'=>auth()->id(),
                'updated_at'=>Now(),
-              ]);  
+              ]);
        return redirect()->route('pending-stock')->with('success','Ops The Item was Cancelled');
-                   
+
     }
 }

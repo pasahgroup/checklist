@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use App\Models\User;
+use App\Models\user;
 use App\Models\userRole;
 use App\Models\userProperty;
 
@@ -63,7 +63,7 @@ class roleController extends Controller
             }
         }
         elseif(request('department_id')){
-                $user = User::where('id',request('user_id'))
+                $user = user::where('id',request('user_id'))
                 ->update([
                  'department_id'=>request('department_id'),
                   'user_id'=>auth()->id()
@@ -85,7 +85,7 @@ class roleController extends Controller
         elseif(request('addrole')){
 
 
- $user = User::where('id',request('user_id'))->first();
+ $user = user::where('id',request('user_id'))->first();
  $user->assignRole(request('role_name'));
 
    $role = userRole::where('sys_user_id',request('user_id'))
@@ -127,7 +127,7 @@ class roleController extends Controller
             //dd(auth()->user()->id);
          //dd(request('permission_to_assign'));
 
-        $user = User::findorfail(request('user_id'));
+        $user = user::findorfail(request('user_id'));
        $user->update([
             'property_id'=>request('permission_to_assign'),
             'user_id'=>auth()->id()

@@ -21,7 +21,7 @@ class salesController extends Controller
     public function index()
     {
     //
-    $users = User::where('id',auth()->id())->first();
+    $users = user::where('id',auth()->id())->first();
 
     if($users->hasRole('Sales')){
     $sales = sale::join('customers','customers.id','sales.customer_id')
@@ -46,7 +46,7 @@ class salesController extends Controller
     ])->first();
 
     $customers = customer::get();
-    $salespeople = User::get();
+    $salespeople = user::get();
 
     return view('admin.sales.sale',compact('sales','customers','salespeople','totals','total_customers'));
     }
@@ -72,7 +72,7 @@ class salesController extends Controller
         ])->first();
 
         $customers = customer::get();
-        $salespeople = User::get();
+        $salespeople = user::get();
 
         return view('admin.sales.sale',compact('sales','customers','salespeople','totals','total_customers'));
         }
@@ -91,7 +91,7 @@ class salesController extends Controller
      * Outstanding balances
      */
     public function outstanding(){
-        $users = User::where('id',auth()->id())->first();
+        $users = user::where('id',auth()->id())->first();
         if($users->hasRole('Sales')){
         $sales_total =sale::join('customers','sales.customer_id','customers.id')
         ->select(
