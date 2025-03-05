@@ -6,7 +6,7 @@
         </div>
 
 <ul class="nav flex-column">
-    @role('GeneralAdmin|SuperAdmin|GeneralManager|Manager')
+    @role('SuperAdmin')
 <li class="nav-item
 {{ (request()->is('dash-property/{id}')) ? 'active' : '' }}
 ">

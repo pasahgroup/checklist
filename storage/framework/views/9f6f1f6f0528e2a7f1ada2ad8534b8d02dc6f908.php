@@ -6,7 +6,7 @@
         </div>
 
 <ul class="nav flex-column">
-    <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'GeneralAdmin|SuperAdmin|GeneralManager|Manager')): ?>
+    <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'SuperAdmin')): ?>
 <li class="nav-item
 <?php echo e((request()->is('dash-property/{id}')) ? 'active' : ''); ?>
 

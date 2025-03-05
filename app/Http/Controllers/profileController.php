@@ -18,7 +18,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\dbsetting;
 use App\Models\asset;
 
-use DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
+
+//use DB;
 use App\Models\department;
 use App\Models\userProperty;
 use App\Models\userRole;
@@ -89,13 +93,23 @@ class profileController extends Controller
        // $answerTableUpdate1o=DB::statement('CREATE DATABASE bbbxv');
        // dd($answerTableUpdate1o);
 
-       $dbName = 'bbdddgbs';  // Your Database name to be created
-       DB::statement("CREATE DATABASE ".$dbName);
+       $dbName = 'bddgdsgso';  // Your Database name to be created
+
        //$users = DB::connection($dbName)->select('select * from users');
+      DB::statement("CREATE USER 'dd'@'%'");
+      DB::statement("CREATE DATABASE ".$dbName);
+      //CREATE USER 'user_name'@'%';
 
-        DB::statement('USE DATABASE '.$dbName);
-         \Artisan::call('migrate');
+       // Config::set('database.connections.mysql.host','localhost');
+       //   Config::set('database.connections.mysql.database',$dbName);
+       //   Config::set('database.connections.mysql.username','root');
+       // Config::set('database.connections.mysql.password','');
+       //    DB::reconnect('mysql');
 
+
+        //DB::statement('USE DATABASE '.$dbName);
+         //\Artisan::call('migrate');
+//dd('ppp');
 dd($users);
 
        // if(empty($hasDb)) {
