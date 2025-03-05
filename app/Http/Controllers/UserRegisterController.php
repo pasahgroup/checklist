@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\user;
+use App\Models\User;
 //use App\Actions\Fortify\PasswordValidationRules;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -32,7 +32,7 @@ class UserRegisterController extends Controller
     public function index()
     {
       $auth=auth::user();
-      $users = user::where('status','Active')
+      $users = User::where('status','Active')
       ->where('name','!=',"")
       ->get();
         $roles = role::where('status','Active')->get();
@@ -83,7 +83,7 @@ class UserRegisterController extends Controller
         ])->validate();
 //dd(request('email'));
 // $email_data = user::findOrFail(request('email'));
-  $email_data = user::where('email',request('email'))->first();
+  $email_data = User::where('email',request('email'))->first();
 //dd($email_data->email);
 
 
@@ -100,7 +100,7 @@ class UserRegisterController extends Controller
 
 else
 {
-       $userReg = user::UpdateOrCreate([
+       $userReg = User::UpdateOrCreate([
         'name'=>request('name'),
         'department_id'=>request('department'),
         'property_id'=>request('property'),
@@ -172,7 +172,7 @@ $assetData =asset::Create([
     {
       //dd('ttt');
       $auth=auth::user();
-            $user = user::where('id',$id)
+            $user = User::where('id',$id)
                ->update([
                 'status'=>"Inactive",
                  'user_id'=>auth()->id()
@@ -192,7 +192,7 @@ $assetData =asset::Create([
     {
       $auth=auth::user();
 
-       $user = user::where('id',$id)->first();
+       $user = User::where('id',$id)->first();
         if($user){
            $user->update([
             'name'=>request('full_name'),
@@ -217,7 +217,7 @@ $assetData =asset::Create([
     public function destroy(user $user,$id)
     {
       $auth=auth::user();
-        $user = user::where('id',$id)->first();
+        $user = User::where('id',$id)->first();
         if($user){
             $user->delete();
             return redirect()->back()->with('success','User permanent deleted successfully');
@@ -231,7 +231,7 @@ $assetData =asset::Create([
     public function recoveryUpdate(user $user,$id)
     {
       $auth=auth::user();
-          $user = user::where('id',$id)
+          $user = User::where('id',$id)
                ->update([
                 'status'=>"Active",
                  'user_id'=>auth()->id()

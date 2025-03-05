@@ -10,7 +10,7 @@ use App\Models\userProperty;
 use App\Models\property;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\user;
+use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Traits\HasRoles;
@@ -28,8 +28,8 @@ class usersPermissionController extends Controller
     {
          $auth=auth::user();
 
-         $users= user::get();
-            $userRoles = user::join('user_roles','users.id','user_roles.sys_user_id')
+         $users= User::get();
+            $userRoles = User::join('user_roles','users.id','user_roles.sys_user_id')
         ->join('roles','user_roles.role_id','roles.id')
         ->where('user_roles.status','Active')
         ->select('roles.name as role_name','user_roles.sys_user_id as sys_user_id','user_roles.id as arole_id','users.*')
@@ -40,7 +40,7 @@ class usersPermissionController extends Controller
   //       ->select('properties.id as id','user_properties.sys_user_id as model_id','properties.property_name as permission_name')
   //       ->get();
 
- $permissions = user::join('properties','users.property_id','properties.id')
+ $permissions = User::join('properties','users.property_id','properties.id')
        ->where('users.status','Active')
         ->select('properties.id as id','users.id as model_id','properties.property_name as permission_name')
         ->get();
@@ -77,7 +77,7 @@ class usersPermissionController extends Controller
       $auth=auth::user();
     //  $aData['dataC'] = dbsetting::getConnect($auth->id);
 
-        $user_id = user::where('id',request('users_id'))->first();
+        $user_id = User::where('id',request('users_id'))->first();
         $user_id->assignRole(request('roles'));
         return redirect()->back()->with('success','Role added successfly');
     }
@@ -104,7 +104,7 @@ class usersPermissionController extends Controller
       $auth=auth::user();
       //$aData['dataC'] = dbsetting::getConnect($auth->id);
 
-        $datas = user::where('id',$id)->first();
+        $datas = User::where('id',$id)->first();
         $roles= Role::get();
         // $myroles = $datas->getRoleNames();
         return view('admin.settings.users.edit',compact('datas','id','roles'));
@@ -118,7 +118,7 @@ class usersPermissionController extends Controller
           $auth=auth::user();
         //  $aData['dataC'] = dbsetting::getConnect($auth->id);
 
-            $user = user::where('id',$id)->first();
+            $user = User::where('id',$id)->first();
             $user->removeRole($role);
             return redirect()->back()->with('success','Role removed successfly');
         }
@@ -129,7 +129,7 @@ class usersPermissionController extends Controller
       $auth=auth::user();
       //$aData['dataC'] = dbsetting::getConnect($auth->id);
 
-          $user = user::where('id',$id)
+          $user = User::where('id',$id)
                ->update([
                 'department_id'=>"",
                  'user_id'=>auth()->id()
@@ -181,7 +181,7 @@ $answerTableUpdate1=DB::statement('delete from model_has_roles where model_id="'
 
         if(request('department')){
     //    dd('dddd');
-            $user = user::where('id',$id)
+            $user = User::where('id',$id)
                ->update([
                 'department_id'=>0,
                  'user_id'=>auth()->id()
@@ -211,7 +211,7 @@ $answerTableUpdate1=DB::statement('delete from model_has_roles where model_id="'
         }
 
         if(request('users')){
-       $delete_user = user::findorfail($id);
+       $delete_user = User::findorfail($id);
        if($delete_user->delete()){
            return redirect()->back()->with('success','User Deleted Successfuly');
        }
