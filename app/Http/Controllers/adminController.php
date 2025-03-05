@@ -18,7 +18,7 @@ use App\Models\purchaseOrder;
 use App\Models\sale;
 use App\Models\stock;
 use App\Models\tenant;
-use App\Models\user;
+use App\Models\User;
 use App\Models\property;
 use Illuminate\Support\Facades\Config;
 
@@ -98,8 +98,8 @@ if($auth->db_name==null)
         $now = Carbon::now();
         $weekStartDate = $now->startOfWeek()->format('Y-m-d H:i');
         $weekEndDate = $now->endOfWeek()->format('Y-m-d H:i');
-        $user = user::where('id',auth()->id())->first();
-        $users= user::get();
+        $user = User::where('id',auth()->id())->first();
+        $users= User::get();
         $user->hasRole('Admin');
        //$int = (int)$user->property_id;
 
@@ -142,7 +142,7 @@ if($property_name ==null)
             $user->assignRole('Admin');
                 }
             //create master accounts
-            $super_admin = user::create([
+            $super_admin = User::create([
                 'name' =>'SuperAdmin',
                 'email' =>'superadmin@pasah.net',
                 'password' => Hash::make('pasah12345!')
