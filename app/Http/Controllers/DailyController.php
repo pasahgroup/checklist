@@ -28,7 +28,7 @@ use App\Models\userRole;
 
 use App\Models\departmentRole;
 use App\Models\department;
-use App\Models\user;
+use App\Models\User;
 use App\Models\qnsview;
 
 use App\Models\answerUpdatePhoto;
@@ -81,7 +81,7 @@ class DailyController extends Controller
   $auth=auth::user();
   $departments=user::where('id',auth()->id())->first();
   $aData['dataC'] = dbsetting::getConnect($auth->id);
-//dd($auth);
+dd($auth);
 
       $current_date = date('Y-m-d');
       //Extract date
