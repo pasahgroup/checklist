@@ -79,9 +79,9 @@ class DailyController extends Controller
    public function index(Request $request)
     {
   $auth=auth::user();
-  $departments=user::where('id',auth()->id())->first();
+  $departments=User::where('id',auth()->id())->first();
   $aData['dataC'] = dbsetting::getConnect($auth->id);
-dd($auth);
+//dd($auth);
 
       $current_date = date('Y-m-d');
       //Extract date
@@ -152,19 +152,7 @@ dd($auth);
           $metadatasCollects = collect($metadatasCollects);
           //$subset = $metadatas->map->only(['id', 'name', 'email']);
 
-      // $assets = asset::where('assets.metaname_id',$metaname_id)
-      // ->where('assets.property_id',auth()->user()->property_id)
-      // ->select('assets.id','assets.metaname_id','assets.asset_name','assets.property_id')
-      // ->get();
-
-//d($metadatasCollects);
-
-      // $assets = asset::where('assets.metaname_id',$metaname_id)
-      // ->where('assets.property_id',auth()->user()->property_id)
-      // ->select('assets.id','assets.metaname_id','assets.asset_name','assets.property_id')
-      // ->get();
-
-      $assets = asset::where('assets.metaname_id',$metaname_id)
+            $assets = asset::where('assets.metaname_id',$metaname_id)
       ->where('assets.property_id',auth()->user()->property_id)
       ->select('assets.id','assets.metaname_id','assets.asset_name','assets.property_id')
       ->paginate(8);
