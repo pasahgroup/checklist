@@ -319,7 +319,7 @@ Route::get('email-send/{id}',[EmailSendController::class,'emailSendF'])->name('e
   Route::get('recovery-user',[UserRegisterController::class,'recovery'])->name('recovery-user');
 
     //properties
-   Route::resource('metaname',MetanameController::class)->middleware(['role:Admin|SuperAdmin']);
+   Route::resource('metaname',MetanameController::class)->middleware(['role:GeneralAdmin|SuperAdmin']);
    Route::get('delete-metaname/{id}',[MetanameController::class,'edit'])->name('delete-metaname');
    Route::get('edit-metaname/{id}',[MetanameController::class,'show'])->name('edit-metaname');
   Route::get('update-metaname/{id}',[MetanameController::class,'recoveryUpdate'])->name('update-metaname');
