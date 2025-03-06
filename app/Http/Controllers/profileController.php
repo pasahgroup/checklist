@@ -7,7 +7,7 @@ use Spatie\Permission\Models\Permission;
 use App\Models\myCompany;
 use App\Models\myPayment;
 use Illuminate\Http\Request;
-use App\Models\user;
+use App\Models\User;
 
 use App\Models\dbconnect;
 use App\Models\property;
@@ -160,7 +160,7 @@ $role_name = role::where('name','GeneralAdmin')->first();
   $compEmail = myCompany::where('email',request('email'))
   ->where('status','Active')->first();
 
-   $userEmail = user::where('email',request('email'))
+   $userEmail = User::where('email',request('email'))
   ->where('status','Active')->first();
 
   if(!is_null($compEmail))
@@ -205,7 +205,7 @@ if(!is_null($userEmail))
 
     //Insert to user
 //Insert to user
-       $userReg = user::Create([
+       $userReg = User::Create([
           //   'name'=>"yyy2",
        'name'=>request('first_name').' '.request('last_name'),
         'department_id'=>1, //$department->id
@@ -276,7 +276,7 @@ $appliedto =userRole::Create([
         ]);
 
 //Update user property ID
-$updateUserPID = user::where('id',$userReg->id)
+$updateUserPID = User::where('id',$userReg->id)
              ->update([
 'property_id'=>$insert_property->id,
  'company_id'=>$insetqnsy->id,
@@ -311,7 +311,7 @@ $dbconnect =dbconnect::Create([
 }
 else
 {
-       $userReg = user::Create([
+       $userReg = User::Create([
         'name'=>request('first_name').' '.request('last_name'),
       //  'name'=>"yyy",
         //'department_id'=>$department->id,
@@ -382,7 +382,7 @@ $appliedto =userRole::Create([
         ]);
 
 //Update user property ID
-$updateUserPID = user::where('id',$userReg->id)
+$updateUserPID = User::where('id',$userReg->id)
              ->update([
 'property_id'=>$insert_property->id,
  'company_id'=>$insetqnsy->id,
